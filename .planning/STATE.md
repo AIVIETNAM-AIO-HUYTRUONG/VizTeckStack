@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 02 Plan 01 complete — svc-roadmap gRPC service built, 2 tests pass, build clean.
-last_updated: "2026-06-18T09:35:34Z"
-last_activity: 2026-06-18 -- Phase 02 Plan 01 (svc-roadmap) complete
+stopped_at: "Phase 02 Plan 02 complete — api-gateway built: GraphQL + REST + Swagger, 2 tests pass, build clean. Phase 02 complete. Next: Phase 03 (shared packages)."
+last_updated: "2026-06-18T00:00:00Z"
+last_activity: 2026-06-18 -- Phase 02 Plan 02 (api-gateway) complete
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 1
-  percent: 14
+  completed_plans: 2
+  percent: 50
 ---
 
 # Project State
@@ -21,31 +21,31 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-18)
 
 **Core value:** Public users can browse and read any roadmap — any page must work without an admin session, and the admin canvas must always faithfully reflect what's in the database.
-**Current focus:** Phase 02 — core-services
+**Current focus:** Phase 02 — core-services COMPLETE; Phase 03 next
 
 ## Current Position
 
-Phase: 02 (core-services) — EXECUTING
-Plan: 2 of 2
-Status: Executing Phase 02 — Plan 01 complete, Plan 02 (api-gateway) next
-Last activity: 2026-06-18 -- Phase 02 Plan 01 (svc-roadmap) complete
+Phase: 02 (core-services) — COMPLETE
+Plan: 2 of 2 — DONE
+Status: Phase 02 complete — both plans executed, api-gateway and svc-roadmap built
+Last activity: 2026-06-18 -- Phase 02 Plan 02 (api-gateway) complete
 
-Progress: [████░░░░░░] 36%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 3
-- Average duration: unknown (Phase 1 pre-existing)
-- Total execution time: unknown
+- Total plans completed: 5
+- Average duration: ~15m/plan
+- Total execution time: ~30m for Phase 02
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Foundation | 3/3 | - | - |
-| 2. Core Services | 1/2 | ~10m | ~10m |
+| 2. Core Services | 2/2 | ~30m | ~15m |
 
 **Recent Trend:**
 
@@ -60,8 +60,15 @@ Progress: [████░░░░░░] 36%
 
 All 10 architectural decisions locked in PROJECT.md Key Decisions table.
 Key decisions applied in Phase 02 Plan 01:
+
 - Used explicit `any` type annotations in transaction/flatMap lambdas for strict TypeScript compliance
 - Prisma generate must be run after pnpm install; .prisma/client must exist in pnpm virtualstore
+
+Key decisions applied in Phase 02 Plan 02:
+
+- Added ts-morph ^24.0.0 to api-gateway devDependencies — required peer of @nestjs/graphql@12 for autoSchemaFile:true (RESEARCH.md Pitfall 1)
+- Kept @nestjs/* at ^10.3.0 (not latest NestJS 11) — @nestjs/graphql@12 and @nestjs/swagger@7 are incompatible with NestJS 11
+- AdminGuard dual HTTP/GraphQL context: context.getType() === 'http' branch vs GqlExecutionContext (DEC-005, T-02-06)
 
 Key decisions affecting Phase 2:
 
@@ -88,5 +95,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-06-18
-Stopped at: Phase 02 Plan 01 complete — svc-roadmap gRPC service built, 2 tests pass, build clean. Next: Plan 02-02 (api-gateway).
+Stopped at: Phase 02 Plan 02 complete — api-gateway built: GraphQL + REST + Swagger, 2 tests pass, build clean. Phase 02 complete. Next: Phase 03 (shared packages).
 Resume file: None
