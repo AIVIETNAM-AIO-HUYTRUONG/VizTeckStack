@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 1 complete — all three tasks committed to git (monorepo, proto, db). Phase 2 planning is next.
-last_updated: "2026-06-18T08:18:09.315Z"
-last_activity: 2026-06-18 — Phase 1 complete (monorepo scaffold, packages/proto, packages/db committed to git)
+status: executing
+stopped_at: Phase 02 Plan 01 complete — svc-roadmap gRPC service built, 2 tests pass, build clean.
+last_updated: "2026-06-18T09:35:34Z"
+last_activity: 2026-06-18 -- Phase 02 Plan 01 (svc-roadmap) complete
 progress:
   total_phases: 4
-  completed_phases: 1
-  total_plans: 11
-  completed_plans: 3
-  percent: 27
+  completed_phases: 0
+  total_plans: 2
+  completed_plans: 1
+  percent: 14
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-18)
 
 **Core value:** Public users can browse and read any roadmap — any page must work without an admin session, and the admin canvas must always faithfully reflect what's in the database.
-**Current focus:** Phase 2 — Core Services
+**Current focus:** Phase 02 — core-services
 
 ## Current Position
 
-Phase: 2 of 4 (Core Services)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-06-18 — Phase 1 complete (monorepo scaffold, packages/proto, packages/db committed to git)
+Phase: 02 (core-services) — EXECUTING
+Plan: 2 of 2
+Status: Executing Phase 02 — Plan 01 complete, Plan 02 (api-gateway) next
+Last activity: 2026-06-18 -- Phase 02 Plan 01 (svc-roadmap) complete
 
-Progress: [███░░░░░░░] 27%
+Progress: [████░░░░░░] 36%
 
 ## Performance Metrics
 
@@ -45,6 +45,7 @@ Progress: [███░░░░░░░] 27%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Foundation | 3/3 | - | - |
+| 2. Core Services | 1/2 | ~10m | ~10m |
 
 **Recent Trend:**
 
@@ -58,6 +59,10 @@ Progress: [███░░░░░░░] 27%
 ### Decisions
 
 All 10 architectural decisions locked in PROJECT.md Key Decisions table.
+Key decisions applied in Phase 02 Plan 01:
+- Used explicit `any` type annotations in transaction/flatMap lambdas for strict TypeScript compliance
+- Prisma generate must be run after pnpm install; .prisma/client must exist in pnpm virtualstore
+
 Key decisions affecting Phase 2:
 
 - DEC-003: gRPC/Protobuf is the only inter-service protocol; packages/proto is source of truth
@@ -83,5 +88,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-06-18
-Stopped at: Phase 1 complete — all three tasks committed to git (monorepo, proto, db). Phase 2 planning is next.
+Stopped at: Phase 02 Plan 01 complete — svc-roadmap gRPC service built, 2 tests pass, build clean. Next: Plan 02-02 (api-gateway).
 Resume file: None

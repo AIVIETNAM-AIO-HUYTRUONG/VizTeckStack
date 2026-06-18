@@ -41,7 +41,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: apps/svc-roadmap — NestJS gRPC server, RoadmapService implementation, Prisma integration
+- [x] 02-01: apps/svc-roadmap — NestJS gRPC server, RoadmapService implementation, Prisma integration
 - [ ] 02-02: apps/api-gateway — NestJS HTTP server, AdminGuard, REST controllers, Apollo GraphQL, gRPC client wiring
 
 ### Phase 3: Public Viewer
@@ -84,6 +84,6 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-06-18 |
-| 2. Core Services | 0/2 | Not started | - |
+| 2. Core Services | 1/2 | In progress | - |
 | 3. Public Viewer | 0/3 | Not started | - |
 | 4. Admin CMS | 0/3 | Not started | - |
