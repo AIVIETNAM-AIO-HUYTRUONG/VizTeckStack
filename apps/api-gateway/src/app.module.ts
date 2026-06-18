@@ -8,7 +8,8 @@ import { RoadmapModule } from './roadmap/roadmap.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
-      playground: true,
+      playground: false,
+      introspection: true,
     }),
     RoadmapModule,
   ],

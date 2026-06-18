@@ -5,7 +5,7 @@
   "main": "./generated/roadmap.js",
   "types": "./generated/roadmap.d.ts",
   "scripts": {
-    "proto:gen": "bash generate.sh"
+    "proto:gen": "node generate.js"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.0",
