@@ -1,0 +1,108 @@
+syntax = "proto3";
+package roadmap;
+
+enum NodeType {
+  ROADMAP = 0;
+  LESSON = 1;
+}
+
+message Empty {}
+
+message BoolResponse {
+  bool success = 1;
+}
+
+message IdRequest {
+  string id = 1;
+}
+
+message SlugRequest {
+  string slug = 1;
+}
+
+message RoadmapItem {
+  string id = 1;
+  string slug = 2;
+  string title = 3;
+  string description = 4;
+  string coverImage = 5;
+}
+
+message NodeItem {
+  string id = 1;
+  string roadmapId = 2;
+  NodeType type = 3;
+  string title = 4;
+  double positionX = 5;
+  double positionY = 6;
+  string targetRoadmapId = 7;
+  string content = 8;
+}
+
+message EdgeItem {
+  string id = 1;
+  string sourceId = 2;
+  string targetId = 3;
+  string label = 4;
+}
+
+message RoadmapList {
+  repeated RoadmapItem roadmaps = 1;
+}
+
+message RoadmapDetail {
+  RoadmapItem roadmap = 1;
+  repeated NodeItem nodes = 2;
+  repeated EdgeItem edges = 3;
+}
+
+message NodeDetail {
+  NodeItem node = 1;
+  RoadmapItem targetRoadmap = 2;
+}
+
+message CreateRoadmapRequest {
+  string slug = 1;
+  string title = 2;
+  string description = 3;
+  string coverImage = 4;
+}
+
+message UpdateRoadmapRequest {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string coverImage = 4;
+}
+
+message NodeInput {
+  string id = 1;
+  NodeType type = 2;
+  string title = 3;
+  double positionX = 4;
+  double positionY = 5;
+  string targetRoadmapId = 6;
+  string content = 7;
+}
+
+message EdgeInput {
+  string sourceId = 1;
+  string targetId = 2;
+  string label = 3;
+}
+
+message UpsertGraphRequest {
+  string roadmapId = 1;
+  repeated NodeInput nodes = 2;
+  repeated EdgeInput edges = 3;
+}
+
+service RoadmapService {
+  rpc GetRoadmaps (Empty) returns (RoadmapList);
+  rpc GetRoadmap (SlugRequest) returns (RoadmapDetail);
+  rpc GetNode (IdRequest) returns (NodeDetail);
+  rpc CreateRoadmap (CreateRoadmapRequest) returns (RoadmapItem);
+  rpc UpdateRoadmap (UpdateRoadmapRequest) returns (RoadmapItem);
+  rpc DeleteRoadmap (IdRequest) returns (BoolResponse);
+  rpc UpsertGraph (UpsertGraphRequest) returns (RoadmapDetail);
+}
