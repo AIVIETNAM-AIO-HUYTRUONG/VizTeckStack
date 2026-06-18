@@ -6,9 +6,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
 
+  const adminToken = process.env.ADMIN_TOKEN ?? 'supersecret';
   const swaggerConfig = new DocumentBuilder()
     .setTitle('VizTeckStack API')
-    .setDescription('Roadmap visualization REST API')
+    .setDescription(
+      `Roadmap visualization REST API\n\n` +
+      `**Admin token (Bearer):** \`${adminToken}\`\n\n` +
+      `Click **Authorize** → paste the token above → write endpoints unlock.`,
+    )
     .setVersion('1.0')
     .addBearerAuth()
     .build();
