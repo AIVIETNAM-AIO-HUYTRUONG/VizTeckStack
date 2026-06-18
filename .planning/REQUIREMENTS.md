@@ -219,8 +219,8 @@ Acceptance criteria:
 | REQ-grpc-service | Phase 2 | Pending |
 | REQ-rest-api | Phase 2 | Complete |
 | REQ-graphql-api | Phase 2 | Complete |
-| REQ-public-roadmap-list | Phase 3 | Pending |
-| REQ-public-roadmap-graph-view | Phase 3 | Pending |
+| REQ-public-roadmap-list | Phase 3 | Complete |
+| REQ-public-roadmap-graph-view | Phase 3 | Complete |
 | REQ-public-lesson-content-view | Phase 3 | Pending |
 | REQ-admin-login | Phase 4 | Pending |
 | REQ-admin-roadmap-crud | Phase 4 | Pending |

@@ -68,7 +68,7 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 03-01-PLAN.md — packages/ui: NodeBadge, Button, Card shared components (@vizteck/ui)
+- [x] 03-01-PLAN.md — packages/ui: NodeBadge, Button, Card shared components (@vizteck/ui)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -109,5 +109,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-06-18 |
 | 2. Core Services | 2/2 | Complete   | 2026-06-18 |
-| 3. Public Viewer | 0/3 | Planned | - |
+| 3. Public Viewer | 1/3 | In Progress|  |
 | 4. Admin CMS | 0/3 | Not started | - |
