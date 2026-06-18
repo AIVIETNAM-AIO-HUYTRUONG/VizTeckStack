@@ -22,7 +22,8 @@
     "@vizteck/proto": "workspace:*",
     "graphql": "^16.8.0",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "dotenv": "^16.4.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.3.0",
