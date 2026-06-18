@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VizTeckStack — UI Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ── Token System ─────────────────────────────── */
+  :root {
+    --bg-0:       #F8F9FC;
+    --bg-1:       #FFFFFF;
+    --bg-2:       #F1F3F9;
+    --border:     #E2E8F0;
+    --text-1:     #0F172A;
+    --text-2:     #475569;
+    --text-3:     #94A3B8;
+    --indigo:     #4F46E5;
+    --indigo-lt:  #EEF2FF;
+    --indigo-mid: #6366F1;
+    --emerald:    #059669;
+    --emerald-lt: #ECFDF5;
+    --amber:      #D97706;
+    --red:        #DC2626;
+
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --radius-lg:  16px;
+
+    --shadow-sm: 0 1px 3px rgba(15,23,42,.06), 0 1px 2px rgba(15,23,42,.04);
+    --shadow-md: 0 4px 16px rgba(15,23,42,.08), 0 1px 4px rgba(15,23,42,.04);
+
+    --f-display: 'Space Grotesk', sans-serif;
+    --f-body:    'Inter', sans-serif;
+    --f-mono:    'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--f-body); background: #CBD5E1; color: var(--text-1); }
+
+  /* ── Screen Wrapper ───────────────────────────── */
+  .screens { display: flex; flex-direction: column; gap: 64px; padding: 48px 32px; max-width: 1440px; margin: 0 auto; }
+  .screen-label { font-family: var(--f-mono); font-size: 11px; color: #64748B; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+  .screen { background: var(--bg-0); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 8px 40px rgba(15,23,42,.18); }
+
+  /* ── Shared Nav ───────────────────────────────── */
+  nav {
+    display: flex; align-items: center; gap: 24px;
+    padding: 0 32px; height: 56px;
+    background: var(--bg-1);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--f-display); font-weight: 700; font-size: 17px;
+    color: var(--text-1); letter-spacing: -.02em; margin-right: auto;
+  }
+  .logo span { color: var(--indigo); }
+  nav a { font-size: 13.5px; font-weight: 500; color: var(--text-2); text-decoration: none; }
+  nav a:hover { color: var(--text-1); }
+  .nav-cta {
+    background: var(--indigo); color: #fff;
+    padding: 7px 16px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    letter-spacing: -.01em;
+  }
+
+  /* ── Graph Breadcrumb (Signature element) ─────── */
+  .graph-breadcrumb {
+    display: flex; align-items: center; gap: 0;
+    padding: 10px 32px;
+    background: var(--bg-1);
+    border-bottom: 1px solid var(--border);
+  }
+  .bc-node {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    cursor: pointer;
+  }
+  .bc-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--border); border: 2px solid var(--border);
+    transition: background .15s;
+  }
+  .bc-dot.active { background: var(--indigo); border-color: var(--indigo); }
+  .bc-dot.visited { background: var(--bg-1); border-color: var(--indigo); }
+  .bc-label {
+    font-family: var(--f-mono); font-size: 10px; font-weight: 500;
+    color: var(--text-3); white-space: nowrap;
+  }
+  .bc-label.active { color: var(--indigo); }
+  .bc-label.visited { color: var(--text-2); }
+  .bc-line { width: 40px; height: 1px; background: var(--border); margin-bottom: 14px; flex-shrink: 0; }
+  .bc-line.active { background: var(--indigo); }
+
+  /* ── Cards ────────────────────────────────────── */
+  .card {
+    background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow .15s, border-color .15s;
+    cursor: pointer;
+  }
+  .card:hover { box-shadow: var(--shadow-md); border-color: #C7D2FE; }
+
+  /* ── Badge / Tag ──────────────────────────────── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 8px; border-radius: 20px;
+    font-family: var(--f-mono); font-size: 10px; font-weight: 500;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  .badge-roadmap { background: var(--indigo-lt); color: var(--indigo); }
+  .badge-lesson  { background: var(--emerald-lt); color: var(--emerald); }
+
+  /* ── Buttons ──────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: var(--radius-sm);
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+    border: none; font-family: var(--f-body); letter-spacing: -.01em;
+  }
+  .btn-primary { background: var(--indigo); color: #fff; }
+  .btn-ghost   { background: transparent; color: var(--text-2); border: 1px solid var(--border); }
+
+  /* ── ─────────────────────────────────────────── */
+  /* SCREEN 1: HOME PAGE */
+  .home-hero {
+    padding: 72px 32px 56px;
+    background: linear-gradient(160deg, #F8F9FC 60%, #EEF2FF 100%);
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .eyebrow {
+    font-family: var(--f-mono); font-size: 11px; font-weight: 500;
+    color: var(--indigo); letter-spacing: .1em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--indigo); }
+  .hero-title {
+    font-family: var(--f-display); font-size: 52px; font-weight: 700;
+    color: var(--text-1); line-height: 1.08; letter-spacing: -.03em;
+    max-width: 600px;
+  }
+  .hero-title em { color: var(--indigo); font-style: normal; }
+  .hero-sub { font-size: 17px; color: var(--text-2); max-width: 480px; line-height: 1.6; }
+  .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+  .home-grid-section { padding: 40px 32px; }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px;
+  }
+  .section-title { font-family: var(--f-display); font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+  .section-link { font-size: 13px; color: var(--indigo); font-weight: 500; }
+  .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .roadmap-card-inner { display: flex; flex-direction: column; gap: 12px; }
+  .rcard-graph {
+    height: 80px; background: var(--bg-2); border-radius: var(--radius-sm);
+    position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+  }
+  /* Mini graph preview in card */
+  .mini-node {
+    position: absolute; display: flex; flex-direction: column; align-items: center;
+    gap: 3px;
+  }
+  .mn-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid;
+  }
+  .mn-dot.r { border-color: var(--indigo); background: var(--indigo-lt); }
+  .mn-dot.l { border-color: var(--emerald); background: var(--emerald-lt); }
+  .mn-label { font-family: var(--f-mono); font-size: 7px; color: var(--text-3); white-space: nowrap; }
+  .mini-edge {
+    position: absolute; background: var(--border);
+    transform-origin: left center;
+  }
+  .rcard-meta { display: flex; align-items: center; justify-content: space-between; }
+  .rcard-title { font-family: var(--f-display); font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .rcard-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+  .rcard-stats { font-family: var(--f-mono); font-size: 10px; color: var(--text-3); }
+
+  /* ── ─────────────────────────────────────────── */
+  /* SCREEN 2: ROADMAP GRAPH PAGE */
+  .graph-page-body { display: flex; flex-direction: column; height: 580px; }
+  .graph-header {
+    padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg-1); border-bottom: 1px solid var(--border);
+  }
+  .graph-title { font-family: var(--f-display); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+  .graph-canvas {
+    flex: 1; background: var(--bg-0);
+    background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
+    background-size: 24px 24px;
+    position: relative; overflow: hidden;
+  }
+
+  /* SVG edges */
+  .graph-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* Graph nodes */
+  .gnode {
+    position: absolute;
+    display: flex; flex-direction: column; align-items: center; gap: 0;
+    cursor: pointer;
+  }
+  .gnode-body {
+    padding: 10px 18px;
+    border-radius: var(--radius-md);
+    border: 2px solid;
+    box-shadow: var(--shadow-sm);
+    background: var(--bg-1);
+    min-width: 120px; text-align: center;
+    transition: box-shadow .15s, transform .15s;
+  }
+  .gnode-body:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+  .gnode-body.roadmap-node { border-color: var(--indigo); }
+  .gnode-body.lesson-node { border-color: var(--emerald); }
+  .gnode-body.active-node { border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(79,70,229,.15); }
+  .gnode-type { font-family: var(--f-mono); font-size: 9px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+  .gnode-type.r { color: var(--indigo); }
+  .gnode-type.l { color: var(--emerald); }
+  .gnode-name { font-family: var(--f-mono); font-size: 12px; font-weight: 500; color: var(--text-1); margin-top: 2px; }
+  .handle { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: 2px solid var(--bg-1); }
+  .handle-top { margin-bottom: -4px; z-index: 2; }
+  .handle-bot { margin-top: -4px; z-index: 2; }
+
+  /* Controls overlay */
+  .graph-controls {
+    position: absolute; bottom: 16px; left: 16px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .ctrl-btn {
+    width: 28px; height: 28px; background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-2); cursor: pointer;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ── ─────────────────────────────────────────── */
+  /* SCREEN 3: LESSON PAGE */
+  .lesson-layout { display: grid; grid-template-columns: 1fr 280px; min-height: 560px; }
+  .lesson-content { padding: 40px 48px; border-right: 1px solid var(--border); }
+  .lesson-sidebar { padding: 24px; background: var(--bg-0); }
+  .lesson-eyebrow { font-family: var(--f-mono); font-size: 10px; color: var(--emerald); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+  .lesson-title { font-family: var(--f-display); font-size: 32px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; margin-bottom: 24px; }
+  .lesson-body { font-size: 15px; line-height: 1.75; color: var(--text-2); }
+  .lesson-body p { margin-bottom: 16px; }
+  .lesson-body h3 { font-family: var(--f-display); font-size: 18px; font-weight: 600; color: var(--text-1); letter-spacing: -.02em; margin: 28px 0 10px; }
+  .lesson-body code {
+    font-family: var(--f-mono); font-size: 13px; background: var(--bg-2);
+    border: 1px solid var(--border); padding: 2px 6px; border-radius: 4px; color: var(--indigo);
+  }
+  .lesson-body pre {
+    font-family: var(--f-mono); font-size: 13px; background: #0F172A; color: #E2E8F0;
+    padding: 18px 20px; border-radius: var(--radius-md); margin: 16px 0; line-height: 1.6;
+    overflow-x: auto;
+  }
+  .lesson-body pre .kw { color: #818CF8; }
+  .lesson-body pre .str { color: #86EFAC; }
+  .lesson-body pre .cm { color: #475569; }
+  .progress-bar { height: 3px; background: var(--border); border-radius: 2px; margin: 20px 0 24px; }
+  .progress-fill { height: 100%; width: 35%; background: var(--emerald); border-radius: 2px; }
+  .sidebar-label { font-family: var(--f-mono); font-size: 10px; color: var(--text-3); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 12px; }
+  .sidebar-mini-graph { position: relative; height: 200px; }
+  /* mini sidebar nodes */
+  .smg-node {
+    position: absolute; display: flex; align-items: center; gap: 6px;
+    font-family: var(--f-mono); font-size: 10px; color: var(--text-2);
+  }
+  .smg-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid; flex-shrink: 0; }
+  .smg-dot.r { border-color: var(--indigo); background: var(--indigo-lt); }
+  .smg-dot.l { border-color: var(--emerald); background: var(--emerald-lt); }
+  .smg-dot.active { background: var(--emerald); border-color: var(--emerald); box-shadow: 0 0 0 3px var(--emerald-lt); }
+  .smg-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+  /* ── ─────────────────────────────────────────── */
+  /* SCREEN 4: ADMIN GRAPH EDITOR */
+  .admin-layout { display: grid; grid-template-columns: 220px 1fr; min-height: 600px; }
+  .admin-sidebar {
+    background: #0F172A; padding: 0;
+    display: flex; flex-direction: column;
+    border-right: 1px solid #1E293B;
+  }
+  .admin-logo {
+    padding: 18px 20px; font-family: var(--f-display); font-size: 15px; font-weight: 700;
+    color: #fff; border-bottom: 1px solid #1E293B; letter-spacing: -.02em;
+  }
+  .admin-logo span { color: var(--indigo-mid); }
+  .admin-nav { padding: 12px 8px; flex: 1; }
+  .admin-nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500; color: #94A3B8; cursor: pointer;
+    margin-bottom: 2px;
+  }
+  .admin-nav-item:hover { background: #1E293B; color: #E2E8F0; }
+  .admin-nav-item.active { background: rgba(79,70,229,.2); color: #A5B4FC; }
+  .admin-nav-icon { font-size: 15px; }
+  .admin-main { display: flex; flex-direction: column; }
+  .admin-topbar {
+    padding: 14px 24px; background: var(--bg-1); border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .admin-topbar-title { font-family: var(--f-display); font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
+  .admin-topbar-actions { display: flex; gap: 8px; }
+  .admin-canvas {
+    flex: 1; min-height: 500px;
+    background: var(--bg-0);
+    background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
+    background-size: 24px 24px;
+    position: relative; overflow: hidden;
+  }
+  /* Node palette panel */
+  .node-palette {
+    position: absolute; top: 16px; left: 16px; z-index: 10;
+    background: var(--bg-1); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 12px;
+    box-shadow: var(--shadow-md); min-width: 140px;
+  }
+  .palette-label { font-family: var(--f-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-3); margin-bottom: 8px; }
+  .palette-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: var(--radius-sm);
+    font-size: 12px; font-weight: 500; cursor: grab;
+    margin-bottom: 4px; border: 1px dashed transparent;
+  }
+  .palette-item:hover { border-color: var(--border); background: var(--bg-2); }
+  .palette-item .pd { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; }
+  .palette-item .pd.r { border-color: var(--indigo); background: var(--indigo-lt); }
+  .palette-item .pd.l { border-color: var(--emerald); background: var(--emerald-lt); }
+
+  /* Save toast */
+  .save-toast {
+    position: absolute; bottom: 20px; right: 20px; z-index: 20;
+    background: var(--text-1); color: #fff;
+    padding: 10px 20px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500; box-shadow: var(--shadow-md);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .save-btn {
+    position: absolute; bottom: 20px; right: 20px; z-index: 20;
+    background: var(--indigo); color: #fff;
+    padding: 10px 20px; border-radius: var(--radius-sm);
+    font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow-md);
+    border: none; cursor: pointer; font-family: var(--f-body);
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Screen label in outer wrapper */
+  .screen-wrap { display: flex; flex-direction: column; gap: 8px; }
+</style>
+</head>
+<body>
+<div class="screens">
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 1: HOME PAGE -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">01 — apps/web · Home Page</div>
+    <div class="screen">
+      <nav>
+        <div class="logo">Viz<span>Teck</span>Stack</div>
+        <a href="#">Roadmaps</a>
+        <a href="#">Blog</a>
+        <a href="#">About</a>
+        <a href="#" class="nav-cta">Admin →</a>
+      </nav>
+
+      <div class="home-hero">
+        <div class="eyebrow">Open Source Roadmaps</div>
+        <h1 class="hero-title">Your path through the <em>tech stack.</em></h1>
+        <p class="hero-sub">Interactive, hierarchical roadmaps built by practitioners. Navigate from high-level concepts down to individual lessons — at your own pace.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Explore Roadmaps ↓</button>
+          <button class="btn btn-ghost">View on GitHub</button>
+        </div>
+      </div>
+
+      <div class="home-grid-section">
+        <div class="section-head">
+          <span class="section-title">All Roadmaps</span>
+          <span class="section-link">View all →</span>
+        </div>
+        <div class="roadmap-grid">
+          <!-- Card 1: Fullstack -->
+          <div class="card">
+            <div class="roadmap-card-inner">
+              <div class="rcard-graph">
+                <svg width="100%" height="100%" style="position:absolute;inset:0;">
+                  <line x1="50%" y1="20" x2="28%" y2="60" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                  <line x1="50%" y1="20" x2="72%" y2="60" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                </svg>
+                <div class="mini-node" style="top:10px;left:50%;transform:translateX(-50%)">
+                  <div class="mn-dot r"></div>
+                  <div class="mn-label">fullstack</div>
+                </div>
+                <div class="mini-node" style="bottom:12px;left:26%;transform:translateX(-50%)">
+                  <div class="mn-dot r"></div>
+                  <div class="mn-label">frontend</div>
+                </div>
+                <div class="mini-node" style="bottom:12px;left:74%;transform:translateX(-50%)">
+                  <div class="mn-dot r"></div>
+                  <div class="mn-label">backend</div>
+                </div>
+              </div>
+              <div class="rcard-meta">
+                <span class="rcard-title">Fullstack Developer</span>
+                <span class="badge badge-roadmap">Roadmap</span>
+              </div>
+              <p class="rcard-desc">End-to-end path covering frontend, backend, databases, and deployment.</p>
+              <div class="rcard-stats">12 nodes · 4 sub-roadmaps</div>
+            </div>
+          </div>
+
+          <!-- Card 2: Frontend -->
+          <div class="card">
+            <div class="roadmap-card-inner">
+              <div class="rcard-graph">
+                <svg width="100%" height="100%" style="position:absolute;inset:0;">
+                  <line x1="50%" y1="20" x2="22%" y2="62" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                  <line x1="50%" y1="20" x2="50%" y2="62" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                  <line x1="50%" y1="20" x2="78%" y2="62" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                </svg>
+                <div class="mini-node" style="top:10px;left:50%;transform:translateX(-50%)">
+                  <div class="mn-dot r"></div>
+                  <div class="mn-label">frontend</div>
+                </div>
+                <div class="mini-node" style="bottom:10px;left:22%;transform:translateX(-50%)">
+                  <div class="mn-dot l"></div>
+                  <div class="mn-label">html</div>
+                </div>
+                <div class="mini-node" style="bottom:10px;left:50%;transform:translateX(-50%)">
+                  <div class="mn-dot l"></div>
+                  <div class="mn-label">css</div>
+                </div>
+                <div class="mini-node" style="bottom:10px;left:78%;transform:translateX(-50%)">
+                  <div class="mn-dot r"></div>
+                  <div class="mn-label">react</div>
+                </div>
+              </div>
+              <div class="rcard-meta">
+                <span class="rcard-title">Frontend Developer</span>
+                <span class="badge badge-roadmap">Roadmap</span>
+              </div>
+              <p class="rcard-desc">HTML, CSS, JavaScript, React, and modern tooling for the browser.</p>
+              <div class="rcard-stats">24 nodes · 6 sub-roadmaps</div>
+            </div>
+          </div>
+
+          <!-- Card 3: Backend -->
+          <div class="card">
+            <div class="roadmap-card-inner">
+              <div class="rcard-graph">
+                <svg width="100%" height="100%" style="position:absolute;inset:0;">
+                  <line x1="50%" y1="20" x2="34%" y2="62" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                  <line x1="50%" y1="20" x2="66%" y2="62" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3,2"/>
+                </svg>
+                <div class="mini-node" style="top:10px;left:50%;transform:translateX(-50%)">
+                  <div class="mn-dot r"></div>
+                  <div class="mn-label">backend</div>
+                </div>
+                <div class="mini-node" style="bottom:10px;left:34%;transform:translateX(-50%)">
+                  <div class="mn-dot l"></div>
+                  <div class="mn-label">nestjs</div>
+                </div>
+                <div class="mini-node" style="bottom:10px;left:66%;transform:translateX(-50%)">
+                  <div class="mn-dot l"></div>
+                  <div class="mn-label">grpc</div>
+                </div>
+              </div>
+              <div class="rcard-meta">
+                <span class="rcard-title">Backend Developer</span>
+                <span class="badge badge-roadmap">Roadmap</span>
+              </div>
+              <p class="rcard-desc">Server-side development, APIs, databases, and system design fundamentals.</p>
+              <div class="rcard-stats">20 nodes · 5 sub-roadmaps</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 2: ROADMAP GRAPH PAGE -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">02 — apps/web · Roadmap Graph Page</div>
+    <div class="screen">
+      <nav>
+        <div class="logo">Viz<span>Teck</span>Stack</div>
+        <a href="#">Roadmaps</a>
+        <a href="#">Blog</a>
+        <a href="#" class="nav-cta">Admin →</a>
+      </nav>
+
+      <!-- Signature: graph breadcrumb -->
+      <div class="graph-breadcrumb">
+        <div class="bc-node">
+          <div class="bc-dot visited"></div>
+          <div class="bc-label visited">home</div>
+        </div>
+        <div class="bc-line active"></div>
+        <div class="bc-node">
+          <div class="bc-dot visited"></div>
+          <div class="bc-label visited">fullstack</div>
+        </div>
+        <div class="bc-line active"></div>
+        <div class="bc-node">
+          <div class="bc-dot active"></div>
+          <div class="bc-label active">frontend</div>
+        </div>
+        <div class="bc-line"></div>
+        <div class="bc-node">
+          <div class="bc-dot"></div>
+          <div class="bc-label">html</div>
+        </div>
+      </div>
+
+      <div class="graph-page-body">
+        <div class="graph-header">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="graph-title">Frontend Developer</div>
+            <span class="badge badge-roadmap">Roadmap</span>
+          </div>
+          <div style="font-family:var(--f-mono);font-size:11px;color:var(--text-3)">7 nodes · click to navigate</div>
+        </div>
+
+        <div class="graph-canvas">
+          <svg class="graph-svg">
+            <!-- Edges -->
+            <line x1="400" y1="88" x2="180" y2="200" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="400" y1="88" x2="400" y2="200" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="400" y1="88" x2="620" y2="200" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="180" y1="260" x2="100" y2="360" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="180" y1="260" x2="260" y2="360" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="620" y1="260" x2="540" y2="360" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="620" y1="260" x2="700" y2="360" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+          </svg>
+
+          <!-- Root node -->
+          <div class="gnode" style="top:48px;left:330px">
+            <div class="handle handle-top" style="background:var(--border)"></div>
+            <div class="gnode-body roadmap-node active-node">
+              <div class="gnode-type r">roadmap</div>
+              <div class="gnode-name">Frontend</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+
+          <!-- Level 2 nodes -->
+          <div class="gnode" style="top:168px;left:112px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body lesson-node">
+              <div class="gnode-type l">lesson</div>
+              <div class="gnode-name">HTML</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+          <div class="gnode" style="top:168px;left:332px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body lesson-node">
+              <div class="gnode-type l">lesson</div>
+              <div class="gnode-name">CSS</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+          <div class="gnode" style="top:168px;left:550px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body roadmap-node">
+              <div class="gnode-type r">roadmap</div>
+              <div class="gnode-name">JavaScript</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+
+          <!-- Level 3 nodes -->
+          <div class="gnode" style="top:320px;left:40px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body lesson-node">
+              <div class="gnode-type l">lesson</div>
+              <div class="gnode-name">Semantic HTML</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+          <div class="gnode" style="top:320px;left:198px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body lesson-node">
+              <div class="gnode-type l">lesson</div>
+              <div class="gnode-name">Accessibility</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+          <div class="gnode" style="top:320px;left:474px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body roadmap-node">
+              <div class="gnode-type r">roadmap</div>
+              <div class="gnode-name">React</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+          <div class="gnode" style="top:320px;left:632px">
+            <div class="handle handle-top"></div>
+            <div class="gnode-body lesson-node">
+              <div class="gnode-type l">lesson</div>
+              <div class="gnode-name">TypeScript</div>
+            </div>
+            <div class="handle handle-bot"></div>
+          </div>
+
+          <!-- Controls -->
+          <div class="graph-controls">
+            <div class="ctrl-btn">+</div>
+            <div class="ctrl-btn">−</div>
+            <div class="ctrl-btn">⤢</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 3: LESSON PAGE -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">03 — apps/web · Lesson Content Page</div>
+    <div class="screen">
+      <nav>
+        <div class="logo">Viz<span>Teck</span>Stack</div>
+        <a href="#">Roadmaps</a>
+        <a href="#">Blog</a>
+        <a href="#" class="nav-cta">Admin →</a>
+      </nav>
+
+      <div class="graph-breadcrumb">
+        <div class="bc-node">
+          <div class="bc-dot visited"></div>
+          <div class="bc-label visited">home</div>
+        </div>
+        <div class="bc-line active"></div>
+        <div class="bc-node">
+          <div class="bc-dot visited"></div>
+          <div class="bc-label visited">fullstack</div>
+        </div>
+        <div class="bc-line active"></div>
+        <div class="bc-node">
+          <div class="bc-dot visited"></div>
+          <div class="bc-label visited">frontend</div>
+        </div>
+        <div class="bc-line active"></div>
+        <div class="bc-node">
+          <div class="bc-dot active"></div>
+          <div class="bc-label active">semantic-html</div>
+        </div>
+      </div>
+
+      <div class="lesson-layout">
+        <!-- Main content -->
+        <div class="lesson-content">
+          <div class="lesson-eyebrow">Lesson · HTML</div>
+          <h1 class="lesson-title">Semantic HTML</h1>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+
+          <div class="lesson-body">
+            <p>Semantic HTML means using the right HTML element for the right job. Instead of wrapping everything in <code>&lt;div&gt;</code>, semantic elements like <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>, and <code>&lt;section&gt;</code> communicate meaning to both browsers and assistive technologies.</p>
+
+            <h3>Why it matters</h3>
+            <p>Screen readers rely on semantic structure to announce content correctly. Search engines use it to understand page hierarchy. Other developers use it to navigate your markup without reading every line.</p>
+
+            <pre><span class="cm">&lt;!-- Non-semantic --&gt;</span>
+<span class="kw">&lt;div</span> class=<span class="str">"header"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;div</span> class=<span class="str">"nav"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+
+<span class="cm">&lt;!-- Semantic --&gt;</span>
+<span class="kw">&lt;header&gt;</span>
+  <span class="kw">&lt;nav&gt;</span>...<span class="kw">&lt;/nav&gt;</span>
+<span class="kw">&lt;/header&gt;</span></pre>
+
+            <h3>Key elements</h3>
+            <p>Use <code>&lt;main&gt;</code> for the primary page content, <code>&lt;aside&gt;</code> for tangential content, and <code>&lt;figure&gt;</code> with <code>&lt;figcaption&gt;</code> for images that need captions.</p>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border)">
+            <button class="btn btn-ghost">← Prev: HTML Basics</button>
+            <button class="btn btn-primary" style="margin-left:auto">Next: Forms →</button>
+          </div>
+        </div>
+
+        <!-- Sidebar: mini graph showing current position -->
+        <div class="lesson-sidebar">
+          <div class="sidebar-label">Your position</div>
+          <div class="sidebar-mini-graph">
+            <svg class="smg-svg">
+              <line x1="60" y1="24" x2="60" y2="64" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <line x1="60" y1="84" x2="40" y2="130" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <line x1="60" y1="84" x2="80" y2="130" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <line x1="40" y1="148" x2="40" y2="188" stroke="#059669" stroke-width="1.5"/>
+            </svg>
+            <div class="smg-node" style="top:12px;left:40px">
+              <div class="smg-dot r"></div><span>frontend</span>
+            </div>
+            <div class="smg-node" style="top:72px;left:40px">
+              <div class="smg-dot l"></div><span>html</span>
+            </div>
+            <div class="smg-node" style="top:120px;left:10px">
+              <div class="smg-dot active"></div><span style="color:var(--emerald);font-weight:600">semantic-html</span>
+            </div>
+            <div class="smg-node" style="top:120px;left:80px">
+              <div class="smg-dot l"></div><span>forms</span>
+            </div>
+            <div class="smg-node" style="top:176px;left:10px">
+              <div class="smg-dot l"></div><span>accessibility</span>
+            </div>
+          </div>
+
+          <div style="margin-top:24px">
+            <div class="sidebar-label">Progress in HTML</div>
+            <div style="margin-top:8px">
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:4px;font-family:var(--f-mono)">
+                <span>2 / 6 lessons</span><span>33%</span>
+              </div>
+              <div style="height:4px;background:var(--border);border-radius:2px">
+                <div style="height:100%;width:33%;background:var(--emerald);border-radius:2px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCREEN 4: ADMIN GRAPH EDITOR -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="screen-wrap">
+    <div class="screen-label">04 — apps/admin · Graph Editor (CMS)</div>
+    <div class="screen">
+      <div class="admin-layout">
+        <!-- Admin Sidebar -->
+        <div class="admin-sidebar">
+          <div class="admin-logo">Viz<span>Teck</span> <span style="color:#475569;font-weight:400">Admin</span></div>
+          <div class="admin-nav">
+            <div class="admin-nav-item active"><span class="admin-nav-icon">◈</span> Roadmaps</div>
+            <div class="admin-nav-item"><span class="admin-nav-icon">✦</span> Lessons</div>
+            <div class="admin-nav-item"><span class="admin-nav-icon">⬡</span> Settings</div>
+            <div style="height:1px;background:#1E293B;margin:12px 4px"></div>
+            <div class="admin-nav-item" style="margin-top:auto">
+              <span class="admin-nav-icon">↗</span> Preview site
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Main -->
+        <div class="admin-main">
+          <div class="admin-topbar">
+            <div>
+              <div style="font-family:var(--f-mono);font-size:10px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px">Roadmaps / Frontend Developer</div>
+              <div class="admin-topbar-title">Graph Editor</div>
+            </div>
+            <div class="admin-topbar-actions">
+              <button class="btn btn-ghost" style="font-size:12.5px">+ Add Node</button>
+              <button class="btn btn-primary" style="font-size:12.5px">Save Graph</button>
+            </div>
+          </div>
+
+          <div class="admin-canvas" style="flex:1;min-height:500px">
+            <svg class="graph-svg">
+              <line x1="390" y1="90" x2="180" y2="205" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <line x1="390" y1="90" x2="390" y2="205" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <line x1="390" y1="90" x2="600" y2="205" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <line x1="180" y1="265" x2="100" y2="370" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+              <line x1="180" y1="265" x2="260" y2="370" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="5,3"/>
+            </svg>
+
+            <!-- Node palette -->
+            <div class="node-palette">
+              <div class="palette-label">Drag to add</div>
+              <div class="palette-item"><div class="pd r"></div> Roadmap Node</div>
+              <div class="palette-item"><div class="pd l"></div> Lesson Node</div>
+            </div>
+
+            <!-- Nodes -->
+            <div class="gnode" style="top:50px;left:318px">
+              <div class="handle handle-top"></div>
+              <div class="gnode-body roadmap-node active-node" style="background:#EEF2FF">
+                <div class="gnode-type r">roadmap</div>
+                <div class="gnode-name">Frontend</div>
+              </div>
+              <div class="handle handle-bot"></div>
+            </div>
+            <div class="gnode" style="top:170px;left:110px">
+              <div class="handle handle-top"></div>
+              <div class="gnode-body lesson-node">
+                <div class="gnode-type l">lesson</div>
+                <div class="gnode-name">HTML</div>
+              </div>
+              <div class="handle handle-bot"></div>
+            </div>
+            <div class="gnode" style="top:170px;left:320px">
+              <div class="handle handle-top"></div>
+              <div class="gnode-body lesson-node">
+                <div class="gnode-type l">lesson</div>
+                <div class="gnode-name">CSS</div>
+              </div>
+              <div class="handle handle-bot"></div>
+            </div>
+            <div class="gnode" style="top:170px;left:528px">
+              <div class="handle handle-top"></div>
+              <div class="gnode-body roadmap-node">
+                <div class="gnode-type r">roadmap</div>
+                <div class="gnode-name">JavaScript</div>
+              </div>
+              <div class="handle handle-bot"></div>
+            </div>
+            <div class="gnode" style="top:335px;left:40px">
+              <div class="handle handle-top"></div>
+              <div class="gnode-body lesson-node">
+                <div class="gnode-type l">lesson</div>
+                <div class="gnode-name">Semantic HTML</div>
+              </div>
+              <div class="handle handle-bot"></div>
+            </div>
+            <div class="gnode" style="top:335px;left:195px">
+              <div class="handle handle-top"></div>
+              <div class="gnode-body lesson-node">
+                <div class="gnode-type l">lesson</div>
+                <div class="gnode-name">Accessibility</div>
+              </div>
+              <div class="handle handle-bot"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="graph-controls">
+              <div class="ctrl-btn">+</div>
+              <div class="ctrl-btn">−</div>
+              <div class="ctrl-btn">⤢</div>
+            </div>
+
+            <button class="save-btn">Save Graph ✓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
