@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md — @vizteck/ui package with NodeBadge, Button, Card
-last_updated: "2026-06-18T16:20:07.910Z"
-last_activity: 2026-06-18 -- Phase 03 execution started
+stopped_at: Completed 03-02-PLAN.md — @vizteck/graph package with RoadmapGraph, RoadmapNode
+last_updated: "2026-06-18T16:30:00.000Z"
+last_activity: 2026-06-18 -- Phase 03 Plan 02 complete
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 5
-  completed_plans: 3
-  percent: 25
+  total_plans: 6
+  completed_plans: 4
+  percent: 40
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-06-18)
 ## Current Position
 
 Phase: 03 (public-viewer) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 Status: Ready to execute
-Last activity: 2026-06-18 -- Phase 03 execution started
+Last activity: 2026-06-18 -- Phase 03 Plan 02 complete
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
@@ -54,6 +54,7 @@ Progress: [█████░░░░░] 50%
 
 *Updated after each plan completion*
 | Phase 03-public-viewer P01 | 5m | 2 tasks | 6 files |
+| Phase 03-public-viewer P02 | 6m | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,8 @@ Key decisions affecting Phase 2:
 - DEC-005: Static ADMIN_TOKEN; all mutations require Bearer token; AdminGuard in api-gateway
 - DEC-010: CreateRoadmap/UpdateRoadmap return RoadmapItem (not Roadmap) — committed proto wins
 - [Phase ?]: packages/ui uses main=./src/index.ts (no build step); apps/web uses transpilePackages to compile at app build time
+- [Phase 03-02]: NodeProps<Node<RoadmapNodeData>> is the correct @xyflow/react v12 generic; RoadmapNodeData must extend Record<string, unknown>
+- [Phase 03-02]: nodeTypes declared at module scope prevents ReactFlow from remounting nodes on every parent render
 
 ### Pending Todos
 
@@ -96,6 +99,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-18T16:20:07.866Z
-Stopped at: Completed 03-01-PLAN.md — @vizteck/ui package with NodeBadge, Button, Card
+Last session: 2026-06-18T16:30:00.000Z
+Stopped at: Completed 03-02-PLAN.md — @vizteck/graph package with RoadmapGraph, RoadmapNode
 Resume file: None

@@ -72,7 +72,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 03-02-PLAN.md — packages/graph: RoadmapGraph (mode="view"|"edit") + RoadmapNode (@vizteck/graph)
+- [x] 03-02-PLAN.md — packages/graph: RoadmapGraph (mode="view"|"edit") + RoadmapNode (@vizteck/graph)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -109,5 +109,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-06-18 |
 | 2. Core Services | 2/2 | Complete   | 2026-06-18 |
-| 3. Public Viewer | 1/3 | In Progress|  |
+| 3. Public Viewer | 2/3 | In Progress|  |
 | 4. Admin CMS | 0/3 | Not started | - |
