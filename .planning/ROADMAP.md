@@ -64,13 +64,13 @@ Plans:
   3. Clicking a LESSON node navigates to /roadmap/[slug]/node/[id] and shows rendered lesson text
   4. Pages build statically (`next build` succeeds without a live api-gateway) and carry revalidate: 3600
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
 
-- [ ] 03-01: packages/ui — Button, Card, NodeBadge React components (@vizteck/ui)
-- [ ] 03-02: packages/graph — RoadmapGraph component with mode="view"|"edit" prop (@vizteck/graph)
-- [ ] 03-03: apps/web — Next.js 15 SSG pages: home, /roadmap/[slug], /roadmap/[slug]/node/[id]
+- [ ] 03-01-PLAN.md — packages/ui: NodeBadge, Button, Card shared components (@vizteck/ui)
+- [ ] 03-02-PLAN.md — packages/graph: RoadmapGraph (mode="view"|"edit") + RoadmapNode (@vizteck/graph)
+- [ ] 03-03-PLAN.md — apps/web: Next.js 16 SSG viewer (home / [slug] / node/[id]), BlockNote lesson reader
 
 **UI hint**: yes
 
@@ -103,5 +103,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-06-18 |
 | 2. Core Services | 2/2 | Complete   | 2026-06-18 |
-| 3. Public Viewer | 0/3 | Not started | - |
+| 3. Public Viewer | 0/3 | Planned | - |
 | 4. Admin CMS | 0/3 | Not started | - |
