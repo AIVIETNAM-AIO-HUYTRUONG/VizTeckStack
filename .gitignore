@@ -1,0 +1,11 @@
+node_modules/
+.turbo/
+dist/
+.next/
+build/
+*.local
+.env
+.env.*
+!.env.example
+packages/proto/generated/
+.pnpm-store/
