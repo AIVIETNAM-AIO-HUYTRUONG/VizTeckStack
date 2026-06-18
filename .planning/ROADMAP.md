@@ -65,11 +65,17 @@ Plans:
   4. Pages build statically (`next build` succeeds without a live api-gateway) and carry revalidate: 3600
 
 **Plans**: 3 plans
-
 Plans:
+**Wave 1**
 
 - [ ] 03-01-PLAN.md — packages/ui: NodeBadge, Button, Card shared components (@vizteck/ui)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 03-02-PLAN.md — packages/graph: RoadmapGraph (mode="view"|"edit") + RoadmapNode (@vizteck/graph)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 03-03-PLAN.md — apps/web: Next.js 16 SSG viewer (home / [slug] / node/[id]), BlockNote lesson reader
 
 **UI hint**: yes

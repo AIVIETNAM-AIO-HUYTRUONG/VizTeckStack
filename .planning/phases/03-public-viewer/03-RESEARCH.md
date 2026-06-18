@@ -710,17 +710,19 @@ export default async function LessonPage({
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Next.js 15 vs 16: which version to scaffold apps/web on?**
    - What we know: `npm view next version` = 16.2.9; CONTEXT.md says "Next.js 15". Next.js 16 has one breaking change that affects this phase: `await params`.
    - What's unclear: Is CONTEXT.md outdated or is there a reason to pin to 15?
    - Recommendation: Use `next@latest` (16.2.9). All code examples in this research use the correct async `params` pattern. The ISR model (`revalidate = 3600`) works identically in both versions without `cacheComponents`.
+   - RESOLVED: Use `next@^16.2.9`. Plans 03-01/02/03 are written with async params throughout.
 
 2. **Should `generateStaticParams` return all slugs (pre-built) or empty array (ISR on demand)?**
    - What we know: REQ-nfr-ssg-revalidation says "pages render without a running api-gateway after build". Empty array satisfies the build part; pages still need api-gateway on first request.
    - What's unclear: Does the requirement mean "zero runtime dependency on api-gateway ever" (impossible with ISR) or "build-time no dependency"?
    - Recommendation: Use `return []` for build-time independence. Document in plan that first-page-load requires api-gateway (ISR populates the cache then).
+   - RESOLVED: Use `return []`. Plans 03-03 Task 3 implements this. First request requires api-gateway (ISR); build does not.
 
 ---
 
