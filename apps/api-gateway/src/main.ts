@@ -1,10 +1,13 @@
 import 'dotenv/config';
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { GrpcExceptionFilter } from './common/grpc-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new GrpcExceptionFilter(httpAdapter));
   app.enableCors();
 
   const adminToken = process.env.ADMIN_TOKEN ?? 'supersecret';

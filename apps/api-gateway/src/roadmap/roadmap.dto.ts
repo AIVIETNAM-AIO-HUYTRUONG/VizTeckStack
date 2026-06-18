@@ -5,29 +5,29 @@ export enum NodeTypeEnum { ROADMAP = 'ROADMAP', LESSON = 'LESSON' }
 registerEnumType(NodeTypeEnum, { name: 'NodeType' });
 
 @ObjectType() export class RoadmapDto {
-  @Field(() => ID) @ApiProperty() id!: string;
-  @Field() @ApiProperty() slug!: string;
-  @Field() @ApiProperty() title!: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() description?: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() coverImage?: string;
+  @Field(() => ID) @ApiProperty({ example: 'clx1234abcd' }) id!: string;
+  @Field() @ApiProperty({ example: 'frontend' }) slug!: string;
+  @Field() @ApiProperty({ example: 'Frontend Developer' }) title!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'Learn modern frontend development' }) description?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'https://example.com/cover.png' }) coverImage?: string;
 }
 
 @ObjectType() export class NodeDto {
-  @Field(() => ID) @ApiProperty() id!: string;
-  @Field() @ApiProperty() roadmapId!: string;
-  @Field(() => NodeTypeEnum) @ApiProperty({ enum: NodeTypeEnum }) type!: NodeTypeEnum;
-  @Field() @ApiProperty() title!: string;
-  @Field(() => Float) @ApiProperty() positionX!: number;
-  @Field(() => Float) @ApiProperty() positionY!: number;
-  @Field({ nullable: true }) @ApiPropertyOptional() targetRoadmapId?: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() content?: string;
+  @Field(() => ID) @ApiProperty({ example: 'node_001' }) id!: string;
+  @Field() @ApiProperty({ example: 'clx1234abcd' }) roadmapId!: string;
+  @Field(() => NodeTypeEnum) @ApiProperty({ enum: NodeTypeEnum, example: NodeTypeEnum.LESSON }) type!: NodeTypeEnum;
+  @Field() @ApiProperty({ example: 'HTML & CSS Basics' }) title!: string;
+  @Field(() => Float) @ApiProperty({ example: 100 }) positionX!: number;
+  @Field(() => Float) @ApiProperty({ example: 200 }) positionY!: number;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: null }) targetRoadmapId?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: null }) content?: string;
 }
 
 @ObjectType() export class EdgeDto {
-  @Field(() => ID) @ApiProperty() id!: string;
-  @Field() @ApiProperty() sourceId!: string;
-  @Field() @ApiProperty() targetId!: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() label?: string;
+  @Field(() => ID) @ApiProperty({ example: 'edge_001' }) id!: string;
+  @Field() @ApiProperty({ example: 'node_001' }) sourceId!: string;
+  @Field() @ApiProperty({ example: 'node_002' }) targetId!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'next' }) label?: string;
 }
 
 @ObjectType() export class RoadmapDetailDto {
@@ -37,30 +37,30 @@ registerEnumType(NodeTypeEnum, { name: 'NodeType' });
 }
 
 @InputType() export class CreateRoadmapInput {
-  @Field() @ApiProperty() slug!: string;
-  @Field() @ApiProperty() title!: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() description?: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() coverImage?: string;
+  @Field() @ApiProperty({ example: 'backend' }) slug!: string;
+  @Field() @ApiProperty({ example: 'Backend Developer' }) title!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'Learn backend development with Node.js' }) description?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'https://example.com/backend.png' }) coverImage?: string;
 }
 
 @InputType() export class UpdateRoadmapInput {
-  @Field({ nullable: true }) @ApiPropertyOptional() title?: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() description?: string;
-  @Field({ nullable: true }) @ApiPropertyOptional() coverImage?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'Backend Developer 2025' }) title?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'Updated description' }) description?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'https://example.com/new-cover.png' }) coverImage?: string;
 }
 
 @InputType() export class NodeInput {
-  @Field() id!: string;
-  @Field(() => NodeTypeEnum) type!: NodeTypeEnum;
-  @Field() title!: string;
-  @Field(() => Float) positionX!: number;
-  @Field(() => Float) positionY!: number;
-  @Field({ nullable: true }) targetRoadmapId?: string;
-  @Field({ nullable: true }) content?: string;
+  @Field() @ApiProperty({ example: 'node_001' }) id!: string;
+  @Field(() => NodeTypeEnum) @ApiProperty({ enum: NodeTypeEnum, example: NodeTypeEnum.LESSON }) type!: NodeTypeEnum;
+  @Field() @ApiProperty({ example: 'REST APIs' }) title!: string;
+  @Field(() => Float) @ApiProperty({ example: 100 }) positionX!: number;
+  @Field(() => Float) @ApiProperty({ example: 200 }) positionY!: number;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: null }) targetRoadmapId?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: null }) content?: string;
 }
 
 @InputType() export class EdgeInput {
-  @Field() sourceId!: string;
-  @Field() targetId!: string;
-  @Field({ nullable: true }) label?: string;
+  @Field() @ApiProperty({ example: 'node_001' }) sourceId!: string;
+  @Field() @ApiProperty({ example: 'node_002' }) targetId!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'next' }) label?: string;
 }
