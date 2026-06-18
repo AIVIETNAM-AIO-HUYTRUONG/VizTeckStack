@@ -38,7 +38,7 @@ Plans:
   3. GET /api-docs serves Swagger UI with all endpoints documented
   4. POST /api/roadmaps with a valid Bearer token creates a roadmap; without a token returns 401
   5. svc-roadmap UpsertGraph runs atomically — partial graph saves never leave orphaned nodes
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
 - [ ] 02-01: apps/svc-roadmap — NestJS gRPC server, RoadmapService implementation, Prisma integration
