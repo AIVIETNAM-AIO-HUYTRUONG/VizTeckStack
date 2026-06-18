@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Phase 02 Plan 02 complete — api-gateway built: GraphQL + REST + Swagger, 2 tests pass, build clean. Phase 02 complete. Next: Phase 03 (shared packages)."
-last_updated: "2026-06-18T00:00:00Z"
-last_activity: 2026-06-18 -- Phase 02 Plan 02 (api-gateway) complete
+stopped_at: "Phase 03 discuss-phase complete — CONTEXT.md written, Pencil designs done (3 screens). Next: /gsd-plan-phase 3."
+last_updated: "2026-06-18T12:00:00Z"
+last_activity: 2026-06-18 -- Phase 03 discuss-phase complete, CONTEXT.md committed
 progress:
   total_phases: 4
   completed_phases: 1
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-18)
 
 **Core value:** Public users can browse and read any roadmap — any page must work without an admin session, and the admin canvas must always faithfully reflect what's in the database.
-**Current focus:** Phase 02 — core-services COMPLETE; Phase 03 next
+**Current focus:** Phase 03 — public-viewer: discuss-phase done, ready to plan
 
 ## Current Position
 
-Phase: 02 (core-services) — COMPLETE
-Plan: 2 of 2 — DONE
-Status: Phase 02 complete — both plans executed, api-gateway and svc-roadmap built
-Last activity: 2026-06-18 -- Phase 02 Plan 02 (api-gateway) complete
+Phase: 03 (public-viewer) — IN PROGRESS (discuss-phase done)
+Plan: 0 of 3 — waiting for /gsd-plan-phase 3
+Status: CONTEXT.md written, Pencil designs complete (3 screens). Ready to plan.
+Last activity: 2026-06-18 -- Phase 03 discuss-phase complete, CONTEXT.md committed
 
 Progress: [█████░░░░░] 50%
 
@@ -95,5 +95,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-06-18
-Stopped at: Phase 02 Plan 02 complete — api-gateway built: GraphQL + REST + Swagger, 2 tests pass, build clean. Phase 02 complete. Next: Phase 03 (shared packages).
+Stopped at: Phase 03 discuss-phase complete — CONTEXT.md written, Pencil designs done (3 screens). Next: /gsd-plan-phase 3.
 Resume file: None
