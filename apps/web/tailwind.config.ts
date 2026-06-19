@@ -1,16 +1,21 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: ['./src/**/*.{ts,tsx}'],
+  content: [
+    './src/**/*.{ts,tsx}',
+    '../../packages/ui/src/**/*.{ts,tsx}',
+    '../../packages/graph/src/**/*.{ts,tsx}',
+  ],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        // Semantic tokens backed by CSS variables — dark mode auto
+        bg: { 0: 'var(--bg-0)', 1: 'var(--bg-1)', 2: 'var(--bg-2)' },
+        border: 'var(--border)',
+        text: { 1: 'var(--text-1)', 2: 'var(--text-2)', 3: 'var(--text-3)' },
         indigo: { DEFAULT: '#4F46E5', mid: '#6366F1', lt: '#EEF2FF' },
         emerald: { DEFAULT: '#059669', lt: '#ECFDF5' },
-        bg: { 0: '#F8F9FC', 1: '#FFFFFF', 2: '#F1F3F9' },
-        border: '#E2E8F0',
-        text: { 1: '#0F172A', 2: '#475569', 3: '#94A3B8' },
       },
       borderRadius: { sm: '6px', md: '10px', lg: '16px' },
       fontFamily: {

@@ -13,54 +13,23 @@ export function Card({ type, title, description, miniGraph, onClick }: CardProps
   return (
     <div
       onClick={onClick}
-      style={{
-        backgroundColor: 'var(--bg-1, #FFFFFF)',
-        border: '1px solid var(--border, #E2E8F0)',
-        borderRadius: 16,
-        padding: 20,
-        cursor: onClick ? 'pointer' : 'default',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 12,
-      }}
+      className={`bg-bg-1 border border-border rounded-lg p-5 flex flex-col gap-3 ${onClick ? 'cursor-pointer' : 'cursor-default'}`}
     >
       <NodeBadge type={type} />
 
       <div>
-        <h3
-          style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontSize: 16,
-            fontWeight: 700,
-            color: 'var(--text-1, #0F172A)',
-            margin: 0,
-          }}
-        >
+        <h3 className="font-display text-base font-bold text-text-1 m-0">
           {title}
         </h3>
         {description && (
-          <p
-            style={{
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 14,
-              color: 'var(--text-2, #475569)',
-              margin: '4px 0 0 0',
-            }}
-          >
+          <p className="font-body text-sm text-text-2 mt-1 mb-0">
             {description}
           </p>
         )}
       </div>
 
       {miniGraph && (
-        <div
-          style={{
-            backgroundColor: 'var(--bg-2, #F1F3F9)',
-            borderRadius: 10,
-            overflow: 'hidden',
-            minHeight: 80,
-          }}
-        >
+        <div className="bg-bg-2 rounded-md overflow-hidden min-h-[80px]">
           {miniGraph}
         </div>
       )}

@@ -34,30 +34,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} bg-[var(--bg-0)] text-[var(--text-1)]`}
-      >
-        <header
-          style={{
-            background: 'var(--bg-1)',
-            borderBottom: '1px solid var(--border)',
-            padding: '0 24px',
-            height: 56,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <a
-            href="/"
-            style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontWeight: 700,
-              fontSize: 18,
-              color: 'var(--text-1)',
-              textDecoration: 'none',
-            }}
-          >
+      <head>
+        {/* Blocking script — sets dark class before first paint to prevent FOUC */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();` }} />
+      </head>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} bg-bg-0 text-text-1`}>
+        <header className="h-14 px-6 flex items-center justify-between bg-bg-1 border-b border-border">
+          <a href="/" className="font-display font-bold text-lg text-text-1 no-underline">
             VizTeckStack
           </a>
           <ThemeToggle />

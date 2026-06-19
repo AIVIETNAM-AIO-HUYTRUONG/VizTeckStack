@@ -28,19 +28,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label="Toggle dark mode"
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      style={{
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-sm)',
-        padding: '6px 10px',
-        background: 'var(--bg-1)',
-        color: 'var(--text-2)',
-        cursor: 'pointer',
-        fontSize: 16,
-        lineHeight: 1,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 4,
-      }}
+      className="flex items-center gap-1 px-[10px] py-[6px] text-base leading-none rounded-sm border border-border bg-bg-1 text-text-2 cursor-pointer"
     >
       {isDark ? '☀' : '🌙'}
     </button>

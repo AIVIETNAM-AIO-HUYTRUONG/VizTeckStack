@@ -13,62 +13,25 @@ export default async function HomePage() {
   }
 
   return (
-    <div style={{ padding: '40px 24px' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <h1
-          style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: 700,
-            fontSize: 32,
-            color: 'var(--text-1)',
-            marginBottom: 8,
-          }}
-        >
+    <div className="px-6 py-10">
+      <div className="max-w-[1200px] mx-auto">
+        <h1 className="font-display font-bold text-[32px] text-text-1 mb-2">
           Learning Roadmaps
         </h1>
-        <p
-          style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 16,
-            color: 'var(--text-2)',
-            marginBottom: 40,
-          }}
-        >
+        <p className="font-body text-base text-text-2 mb-10">
           Browse our structured learning paths and start your journey.
         </p>
 
         {roadmaps.length === 0 ? (
-          <div
-            style={{
-              color: 'var(--text-3)',
-              fontFamily: 'Inter, sans-serif',
-              fontSize: 14,
-              textAlign: 'center',
-              padding: '64px 0',
-            }}
-          >
+          <div className="text-text-3 text-sm text-center py-16">
             No roadmaps available yet.
           </div>
         ) : (
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 24,
-            }}
-          >
+          <div className="grid grid-cols-3 gap-6">
             {roadmaps.map((r) => (
-              <a
-                key={r.id}
-                href={`/roadmap/${r.slug}`}
-                style={{ textDecoration: 'none', display: 'block' }}
-              >
+              <a key={r.id} href={`/roadmap/${r.slug}`} className="no-underline block">
                 {/* miniGraph omitted until /api/roadmaps returns node positions */}
-                <Card
-                  type="ROADMAP"
-                  title={r.title}
-                  description={r.description}
-                />
+                <Card type="ROADMAP" title={r.title} description={r.description} />
               </a>
             ))}
           </div>

@@ -23,24 +23,11 @@ export function RoadmapNode({ data }: RoadmapNodeProps) {
     <>
       <Handle type="target" position={Position.Top} />
       <div
-        style={{
-          border: `2px solid ${borderColor}`,
-          background: 'var(--bg-1, #ffffff)',
-          borderRadius: 10,
-          padding: '10px 18px',
-          minWidth: 120,
-          textAlign: 'center',
-        }}
+        className="bg-bg-1 rounded-md px-[18px] py-[10px] min-w-[120px] text-center border-2"
+        style={{ borderColor }}
       >
         <NodeBadge type={data.nodeType} />
-        <div
-          style={{
-            fontFamily: 'JetBrains Mono, monospace',
-            fontSize: 12,
-            marginTop: 4,
-            color: 'var(--text-1, #0F172A)',
-          }}
-        >
+        <div className="font-mono text-xs mt-1 text-text-1">
           {data.title}
         </div>
       </div>

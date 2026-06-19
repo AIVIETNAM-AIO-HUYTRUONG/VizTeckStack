@@ -12,86 +12,43 @@ interface BreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
-const DOT_STYLES: Record<BreadcrumbState, React.CSSProperties> = {
-  visited: {
-    background: '#FFFFFF',
-    border: '2px solid #4F46E5',
-    color: '#4F46E5',
-  },
-  active: {
-    background: '#4F46E5',
-    border: '2px solid #4F46E5',
-    color: '#FFFFFF',
-  },
-  none: {
-    background: '#94A3B8',
-    border: '2px solid #94A3B8',
-    color: '#FFFFFF',
-  },
+const dotClass: Record<BreadcrumbState, string> = {
+  visited: 'bg-bg-1 border-2 border-indigo text-indigo',
+  active:  'bg-indigo border-2 border-indigo text-white',
+  none:    'bg-text-3 border-2 border-text-3 text-white',
 };
 
-const CONNECTOR_COLORS: Record<BreadcrumbState, string> = {
-  visited: '#4F46E5',
-  active: '#E2E8F0',
-  none: '#CBD5E1',
+const labelClass: Record<BreadcrumbState, string> = {
+  visited: 'text-indigo',
+  active:  'text-indigo',
+  none:    'text-text-3',
+};
+
+const connectorClass: Record<BreadcrumbState, string> = {
+  visited: 'bg-indigo',
+  active:  'bg-border',
+  none:    'bg-text-2',
 };
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav
-      aria-label="Breadcrumb"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 0,
-        padding: '12px 0',
-      }}
-    >
+    <nav aria-label="Breadcrumb" className="flex items-center py-3">
       {items.map((item, idx) => {
-        const dotStyle = DOT_STYLES[item.state];
         const isLast = idx === items.length - 1;
-        const connectorColor = CONNECTOR_COLORS[item.state];
-
         return (
-          <span key={item.href} style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+          <span key={item.href} className="flex items-center">
             <a
               href={item.href}
               aria-current={item.state === 'active' ? 'page' : undefined}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: 4,
-                textDecoration: 'none',
-              }}
+              className="flex flex-col items-center gap-1 no-underline"
             >
               <span
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: 10,
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontWeight: 700,
-                  ...dotStyle,
-                }}
+                className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono font-bold ${dotClass[item.state]}`}
               >
                 {idx + 1}
               </span>
               <span
-                style={{
-                  fontSize: 11,
-                  color: item.state === 'active' ? '#4F46E5' : item.state === 'visited' ? '#4F46E5' : '#94A3B8',
-                  fontFamily: 'Inter, sans-serif',
-                  maxWidth: 72,
-                  textAlign: 'center',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                }}
+                className={`text-[11px] font-body max-w-[72px] text-center truncate ${labelClass[item.state]}`}
               >
                 {item.label}
               </span>
@@ -99,13 +56,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
             {!isLast && (
               <span
                 aria-hidden="true"
-                style={{
-                  width: 32,
-                  height: 2,
-                  background: connectorColor,
-                  marginBottom: 16,
-                  flexShrink: 0,
-                }}
+                className={`w-8 h-0.5 mb-4 shrink-0 ${connectorClass[item.state]}`}
               />
             )}
           </span>
