@@ -21,6 +21,7 @@ import { useUnsavedGuard } from '@/lib/useRouteGuard';
 
 interface EditorNode extends NodeItem {
   // positionX/Y are number | null (unplaced = null)
+  selected?: boolean;
 }
 
 interface EditorEdge extends EdgeItem {}
@@ -39,6 +40,12 @@ interface DeleteConfirm {
 }
 
 // ---- Helpers ----
+
+// proto3 numeric enum (0=ROADMAP, 1=LESSON) → string
+function normalizeNodeType(type: unknown): 'ROADMAP' | 'LESSON' {
+  if (type === 0 || type === 'ROADMAP') return 'ROADMAP';
+  return 'LESSON';
+}
 
 function makeSnapshot(nodes: EditorNode[], edges: EditorEdge[]): string {
   return JSON.stringify({
@@ -60,24 +67,23 @@ function makeSnapshot(nodes: EditorNode[], edges: EditorEdge[]): string {
   });
 }
 
-// Apply React Flow NodeChanges back into EditorNode list (position updates only)
+// Apply React Flow NodeChanges back into EditorNode list (position + selection)
 function applyFlowChangesToEditorNodes(
   rfChanges: NodeChange[],
   editorNodes: EditorNode[],
 ): EditorNode[] {
   return editorNodes.map((n) => {
+    let updated = n;
     for (const change of rfChanges) {
-      if (
-        change.type === 'position' &&
-        change.id === n.id &&
-        'position' in change &&
-        change.position != null
-      ) {
+      if (change.id !== n.id) continue;
+      if (change.type === 'position' && 'position' in change && change.position != null) {
         const pos = change.position as { x: number; y: number };
-        return { ...n, positionX: pos.x, positionY: pos.y };
+        updated = { ...updated, positionX: pos.x, positionY: pos.y };
+      } else if (change.type === 'select' && 'selected' in change) {
+        updated = { ...updated, selected: (change as { selected: boolean }).selected };
       }
     }
-    return n;
+    return updated;
   });
 }
 
@@ -130,13 +136,13 @@ export default function GraphEditorPage({
         if (!res.ok) return;
         const data = await res.json() as {
           roadmap: { title: string };
-          nodes: NodeItem[];
-          edges: EdgeItem[];
+          nodes?: NodeItem[];
+          edges?: EdgeItem[];
         };
         if (cancelled) return;
         setRoadmapTitle(data.roadmap?.title ?? '');
-        const nodes: EditorNode[] = data.nodes.map((n) => ({ ...n }));
-        const edges: EditorEdge[] = data.edges.map((e) => ({ ...e }));
+        const nodes: EditorNode[] = (data.nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) }));
+        const edges: EditorEdge[] = (data.edges ?? []).map((e) => ({ ...e }));
         setEditorNodes(nodes);
         setEditorEdges(edges);
         savedSnapshotRef.current = makeSnapshot(nodes, edges);
@@ -152,7 +158,15 @@ export default function GraphEditorPage({
   // ---- React Flow callbacks ----
 
   const handleNodesChange = useCallback((changes: NodeChange[]) => {
-    setEditorNodes((prev) => applyFlowChangesToEditorNodes(changes, prev));
+    // Pass only position and select changes — dimensions/add changes are React Flow-internal
+    // and must not trigger re-renders (that would reset visibility:hidden in a loop)
+    const relevant = changes.filter(
+      (c) =>
+        (c.type === 'position' && 'position' in c && (c as { position?: unknown }).position != null) ||
+        c.type === 'select',
+    );
+    if (relevant.length === 0) return;
+    setEditorNodes((prev) => applyFlowChangesToEditorNodes(relevant, prev));
   }, []);
 
   const handleEdgesChange = useCallback((changes: EdgeChange[]) => {

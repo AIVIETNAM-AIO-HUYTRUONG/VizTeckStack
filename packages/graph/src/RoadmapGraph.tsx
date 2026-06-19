@@ -126,6 +126,7 @@ export function RoadmapGraph(props: RoadmapGraphProps) {
       id: n.id,
       type: 'roadmapNode' as const,
       position: { x: n.positionX!, y: n.positionY! },
+      selected: (n as { selected?: boolean }).selected ?? false,
       data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
     }));
 
