@@ -1,5 +1,4 @@
 import { Card } from '@vizteck/ui';
-import { MiniGraph } from '../components/MiniGraph';
 import { fetchRoadmaps } from '../lib/api';
 
 export const revalidate = 3600;
@@ -64,13 +63,11 @@ export default async function HomePage() {
                 href={`/roadmap/${r.slug}`}
                 style={{ textDecoration: 'none', display: 'block' }}
               >
+                {/* miniGraph omitted until /api/roadmaps returns node positions */}
                 <Card
                   type="ROADMAP"
                   title={r.title}
                   description={r.description}
-                  miniGraph={
-                    <MiniGraph nodes={[]} edges={[]} width={200} height={80} />
-                  }
                 />
               </a>
             ))}
