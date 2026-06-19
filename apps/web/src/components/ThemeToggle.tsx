@@ -1,13 +1,27 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const stored = localStorage.getItem('theme');
+    if (stored) return stored === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Apply class once on mount to match initial state
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggle = () => {
     const next = !isDark;
     setIsDark(next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
     if (next) {
       document.documentElement.classList.add('dark');
     } else {
