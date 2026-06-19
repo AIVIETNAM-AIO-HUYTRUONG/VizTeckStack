@@ -42,7 +42,7 @@ export function RoadmapGraph({ nodes, edges, mode, onNodeClick }: RoadmapGraphPr
   }
 
   return (
-    <div style={{ width: '100%', height: '100%', background: '#F4F6FB' }}>
+    <div style={{ width: '100%', height: '100%', background: 'var(--bg-1, #F4F6FB)' }}>
       <ReactFlowProvider>
         <ReactFlow
           nodes={rfNodes}

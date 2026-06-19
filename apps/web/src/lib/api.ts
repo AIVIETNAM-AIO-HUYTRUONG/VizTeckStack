@@ -34,7 +34,7 @@ export interface RoadmapDetail {
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
 export async function fetchRoadmaps(): Promise<RoadmapItem[]> {
-  const res = await fetch(`${API}/api/roadmaps`, { cache: 'force-cache' });
+  const res = await fetch(`${API}/api/roadmaps`, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`fetchRoadmaps: ${res.status}`);
   const data = await res.json() as { roadmaps?: RoadmapItem[] } | RoadmapItem[];
   return Array.isArray(data) ? data : (data as { roadmaps?: RoadmapItem[] }).roadmaps ?? [];
@@ -47,7 +47,7 @@ function normalizeNodeType(t: unknown): 'ROADMAP' | 'LESSON' {
 }
 
 export async function fetchRoadmap(slug: string): Promise<RoadmapDetail> {
-  const res = await fetch(`${API}/api/roadmaps/${slug}`, { cache: 'force-cache' });
+  const res = await fetch(`${API}/api/roadmaps/${slug}`, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`fetchRoadmap(${slug}): ${res.status}`);
   const raw = await res.json() as Partial<RoadmapDetail>;
   return {
@@ -58,7 +58,7 @@ export async function fetchRoadmap(slug: string): Promise<RoadmapDetail> {
 }
 
 export async function fetchNode(id: string): Promise<NodeItem> {
-  const res = await fetch(`${API}/api/nodes/${id}`, { cache: 'force-cache' });
+  const res = await fetch(`${API}/api/nodes/${id}`, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`fetchNode(${id}): ${res.status}`);
   return res.json() as Promise<NodeItem>;
 }

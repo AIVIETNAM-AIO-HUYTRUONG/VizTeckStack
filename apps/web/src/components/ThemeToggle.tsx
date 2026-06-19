@@ -3,19 +3,13 @@
 import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+  const [isDark, setIsDark] = useState(false); // SSR-safe default
 
-  // Apply class once on mount to match initial state
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const stored = localStorage.getItem('theme');
+    const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setIsDark(dark);
+    if (dark) document.documentElement.classList.add('dark');
   }, []);
 
   const toggle = () => {
