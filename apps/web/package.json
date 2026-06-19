@@ -1,0 +1,30 @@
+{
+  "name": "@vizteck/web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start --port 3001",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^16.2.9",
+    "react": "^19",
+    "react-dom": "^19",
+    "@vizteck/ui": "workspace:*",
+    "@vizteck/graph": "workspace:*",
+    "@blocknote/react": "^0.51.4",
+    "@blocknote/core": "^0.51.4",
+    "@blocknote/mantine": "^0.51.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/node": "^20",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}
