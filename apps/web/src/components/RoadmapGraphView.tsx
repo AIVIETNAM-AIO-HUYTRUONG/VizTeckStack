@@ -22,9 +22,9 @@ export function RoadmapGraphView({ detail, slug }: RoadmapGraphViewProps) {
   const handleNodeClick = (node: NodeItem) => {
     if (node.type === 'LESSON') {
       router.push(`/roadmap/${slug}/node/${node.id}`);
-    } else if (node.type === 'ROADMAP' && node.targetRoadmapId) {
-      // Mitigates T-03-02 open redirect: only navigate to internal /roadmap/ path
-      router.push(`/roadmap/${node.targetRoadmapId}`);
+    } else if (node.type === 'ROADMAP' && (node.targetRoadmapSlug ?? node.targetRoadmapId)) {
+      // Prefer slug for human-readable URLs; fall back to ID until API returns slug
+      router.push(`/roadmap/${node.targetRoadmapSlug ?? node.targetRoadmapId}`);
     }
   };
 

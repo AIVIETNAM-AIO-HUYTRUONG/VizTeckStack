@@ -14,6 +14,7 @@ export interface NodeItem {
   positionX: number;
   positionY: number;
   targetRoadmapId?: string;
+  targetRoadmapSlug?: string;
   content?: string;
 }
 
