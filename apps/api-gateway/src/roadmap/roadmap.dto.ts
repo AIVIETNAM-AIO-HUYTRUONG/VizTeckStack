@@ -35,8 +35,8 @@ export class NodeDto {
   @ApiProperty({ enum: NodeTypeEnum, example: NodeTypeEnum.LESSON })
   type!: NodeTypeEnum;
   @Field() @ApiProperty({ example: "HTML & CSS Basics" }) title!: string;
-  @Field(() => Float) @ApiProperty({ example: 100 }) positionX!: number;
-  @Field(() => Float) @ApiProperty({ example: 200 }) positionY!: number;
+  @Field(() => Float, { nullable: true }) @ApiPropertyOptional({ example: 100 }) positionX?: number;
+  @Field(() => Float, { nullable: true }) @ApiPropertyOptional({ example: 200 }) positionY?: number;
   @Field({ nullable: true })
   @ApiPropertyOptional({ example: null })
   targetRoadmapId?: string;
@@ -94,8 +94,8 @@ export class NodeInput {
   @ApiProperty({ enum: NodeTypeEnum, example: NodeTypeEnum.LESSON })
   type!: NodeTypeEnum;
   @Field() @ApiProperty({ example: "REST APIs" }) title!: string;
-  @Field(() => Float) @ApiProperty({ example: 100 }) positionX!: number;
-  @Field(() => Float) @ApiProperty({ example: 200 }) positionY!: number;
+  @Field(() => Float, { nullable: true }) @ApiPropertyOptional({ example: 100 }) positionX?: number;
+  @Field(() => Float, { nullable: true }) @ApiPropertyOptional({ example: 200 }) positionY?: number;
   @Field({ nullable: true })
   @ApiPropertyOptional({ example: null })
   targetRoadmapId?: string;

@@ -1,7 +1,11 @@
 'use client';
 import '@xyflow/react/dist/style.css';
-import { type MouseEvent } from 'react';
-import { ReactFlow, Controls, ReactFlowProvider, type Node } from '@xyflow/react';
+import React, { type MouseEvent } from 'react';
+import {
+  ReactFlow, Controls, ReactFlowProvider,
+  type Node,
+  type OnNodesChange, type OnEdgesChange,
+} from '@xyflow/react';
 import { RoadmapNode } from './RoadmapNode';
 import type { NodeItem, EdgeItem } from './types';
 
@@ -13,15 +17,25 @@ export interface RoadmapGraphProps {
   edges: EdgeItem[];
   mode: 'view' | 'edit';
   onNodeClick?: (node: NodeItem) => void;
+  /** Called when React Flow node state changes (drag, select, etc.) — edit mode only */
+  onNodesChange?: OnNodesChange;
+  /** Called when React Flow edge state changes (connect, delete, etc.) — edit mode only */
+  onEdgesChange?: OnEdgesChange;
+  /** Called on right-click on empty canvas area — receives the canvas-space position */
+  onPaneContextMenu?: (event: MouseEvent, position: { x: number; y: number }) => void;
 }
 
-export function RoadmapGraph({ nodes, edges, mode, onNodeClick }: RoadmapGraphProps) {
-  const rfNodes = nodes.map((n) => ({
-    id: n.id,
-    type: 'roadmapNode' as const,
-    position: { x: n.positionX, y: n.positionY },
-    data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
-  }));
+export function RoadmapGraph({
+  nodes, edges, mode, onNodeClick, onNodesChange, onEdgesChange, onPaneContextMenu,
+}: RoadmapGraphProps) {
+  const rfNodes = nodes
+    .filter((n) => n.positionX != null && n.positionY != null)
+    .map((n) => ({
+      id: n.id,
+      type: 'roadmapNode' as const,
+      position: { x: n.positionX!, y: n.positionY! },
+      data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
+    }));
 
   const rfEdges = edges.map((e) => ({
     id: e.id,
@@ -41,6 +55,14 @@ export function RoadmapGraph({ nodes, edges, mode, onNodeClick }: RoadmapGraphPr
     }
   }
 
+  function handlePaneContextMenu(event: React.MouseEvent | globalThis.MouseEvent) {
+    if (onPaneContextMenu) {
+      event.preventDefault();
+      const { clientX, clientY } = event as React.MouseEvent;
+      onPaneContextMenu(event as MouseEvent, { x: clientX, y: clientY });
+    }
+  }
+
   return (
     <div className="w-full h-full bg-bg-1">
       <ReactFlowProvider>
@@ -54,6 +76,9 @@ export function RoadmapGraph({ nodes, edges, mode, onNodeClick }: RoadmapGraphPr
           edgesReconnectable={!isView}
           fitView
           onNodeClick={onNodeClick ? handleNodeClick : undefined}
+          onNodesChange={!isView ? onNodesChange : undefined}
+          onEdgesChange={!isView ? onEdgesChange : undefined}
+          onPaneContextMenu={!isView ? handlePaneContextMenu : undefined}
         >
           <Controls />
         </ReactFlow>

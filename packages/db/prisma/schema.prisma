@@ -29,8 +29,8 @@ model Node {
   roadmap         Roadmap  @relation("RoadmapNodes", fields: [roadmapId], references: [id], onDelete: Cascade)
   type            NodeType
   title           String
-  positionX       Float
-  positionY       Float
+  positionX       Float?
+  positionY       Float?
   targetRoadmapId String?
   targetRoadmap   Roadmap? @relation("NodeTarget", fields: [targetRoadmapId], references: [id])
   content         Json?

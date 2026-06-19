@@ -5,8 +5,8 @@ export interface NodeItem {
   roadmapId: string;
   type: GraphNodeType;
   title: string;
-  positionX: number;
-  positionY: number;
+  positionX: number | null;
+  positionY: number | null;
   targetRoadmapId?: string;
   targetRoadmapSlug?: string;
   content?: string;
