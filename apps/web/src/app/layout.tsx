@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
+import { ThemeToggle } from '../components/ThemeToggle';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -35,7 +36,32 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} bg-[var(--bg-0)] text-[var(--text-1)]`}
       >
-        {children}
+        <header
+          style={{
+            background: 'var(--bg-1)',
+            borderBottom: '1px solid var(--border)',
+            padding: '0 24px',
+            height: 56,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <a
+            href="/"
+            style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontWeight: 700,
+              fontSize: 18,
+              color: 'var(--text-1)',
+              textDecoration: 'none',
+            }}
+          >
+            VizTeckStack
+          </a>
+          <ThemeToggle />
+        </header>
+        <main>{children}</main>
       </body>
     </html>
   );
