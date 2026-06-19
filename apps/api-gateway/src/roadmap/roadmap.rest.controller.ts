@@ -16,7 +16,20 @@ export class RoadmapRestController {
   @Get('roadmaps/:slug')
   @ApiOperation({ summary: 'Get roadmap by slug with nodes and edges' })
   @ApiParam({ name: 'slug', type: String })
-  getRoadmap(@Param('slug') slug: string) { return this.grpc.getRoadmap(slug); }
+  async getRoadmap(@Param('slug') slug: string) {
+    const [detail, list] = await Promise.all([
+      this.grpc.getRoadmap(slug),
+      this.grpc.getRoadmaps(),
+    ]);
+    const idToSlug = new Map<string, string>(
+      (list.roadmaps ?? []).map((r: { id: string; slug: string }) => [r.id, r.slug]),
+    );
+    const nodes = (detail.nodes ?? []).map((n: { type: unknown; targetRoadmapId?: string; [k: string]: unknown }) => ({
+      ...n,
+      ...(n.targetRoadmapId ? { targetRoadmapSlug: idToSlug.get(n.targetRoadmapId) } : {}),
+    }));
+    return { ...detail, nodes };
+  }
 
   @Get('nodes/:id')
   @ApiOperation({ summary: 'Get node detail (includes lesson content)' })
