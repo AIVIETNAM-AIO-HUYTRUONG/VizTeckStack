@@ -9,3 +9,4 @@ build/
 !.env.example
 packages/proto/generated/
 .pnpm-store/
+.playwright-mcp/

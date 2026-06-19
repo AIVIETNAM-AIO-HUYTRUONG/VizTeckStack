@@ -24,6 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'VizTeckStack — Public Roadmaps',
   description: 'Browse and explore technology learning roadmaps',
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({

@@ -1,6 +1,6 @@
-// apps/svc-roadmap/src/roadmap/roadmap.service.ts
 import { Injectable } from '@nestjs/common';
-import { db } from '@vizteck/db';
+import { RpcException } from '@nestjs/microservices';
+import { Prisma, db } from '@vizteck/db';
 import {
   Empty, RoadmapList, SlugRequest, RoadmapDetail, IdRequest,
   NodeDetail, CreateRoadmapRequest, RoadmapItem, UpdateRoadmapRequest,
@@ -56,10 +56,17 @@ export class RoadmapService {
   }
 
   async createRoadmap(req: CreateRoadmapRequest): Promise<RoadmapItem> {
-    const r = await db.roadmap.create({
-      data: { slug: req.slug, title: req.title, description: req.description || null, coverImage: req.coverImage || null },
-    });
-    return toRoadmapItem(r);
+    try {
+      const r = await db.roadmap.create({
+        data: { slug: req.slug, title: req.title, description: req.description || null, coverImage: req.coverImage || null },
+      });
+      return toRoadmapItem(r);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
+        throw new RpcException({ code: 6, message: `Roadmap with slug '${req.slug}' already exists` });
+      }
+      throw e;
+    }
   }
 
   async updateRoadmap(req: UpdateRoadmapRequest): Promise<RoadmapItem> {

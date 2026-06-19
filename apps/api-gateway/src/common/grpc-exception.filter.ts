@@ -18,6 +18,10 @@ const GRPC_TO_HTTP: Record<number, number> = {
 export class GrpcExceptionFilter extends BaseExceptionFilter {
   catch(exception: unknown, host: ArgumentsHost) {
     if (exception instanceof HttpException) {
+      // BaseExceptionFilter uses HTTP response API — incompatible with GraphQL context
+      if (host.getType<GqlContextType>() === 'graphql') {
+        throw exception;
+      }
       return super.catch(exception, host);
     }
 

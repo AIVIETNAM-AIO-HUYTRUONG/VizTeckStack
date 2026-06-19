@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { RoadmapGraphView } from '../../../components/RoadmapGraphView';
 import { fetchRoadmap } from '../../../lib/api';
 
@@ -22,18 +23,11 @@ export default async function RoadmapPage({
   try {
     detail = await fetchRoadmap(slug);
   } catch {
-    return (
-      <div
-        style={{
-          padding: 40,
-          color: 'var(--text-3)',
-          fontFamily: 'Inter, sans-serif',
-          textAlign: 'center',
-        }}
-      >
-        Roadmap not found.
-      </div>
-    );
+    notFound();
+  }
+
+  if (!detail.roadmap) {
+    notFound();
   }
 
   return <RoadmapGraphView detail={detail} slug={slug} />;

@@ -14,8 +14,8 @@ export function Card({ type, title, description, miniGraph, onClick }: CardProps
     <div
       onClick={onClick}
       style={{
-        backgroundColor: '#FFFFFF',
-        border: '1px solid #E2E8F0',
+        backgroundColor: 'var(--bg-1, #FFFFFF)',
+        border: '1px solid var(--border, #E2E8F0)',
         borderRadius: 16,
         padding: 20,
         cursor: onClick ? 'pointer' : 'default',
@@ -32,7 +32,7 @@ export function Card({ type, title, description, miniGraph, onClick }: CardProps
             fontFamily: 'Space Grotesk, sans-serif',
             fontSize: 16,
             fontWeight: 700,
-            color: '#0F172A',
+            color: 'var(--text-1, #0F172A)',
             margin: 0,
           }}
         >
@@ -43,7 +43,7 @@ export function Card({ type, title, description, miniGraph, onClick }: CardProps
             style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: 14,
-              color: '#475569',
+              color: 'var(--text-2, #475569)',
               margin: '4px 0 0 0',
             }}
           >
@@ -55,7 +55,7 @@ export function Card({ type, title, description, miniGraph, onClick }: CardProps
       {miniGraph && (
         <div
           style={{
-            backgroundColor: '#F1F3F9',
+            backgroundColor: 'var(--bg-2, #F1F3F9)',
             borderRadius: 10,
             overflow: 'hidden',
             minHeight: 80,
