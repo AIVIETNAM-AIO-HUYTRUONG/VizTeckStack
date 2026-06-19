@@ -22,7 +22,7 @@ created: 2026-06-19
 | Preset | not applicable |
 | Component library | packages/ui (Button, Card, NodeBadge — no build step) |
 | Icon library | none (use text labels; Heroicons may be added inline if needed) |
-| Font | Space Grotesk 700 (display), Inter 400/600 (body), JetBrains Mono 700 (mono/badge) |
+| Font | Space Grotesk 600 (display), Inter 400/600 (body), JetBrains Mono 600 (mono/badge) |
 
 Source: apps/web tailwind.config.ts + globals.css (read 2026-06-19). Admin MUST copy both files verbatim.
 
@@ -58,10 +58,10 @@ Exceptions:
 | Body | 14px | 400 (regular) | 1.5 | Inter | Table cells, form labels, list rows, meta text |
 | Label | 14px | 600 (semibold) | 1.4 | Inter | Button labels, form field labels, section headers |
 | Heading | 20px | 600 (semibold) | 1.3 | Inter | Page headings (h1 on /roadmaps, modal titles) |
-| Display | 18px | 700 (bold) | 1.2 | Space Grotesk | App name in header only ("VizTeckStack") |
-| Mono/Badge | 9px | 700 (bold) | 1.0 | JetBrains Mono | NodeBadge labels (ROADMAP / LESSON) — uppercase, letter-spacing 0.05em |
+| Display | 18px | 600 (semibold) | 1.2 | Space Grotesk | App name in header only ("VizTeckStack") |
+| Mono/Badge | 9px | 600 (semibold) | 1.0 | JetBrains Mono | NodeBadge labels (ROADMAP / LESSON) — uppercase, letter-spacing 0.05em |
 
-Rationale: Exactly 4 sizes (9, 14, 18, 20) and 2 weights (400, 600; 700 is display/badge only — not a body weight). Matches established apps/web pattern.
+Rationale: Exactly 4 sizes (9, 14, 18, 20) and 2 weights (400 regular + 600 semibold). Matches established apps/web pattern.
 
 ---
 
@@ -119,6 +119,8 @@ Accent reserved for: primary action buttons, node type badges, input focus rings
 
 ### Screen 1: /login
 
+**Primary focal point:** The `Sign In` button — sole action on the page; eye naturally follows centered card → input → button.
+
 **Layout:** Full-page centered column. Single card (bg-1, radius-md, shadow-sm) centered at 400px width, vertically centered in viewport.
 
 **Elements:**
@@ -138,6 +140,8 @@ Accent reserved for: primary action buttons, node type badges, input focus rings
 ---
 
 ### Screen 2: /roadmaps
+
+**Primary focal point:** The `+ New Roadmap` button — positioned top-right of the toolbar row; draws the eye as the primary management action on an otherwise list-heavy page.
 
 **Layout:** Full-width page. Header (h-14, bg-1, border-b) with app name left + ThemeToggle + Logout button right. Main content: max-w-4xl mx-auto, padding lg (24px).
 
@@ -170,17 +174,23 @@ Accent reserved for: primary action buttons, node type badges, input focus rings
   - Title: text input, required, label `Title`, full width
   - Slug: text input, label `Slug`, full width, JetBrains Mono 13px in input, auto-generated (debounced 300ms from title), editable
   - Slug helper text: `Auto-generated from title. You can edit before saving.` — 12px, text-3
-- Footer: Cancel button (variant=secondary) + Save button (variant=primary, `Create` or `Save Changes`) — right-aligned, 8px gap
+- Footer (create modal): `Discard` button (variant=secondary) + `Create Roadmap` button (variant=primary) — right-aligned, 8px gap
+- Footer (edit modal): `Discard Changes` button (variant=secondary) + `Save Changes` button (variant=primary) — right-aligned, 8px gap
+
+**Unsaved-work guard (edit modal only):**
+- If the user clicks `Discard Changes` while dirty fields exist: show inline confirmation text below the footer: `Unsaved changes will be lost.` with `Keep Editing` link (text-indigo, 14px) inline — does not open a second modal.
 
 **Delete roadmap confirmation:**
 - Modal, 400px
 - Heading: `Delete roadmap?`
 - Body: `This will permanently delete "[roadmap title]" and all its nodes and edges. This cannot be undone.` — 14px, text-2
-- Footer: Cancel (variant=secondary) + Delete (bg red-500, white text, `Delete Roadmap`) — right-aligned
+- Footer: `Keep Roadmap` (variant=secondary) + `Delete Roadmap` (bg red-500, white text) — right-aligned
 
 ---
 
 ### Screen 3: /roadmaps/[id] — Graph Editor
+
+**Primary focal point:** The React Flow canvas — occupies the majority of the viewport; the `Save Graph` button (with amber tint when dirty) is the secondary focal point when unsaved changes exist.
 
 **Layout:** Three-zone vertical split within the page (below header):
 
@@ -209,11 +219,11 @@ Total page: 100vh. Header: 56px. Remaining: calc(100vh - 56px) split into toolba
 - Slides in from right, 320px wide, full canvas-zone height
 - Background: bg-bg-1, border-l border-border
 - Slide transition: 200ms ease-out (transform translateX)
-- Panel header: 14px semibold, text-1 — `Create Node` or `Edit Node`, with × close button (ghost, right-aligned)
+- Panel header: 14px semibold, text-1 — `Create Node` or `Edit Node`, with × close button (ghost, right-aligned, `aria-label="Close panel"`)
 - Fields:
   - Title: text input, label `Title`, required
   - Type: select/dropdown, label `Type`, options: `ROADMAP` / `LESSON`, with NodeBadge preview next to selected value
-- Footer: `Cancel` (variant=ghost, text-2) + `Create Node` or `Save Changes` (variant=primary) — bottom of panel, border-t, px-md py-sm
+- Footer: `Discard` (variant=ghost, text-2) + `Create Node` or `Save Changes` (variant=primary) — bottom of panel, border-t, px-md py-sm
 
 **Trigger rules:**
 - Right-click on empty canvas area → panel opens with mode=Create, position stored as canvas coordinates
@@ -240,18 +250,20 @@ Total page: 100vh. Header: 56px. Remaining: calc(100vh - 56px) split into toolba
 - Modal, 400px
 - Heading: `Delete node?`
 - Body: `This will permanently delete "[node title]" and all connected edges. This cannot be undone.` — 14px, text-2
-- Footer: Cancel (variant=secondary) + `Delete Node` (bg red-500, white text)
+- Footer: `Keep Node` (variant=secondary) + `Delete Node` (bg red-500, white text)
 
 **Unsaved changes navigation guard:**
 - Before route change (Next.js router.push, browser back, link click) when unsaved === true:
 - Modal, 420px
 - Heading: `Leave without saving?`
 - Body: `Your graph changes haven't been saved. Leaving now will discard them.` — 14px, text-2
-- Footer: `Stay` (variant=secondary) + `Leave anyway` (variant=ghost, red-500 text) — right-aligned
+- Footer: `Keep Editing` (variant=secondary) + `Leave anyway` (variant=ghost, red-500 text) — right-aligned
 
 ---
 
 ### Screen 4: /roadmaps/[id]/nodes/[nodeId] — Lesson Editor
+
+**Primary focal point:** The BlockNote editor body — full-width content area; `Save Lesson` button is the secondary focal point, visible above the editor.
 
 **Layout:** Below header. Single-column, max-w-3xl mx-auto, px-lg py-lg.
 
@@ -289,32 +301,39 @@ Each segment is a link (text-indigo on hover, no underline by default).
 | New roadmap CTA | `+ New Roadmap` |
 | Create modal heading | `Create Roadmap` |
 | Edit modal heading | `Edit Roadmap` |
-| Create modal CTA | `Create` |
-| Edit modal CTA | `Save Changes` |
+| Create modal primary CTA | `Create Roadmap` |
+| Create modal secondary CTA (dismiss) | `Discard` |
+| Edit modal primary CTA | `Save Changes` |
+| Edit modal secondary CTA (dismiss) | `Discard Changes` |
+| Edit modal unsaved guard inline link | `Keep Editing` |
 | Slug helper | `Auto-generated from title. You can edit before saving.` |
 | Empty state heading | `No roadmaps yet` |
 | Empty state body | `Create your first roadmap to get started.` |
 | Delete roadmap heading | `Delete roadmap?` |
 | Delete roadmap body | `This will permanently delete "[title]" and all its nodes and edges. This cannot be undone.` |
-| Delete roadmap CTA | `Delete Roadmap` |
+| Delete roadmap primary CTA | `Delete Roadmap` |
+| Delete roadmap secondary CTA (dismiss) | `Keep Roadmap` |
 | Graph editor — Save Graph default | `Save Graph` |
 | Graph editor — Save Graph unsaved | `Save Graph` (amber tint; no label change — tint is the indicator) |
 | Graph editor — Save Graph saving | `Saving…` |
 | Graph editor — Add Node | `Add Node` |
 | Create node panel heading | `Create Node` |
-| Create node panel CTA | `Create Node` |
+| Create node panel primary CTA | `Create Node` |
+| Create node panel secondary CTA (dismiss) | `Discard` |
 | Edit node panel heading | `Edit Node` |
-| Edit node panel CTA | `Save Changes` |
+| Edit node panel primary CTA | `Save Changes` |
+| Edit node panel secondary CTA (dismiss) | `Discard` |
 | Inventory section label | `Node Inventory` |
 | Placed status chip | `Placed` |
 | Unplaced status chip | `Unplaced` |
 | Delete node (inventory) heading | `Delete node?` |
 | Delete node (inventory) body | `This will permanently delete "[title]" and all connected edges. This cannot be undone.` |
-| Delete node CTA | `Delete Node` |
+| Delete node primary CTA | `Delete Node` |
+| Delete node secondary CTA (dismiss) | `Keep Node` |
 | Unsaved navigation guard heading | `Leave without saving?` |
 | Unsaved navigation guard body | `Your graph changes haven't been saved. Leaving now will discard them.` |
-| Unsaved guard stay CTA | `Stay` |
-| Unsaved guard leave CTA | `Leave anyway` |
+| Unsaved guard primary CTA (stay) | `Keep Editing` |
+| Unsaved guard secondary CTA (leave) | `Leave anyway` |
 | Lesson editor CTA | `Save Lesson` |
 | Lesson editor saving state | `Saving…` |
 | Lesson editor success state | `Saved` (2s then reverts) |
@@ -366,12 +385,12 @@ New components to create in apps/admin (not shared packages):
 ## Accessibility Contract
 
 - All interactive elements must have a visible focus ring: `outline: 2px solid #4F46E5; outline-offset: 2px`
-- All `<button>` elements that are icon-only must have `aria-label`
+- All `<button>` elements that are icon-only must have `aria-label`; the × close button in the Node Side Panel must have `aria-label="Close panel"`
 - Modal dialogs: `role="dialog"`, `aria-modal="true"`, `aria-labelledby` pointing to heading; focus trapped inside while open
 - `<select>` for node type dropdown: no custom styling beyond border/bg; native select element
 - Color alone must not convey the unsaved state — amber tint on Save Graph button is supplementary; a visually hidden accessible label `(unsaved changes)` should be added via `aria-label` override when unsaved === true
 - Drag handles in inventory list: `aria-label="Drag to place on canvas"`, `role="button"`, `tabIndex={0}`
-- Confirm dialogs: focus moves to Cancel button on open (destructive-default-safe)
+- Confirm dialogs: focus moves to the non-destructive dismiss button on open (destructive-default-safe)
 
 ---
 
