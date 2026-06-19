@@ -17,17 +17,26 @@ interface MiniGraphProps {
   height?: number;
 }
 
-function normalize(
-  values: number[],
-  targetMin: number,
-  targetMax: number,
-): Map<number, number> {
-  const min = Math.min(...values);
-  const max = Math.max(...values);
-  const range = max - min || 1;
-  const result = new Map<number, number>();
-  for (const v of values) {
-    result.set(v, targetMin + ((v - min) / range) * (targetMax - targetMin));
+function normalizePositions(
+  nodes: MiniGraphNode[],
+  padding: number,
+  innerW: number,
+  innerH: number,
+): Map<string, { cx: number; cy: number }> {
+  const xs = nodes.map((n) => n.x);
+  const ys = nodes.map((n) => n.y);
+  const xMin = Math.min(...xs);
+  const xMax = Math.max(...xs);
+  const yMin = Math.min(...ys);
+  const yMax = Math.max(...ys);
+  const xRange = xMax - xMin || 1;
+  const yRange = yMax - yMin || 1;
+  const result = new Map<string, { cx: number; cy: number }>();
+  for (const n of nodes) {
+    result.set(n.id, {
+      cx: padding + ((n.x - xMin) / xRange) * innerW,
+      cy: padding + ((n.y - yMin) / yRange) * innerH,
+    });
   }
   return result;
 }
@@ -39,28 +48,15 @@ export function MiniGraph({
   height = 120,
 }: MiniGraphProps) {
   const padding = 16;
-  const inner_w = width - padding * 2;
-  const inner_h = height - padding * 2;
+  const innerW = width - padding * 2;
+  const innerH = height - padding * 2;
 
-  // Normalize coordinates to fit viewBox
-  const xs = nodes.map((n) => n.x);
-  const ys = nodes.map((n) => n.y);
-  const xMap =
-    xs.length > 0
-      ? normalize(xs, padding, padding + inner_w)
-      : new Map<number, number>();
-  const yMap =
-    ys.length > 0
-      ? normalize(ys, padding, padding + inner_h)
-      : new Map<number, number>();
-
-  const posById = new Map<string, { cx: number; cy: number }>();
-  for (const n of nodes) {
-    posById.set(n.id, {
-      cx: xMap.get(n.x) ?? padding,
-      cy: yMap.get(n.y) ?? padding,
-    });
-  }
+  // Normalize coordinates to fit viewBox, keyed by node ID to avoid
+  // duplicate-coordinate collisions (WR-01)
+  const posById =
+    nodes.length > 0
+      ? normalizePositions(nodes, padding, innerW, innerH)
+      : new Map<string, { cx: number; cy: number }>();
 
   return (
     <svg
