@@ -90,7 +90,7 @@ export class RoadmapService {
       await tx.edge.deleteMany({ where: { sourceId: { in: nodeIds } } });
       await tx.node.deleteMany({ where: { roadmapId: req.roadmapId } });
 
-      for (const n of req.nodes) {
+      for (const n of req.nodes ?? []) {
         await tx.node.create({
           data: {
             id: n.id || undefined,
@@ -105,7 +105,7 @@ export class RoadmapService {
         });
       }
 
-      for (const e of req.edges) {
+      for (const e of req.edges ?? []) {
         await tx.edge.create({
           data: { sourceId: e.sourceId, targetId: e.targetId, label: e.label || null },
         });
