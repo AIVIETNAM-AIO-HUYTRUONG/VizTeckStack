@@ -8,7 +8,7 @@ VizTeckStack ships in four phases. Phase 1 (monorepo foundation, gRPC contract, 
 
 - [x] **Phase 1: Foundation** - Monorepo scaffold, gRPC contract (packages/proto), Prisma schema + seed (packages/db)
 - [x] **Phase 2: Core Services** - svc-roadmap gRPC server and api-gateway (GraphQL + REST) — data pipeline end-to-end (completed 2026-06-18)
-- [ ] **Phase 3: Public Viewer** - Shared packages (UI + graph) and apps/web SSG — public roadmap browsing live
+- [x] **Phase 3: Public Viewer** - Shared packages (UI + graph) and apps/web SSG — public roadmap browsing live (completed 2026-06-19)
 - [ ] **Phase 4: Admin CMS** - apps/admin with login, roadmap CRUD, graph editor, lesson editor — full platform
 
 ## Phase Details
@@ -76,7 +76,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 03-03-PLAN.md — apps/web: Next.js 16 SSG viewer (home / [slug] / node/[id]), BlockNote lesson reader
+- [x] 03-03-PLAN.md — apps/web: Next.js 16 SSG viewer (home / [slug] / node/[id]), BlockNote lesson reader
 
 **UI hint**: yes
 
@@ -109,5 +109,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 3/3 | Complete | 2026-06-18 |
 | 2. Core Services | 2/2 | Complete   | 2026-06-18 |
-| 3. Public Viewer | 2/3 | In Progress|  |
+| 3. Public Viewer | 3/3 | Complete | 2026-06-19 |
 | 4. Admin CMS | 0/3 | Not started | - |

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-02-PLAN.md — @vizteck/graph package with RoadmapGraph, RoadmapNode
-last_updated: "2026-06-18T16:30:00.000Z"
-last_activity: 2026-06-18 -- Phase 03 Plan 02 complete
+stopped_at: Completed 03-03-PLAN.md — apps/web Next.js 16 SSG public viewer (home, graph, lesson)
+last_updated: "2026-06-19T01:00:00.000Z"
+last_activity: 2026-06-19 -- Phase 03 complete
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 6
-  completed_plans: 4
-  percent: 40
+  completed_plans: 6
+  percent: 50
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-06-18)
 
 ## Current Position
 
-Phase: 03 (public-viewer) — EXECUTING
-Plan: 3 of 3
-Status: Ready to execute
-Last activity: 2026-06-18 -- Phase 03 Plan 02 complete
+Phase: 03 (public-viewer) — COMPLETE
+Plan: 3 of 3 — all complete
+Status: Phase 03 complete; Phase 04 (Admin CMS) is next
+Last activity: 2026-06-19 -- Phase 03 all 3 plans complete
 
-Progress: [██████░░░░] 60%
+Progress: [████████░░] 75%
 
 ## Performance Metrics
 
@@ -55,6 +55,7 @@ Progress: [██████░░░░] 60%
 *Updated after each plan completion*
 | Phase 03-public-viewer P01 | 5m | 2 tasks | 6 files |
 | Phase 03-public-viewer P02 | 6m | 2 tasks | 6 files |
+| Phase 03-public-viewer P03 | 12m | 4 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,10 @@ Key decisions affecting Phase 2:
 - [Phase ?]: packages/ui uses main=./src/index.ts (no build step); apps/web uses transpilePackages to compile at app build time
 - [Phase 03-02]: NodeProps<Node<RoadmapNodeData>> is the correct @xyflow/react v12 generic; RoadmapNodeData must extend Record<string, unknown>
 - [Phase 03-02]: nodeTypes declared at module scope prevents ReactFlow from remounting nodes on every parent render
+- [Phase 03-03]: Next.js 16 params is a Promise — must type as Promise<{slug,id}> and destructure with await (Pitfall 1)
+- [Phase 03-03]: generateStaticParams returns [] for dynamic segments; build succeeds without live api-gateway; ISR handles first-request rendering
+- [Phase 03-03]: transpilePackages must include all 6 ESM-only/workspace packages for apps/web to compile them at build time
+- [Phase 03-03]: LessonContent is 'use client' only — BlockNote is browser-only; server passes contentJson string down to client
 
 ### Pending Todos
 
@@ -99,6 +104,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-18T16:30:00.000Z
-Stopped at: Completed 03-02-PLAN.md — @vizteck/graph package with RoadmapGraph, RoadmapNode
+Last session: 2026-06-19T01:00:00.000Z
+Stopped at: Completed 03-03-PLAN.md — apps/web Next.js 16 SSG public viewer (home, graph, lesson)
 Resume file: None
