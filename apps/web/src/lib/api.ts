@@ -36,7 +36,8 @@ const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 export async function fetchRoadmaps(): Promise<RoadmapItem[]> {
   const res = await fetch(`${API}/api/roadmaps`, { cache: 'force-cache' });
   if (!res.ok) throw new Error(`fetchRoadmaps: ${res.status}`);
-  return res.json() as Promise<RoadmapItem[]>;
+  const data = await res.json() as { roadmaps?: RoadmapItem[] } | RoadmapItem[];
+  return Array.isArray(data) ? data : (data as { roadmaps?: RoadmapItem[] }).roadmaps ?? [];
 }
 
 export async function fetchRoadmap(slug: string): Promise<RoadmapDetail> {
