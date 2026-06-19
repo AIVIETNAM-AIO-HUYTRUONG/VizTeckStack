@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Phase 04-02 not yet started"
-last_updated: "2026-06-19T13:55:00.000Z"
-last_activity: 2026-06-19 -- Phase 04-01 complete (all 4 tasks including human-verify checkpoint); BUG-01 fixed (auth bypass via public endpoint)
+stopped_at: "Phase 04-02 Task 4 checkpoint:human-verify — awaiting browser QA"
+last_updated: "2026-06-19T15:00:00.000Z"
+last_activity: 2026-06-19 -- Phase 04-02 Tasks 1-3 complete (graph editor built); Task 4 checkpoint awaiting human verify
 progress:
   total_phases: 4
   completed_phases: 2
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-06-18)
 ## Current Position
 
 Phase: 04 (admin-cms) — EXECUTING
-Plan: 2 of 3 (04-01 complete; starting 04-02 graph editor)
-Status: Phase 04-01 complete; proceeding to 04-02 (graph editor)
-Last activity: 2026-06-19 -- Phase 04-01 all 4 tasks complete; BUG-01 auth bypass fixed via /api/admin/validate endpoint
+Plan: 2 of 3 (04-02 Tasks 1-3 complete; awaiting Task 4 human-verify checkpoint)
+Status: Phase 04-02 paused at checkpoint:human-verify (Task 4 browser QA)
+Last activity: 2026-06-19 -- Phase 04-02 Tasks 1-3 complete; graph editor assembled with toolbar, inventory, side panel, dirty-state save
 
 Progress: [████████░░] 75%
 
@@ -57,6 +57,7 @@ Progress: [████████░░] 75%
 | Phase 03-public-viewer P02 | 6m | 2 tasks | 6 files |
 | Phase 03-public-viewer P03 | 12m | 4 tasks | 18 files |
 | Phase 04-admin-cms P01 | 36m | 3 tasks (checkpoint) | 23 files |
+| Phase 04-admin-cms P02 | 45m | 3 tasks (checkpoint pending) | 7 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,13 @@ Key decisions affecting Phase 2:
 
 None yet.
 
+Key decisions applied in Phase 04-02:
+
+- GraphCanvas inner component pattern: RoadmapGraph wraps ReactFlowProvider; GraphCanvas lives inside for screenToFlowPosition access
+- dataTransfer cast as any in both RoadmapGraph and NodeInventory — lib:[ES2022] omits DOM types
+- packages/graph/src/index.ts re-exports @xyflow/react types so apps/admin avoids direct dependency
+- Dirty state tracked via JSON snapshot ref (not state) to avoid extra re-renders
+
 Key decisions applied in Phase 04-01:
 
 - Used `db:push` instead of `db:migrate` — DB user lacks CREATEDB for shadow database (P3014 error)
@@ -111,6 +119,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-19T12:41:14Z
-Stopped at: Wave 2 — 04-02 graph editor not yet started
-Resume file: .planning/phases/04-admin-cms/04-02-PLAN.md
+Last session: 2026-06-19T15:00:00Z
+Stopped at: Phase 04-02 Task 4 checkpoint:human-verify — browser QA of graph editor
+Resume file: .planning/phases/04-admin-cms/04-02-PLAN.md (Task 4 — resume after "approved")
