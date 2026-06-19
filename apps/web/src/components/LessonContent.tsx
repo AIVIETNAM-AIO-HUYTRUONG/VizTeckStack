@@ -2,6 +2,7 @@
 
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
+import { useEffect, useState } from 'react';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 
@@ -29,6 +30,16 @@ export function LessonContent({ contentJson }: LessonContentProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
 
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  useEffect(() => {
+    const update = () =>
+      setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    update();
+    const obs = new MutationObserver(update);
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => obs.disconnect();
+  }, []);
+
   if (!blocks) {
     return (
       <div
@@ -44,5 +55,5 @@ export function LessonContent({ contentJson }: LessonContentProps) {
     );
   }
 
-  return <BlockNoteView editor={editor} editable={false} theme="light" />;
+  return <BlockNoteView editor={editor} editable={false} theme={theme} />;
 }
