@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 4 UI-SPEC approved
-last_updated: "2026-06-19T07:42:46.652Z"
-last_activity: 2026-06-19 -- Phase 03 all 3 plans complete
+status: executing
+stopped_at: "Phase 04-01 complete — checkpoint:human-verify Task 4"
+last_updated: "2026-06-19T13:17:23.000Z"
+last_activity: 2026-06-19 -- Phase 04-01 executed (3 tasks complete, checkpoint reached)
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 5
+  total_plans: 8
   completed_plans: 5
-  percent: 50
+  percent: 62
 ---
 
 # Project State
@@ -21,14 +21,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-18)
 
 **Core value:** Public users can browse and read any roadmap — any page must work without an admin session, and the admin canvas must always faithfully reflect what's in the database.
-**Current focus:** Phase 03 — public-viewer
+**Current focus:** Phase 04 — admin-cms
 
 ## Current Position
 
-Phase: 03 (public-viewer) — COMPLETE
-Plan: 3 of 3 — all complete
-Status: Phase 03 complete; Phase 04 (Admin CMS) is next
-Last activity: 2026-06-19 -- Phase 03 all 3 plans complete
+Phase: 04 (admin-cms) — EXECUTING
+Plan: 1 of 3 (checkpoint reached — awaiting human verify)
+Status: Executing Phase 04-01, paused at Task 4 checkpoint
+Last activity: 2026-06-19 -- Phase 04-01 tasks 1-3 executed; checkpoint:human-verify reached
 
 Progress: [████████░░] 75%
 
@@ -56,6 +56,7 @@ Progress: [████████░░] 75%
 | Phase 03-public-viewer P01 | 5m | 2 tasks | 6 files |
 | Phase 03-public-viewer P02 | 6m | 2 tasks | 6 files |
 | Phase 03-public-viewer P03 | 12m | 4 tasks | 18 files |
+| Phase 04-admin-cms P01 | 36m | 3 tasks (checkpoint) | 23 files |
 
 ## Accumulated Context
 
@@ -91,6 +92,12 @@ Key decisions affecting Phase 2:
 
 None yet.
 
+Key decisions applied in Phase 04-01:
+
+- Used `db:push` instead of `db:migrate` — DB user lacks CREATEDB for shadow database (P3014 error)
+- ConfirmDialog uses native `<button>` refs for focus management — @vizteck/ui Button lacks forwardRef
+- Login page uses raw `fetch` (not apiFetch) to avoid 401 redirect loop on the login page itself
+
 ### Blockers/Concerns
 
 None yet.
@@ -104,6 +111,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-19T07:42:46.646Z
-Stopped at: Phase 4 UI-SPEC approved
-Resume file: .planning/phases/04-admin-cms/04-UI-SPEC.md
+Last session: 2026-06-19T12:41:14Z
+Stopped at: Phase 04-01 Task 4 — checkpoint:human-verify (login + CRUD browser test)
+Resume file: .planning/phases/04-admin-cms/04-01-PLAN.md (Task 4 continuation)
