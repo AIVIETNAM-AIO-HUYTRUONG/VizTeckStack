@@ -93,13 +93,20 @@ Plans:
   4. Admin opens a LESSON node, types rich text in BlockNote editor, saves, and the content appears on the public lesson page
   5. Admin deletes a roadmap — it is removed from the DB and no longer returned by GET /api/roadmaps
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
+**Wave 1**
 
-- [ ] 04-01: apps/admin — Next.js app shell, /login page, token localStorage flow, /roadmaps list + CRUD
-- [ ] 04-02: apps/admin — /roadmaps/[id] graph editor (RoadmapGraph mode="edit"), Save Graph wiring
-- [ ] 04-03: apps/admin — /roadmaps/[id]/nodes/[nodeId] lesson editor (BlockNote, client-side only)
+- [ ] 04-01-PLAN.md — Prisma nullable-position migration + DTO/service/graph-type updates; apps/admin scaffold; /login + /roadmaps CRUD (REQ-admin-login, REQ-admin-roadmap-crud)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
+- [ ] 04-02-PLAN.md — RoadmapGraph edit-mode extension + /roadmaps/[id] graph editor (canvas + inventory + side panel, Save Graph via UpsertGraph) (REQ-admin-graph-editor)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 04-03-PLAN.md — /roadmaps/[id]/nodes/[nodeId] BlockNote lesson editor (ssr:false), Save via full-graph UpsertGraph (REQ-admin-lesson-editor)
 
 **UI hint**: yes
 
