@@ -29,7 +29,7 @@ export default function LoginPage() {
     setError('');
 
     try {
-      const res = await fetch(`${API}/api/roadmaps`, {
+      const res = await fetch(`${API}/api/admin/validate`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

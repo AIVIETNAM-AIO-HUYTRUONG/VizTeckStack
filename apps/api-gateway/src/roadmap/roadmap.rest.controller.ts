@@ -37,6 +37,12 @@ export class RoadmapRestController {
   getNode(@Param('id') id: string) { return this.grpc.getNode(id); }
 
   @UseGuards(AdminGuard)
+  @Get('admin/validate')
+  @ApiOperation({ summary: 'Validate admin token — returns 200 if valid, 401 if not' })
+  @ApiBearerAuth()
+  validateToken() { return { ok: true }; }
+
+  @UseGuards(AdminGuard)
   @Post('roadmaps')
   @ApiOperation({ summary: 'Create roadmap' })
   @ApiBearerAuth()
