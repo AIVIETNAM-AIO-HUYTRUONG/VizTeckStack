@@ -40,10 +40,21 @@ export async function fetchRoadmaps(): Promise<RoadmapItem[]> {
   return Array.isArray(data) ? data : (data as { roadmaps?: RoadmapItem[] }).roadmaps ?? [];
 }
 
+const NODE_TYPE_MAP: Record<number | string, 'ROADMAP' | 'LESSON'> = { 0: 'ROADMAP', 1: 'LESSON' };
+function normalizeNodeType(t: unknown): 'ROADMAP' | 'LESSON' {
+  if (t === 'ROADMAP' || t === 'LESSON') return t;
+  return NODE_TYPE_MAP[t as number] ?? 'LESSON';
+}
+
 export async function fetchRoadmap(slug: string): Promise<RoadmapDetail> {
   const res = await fetch(`${API}/api/roadmaps/${slug}`, { cache: 'force-cache' });
   if (!res.ok) throw new Error(`fetchRoadmap(${slug}): ${res.status}`);
-  return res.json() as Promise<RoadmapDetail>;
+  const raw = await res.json() as Partial<RoadmapDetail>;
+  return {
+    roadmap: raw.roadmap,
+    nodes: (raw.nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) })),
+    edges: raw.edges ?? [],
+  };
 }
 
 export async function fetchNode(id: string): Promise<NodeItem> {
