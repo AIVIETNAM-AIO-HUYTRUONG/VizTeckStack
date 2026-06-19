@@ -2,9 +2,9 @@
 import '@xyflow/react/dist/style.css';
 import React, { type MouseEvent } from 'react';
 import {
-  ReactFlow, Controls, ReactFlowProvider,
+  ReactFlow, Controls, ReactFlowProvider, useReactFlow,
   type Node,
-  type OnNodesChange, type OnEdgesChange,
+  type OnNodesChange, type OnEdgesChange, type OnConnect, type OnNodesDelete,
 } from '@xyflow/react';
 import { RoadmapNode } from './RoadmapNode';
 import type { NodeItem, EdgeItem } from './types';
@@ -21,30 +21,38 @@ export interface RoadmapGraphProps {
   onNodesChange?: OnNodesChange;
   /** Called when React Flow edge state changes (connect, delete, etc.) — edit mode only */
   onEdgesChange?: OnEdgesChange;
-  /** Called on right-click on empty canvas area — receives the canvas-space position */
+  /** Called when edges are connected — edit mode only */
+  onConnect?: OnConnect;
+  /** Called when canvas nodes are deleted (unplace) — edit mode only */
+  onNodesDelete?: OnNodesDelete;
+  /** Called on right-click on empty canvas area — receives the flow-space position */
   onPaneContextMenu?: (event: MouseEvent, position: { x: number; y: number }) => void;
+  /** Called when a node is dropped from inventory onto the canvas — receives flow-space position */
+  onDropNode?: (nodeId: string, flowPosition: { x: number; y: number }) => void;
 }
 
-export function RoadmapGraph({
-  nodes, edges, mode, onNodeClick, onNodesChange, onEdgesChange, onPaneContextMenu,
-}: RoadmapGraphProps) {
-  const rfNodes = nodes
-    .filter((n) => n.positionX != null && n.positionY != null)
-    .map((n) => ({
-      id: n.id,
-      type: 'roadmapNode' as const,
-      position: { x: n.positionX!, y: n.positionY! },
-      data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
-    }));
+interface GraphCanvasProps extends RoadmapGraphProps {
+  rfNodes: Node[];
+  rfEdges: ReturnType<typeof mapEdges>;
+  isView: boolean;
+}
 
-  const rfEdges = edges.map((e) => ({
+function mapEdges(edges: EdgeItem[]) {
+  return edges.map((e) => ({
     id: e.id,
     source: e.sourceId,
     target: e.targetId,
     label: e.label,
   }));
+}
 
-  const isView = mode === 'view';
+/** Inner component — must live inside ReactFlowProvider to use useReactFlow() */
+function GraphCanvas({
+  nodes, rfNodes, rfEdges, isView, onNodeClick,
+  onNodesChange, onEdgesChange, onConnect, onNodesDelete,
+  onPaneContextMenu, onDropNode,
+}: GraphCanvasProps) {
+  const { screenToFlowPosition } = useReactFlow();
 
   function handleNodeClick(_event: MouseEvent, rfNode: Node) {
     if (onNodeClick) {
@@ -59,30 +67,79 @@ export function RoadmapGraph({
     if (onPaneContextMenu) {
       event.preventDefault();
       const { clientX, clientY } = event as React.MouseEvent;
-      onPaneContextMenu(event as MouseEvent, { x: clientX, y: clientY });
+      const flowPosition = screenToFlowPosition({ x: clientX, y: clientY });
+      onPaneContextMenu(event as MouseEvent, flowPosition);
     }
   }
 
+  function handleDrop(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    if (!onDropNode) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const dt = event.dataTransfer as any;
+    const nodeId: string = dt.getData('nodeId') || dt.getData('text/plain') || '';
+    if (!nodeId) return;
+    const flowPosition = screenToFlowPosition({ x: event.clientX, y: event.clientY });
+    onDropNode(nodeId, flowPosition);
+  }
+
+  function handleDragOver(event: React.DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (event.dataTransfer as any).dropEffect = 'move';
+  }
+
   return (
-    <div className="w-full h-full bg-bg-1">
-      <ReactFlowProvider>
-        <ReactFlow
-          nodes={rfNodes}
-          edges={rfEdges}
-          nodeTypes={nodeTypes}
-          nodesDraggable={!isView}
-          nodesConnectable={!isView}
-          elementsSelectable={!isView}
-          edgesReconnectable={!isView}
-          fitView
-          onNodeClick={onNodeClick ? handleNodeClick : undefined}
-          onNodesChange={!isView ? onNodesChange : undefined}
-          onEdgesChange={!isView ? onEdgesChange : undefined}
-          onPaneContextMenu={!isView ? handlePaneContextMenu : undefined}
-        >
-          <Controls />
-        </ReactFlow>
-      </ReactFlowProvider>
+    <div
+      className="w-full h-full bg-bg-1"
+      onDrop={!isView ? handleDrop : undefined}
+      onDragOver={!isView ? handleDragOver : undefined}
+    >
+      <ReactFlow
+        nodes={rfNodes}
+        edges={rfEdges}
+        nodeTypes={nodeTypes}
+        nodesDraggable={!isView}
+        nodesConnectable={!isView}
+        elementsSelectable={!isView}
+        edgesReconnectable={!isView}
+        fitView
+        onNodeClick={onNodeClick ? handleNodeClick : undefined}
+        onNodesChange={!isView ? onNodesChange : undefined}
+        onEdgesChange={!isView ? onEdgesChange : undefined}
+        onConnect={!isView ? onConnect : undefined}
+        onNodesDelete={!isView ? onNodesDelete : undefined}
+        onPaneContextMenu={!isView ? handlePaneContextMenu : undefined}
+      >
+        <Controls />
+      </ReactFlow>
     </div>
+  );
+}
+
+export function RoadmapGraph(props: RoadmapGraphProps) {
+  const { nodes, edges, mode } = props;
+
+  const rfNodes = nodes
+    .filter((n) => n.positionX != null && n.positionY != null)
+    .map((n) => ({
+      id: n.id,
+      type: 'roadmapNode' as const,
+      position: { x: n.positionX!, y: n.positionY! },
+      data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
+    }));
+
+  const rfEdges = mapEdges(edges);
+  const isView = mode === 'view';
+
+  return (
+    <ReactFlowProvider>
+      <GraphCanvas
+        {...props}
+        rfNodes={rfNodes}
+        rfEdges={rfEdges}
+        isView={isView}
+      />
+    </ReactFlowProvider>
   );
 }
