@@ -25,7 +25,7 @@ export function RoadmapNode({ data }: RoadmapNodeProps) {
       <div
         style={{
           border: `2px solid ${borderColor}`,
-          background: '#ffffff',
+          background: 'var(--bg-1, #ffffff)',
           borderRadius: 10,
           padding: '10px 18px',
           minWidth: 120,
@@ -38,6 +38,7 @@ export function RoadmapNode({ data }: RoadmapNodeProps) {
             fontFamily: 'JetBrains Mono, monospace',
             fontSize: 12,
             marginTop: 4,
+            color: 'var(--text-1, #0F172A)',
           }}
         >
           {data.title}
