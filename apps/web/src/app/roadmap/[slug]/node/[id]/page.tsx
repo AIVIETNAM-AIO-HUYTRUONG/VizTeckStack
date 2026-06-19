@@ -116,23 +116,6 @@ export default async function LessonPage({
           >
             Progress
           </h3>
-          <div
-            style={{
-              height: 8,
-              background: 'var(--bg-2)',
-              borderRadius: 4,
-              overflow: 'hidden',
-            }}
-          >
-            <div
-              style={{
-                height: '100%',
-                width: '30%',
-                background: 'var(--indigo)',
-                borderRadius: 4,
-              }}
-            />
-          </div>
           <p
             style={{
               fontFamily: 'Inter, sans-serif',
@@ -141,7 +124,7 @@ export default async function LessonPage({
               marginTop: 8,
             }}
           >
-            Keep learning!
+            Progress tracking coming soon.
           </p>
         </div>
 
