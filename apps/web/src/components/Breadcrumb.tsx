@@ -1,3 +1,5 @@
+import type React from 'react';
+
 type BreadcrumbState = 'visited' | 'active' | 'none';
 
 interface BreadcrumbItem {
