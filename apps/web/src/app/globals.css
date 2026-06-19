@@ -35,3 +35,35 @@ body {
   color: var(--text-1);
   font-family: Inter, sans-serif;
 }
+
+/* ReactFlow Controls dark mode */
+.dark .react-flow__controls {
+  background: var(--bg-2);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.dark .react-flow__controls button {
+  background: var(--bg-2);
+  border-bottom-color: var(--border);
+  color: var(--text-1);
+  fill: var(--text-1);
+}
+
+.dark .react-flow__controls button:hover {
+  background: var(--bg-1);
+}
+
+/* ReactFlow canvas background in dark mode */
+.dark .react-flow__background {
+  background: var(--bg-0);
+}
+
+.dark .react-flow__attribution {
+  background: transparent;
+  color: var(--text-3);
+}
+
+.dark .react-flow__attribution a {
+  color: var(--text-3);
+}
