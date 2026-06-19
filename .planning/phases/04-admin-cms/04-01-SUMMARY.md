@@ -56,7 +56,7 @@ decisions:
 metrics:
   duration: "36m"
   completed: "2026-06-19"
-  tasks_completed: 3
+  tasks_completed: 4
   tasks_total: 4
   files_created: 18
   files_modified: 5
@@ -68,7 +68,7 @@ metrics:
 
 ## What Was Built
 
-Tasks 1-3 of plan 04-01 are complete. Task 4 is a human-verification checkpoint.
+All 4 tasks complete. Task 4 (human-verify checkpoint) passed via Playwright QA.
 
 ### Task 1: Nullable Node Positions (BLOCKING)
 
@@ -130,6 +130,7 @@ Implemented `REQ-admin-login` and `REQ-admin-roadmap-crud`:
 | d84ab7b | feat(04-01): make node positions nullable — Prisma migration + DTO + graph types |
 | 64a6f98 | feat(04-01): scaffold apps/admin shell — config, layout, ThemeToggle, api lib, auth guard |
 | d29d6c1 | feat(04-01): implement /login and /roadmaps CRUD (REQ-admin-login, REQ-admin-roadmap-crud) |
+| 3380cde | fix(qa): BUG-01 — login accepted any token because GET /api/roadmaps is public; added GET /api/admin/validate with AdminGuard |
 
 ## Known Stubs
 
@@ -138,7 +139,7 @@ None — all implemented functionality is wired to live API calls.
 ## Threat Flags
 
 None — all trust boundaries and mitigations match the plan's `<threat_model>`:
-- T-04-01: Login validates token server-side via GET /api/roadmaps (200/401) — implemented
+- T-04-01: Login validates token server-side via GET /api/admin/validate (200/401) — implemented (BUG-01: was GET /api/roadmaps which is public, fixed in commit 3380cde)
 - T-04-03: All CRUD calls use apiFetch with Bearer; AdminGuard in api-gateway enforces — implemented
 - T-04-04: slugify normalizes slug input to `[a-z0-9-]` — implemented
 
