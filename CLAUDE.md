@@ -126,3 +126,5 @@ All packages extend `tsconfig.base.json` (strict mode, commonjs, ES2022). NestJS
 **`packages/graph` measuredRef cache** — `RoadmapGraph` maintains a `measuredRef` (Map of node id → dimensions) to survive React Flow's `adoptUserNodes` resetting `measured` on every re-render. Without this, nodes go `visibility: hidden` after position updates. Never remove or bypass this cache.
 
 **Web fetch cache** — all fetches in `apps/web/src/lib/api.ts` use `{ cache: 'no-store' }`. This is intentional so the public viewer reflects admin changes immediately.
+
+**Turbopack stale route cache** — if a newly added `app/` page returns 404 in dev mode despite the file existing, a stale `.next/` directory from a previous build session may be confusing the Turbopack route matcher. Fix: `rm -rf apps/admin/.next` (or the relevant app's `.next`) and restart `pnpm dev`. This is a known Turbopack limitation when switching between `next build` and `next dev` in the same working tree.

@@ -98,15 +98,15 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 04-01-PLAN.md — Prisma nullable-position migration + DTO/service/graph-type updates; apps/admin scaffold; /login + /roadmaps CRUD (REQ-admin-login, REQ-admin-roadmap-crud)
+- [x] 04-01-PLAN.md — Prisma nullable-position migration + DTO/service/graph-type updates; apps/admin scaffold; /login + /roadmaps CRUD (REQ-admin-login, REQ-admin-roadmap-crud)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 04-02-PLAN.md — RoadmapGraph edit-mode extension + /roadmaps/[id] graph editor (canvas + inventory + side panel, Save Graph via UpsertGraph) (REQ-admin-graph-editor)
+- [x] 04-02-PLAN.md — RoadmapGraph edit-mode extension + /roadmaps/[id] graph editor (canvas + inventory + side panel, Save Graph via UpsertGraph) (REQ-admin-graph-editor)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 04-03-PLAN.md — /roadmaps/[id]/nodes/[nodeId] BlockNote lesson editor (ssr:false), Save via full-graph UpsertGraph (REQ-admin-lesson-editor)
+- [x] 04-03-PLAN.md — /roadmaps/[id]/nodes/[nodeId] BlockNote lesson editor (ssr:false), Save via full-graph UpsertGraph (REQ-admin-lesson-editor)
 
 **UI hint**: yes
 
@@ -117,4 +117,4 @@ Plans:
 | 1. Foundation | 3/3 | Complete | 2026-06-18 |
 | 2. Core Services | 2/2 | Complete   | 2026-06-18 |
 | 3. Public Viewer | 3/3 | Complete | 2026-06-19 |
-| 4. Admin CMS | 0/3 | Not started | - |
+| 4. Admin CMS | 3/3 | Complete | 2026-06-20 |
