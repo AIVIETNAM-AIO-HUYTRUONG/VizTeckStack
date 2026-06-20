@@ -48,7 +48,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                 {idx + 1}
               </span>
               <span
-                className={`text-[11px] font-body max-w-[72px] text-center truncate ${labelClass[item.state]}`}
+                className={`text-[11px] font-body max-w-[96px] text-center leading-tight break-words ${labelClass[item.state]}`}
               >
                 {item.label}
               </span>

@@ -6,29 +6,18 @@ export interface NodeBadgeProps {
   type: NodeType;
 }
 
-const BADGE_STYLES: Record<NodeType, { bg: string; color: string; label: string }> = {
-  ROADMAP: { bg: '#EEF2FF', color: '#4F46E5', label: 'ROADMAP' },
-  LESSON:  { bg: '#ECFDF5', color: '#059669', label: 'LESSON'  },
+const BADGE_CLASSES: Record<NodeType, string> = {
+  ROADMAP: 'bg-indigo-lt text-indigo dark:bg-indigo/20 dark:text-indigo-mid',
+  LESSON:  'bg-emerald-lt text-emerald dark:bg-emerald/20 dark:text-emerald-400',
 };
 
 export function NodeBadge({ type }: NodeBadgeProps) {
-  const s = BADGE_STYLES[type] ?? { bg: '#F3F4F6', color: '#6B7280', label: String(type) };
+  const cls = BADGE_CLASSES[type] ?? 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-300';
   return (
     <span
-      style={{
-        background: s.bg,
-        color: s.color,
-        fontFamily: 'JetBrains Mono, monospace',
-        fontSize: 9,
-        fontWeight: 700,
-        padding: '2px 8px',
-        borderRadius: 20,
-        textTransform: 'uppercase',
-        letterSpacing: '0.05em',
-        display: 'inline-block',
-      }}
+      className={`${cls} font-mono text-[9px] font-bold px-2 py-[2px] rounded-full uppercase tracking-[0.05em] inline-block`}
     >
-      {s.label}
+      {type}
     </span>
   );
 }
