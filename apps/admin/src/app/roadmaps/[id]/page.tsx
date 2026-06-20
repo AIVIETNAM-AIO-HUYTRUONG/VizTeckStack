@@ -75,7 +75,7 @@ function applyFlowChangesToEditorNodes(
   return editorNodes.map((n) => {
     let updated = n;
     for (const change of rfChanges) {
-      if (change.id !== n.id) continue;
+      if (!('id' in change) || (change as { id: string }).id !== n.id) continue;
       if (change.type === 'position' && 'position' in change && change.position != null) {
         const pos = change.position as { x: number; y: number };
         updated = { ...updated, positionX: pos.x, positionY: pos.y };
@@ -213,6 +213,10 @@ export default function GraphEditorPage({
     },
     [],
   );
+
+  const handleEdgeClick = useCallback((edgeId: string) => {
+    setEditorEdges((prev) => prev.filter((e) => e.id !== edgeId));
+  }, []);
 
   // Drop from inventory = place node at drop position
   const handleDropNode = useCallback((nodeId: string, flowPos: { x: number; y: number }) => {
@@ -389,6 +393,7 @@ export default function GraphEditorPage({
           onEdgesChange={handleEdgesChange}
           onConnect={handleConnect}
           onNodesDelete={handleNodesDelete}
+          onEdgeClick={handleEdgeClick}
           onPaneContextMenu={handlePaneContextMenu}
           onDropNode={handleDropNode}
         />

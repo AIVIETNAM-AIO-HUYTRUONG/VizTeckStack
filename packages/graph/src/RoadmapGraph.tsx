@@ -1,6 +1,6 @@
 'use client';
 import '@xyflow/react/dist/style.css';
-import React, { type MouseEvent } from 'react';
+import React, { useCallback, useRef, type MouseEvent } from 'react';
 import {
   ReactFlow, Controls, ReactFlowProvider, useReactFlow,
   type Node,
@@ -29,6 +29,8 @@ export interface RoadmapGraphProps {
   onPaneContextMenu?: (event: MouseEvent, position: { x: number; y: number }) => void;
   /** Called when a node is dropped from inventory onto the canvas — receives flow-space position */
   onDropNode?: (nodeId: string, flowPosition: { x: number; y: number }) => void;
+  /** Called when an edge is clicked — edit mode only; use to delete the edge */
+  onEdgeClick?: (edgeId: string) => void;
 }
 
 interface GraphCanvasProps extends RoadmapGraphProps {
@@ -50,7 +52,7 @@ function mapEdges(edges: EdgeItem[]) {
 function GraphCanvas({
   nodes, rfNodes, rfEdges, isView, onNodeClick,
   onNodesChange, onEdgesChange, onConnect, onNodesDelete,
-  onPaneContextMenu, onDropNode,
+  onPaneContextMenu, onDropNode, onEdgeClick,
 }: GraphCanvasProps) {
   const { screenToFlowPosition } = useReactFlow();
 
@@ -61,6 +63,10 @@ function GraphCanvas({
         onNodeClick(original);
       }
     }
+  }
+
+  function handleEdgeClick(_event: MouseEvent, edge: { id: string }) {
+    if (onEdgeClick) onEdgeClick(edge.id);
   }
 
   function handlePaneContextMenu(event: React.MouseEvent | globalThis.MouseEvent) {
@@ -109,6 +115,7 @@ function GraphCanvas({
         onEdgesChange={!isView ? onEdgesChange : undefined}
         onConnect={!isView ? onConnect : undefined}
         onNodesDelete={!isView ? onNodesDelete : undefined}
+        onEdgeClick={!isView && onEdgeClick ? handleEdgeClick : undefined}
         onPaneContextMenu={!isView ? handlePaneContextMenu : undefined}
       >
         <Controls />
@@ -118,7 +125,28 @@ function GraphCanvas({
 }
 
 export function RoadmapGraph(props: RoadmapGraphProps) {
-  const { nodes, edges, mode } = props;
+  const { nodes, edges, mode, onNodesChange } = props;
+
+  // Cache measured dimensions so rfNodes can include them on every render.
+  // React Flow's adoptUserNodes resets `measured` whenever it receives new node
+  // objects (our .map() always creates new refs), which causes visibility:hidden.
+  // Including the cached measured value lets nodeHasDimensions() return true
+  // immediately, preventing the stuck-hidden state after position changes.
+  const measuredRef = useRef<Map<string, { width: number; height: number }>>(new Map());
+
+  // Intercept dimensions changes to populate the cache before forwarding.
+  const wrappedOnNodesChange = useCallback<OnNodesChange>(
+    (changes) => {
+      for (const c of changes) {
+        if (c.type === 'dimensions' && 'dimensions' in c && c.dimensions) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          measuredRef.current.set(c.id, c.dimensions as any);
+        }
+      }
+      onNodesChange?.(changes);
+    },
+    [onNodesChange],
+  );
 
   const rfNodes = nodes
     .filter((n) => n.positionX != null && n.positionY != null)
@@ -128,6 +156,8 @@ export function RoadmapGraph(props: RoadmapGraphProps) {
       position: { x: n.positionX!, y: n.positionY! },
       selected: (n as { selected?: boolean }).selected ?? false,
       data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
+      // Include cached measured so nodes stay visible after external position updates
+      measured: measuredRef.current.get(n.id),
     }));
 
   const rfEdges = mapEdges(edges);
@@ -137,6 +167,7 @@ export function RoadmapGraph(props: RoadmapGraphProps) {
     <ReactFlowProvider>
       <GraphCanvas
         {...props}
+        onNodesChange={wrappedOnNodesChange}
         rfNodes={rfNodes}
         rfEdges={rfEdges}
         isView={isView}
