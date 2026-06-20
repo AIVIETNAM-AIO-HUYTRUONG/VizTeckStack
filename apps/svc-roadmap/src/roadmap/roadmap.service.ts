@@ -83,34 +83,42 @@ export class RoadmapService {
   }
 
   async upsertGraph(req: UpsertGraphRequest): Promise<RoadmapDetail> {
-    await db.$transaction(async (tx: any) => {
-      // Delete edges first (FK constraint), then nodes
-      const existingNodes = await tx.node.findMany({ where: { roadmapId: req.roadmapId }, select: { id: true } });
-      const nodeIds = existingNodes.map((n: any) => n.id);
-      await tx.edge.deleteMany({ where: { sourceId: { in: nodeIds } } });
-      await tx.node.deleteMany({ where: { roadmapId: req.roadmapId } });
+    try {
+      await db.$transaction(async (tx: any) => {
+        // Delete edges first (FK constraint), then nodes
+        const existingNodes = await tx.node.findMany({ where: { roadmapId: req.roadmapId }, select: { id: true } });
+        const nodeIds = existingNodes.map((n: any) => n.id);
+        await tx.edge.deleteMany({ where: { sourceId: { in: nodeIds } } });
+        await tx.node.deleteMany({ where: { roadmapId: req.roadmapId } });
 
-      for (const n of req.nodes ?? []) {
-        await tx.node.create({
-          data: {
-            id: n.id || undefined,
-            roadmapId: req.roadmapId,
-            type: n.type === 0 ? 'ROADMAP' : 'LESSON',
-            title: n.title,
-            positionX: n.positionX ?? null,
-            positionY: n.positionY ?? null,
-            targetRoadmapId: n.targetRoadmapId || null,
-            content: n.content ? JSON.parse(n.content) : null,
-          },
-        });
-      }
+        for (const n of req.nodes ?? []) {
+          await tx.node.create({
+            data: {
+              id: n.id || undefined,
+              roadmap: { connect: { id: req.roadmapId } },
+              type: n.type === 0 ? 'ROADMAP' : 'LESSON',
+              title: n.title,
+              // proto3 double defaults to 0 for unset — treat 0 as unplaced (null in DB)
+              ...(n.positionX ? { positionX: n.positionX } : {}),
+              ...(n.positionY ? { positionY: n.positionY } : {}),
+              ...(n.targetRoadmapId
+                ? { targetRoadmap: { connect: { id: n.targetRoadmapId } } }
+                : {}),
+              content: n.content ? JSON.parse(n.content) : null,
+            },
+          });
+        }
 
-      for (const e of req.edges ?? []) {
-        await tx.edge.create({
-          data: { sourceId: e.sourceId, targetId: e.targetId, label: e.label || null },
-        });
-      }
-    });
+        for (const e of req.edges ?? []) {
+          await tx.edge.create({
+            data: { sourceId: e.sourceId, targetId: e.targetId, label: e.label || null },
+          });
+        }
+      });
+    } catch (err: any) {
+      console.error('[upsertGraph] transaction error:', err?.message ?? err);
+      throw new RpcException({ code: 13, message: err?.message ?? 'upsertGraph failed' });
+    }
 
     const roadmap = await db.roadmap.findUnique({
       where: { id: req.roadmapId },
