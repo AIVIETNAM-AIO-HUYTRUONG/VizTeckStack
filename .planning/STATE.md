@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Phase 04-02 Task 4 checkpoint:human-verify — awaiting browser QA"
-last_updated: "2026-06-19T15:00:00.000Z"
-last_activity: 2026-06-19 -- Phase 04-02 Tasks 1-3 complete (graph editor built); Task 4 checkpoint awaiting human verify
+stopped_at: "Phase 04-02 complete — all 11 QA items passed; ready for 04-03 lesson editor"
+last_updated: "2026-06-20T03:50:00.000Z"
+last_activity: 2026-06-20 -- Phase 04-02 QA complete; BUG-06 fixed (Prisma pnpm virtual store mismatch); all 11 graph editor checks pass
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 8
-  completed_plans: 6
-  percent: 75
+  completed_plans: 7
+  percent: 87
 ---
 
 # Project State
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-06-18)
 ## Current Position
 
 Phase: 04 (admin-cms) — EXECUTING
-Plan: 2 of 3 (04-02 Tasks 1-3 complete; awaiting Task 4 human-verify checkpoint)
-Status: Phase 04-02 paused at checkpoint:human-verify (Task 4 browser QA)
-Last activity: 2026-06-19 -- Phase 04-02 Tasks 1-3 complete; graph editor assembled with toolbar, inventory, side panel, dirty-state save
+Plan: 2 of 3 complete (04-02 done; starting 04-03 lesson editor)
+Status: Phase 04-02 COMPLETE — all 11 QA items pass; 3 bugs fixed (BUG-04/05/06)
+Last activity: 2026-06-20 -- Phase 04-02 QA all 11 items pass; BUG-06 (upsertGraph Prisma pnpm mismatch) fixed; ready for 04-03
 
 Progress: [████████░░] 75%
 
@@ -106,9 +106,16 @@ Key decisions applied in Phase 04-01:
 - ConfirmDialog uses native `<button>` refs for focus management — @vizteck/ui Button lacks forwardRef
 - Login page uses raw `fetch` (not apiFetch) to avoid 401 redirect loop on the login page itself
 
+Key decisions applied in Phase 04-02 QA:
+
+- Prisma generator must NOT use custom `output` in pnpm workspaces — default output writes to pnpm virtual store where `@prisma/client` resolves at runtime; custom output writes to packages/db/node_modules which is never used
+- React Flow v12 controlled mode: onNodesChange must filter to position+select only to prevent visibility:hidden loop (BUG-04)
+- EditorNode.selected must be passed as rfNodes.selected prop for selection to work in controlled mode (BUG-05)
+- proto3 double fields (positionX/positionY) default to 0.0 on wire — treat 0 as unplaced (null in DB) via truthy check
+
 ### Blockers/Concerns
 
-None yet.
+None.
 
 ## Deferred Items
 
@@ -119,6 +126,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-19T15:00:00Z
-Stopped at: Phase 04-02 Task 4 checkpoint:human-verify — browser QA of graph editor
-Resume file: .planning/phases/04-admin-cms/04-02-PLAN.md (Task 4 — resume after "approved")
+Last session: 2026-06-20T03:50:00Z
+Stopped at: Phase 04-02 complete — all QA passed; ready to execute 04-03 (lesson editor)
+Resume file: .planning/phases/04-admin-cms/04-03-PLAN.md
