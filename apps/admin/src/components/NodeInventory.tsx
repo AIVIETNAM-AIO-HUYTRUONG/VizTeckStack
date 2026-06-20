@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NodeBadge } from '@vizteck/ui';
 import type { NodeItem } from '@vizteck/graph';
 
@@ -10,163 +10,224 @@ export interface RoadmapEntry {
   slug: string;
 }
 
+type FilterType = 'ALL' | 'ROADMAP' | 'LESSON';
+
 interface NodeInventoryProps {
   nodes: NodeItem[];
   allRoadmaps: RoadmapEntry[];
   onDeleteNode: (id: string) => void;
   onEditNode: (id: string) => void;
+  /** Adds a roadmap as an unplaced ROADMAP node in the graph */
+  onAddRoadmapLink: (roadmap: RoadmapEntry) => void;
 }
 
-export function NodeInventory({ nodes, allRoadmaps, onDeleteNode, onEditNode }: NodeInventoryProps) {
-  function handleDragStart(
-    event: React.DragEvent<HTMLDivElement>,
-    nodeId: string,
-  ) {
+export function NodeInventory({
+  nodes, allRoadmaps, onDeleteNode, onEditNode, onAddRoadmapLink,
+}: NodeInventoryProps) {
+  const [open, setOpen] = useState(true);
+  const [filter, setFilter] = useState<FilterType>('ALL');
+  const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set());
+
+  // Roadmaps not yet linked as nodes in this graph
+  const linkedRoadmapIds = new Set(
+    nodes.filter((n) => n.type === 'ROADMAP' && n.targetRoadmapId).map((n) => n.targetRoadmapId!),
+  );
+  const availableRoadmaps = allRoadmaps.filter(
+    (r) => !linkedRoadmapIds.has(r.id) && !dismissedIds.has(r.id),
+  );
+
+  const filteredNodes = filter === 'ALL' ? nodes : nodes.filter((n) => n.type === filter);
+  const showAvailable = filter === 'ALL' || filter === 'ROADMAP';
+  const totalCount = nodes.length + availableRoadmaps.length;
+
+  function handleNodeDrag(e: React.DragEvent, nodeId: string) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dt = event.dataTransfer as any;
-    dt.setData('nodeId', nodeId);
-    dt.effectAllowed = 'move';
+    (e.dataTransfer as any).setData('nodeId', nodeId);
+    e.dataTransfer.effectAllowed = 'move';
   }
 
-  function handleRoadmapDragStart(
-    event: React.DragEvent<HTMLDivElement>,
-    roadmap: RoadmapEntry,
-  ) {
+  function handleRoadmapDrag(e: React.DragEvent, roadmap: RoadmapEntry) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const dt = event.dataTransfer as any;
-    dt.setData('nodeId', `newRoadmap:${roadmap.id}:${roadmap.slug}`);
-    dt.effectAllowed = 'move';
+    (e.dataTransfer as any).setData('nodeId', `newRoadmap:${roadmap.id}:${roadmap.slug}`);
+    e.dataTransfer.effectAllowed = 'move';
   }
 
-  const totalCount = nodes.length + allRoadmaps.length;
+  function dismiss(roadmapId: string) {
+    setDismissedIds((prev) => new Set([...prev, roadmapId]));
+  }
 
-  return (
-    <div className="bg-bg-1 border-t border-border flex-shrink-0" style={{ height: 220 }}>
-      {/* Section header */}
-      <div className="bg-bg-2 border-b border-border px-4 flex items-center justify-between" style={{ height: 32 }}>
-        <span
-          className="text-text-2 font-semibold uppercase"
-          style={{ fontSize: 12, letterSpacing: '0.08em' }}
+  // ── Collapsed ─────────────────────────────────────────────────
+  if (!open) {
+    return (
+      <div
+        className="flex-shrink-0 flex flex-col items-center bg-bg-1 border-r border-border pt-1 gap-1"
+        style={{ width: 32 }}
+      >
+        <button
+          onClick={() => setOpen(true)}
+          title="Open Inventory"
+          className="w-7 h-7 flex items-center justify-center text-text-3 hover:text-text-1 hover:bg-bg-2 rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo"
+          style={{ fontSize: 16 }}
         >
-          Node Inventory
+          ›
+        </button>
+      </div>
+    );
+  }
+
+  // ── Open ──────────────────────────────────────────────────────
+  return (
+    <div className="flex-shrink-0 flex flex-col bg-bg-1 border-r border-border" style={{ width: 260 }}>
+      {/* Header */}
+      <div
+        className="flex-shrink-0 flex items-center justify-between px-3 border-b border-border"
+        style={{ height: 36 }}
+      >
+        <span className="text-[11px] font-semibold text-text-2 uppercase tracking-[0.08em]">
+          Inventory{' '}
+          <span className="text-text-3 font-normal normal-case tracking-normal">({totalCount})</span>
         </span>
-        <span className="text-text-3" style={{ fontSize: 12 }}>
-          {totalCount} {totalCount === 1 ? 'item' : 'items'}
-        </span>
+        <button
+          onClick={() => setOpen(false)}
+          title="Collapse"
+          className="text-text-3 hover:text-text-1 cursor-pointer focus:outline-none focus:ring-1 focus:ring-indigo rounded leading-none"
+          style={{ fontSize: 18 }}
+        >
+          ‹
+        </button>
+      </div>
+
+      {/* Filter tabs */}
+      <div className="flex-shrink-0 flex border-b border-border" style={{ height: 30 }}>
+        {(['ALL', 'ROADMAP', 'LESSON'] as FilterType[]).map((f) => (
+          <button
+            key={f}
+            onClick={() => setFilter(f)}
+            className={`flex-1 text-[10px] font-semibold uppercase tracking-wider cursor-pointer focus:outline-none transition-colors
+              ${filter === f
+                ? 'text-indigo border-b-2 border-indigo bg-indigo/5'
+                : 'text-text-3 hover:text-text-2 border-b-2 border-transparent'
+              }`}
+          >
+            {f}
+          </button>
+        ))}
       </div>
 
       {/* Scrollable list */}
-      <div className="overflow-y-auto" style={{ height: 188 }}>
-        {totalCount === 0 && (
-          <div className="flex items-center justify-center h-full text-text-3 text-sm">
-            No nodes yet. Right-click on the canvas or click Add Node to create one.
+      <div className="flex-1 overflow-y-auto">
+
+        {/* Empty state */}
+        {filteredNodes.length === 0 && (!showAvailable || availableRoadmaps.length === 0) && (
+          <div className="flex flex-col items-center justify-center h-32 text-text-3 text-xs text-center px-4 gap-1">
+            <span>No nodes yet.</span>
+            <span style={{ fontSize: 10 }}>Right-click canvas or use Add Node.</span>
           </div>
         )}
 
-        {/* ── Roadmaps section ─────────────────────────────── */}
-        {allRoadmaps.length > 0 && (
+        {/* ── Graph nodes ─────────────────────────────────── */}
+        {filteredNodes.map((node) => {
+          const placed = node.positionX != null && node.positionY != null;
+          return (
+            <div
+              key={node.id}
+              className="group flex items-center gap-1 px-2 border-b border-border hover:bg-bg-2"
+              style={{ minHeight: 44 }}
+            >
+              <div
+                draggable
+                onDragStart={(e) => handleNodeDrag(e, node.id)}
+                role="button"
+                tabIndex={0}
+                aria-label="Drag to place on canvas"
+                onKeyDown={() => {}}
+                className="flex-shrink-0 text-text-3 cursor-grab select-none w-5 flex items-center justify-center"
+              >
+                ⠿
+              </div>
+
+              <NodeBadge type={node.type} />
+
+              <span className="flex-1 text-sm text-text-1 truncate min-w-0">
+                {node.title}
+              </span>
+
+              <span
+                className={`flex-shrink-0 rounded-full font-mono ${
+                  placed
+                    ? 'text-indigo bg-indigo-lt'
+                    : 'text-text-3 bg-bg-2 border border-border'
+                }`}
+                style={{ fontSize: 9, padding: '1px 5px' }}
+              >
+                {placed ? 'on canvas' : 'off'}
+              </span>
+
+              <button
+                onClick={() => onEditNode(node.id)}
+                className="flex-shrink-0 text-[10px] font-semibold text-text-3 hover:text-indigo px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => onDeleteNode(node.id)}
+                className="flex-shrink-0 text-[10px] font-semibold text-red-400 hover:text-red-600 px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Del
+              </button>
+            </div>
+          );
+        })}
+
+        {/* ── Available roadmaps ──────────────────────────── */}
+        {showAvailable && availableRoadmaps.length > 0 && (
           <>
             <div
-              className="px-3 bg-bg-2 border-b border-border flex items-center"
-              style={{ height: 24, fontSize: 10, letterSpacing: '0.06em' }}
+              className="flex items-center px-3 border-b border-border bg-bg-2 text-text-3 font-semibold uppercase"
+              style={{ height: 20, fontSize: 9, letterSpacing: '0.06em' }}
             >
-              <span className="text-text-3 font-semibold uppercase">Roadmaps</span>
+              Available roadmaps
             </div>
-            {allRoadmaps.map((roadmap) => (
+            {availableRoadmaps.map((roadmap) => (
               <div
                 key={roadmap.id}
-                className="border-b border-border flex items-center px-2 gap-2 hover:bg-bg-2 cursor-default"
+                className="group flex items-center gap-1 px-2 border-b border-border hover:bg-bg-2"
                 style={{ minHeight: 40 }}
               >
-                {/* Drag handle */}
                 <div
                   draggable
-                  onDragStart={(e) => handleRoadmapDragStart(e, roadmap)}
-                  aria-label="Drag to place on canvas"
+                  onDragStart={(e) => handleRoadmapDrag(e, roadmap)}
                   role="button"
                   tabIndex={0}
-                  className="flex-shrink-0 flex items-center justify-center text-text-3 cursor-grab select-none"
-                  style={{ width: 40, height: '100%', minHeight: 40 }}
+                  aria-label="Drag to place on canvas"
                   onKeyDown={() => {}}
+                  className="flex-shrink-0 text-text-3 cursor-grab select-none w-5 flex items-center justify-center"
                 >
                   ⠿
                 </div>
+
                 <NodeBadge type="ROADMAP" />
-                <span className="flex-1 text-xs text-text-2 truncate font-mono">
+
+                <span className="flex-1 text-sm text-text-2 truncate min-w-0">
                   {roadmap.title}
                 </span>
-                <span className="flex-shrink-0 font-mono text-text-3 text-[10px] px-1">
-                  drag to place
-                </span>
+
+                {/* "Add" = adds as unplaced node (then Edit/Del appear like any node) */}
+                <button
+                  onClick={() => onAddRoadmapLink(roadmap)}
+                  className="flex-shrink-0 text-[10px] font-semibold text-text-3 hover:text-indigo px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  Add
+                </button>
+                {/* Dismiss from palette (doesn't delete the roadmap) */}
+                <button
+                  onClick={() => dismiss(roadmap.id)}
+                  className="flex-shrink-0 text-[10px] text-text-3 hover:text-red-500 px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  ✕
+                </button>
               </div>
             ))}
-          </>
-        )}
-
-        {/* ── Canvas nodes section ─────────────────────────── */}
-        {nodes.length > 0 && (
-          <>
-            <div
-              className="px-3 bg-bg-2 border-b border-border flex items-center"
-              style={{ height: 24, fontSize: 10, letterSpacing: '0.06em' }}
-            >
-              <span className="text-text-3 font-semibold uppercase">Nodes in this roadmap</span>
-            </div>
-            {nodes.map((node) => {
-              const placed = node.positionX != null && node.positionY != null;
-              return (
-                <div
-                  key={node.id}
-                  className="border-b border-border flex items-center px-2 gap-2 hover:bg-bg-2 cursor-default"
-                  style={{ minHeight: 44 }}
-                >
-                  {/* Drag handle */}
-                  <div
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, node.id)}
-                    aria-label="Drag to place on canvas"
-                    role="button"
-                    tabIndex={0}
-                    className="flex-shrink-0 flex items-center justify-center text-text-3 cursor-grab select-none"
-                    style={{ width: 40, height: '100%', minHeight: 44 }}
-                    onKeyDown={() => {}}
-                  >
-                    ⠿
-                  </div>
-
-                  <NodeBadge type={node.type} />
-
-                  <span className="flex-1 text-sm text-text-1 truncate">
-                    {node.title}
-                  </span>
-
-                  {placed ? (
-                    <span className="flex-shrink-0 font-mono text-indigo bg-indigo-lt rounded-full px-2" style={{ fontSize: 11 }}>
-                      Placed
-                    </span>
-                  ) : (
-                    <span className="flex-shrink-0 font-mono text-text-3 bg-bg-2 rounded-full px-2" style={{ fontSize: 11 }}>
-                      Unplaced
-                    </span>
-                  )}
-
-                  {/* Edit button */}
-                  <button
-                    onClick={() => onEditNode(node.id)}
-                    className="flex-shrink-0 text-sm font-semibold text-text-2 hover:text-text-1 px-2 py-1 rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1"
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    onClick={() => onDeleteNode(node.id)}
-                    className="flex-shrink-0 text-sm font-semibold text-red-500 hover:text-red-700 px-2 py-1 rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1"
-                  >
-                    Delete
-                  </button>
-                </div>
-              );
-            })}
           </>
         )}
       </div>

@@ -384,6 +384,22 @@ export default function GraphEditorPage({
     }
   }
 
+  // ---- Add roadmap as unplaced node from inventory palette ----
+
+  function handleAddRoadmapLink(roadmap: RoadmapEntry) {
+    const newNode: EditorNode = {
+      id: crypto.randomUUID(),
+      roadmapId: id,
+      type: 'ROADMAP',
+      title: roadmap.title,
+      positionX: null,
+      positionY: null,
+      targetRoadmapId: roadmap.id,
+      targetRoadmapSlug: roadmap.slug,
+    };
+    setEditorNodes((prev) => [...prev, newNode]);
+  }
+
   // ---- Render ----
 
   // Determine the initial values for the side panel
@@ -421,40 +437,43 @@ export default function GraphEditorPage({
         </div>
       )}
 
-      {/* Canvas zone — relative so the side panel can overlay it */}
-      <div className="flex-1 relative overflow-hidden">
-        <RoadmapGraph
+      {/* Main area: left inventory sidebar + canvas */}
+      <div className="flex flex-1 overflow-hidden">
+        <NodeInventory
           nodes={editorNodes}
-          edges={editorEdges}
-          mode="edit"
-          onNodeClick={handleNodeClick}
-          onNodesChange={handleNodesChange}
-          onEdgesChange={handleEdgesChange}
-          onConnect={handleConnect}
-          onNodesDelete={handleNodesDelete}
-          onEdgeClick={handleEdgeClick}
-          onPaneContextMenu={handlePaneContextMenu}
-          onDropNode={handleDropNode}
+          allRoadmaps={allRoadmaps}
+          onEditNode={handleEditNode}
+          onDeleteNode={handleDeleteNodeRequest}
+          onAddRoadmapLink={handleAddRoadmapLink}
         />
 
-        {/* Side panel overlay */}
-        {panel.open && (
-          <NodeSidePanel
-            mode={panel.mode}
-            initial={panelInitial}
-            onSubmit={handlePanelSubmit}
-            onClose={handlePanelClose}
+        {/* Canvas zone — relative so the NodeSidePanel can overlay it */}
+        <div className="flex-1 relative overflow-hidden">
+          <RoadmapGraph
+            nodes={editorNodes}
+            edges={editorEdges}
+            mode="edit"
+            onNodeClick={handleNodeClick}
+            onNodesChange={handleNodesChange}
+            onEdgesChange={handleEdgesChange}
+            onConnect={handleConnect}
+            onNodesDelete={handleNodesDelete}
+            onEdgeClick={handleEdgeClick}
+            onPaneContextMenu={handlePaneContextMenu}
+            onDropNode={handleDropNode}
           />
-        )}
-      </div>
 
-      {/* Node inventory */}
-      <NodeInventory
-        nodes={editorNodes}
-        allRoadmaps={allRoadmaps}
-        onEditNode={handleEditNode}
-        onDeleteNode={handleDeleteNodeRequest}
-      />
+          {/* Side panel overlay */}
+          {panel.open && (
+            <NodeSidePanel
+              mode={panel.mode}
+              initial={panelInitial}
+              onSubmit={handlePanelSubmit}
+              onClose={handlePanelClose}
+            />
+          )}
+        </div>
+      </div>
 
       {/* Inventory delete confirm */}
       {deleteConfirm.open && (
