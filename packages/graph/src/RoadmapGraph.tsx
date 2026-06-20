@@ -111,7 +111,7 @@ function GraphCanvas({
         edgesReconnectable={!isView}
         fitView
         onNodeClick={onNodeClick ? handleNodeClick : undefined}
-        onNodesChange={!isView ? onNodesChange : undefined}
+        onNodesChange={onNodesChange}
         onEdgesChange={!isView ? onEdgesChange : undefined}
         onConnect={!isView ? onConnect : undefined}
         onNodesDelete={!isView ? onNodesDelete : undefined}
