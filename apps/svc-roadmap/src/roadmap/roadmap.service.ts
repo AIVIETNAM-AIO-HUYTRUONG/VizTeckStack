@@ -70,16 +70,30 @@ export class RoadmapService {
   }
 
   async updateRoadmap(req: UpdateRoadmapRequest): Promise<RoadmapItem> {
-    const r = await db.roadmap.update({
-      where: { id: req.id },
-      data: { title: req.title || undefined, description: req.description || undefined, coverImage: req.coverImage || undefined },
-    });
-    return toRoadmapItem(r);
+    try {
+      const r = await db.roadmap.update({
+        where: { id: req.id },
+        data: { title: req.title || undefined, description: req.description || undefined, coverImage: req.coverImage || undefined },
+      });
+      return toRoadmapItem(r);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
+        throw new RpcException({ code: 5, message: `Roadmap '${req.id}' not found` });
+      }
+      throw e;
+    }
   }
 
   async deleteRoadmap({ id }: IdRequest): Promise<BoolResponse> {
-    await db.roadmap.delete({ where: { id } });
-    return { success: true };
+    try {
+      await db.roadmap.delete({ where: { id } });
+      return { success: true };
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
+        throw new RpcException({ code: 5, message: `Roadmap '${id}' not found` });
+      }
+      throw e;
+    }
   }
 
   async upsertGraph(req: UpsertGraphRequest): Promise<RoadmapDetail> {
