@@ -30,7 +30,8 @@ export function LessonContent({ contentJson }: LessonContentProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  // Defer theme detection to after mount to avoid SSR/client hydration mismatch
+  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
   useEffect(() => {
     const update = () =>
       setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
@@ -55,5 +56,5 @@ export function LessonContent({ contentJson }: LessonContentProps) {
     );
   }
 
-  return <BlockNoteView editor={editor} editable={false} theme={theme} />;
+  return <BlockNoteView editor={editor} editable={false} theme={theme ?? 'light'} />;
 }

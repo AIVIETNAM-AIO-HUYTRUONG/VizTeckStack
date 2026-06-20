@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { RoadmapGraphView } from '../../../components/RoadmapGraphView';
 import { fetchRoadmap } from '../../../lib/api';
 
-export const revalidate = 3600;
+export const revalidate = 0;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

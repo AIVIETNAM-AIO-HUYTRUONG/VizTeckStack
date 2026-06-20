@@ -3,7 +3,7 @@ import { LessonContent } from '../../../../../components/LessonContent';
 import { MiniGraph } from '../../../../../components/MiniGraph';
 import { fetchNode } from '../../../../../lib/api';
 
-export const revalidate = 3600;
+export const revalidate = 0;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {

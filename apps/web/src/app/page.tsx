@@ -1,7 +1,7 @@
 import { Card } from '@vizteck/ui';
 import { fetchRoadmaps } from '../lib/api';
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export default async function HomePage() {
   let roadmaps: Awaited<ReturnType<typeof fetchRoadmaps>> = [];
