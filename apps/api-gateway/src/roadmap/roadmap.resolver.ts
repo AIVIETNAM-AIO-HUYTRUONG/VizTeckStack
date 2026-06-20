@@ -6,11 +6,23 @@ import {
   RoadmapDto,
   RoadmapDetailDto,
   NodeDto,
+  NodeTypeEnum,
   CreateRoadmapInput,
   UpdateRoadmapInput,
   NodeInput,
   EdgeInput,
 } from "./roadmap.dto";
+
+// Proto sends NodeType as numeric (ROADMAP=0, LESSON=1); GraphQL enum expects strings.
+function normalizeNodeType(type: unknown): NodeTypeEnum {
+  if (type === 0 || type === "ROADMAP") return NodeTypeEnum.ROADMAP;
+  if (type === 1 || type === "LESSON") return NodeTypeEnum.LESSON;
+  return NodeTypeEnum.LESSON;
+}
+
+function normalizeNodes(nodes: any[]): NodeDto[] {
+  return (nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) }));
+}
 
 @Resolver()
 export class RoadmapResolver {
@@ -24,7 +36,8 @@ export class RoadmapResolver {
 
   @Query(() => RoadmapDetailDto, { nullable: true })
   async roadmap(@Args("slug") slug: string): Promise<RoadmapDetailDto> {
-    return this.grpc.getRoadmap(slug);
+    const result = await this.grpc.getRoadmap(slug);
+    return { ...result, nodes: normalizeNodes(result.nodes) };
   }
 
   @Query(() => NodeDto, { nullable: true })
