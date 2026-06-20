@@ -93,7 +93,11 @@ export default function LessonEditorPage({
   // Load: fetch full graph + target node detail in parallel
   // ---------------------------------------------------------------------------
   useEffect(() => {
-    if (!slug) return;
+    if (!slug) {
+      setLoading(false);
+      setNotFound(true);
+      return;
+    }
     let cancelled = false;
 
     async function load() {
