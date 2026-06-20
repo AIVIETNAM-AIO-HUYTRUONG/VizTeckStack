@@ -126,6 +126,7 @@ export default function GraphEditorPage({
   const dirty = loading ? false : currentSnapshot !== savedSnapshotRef.current;
   const { showConfirm: showNavConfirm, confirmNavigation, cancelNavigation, proceedNavigation } =
     useUnsavedGuard(dirty);
+  const [pendingNavUrl, setPendingNavUrl] = useState<string>('');
 
   // ---- Initial load ----
   useEffect(() => {
@@ -152,9 +153,27 @@ export default function GraphEditorPage({
         setRoadmapStatus((data.roadmap as any)?.status ?? 'DRAFT');
         const nodes: EditorNode[] = (data.nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) }));
         const edges: EditorEdge[] = (data.edges ?? []).map((e) => ({ ...e }));
-        setEditorNodes(nodes);
-        setEditorEdges(edges);
-        savedSnapshotRef.current = makeSnapshot(nodes, edges);
+        const apiSnapshot = makeSnapshot(nodes, edges);
+        savedSnapshotRef.current = apiSnapshot;
+
+        // Restore draft from sessionStorage if it differs from saved API state
+        let restoredNodes = nodes;
+        let restoredEdges = edges;
+        const draftJson = sessionStorage.getItem(`graph-draft-${id}`);
+        if (draftJson) {
+          try {
+            const draft = JSON.parse(draftJson) as { nodes: EditorNode[]; edges: EditorEdge[] };
+            if (makeSnapshot(draft.nodes, draft.edges) !== apiSnapshot) {
+              restoredNodes = draft.nodes;
+              restoredEdges = draft.edges;
+            }
+          } catch {
+            sessionStorage.removeItem(`graph-draft-${id}`);
+          }
+        }
+
+        setEditorNodes(restoredNodes);
+        setEditorEdges(restoredEdges);
         setAllRoadmaps(roadmapsData.roadmaps ?? []);
       } finally {
         if (!cancelled) setLoading(false);
@@ -164,6 +183,16 @@ export default function GraphEditorPage({
     load();
     return () => { cancelled = true; };
   }, [slug]);
+
+  // Auto-save draft to sessionStorage on every change (clear when synced with DB)
+  useEffect(() => {
+    if (loading) return;
+    if (dirty) {
+      sessionStorage.setItem(`graph-draft-${id}`, JSON.stringify({ nodes: editorNodes, edges: editorEdges }));
+    } else {
+      sessionStorage.removeItem(`graph-draft-${id}`);
+    }
+  }, [editorNodes, editorEdges, loading, dirty, id]);
 
   // ---- React Flow callbacks ----
 
@@ -291,11 +320,10 @@ export default function GraphEditorPage({
   }
 
   function handleBack() {
+    const url = '/roadmaps';
     const allowed = confirmNavigation();
-    if (allowed) {
-      router.push('/roadmaps');
-    }
-    // If not allowed, showNavConfirm will become true and dialog renders
+    if (allowed) router.push(url);
+    else setPendingNavUrl(url);
   }
 
   // ---- Side panel submit ----
@@ -389,8 +417,9 @@ export default function GraphEditorPage({
         return;
       }
 
-      // Re-snapshot from current state so dirty resets to false
+      // Re-snapshot so dirty resets to false; draft is no longer needed
       savedSnapshotRef.current = makeSnapshot(editorNodes, editorEdges);
+      sessionStorage.removeItem(`graph-draft-${id}`);
     } catch (err) {
       setSaveError('Save failed. Check your connection and try again.');
       console.error('[GraphEditor] save error:', err);
@@ -513,7 +542,8 @@ export default function GraphEditorPage({
           dismissLabel="Keep Editing"
           onConfirm={() => {
             proceedNavigation();
-            router.push('/roadmaps');
+            router.push(pendingNavUrl || '/roadmaps');
+            setPendingNavUrl('');
           }}
           onClose={cancelNavigation}
         />
