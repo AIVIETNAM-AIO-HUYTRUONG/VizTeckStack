@@ -60,5 +60,8 @@ export async function fetchRoadmap(slug: string): Promise<RoadmapDetail> {
 export async function fetchNode(id: string): Promise<NodeItem> {
   const res = await fetch(`${API}/api/nodes/${id}`, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error(`fetchNode(${id}): ${res.status}`);
-  return res.json() as Promise<NodeItem>;
+  // Response shape is { node: {...}, targetRoadmap: {...} } — extract and normalize
+  const raw = await res.json() as { node?: Partial<NodeItem> } | Partial<NodeItem>;
+  const n = (raw as { node?: Partial<NodeItem> }).node ?? (raw as Partial<NodeItem>);
+  return { ...n, type: normalizeNodeType(n.type) } as NodeItem;
 }

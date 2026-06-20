@@ -12,7 +12,7 @@ const BADGE_STYLES: Record<NodeType, { bg: string; color: string; label: string 
 };
 
 export function NodeBadge({ type }: NodeBadgeProps) {
-  const s = BADGE_STYLES[type];
+  const s = BADGE_STYLES[type] ?? { bg: '#F3F4F6', color: '#6B7280', label: String(type) };
   return (
     <span
       style={{

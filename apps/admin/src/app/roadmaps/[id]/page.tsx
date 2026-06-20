@@ -227,10 +227,16 @@ export default function GraphEditorPage({
     );
   }, []);
 
-  // Canvas node click = open edit panel
+  // Canvas node click: navigate for LESSON/ROADMAP nodes; fall back to edit panel
   const handleNodeClick = useCallback((node: NodeItem) => {
-    setPanel({ open: true, mode: 'edit', nodeId: node.id });
-  }, []);
+    if (node.type === 'LESSON') {
+      router.push(`/roadmaps/${id}/nodes/${node.id}?slug=${slug ?? ''}`);
+    } else if (node.type === 'ROADMAP' && node.targetRoadmapId && node.targetRoadmapSlug) {
+      router.push(`/roadmaps/${node.targetRoadmapId}?slug=${node.targetRoadmapSlug}`);
+    } else {
+      setPanel({ open: true, mode: 'edit', nodeId: node.id });
+    }
+  }, [id, slug, router]);
 
   // ---- Toolbar actions ----
 
