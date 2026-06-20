@@ -144,6 +144,15 @@ importers:
         specifier: ^5.4.0
         version: 5.9.3
 
+  apps/e2e:
+    devDependencies:
+      '@playwright/test':
+        specifier: ^1.61.0
+        version: 1.61.0
+      '@types/node':
+        specifier: ^20.19.43
+        version: 20.19.43
+
   apps/svc-roadmap:
     dependencies:
       '@grpc/grpc-js':
@@ -5440,7 +5449,6 @@ snapshots:
   '@playwright/test@1.61.0':
     dependencies:
       playwright: 1.61.0
-    optional: true
 
   '@prisma/client@5.22.0(prisma@5.22.0)':
     optionalDependencies:
@@ -7692,15 +7700,13 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  playwright-core@1.61.0:
-    optional: true
+  playwright-core@1.61.0: {}
 
   playwright@1.61.0:
     dependencies:
       playwright-core: 1.61.0
     optionalDependencies:
       fsevents: 2.3.2
-    optional: true
 
   pluralize@8.0.0: {}
 

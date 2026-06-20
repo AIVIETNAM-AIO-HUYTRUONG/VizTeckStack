@@ -45,19 +45,19 @@ export default function RoadmapsPage() {
     fetchRoadmaps();
   }, [fetchRoadmaps]);
 
-  async function handleCreate(data: { title: string; slug: string }) {
+  async function handleCreate(data: { title: string; slug: string; description: string }) {
     await apiFetch('/api/roadmaps', {
       method: 'POST',
-      body: JSON.stringify({ title: data.title, slug: data.slug }),
+      body: JSON.stringify({ title: data.title, slug: data.slug, description: data.description }),
     });
     setModal({ type: 'none' });
     await fetchRoadmaps();
   }
 
-  async function handleEdit(roadmap: Roadmap, data: { title: string; slug: string }) {
+  async function handleEdit(roadmap: Roadmap, data: { title: string; slug: string; description: string }) {
     await apiFetch(`/api/roadmaps/${roadmap.id}`, {
       method: 'PUT',
-      body: JSON.stringify({ title: data.title }),
+      body: JSON.stringify({ title: data.title, description: data.description }),
     });
     setModal({ type: 'none' });
     await fetchRoadmaps();

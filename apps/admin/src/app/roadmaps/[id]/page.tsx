@@ -254,7 +254,7 @@ export default function GraphEditorPage({
 
   // ---- Side panel submit ----
 
-  function handlePanelSubmit(data: { title: string; type: NodeType }) {
+  function handlePanelSubmit(data: { title: string; type: NodeType; targetRoadmapId?: string; targetRoadmapSlug?: string }) {
     if (panel.mode === 'create') {
       const newNode: EditorNode = {
         id: crypto.randomUUID(),
@@ -263,13 +263,15 @@ export default function GraphEditorPage({
         title: data.title,
         positionX: panel.flowPosition?.x ?? null,
         positionY: panel.flowPosition?.y ?? null,
+        targetRoadmapId: data.targetRoadmapId,
+        targetRoadmapSlug: data.targetRoadmapSlug,
       };
       setEditorNodes((prev) => [...prev, newNode]);
     } else if (panel.mode === 'edit' && panel.nodeId) {
       const nodeId = panel.nodeId;
       setEditorNodes((prev) =>
         prev.map((n) =>
-          n.id === nodeId ? { ...n, title: data.title, type: data.type } : n,
+          n.id === nodeId ? { ...n, title: data.title, type: data.type, targetRoadmapId: data.targetRoadmapId, targetRoadmapSlug: data.targetRoadmapSlug } : n,
         ),
       );
     }
@@ -358,7 +360,7 @@ export default function GraphEditorPage({
     panel.mode === 'edit' && panel.nodeId
       ? (() => {
           const n = editorNodes.find((x) => x.id === panel.nodeId);
-          return n ? { title: n.title, type: n.type as NodeType } : undefined;
+          return n ? { title: n.title, type: n.type as NodeType, targetRoadmapId: n.targetRoadmapId } : undefined;
         })()
       : undefined;
 

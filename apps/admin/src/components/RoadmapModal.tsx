@@ -6,14 +6,15 @@ import { slugify } from '@/lib/api';
 
 interface RoadmapModalProps {
   mode: 'create' | 'edit';
-  initial?: { id: string; title: string; slug: string };
-  onSubmit: (data: { title: string; slug: string }) => Promise<void>;
+  initial?: { id: string; title: string; slug: string; description?: string };
+  onSubmit: (data: { title: string; slug: string; description: string }) => Promise<void>;
   onClose: () => void;
 }
 
 export function RoadmapModal({ mode, initial, onSubmit, onClose }: RoadmapModalProps) {
   const [title, setTitle] = useState(initial?.title ?? '');
   const [slug, setSlug] = useState(initial?.slug ?? '');
+  const [description, setDescription] = useState(initial?.description ?? '');
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
   const [loading, setLoading] = useState(false);
   const headingId = 'roadmap-modal-heading';
@@ -59,7 +60,7 @@ export function RoadmapModal({ mode, initial, onSubmit, onClose }: RoadmapModalP
 
     setLoading(true);
     try {
-      await onSubmit({ title: title.trim(), slug: slug.trim() });
+      await onSubmit({ title: title.trim(), slug: slug.trim(), description: description.trim() });
     } finally {
       setLoading(false);
     }
@@ -125,6 +126,20 @@ export function RoadmapModal({ mode, initial, onSubmit, onClose }: RoadmapModalP
                 Auto-generated from title. You can edit before saving.
               </p>
             )}
+          </div>
+
+          <div>
+            <label htmlFor="roadmap-description" className="block text-sm font-semibold text-text-1 mb-1">
+              Description <span className="text-text-3 font-normal">(optional)</span>
+            </label>
+            <textarea
+              id="roadmap-description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Brief description shown on the public roadmap card"
+              rows={3}
+              className="w-full px-3 py-2 text-sm text-text-1 bg-bg-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo focus:border-indigo resize-none"
+            />
           </div>
 
           <div className="flex justify-end gap-2 pt-2">
