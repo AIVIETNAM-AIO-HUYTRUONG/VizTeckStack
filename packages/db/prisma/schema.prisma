@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Roadmap {
+  id              String         @id @default(cuid())
+  slug            String         @unique
+  title           String
+  description     String?
+  coverImage      String?
+  status          RoadmapStatus  @default(DRAFT)
+  nodes           Node[]         @relation("RoadmapNodes")
+  targetedByNodes Node[]         @relation("NodeTarget")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Node {
+  id              String   @id @default(cuid())
+  roadmapId       String
+  roadmap         Roadmap  @relation("RoadmapNodes", fields: [roadmapId], references: [id], onDelete: Cascade)
+  type            NodeType
+  title           String
+  positionX       Float?
+  positionY       Float?
+  targetRoadmapId String?
+  targetRoadmap   Roadmap? @relation("NodeTarget", fields: [targetRoadmapId], references: [id])
+  content         Json?
+  edges           Edge[]   @relation("EdgeSource")
+  edgesTarget     Edge[]   @relation("EdgeTarget")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Edge {
+  id       String  @id @default(cuid())
+  sourceId String
+  targetId String
+  source   Node    @relation("EdgeSource", fields: [sourceId], references: [id], onDelete: Cascade)
+  target   Node    @relation("EdgeTarget", fields: [targetId], references: [id], onDelete: Cascade)
+  label    String?
+}
+
+enum NodeType {
+  ROADMAP
+  LESSON
+}
+
+enum RoadmapStatus {
+  DRAFT
+  PUBLIC
+  PRIVATE
+}

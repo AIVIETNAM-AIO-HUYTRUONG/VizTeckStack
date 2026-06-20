@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --indigo: #4F46E5;
+  --indigo-mid: #6366F1;
+  --indigo-lt: #EEF2FF;
+  --emerald: #059669;
+  --emerald-lt: #ECFDF5;
+  --bg-0: #F8F9FC;
+  --bg-1: #FFFFFF;
+  --bg-2: #F1F3F9;
+  --border: #E2E8F0;
+  --text-1: #0F172A;
+  --text-2: #475569;
+  --text-3: #94A3B8;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+.dark {
+  --bg-0: #0F172A;
+  --bg-1: #1E293B;
+  --bg-2: #334155;
+  --border: #334155;
+  --text-1: #F8FAFC;
+  --text-2: #CBD5E1;
+  --text-3: #64748B;
+}
+
+body {
+  background: var(--bg-0);
+  color: var(--text-1);
+  font-family: Inter, sans-serif;
+}
+
+/* ReactFlow Controls dark mode */
+.dark .react-flow__controls {
+  background: var(--bg-2);
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.dark .react-flow__controls button {
+  background: var(--bg-2);
+  border-bottom-color: var(--border);
+  color: var(--text-1);
+  fill: var(--text-1);
+}
+
+.dark .react-flow__controls button:hover {
+  background: var(--bg-1);
+}
+
+/* ReactFlow canvas background in dark mode */
+.dark .react-flow__background {
+  background: var(--bg-0);
+}
+
+.dark .react-flow__attribution {
+  background: transparent;
+  color: var(--text-3);
+}
+
+.dark .react-flow__attribution a {
+  color: var(--text-3);
+}
