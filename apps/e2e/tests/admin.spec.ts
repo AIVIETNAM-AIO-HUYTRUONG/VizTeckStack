@@ -2,6 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 const ADMIN_TOKEN = 'supersecret';
 const ROADMAP_ID = 'cmqjg391q0000tux4lzw52wao'; // "Frontend Developer"
+const ROADMAP_SLUG = 'frontend';
 
 async function loginAsAdmin(page: Page) {
   await page.goto('/login');
@@ -69,15 +70,16 @@ test.describe('Admin — Roadmaps list', () => {
 test.describe('Admin — Graph editor', () => {
   test.beforeEach(async ({ page }) => {
     await loginAsAdmin(page);
-    await page.goto(`/roadmaps/${ROADMAP_ID}`);
+    await page.goto(`/roadmaps/${ROADMAP_ID}?slug=${ROADMAP_SLUG}`);
+    // Wait for "Loading graph…" to disappear — API call can take a few seconds
+    await page.getByText(/loading graph/i).waitFor({ state: 'hidden', timeout: 15000 });
   });
 
   test('graph editor loads React Flow canvas', async ({ page }) => {
-    await expect(page.locator('.react-flow')).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('.react-flow')).toBeVisible({ timeout: 5000 });
   });
 
   test('save button is present in editor', async ({ page }) => {
-    await page.locator('.react-flow').waitFor({ timeout: 10000 });
     await expect(page.getByRole('button', { name: /save/i })).toBeVisible({ timeout: 5000 });
   });
 
@@ -86,7 +88,7 @@ test.describe('Admin — Graph editor', () => {
     page.on('console', (msg) => {
       if (msg.type() === 'error') errors.push(msg.text());
     });
-    await page.locator('.react-flow').waitFor({ timeout: 10000 });
+    await expect(page.locator('.react-flow')).toBeVisible({ timeout: 5000 });
     const critical = errors.filter(
       (e) => !e.includes('Download the React DevTools') && !e.includes('Warning:')
     );
