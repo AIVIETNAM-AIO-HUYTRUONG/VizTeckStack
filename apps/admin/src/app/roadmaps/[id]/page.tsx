@@ -10,7 +10,7 @@ import {
 import type { NodeItem, EdgeItem } from '@vizteck/graph';
 import type { NodeType } from '@vizteck/ui';
 import { GraphToolbar } from '@/components/GraphToolbar';
-import { NodeInventory } from '@/components/NodeInventory';
+import { NodeInventory, type RoadmapEntry } from '@/components/NodeInventory';
 import { NodeSidePanel } from '@/components/NodeSidePanel';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { apiFetch } from '@/lib/api';
@@ -105,6 +105,7 @@ export default function GraphEditorPage({
   const [roadmapTitle, setRoadmapTitle] = useState('');
   const [editorNodes, setEditorNodes] = useState<EditorNode[]>([]);
   const [editorEdges, setEditorEdges] = useState<EditorEdge[]>([]);
+  const [allRoadmaps, setAllRoadmaps] = useState<RoadmapEntry[]>([]);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
   const savedSnapshotRef = useRef<string>('');
@@ -132,13 +133,19 @@ export default function GraphEditorPage({
 
     async function load() {
       try {
-        const res = await apiFetch(`/api/roadmaps/${slug}`);
-        if (!res.ok) return;
-        const data = await res.json() as {
+        const [graphRes, roadmapsRes] = await Promise.all([
+          apiFetch(`/api/roadmaps/${slug}`),
+          apiFetch('/api/roadmaps'),
+        ]);
+        if (!graphRes.ok) return;
+        const data = await graphRes.json() as {
           roadmap: { title: string };
           nodes?: NodeItem[];
           edges?: EdgeItem[];
         };
+        const roadmapsData = roadmapsRes.ok
+          ? await roadmapsRes.json() as { roadmaps?: RoadmapEntry[] }
+          : { roadmaps: [] };
         if (cancelled) return;
         setRoadmapTitle(data.roadmap?.title ?? '');
         const nodes: EditorNode[] = (data.nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) }));
@@ -146,6 +153,7 @@ export default function GraphEditorPage({
         setEditorNodes(nodes);
         setEditorEdges(edges);
         savedSnapshotRef.current = makeSnapshot(nodes, edges);
+        setAllRoadmaps(roadmapsData.roadmaps ?? []);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -218,14 +226,37 @@ export default function GraphEditorPage({
     setEditorEdges((prev) => prev.filter((e) => e.id !== edgeId));
   }, []);
 
-  // Drop from inventory = place node at drop position
+  // Drop from inventory = place existing node OR create a new ROADMAP node from the roadmap palette
   const handleDropNode = useCallback((nodeId: string, flowPos: { x: number; y: number }) => {
-    setEditorNodes((prev) =>
-      prev.map((n) =>
-        n.id === nodeId ? { ...n, positionX: flowPos.x, positionY: flowPos.y } : n,
-      ),
-    );
-  }, []);
+    if (nodeId.startsWith('newRoadmap:')) {
+      const parts = nodeId.split(':');
+      const targetRoadmapId = parts[1];
+      const targetRoadmapSlug = parts[2];
+      setAllRoadmaps((prev) => {
+        const roadmap = prev.find((r) => r.id === targetRoadmapId);
+        if (roadmap) {
+          const newNode: EditorNode = {
+            id: crypto.randomUUID(),
+            roadmapId: id,
+            type: 'ROADMAP',
+            title: roadmap.title,
+            positionX: flowPos.x,
+            positionY: flowPos.y,
+            targetRoadmapId,
+            targetRoadmapSlug,
+          };
+          setEditorNodes((prev2) => [...prev2, newNode]);
+        }
+        return prev;
+      });
+    } else {
+      setEditorNodes((prev) =>
+        prev.map((n) =>
+          n.id === nodeId ? { ...n, positionX: flowPos.x, positionY: flowPos.y } : n,
+        ),
+      );
+    }
+  }, [id]);
 
   // Canvas node click: navigate for LESSON/ROADMAP nodes; fall back to edit panel
   const handleNodeClick = useCallback((node: NodeItem) => {
@@ -420,6 +451,7 @@ export default function GraphEditorPage({
       {/* Node inventory */}
       <NodeInventory
         nodes={editorNodes}
+        allRoadmaps={allRoadmaps}
         onEditNode={handleEditNode}
         onDeleteNode={handleDeleteNodeRequest}
       />

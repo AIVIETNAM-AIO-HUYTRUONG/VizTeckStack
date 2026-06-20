@@ -2,7 +2,7 @@
 import '@xyflow/react/dist/style.css';
 import React, { useCallback, useRef, type MouseEvent } from 'react';
 import {
-  ReactFlow, Controls, ReactFlowProvider, useReactFlow,
+  ReactFlow, Controls, Background, BackgroundVariant, ReactFlowProvider, useReactFlow,
   type Node,
   type OnNodesChange, type OnEdgesChange, type OnConnect, type OnNodesDelete,
 } from '@xyflow/react';
@@ -118,6 +118,12 @@ function GraphCanvas({
         onEdgeClick={!isView && onEdgeClick ? handleEdgeClick : undefined}
         onPaneContextMenu={!isView ? handlePaneContextMenu : undefined}
       >
+        <Background
+          variant={BackgroundVariant.Dots}
+          gap={20}
+          size={1}
+          color={isView ? '#94a3b8' : '#475569'}
+        />
         <Controls />
       </ReactFlow>
     </div>
