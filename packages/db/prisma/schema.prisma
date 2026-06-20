@@ -11,15 +11,16 @@ datasource db {
 }
 
 model Roadmap {
-  id              String   @id @default(cuid())
-  slug            String   @unique
+  id              String         @id @default(cuid())
+  slug            String         @unique
   title           String
   description     String?
   coverImage      String?
-  nodes           Node[]   @relation("RoadmapNodes")
-  targetedByNodes Node[]   @relation("NodeTarget")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  status          RoadmapStatus  @default(DRAFT)
+  nodes           Node[]         @relation("RoadmapNodes")
+  targetedByNodes Node[]         @relation("NodeTarget")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 }
 
 model Node {
@@ -51,4 +52,10 @@ model Edge {
 enum NodeType {
   ROADMAP
   LESSON
+}
+
+enum RoadmapStatus {
+  DRAFT
+  PUBLIC
+  PRIVATE
 }

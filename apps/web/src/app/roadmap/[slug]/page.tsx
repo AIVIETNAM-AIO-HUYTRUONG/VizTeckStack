@@ -26,7 +26,7 @@ export default async function RoadmapPage({
     notFound();
   }
 
-  if (!detail.roadmap) {
+  if (!detail.roadmap || detail.roadmap.status !== 'PUBLIC') {
     notFound();
   }
 

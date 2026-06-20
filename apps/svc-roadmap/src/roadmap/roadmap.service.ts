@@ -8,7 +8,7 @@ import {
 } from '@vizteck/proto';
 
 function toRoadmapItem(r: any): RoadmapItem {
-  return { id: r.id, slug: r.slug, title: r.title, description: r.description ?? '', coverImage: r.coverImage ?? '' };
+  return { id: r.id, slug: r.slug, title: r.title, description: r.description ?? '', coverImage: r.coverImage ?? '', status: r.status ?? 'DRAFT' };
 }
 
 function toNodeItem(n: any) {
@@ -73,7 +73,13 @@ export class RoadmapService {
     try {
       const r = await db.roadmap.update({
         where: { id: req.id },
-        data: { title: req.title || undefined, description: req.description || undefined, coverImage: req.coverImage || undefined },
+        data: {
+          title: req.title || undefined,
+          description: req.description || undefined,
+          coverImage: req.coverImage || undefined,
+          // status is a string on the wire; only update if provided
+          ...(req.status ? { status: req.status as any } : {}),
+        },
       });
       return toRoadmapItem(r);
     } catch (e) {

@@ -37,6 +37,7 @@ export interface RoadmapItem {
   title: string;
   description: string;
   coverImage: string;
+  status: string;
 }
 
 export interface NodeItem {
@@ -84,6 +85,7 @@ export interface UpdateRoadmapRequest {
   title: string;
   description: string;
   coverImage: string;
+  status: string;
 }
 
 export interface NodeInput {

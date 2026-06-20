@@ -103,6 +103,7 @@ export default function GraphEditorPage({
 
   const [loading, setLoading] = useState(true);
   const [roadmapTitle, setRoadmapTitle] = useState('');
+  const [roadmapStatus, setRoadmapStatus] = useState('DRAFT');
   const [editorNodes, setEditorNodes] = useState<EditorNode[]>([]);
   const [editorEdges, setEditorEdges] = useState<EditorEdge[]>([]);
   const [allRoadmaps, setAllRoadmaps] = useState<RoadmapEntry[]>([]);
@@ -148,6 +149,7 @@ export default function GraphEditorPage({
           : { roadmaps: [] };
         if (cancelled) return;
         setRoadmapTitle(data.roadmap?.title ?? '');
+        setRoadmapStatus((data.roadmap as any)?.status ?? 'DRAFT');
         const nodes: EditorNode[] = (data.nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) }));
         const edges: EditorEdge[] = (data.edges ?? []).map((e) => ({ ...e }));
         setEditorNodes(nodes);
@@ -229,25 +231,25 @@ export default function GraphEditorPage({
   // Drop from inventory = place existing node OR create a new ROADMAP node from the roadmap palette
   const handleDropNode = useCallback((nodeId: string, flowPos: { x: number; y: number }) => {
     if (nodeId.startsWith('newRoadmap:')) {
+      // Parse title from drag data to avoid nested setState (which Strict Mode double-invokes)
       const parts = nodeId.split(':');
       const targetRoadmapId = parts[1];
       const targetRoadmapSlug = parts[2];
-      setAllRoadmaps((prev) => {
-        const roadmap = prev.find((r) => r.id === targetRoadmapId);
-        if (roadmap) {
-          const newNode: EditorNode = {
-            id: crypto.randomUUID(),
-            roadmapId: id,
-            type: 'ROADMAP',
-            title: roadmap.title,
-            positionX: flowPos.x,
-            positionY: flowPos.y,
-            targetRoadmapId,
-            targetRoadmapSlug,
-          };
-          setEditorNodes((prev2) => [...prev2, newNode]);
-        }
-        return prev;
+      const title = decodeURIComponent(parts.slice(3).join(':'));
+      setEditorNodes((prev) => {
+        // Deduplicate: already on canvas as a linked ROADMAP node
+        if (prev.some((n) => n.type === 'ROADMAP' && n.targetRoadmapId === targetRoadmapId)) return prev;
+        const newNode: EditorNode = {
+          id: crypto.randomUUID(),
+          roadmapId: id,
+          type: 'ROADMAP',
+          title,
+          positionX: flowPos.x,
+          positionY: flowPos.y,
+          targetRoadmapId,
+          targetRoadmapSlug,
+        };
+        return [...prev, newNode];
       });
     } else {
       setEditorNodes((prev) =>
@@ -270,6 +272,19 @@ export default function GraphEditorPage({
   }, [id, slug, router]);
 
   // ---- Toolbar actions ----
+
+  async function handleChangeStatus(next: string) {
+    setRoadmapStatus(next);
+    try {
+      await apiFetch(`/api/roadmaps/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ status: next }),
+      });
+    } catch {
+      // revert on error
+      setRoadmapStatus((prev) => prev);
+    }
+  }
 
   function handleAddNode() {
     setPanel({ open: true, mode: 'create', flowPosition: undefined });
@@ -420,15 +435,17 @@ export default function GraphEditorPage({
   }
 
   return (
-    <div className="flex flex-col" style={{ height: 'calc(100vh - 56px)' }}>
+    <div className="flex flex-col" style={{ height: '100vh' }}>
       {/* Toolbar */}
       <GraphToolbar
         roadmapTitle={roadmapTitle}
         dirty={dirty}
         saving={saving}
+        roadmapStatus={roadmapStatus}
         onAddNode={handleAddNode}
         onSave={handleSave}
         onBack={handleBack}
+        onChangeStatus={handleChangeStatus}
       />
 
       {saveError && (

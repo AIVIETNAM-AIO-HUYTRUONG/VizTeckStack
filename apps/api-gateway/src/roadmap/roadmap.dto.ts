@@ -25,6 +25,9 @@ export class RoadmapDto {
   @Field({ nullable: true })
   @ApiPropertyOptional({ example: "https://example.com/cover.png" })
   coverImage?: string;
+  @Field({ nullable: true })
+  @ApiPropertyOptional({ example: "DRAFT", enum: ["DRAFT", "PUBLIC", "PRIVATE"] })
+  status?: string;
 }
 
 @ObjectType()
@@ -85,6 +88,9 @@ export class UpdateRoadmapInput {
   @Field({ nullable: true })
   @ApiPropertyOptional({ example: "https://example.com/new-cover.png" })
   coverImage?: string;
+  @Field({ nullable: true })
+  @ApiPropertyOptional({ example: "PUBLIC", enum: ["DRAFT", "PUBLIC", "PRIVATE"] })
+  status?: string;
 }
 
 @InputType()

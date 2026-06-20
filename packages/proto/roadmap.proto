@@ -26,6 +26,7 @@ message RoadmapItem {
   string title = 3;
   string description = 4;
   string coverImage = 5;
+  string status = 6;
 }
 
 message NodeItem {
@@ -73,6 +74,7 @@ message UpdateRoadmapRequest {
   string title = 2;
   string description = 3;
   string coverImage = 4;
+  string status = 5;
 }
 
 message NodeInput {

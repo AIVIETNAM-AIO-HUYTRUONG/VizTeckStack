@@ -4,6 +4,7 @@ export interface RoadmapItem {
   title: string;
   description?: string;
   coverImage?: string;
+  status?: string;
 }
 
 export interface NodeItem {
@@ -37,7 +38,8 @@ export async function fetchRoadmaps(): Promise<RoadmapItem[]> {
   const res = await fetch(`${API}/api/roadmaps`, { cache: 'no-store' });
   if (!res.ok) throw new Error(`fetchRoadmaps: ${res.status}`);
   const data = await res.json() as { roadmaps?: RoadmapItem[] } | RoadmapItem[];
-  return Array.isArray(data) ? data : (data as { roadmaps?: RoadmapItem[] }).roadmaps ?? [];
+  const all = Array.isArray(data) ? data : (data as { roadmaps?: RoadmapItem[] }).roadmaps ?? [];
+  return all.filter((r) => r.status === 'PUBLIC');
 }
 
 const NODE_TYPE_MAP: Record<number | string, 'ROADMAP' | 'LESSON'> = { 0: 'ROADMAP', 1: 'LESSON' };

@@ -48,7 +48,7 @@ export function NodeInventory({
 
   function handleRoadmapDrag(e: React.DragEvent, roadmap: RoadmapEntry) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (e.dataTransfer as any).setData('nodeId', `newRoadmap:${roadmap.id}:${roadmap.slug}`);
+    (e.dataTransfer as any).setData('nodeId', `newRoadmap:${roadmap.id}:${roadmap.slug}:${encodeURIComponent(roadmap.title)}`);
     e.dataTransfer.effectAllowed = 'move';
   }
 
