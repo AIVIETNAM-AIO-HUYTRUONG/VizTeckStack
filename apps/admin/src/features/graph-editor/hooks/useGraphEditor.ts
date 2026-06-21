@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
+import { useState, useEffect, useRef, useMemo, type Dispatch, type SetStateAction } from 'react';
 import {
   loadGraph,
   saveGraph,
@@ -22,7 +22,7 @@ export function useGraphEditor(id: string, slug: string | null) {
   const [saveError, setSaveError] = useState('');
   const savedSnapshotRef = useRef<string>('');
 
-  const currentSnapshot = makeSnapshot(editorNodes, editorEdges);
+  const currentSnapshot = useMemo(() => makeSnapshot(editorNodes, editorEdges), [editorNodes, editorEdges]);
   const dirty = loading ? false : currentSnapshot !== savedSnapshotRef.current;
 
   useEffect(() => {
@@ -55,9 +55,6 @@ export function useGraphEditor(id: string, slug: string | null) {
     try {
       await saveGraph(id, editorNodes, editorEdges);
       savedSnapshotRef.current = makeSnapshot(editorNodes, editorEdges);
-      if (typeof window !== 'undefined') {
-        sessionStorage.removeItem(`graph-draft-${id}`);
-      }
     } catch (err) {
       setSaveError(
         err instanceof Error ? err.message : 'Save failed. Check your connection and try again.',
@@ -69,12 +66,12 @@ export function useGraphEditor(id: string, slug: string | null) {
   }
 
   async function handleChangeStatus(next: string) {
+    const prev = roadmapStatus;
     setRoadmapStatus(next);
     try {
       await updateRoadmap(id, { status: next });
     } catch {
-      // revert optimistic update
-      setRoadmapStatus((prev) => prev);
+      setRoadmapStatus(prev);
     }
   }
 
