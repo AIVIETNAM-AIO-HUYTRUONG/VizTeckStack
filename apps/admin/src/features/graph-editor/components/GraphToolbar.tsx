@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button } from '@vizteck/ui';
-import { ThemeToggle } from './ThemeToggle';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const STATUS_CYCLE: Record<string, string> = { DRAFT: 'PUBLIC', PUBLIC: 'PRIVATE', PRIVATE: 'DRAFT' };
 const STATUS_LABEL: Record<string, string> = { DRAFT: 'Draft', PUBLIC: 'Public', PRIVATE: 'Private' };

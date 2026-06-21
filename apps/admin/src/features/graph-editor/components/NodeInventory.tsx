@@ -3,12 +3,9 @@
 import React, { useState } from 'react';
 import { NodeBadge } from '@vizteck/ui';
 import type { NodeItem } from '@vizteck/graph';
+import type { RoadmapEntry } from '../services/graph.service';
 
-export interface RoadmapEntry {
-  id: string;
-  title: string;
-  slug: string;
-}
+export type { RoadmapEntry };
 
 type FilterType = 'ALL' | 'ROADMAP' | 'LESSON';
 

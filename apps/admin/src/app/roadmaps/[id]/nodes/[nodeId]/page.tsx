@@ -58,7 +58,7 @@ function normalizeNodeType(type: unknown): 'ROADMAP' | 'LESSON' {
 // Dynamic import — BlockNote is browser-only; ssr:false required
 // ---------------------------------------------------------------------------
 const LessonEditor = dynamic(
-  () => import('@/components/LessonEditor').then((m) => m.LessonEditor),
+  () => import('@/features/nodes/components/LessonEditor').then((m) => m.LessonEditor),
   { ssr: false, loading: () => <div className="text-sm text-text-2 py-4">Loading editor…</div> },
 );
 

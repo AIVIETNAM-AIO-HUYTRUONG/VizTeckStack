@@ -3,34 +3,25 @@
 import React, { useState, useEffect } from 'react';
 import { Button, NodeBadge } from '@vizteck/ui';
 import type { NodeType } from '@vizteck/ui';
-import { apiFetch } from '@/lib/api';
-
-interface RoadmapOption {
-  id: string;
-  title: string;
-  slug: string;
-}
+import type { RoadmapEntry } from '../services/graph.service';
 
 interface NodeSidePanelProps {
   mode: 'create' | 'edit';
   initial?: { title: string; type: NodeType; targetRoadmapId?: string };
-  onSubmit: (data: { title: string; type: NodeType; targetRoadmapId?: string; targetRoadmapSlug?: string }) => void;
+  allRoadmaps: RoadmapEntry[];
+  onSubmit: (data: {
+    title: string;
+    type: NodeType;
+    targetRoadmapId?: string;
+    targetRoadmapSlug?: string;
+  }) => void;
   onClose: () => void;
 }
 
-export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePanelProps) {
+export function NodeSidePanel({ mode, initial, allRoadmaps, onSubmit, onClose }: NodeSidePanelProps) {
   const [title, setTitle] = useState(initial?.title ?? '');
   const [type, setType] = useState<NodeType>(initial?.type ?? 'ROADMAP');
   const [targetRoadmapId, setTargetRoadmapId] = useState(initial?.targetRoadmapId ?? '');
-  const [roadmaps, setRoadmaps] = useState<RoadmapOption[]>([]);
-
-  // Fetch roadmaps for the ROADMAP-type selector
-  useEffect(() => {
-    apiFetch('/api/roadmaps')
-      .then((r) => r.json())
-      .then((d: { roadmaps?: RoadmapOption[] }) => setRoadmaps(d.roadmaps ?? []))
-      .catch(() => {});
-  }, []);
 
   // Sync when initial changes (switching from create to edit)
   useEffect(() => {
@@ -42,7 +33,7 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!title.trim()) return;
-    const selectedRoadmap = roadmaps.find((r) => r.id === targetRoadmapId);
+    const selectedRoadmap = allRoadmaps.find((r) => r.id === targetRoadmapId);
     onSubmit({
       title: title.trim(),
       type,
@@ -56,23 +47,11 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
 
   return (
     <>
-      {/* Backdrop overlay (click outside to close) */}
-      <div
-        className="absolute inset-0 z-10"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-
-      {/* Slide-in panel */}
+      <div className="absolute inset-0 z-10" onClick={onClose} aria-hidden="true" />
       <div
         className="absolute top-0 right-0 bottom-0 z-20 bg-bg-1 border-l border-border flex flex-col"
-        style={{
-          width: 320,
-          transform: 'translateX(0)',
-          transition: 'transform 200ms ease-out',
-        }}
+        style={{ width: 320, transform: 'translateX(0)', transition: 'transform 200ms ease-out' }}
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-border flex-shrink-0">
           <span className="text-sm font-semibold text-text-1">{headingText}</span>
           <button
@@ -84,10 +63,8 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
           </button>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
           <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
-            {/* Title field */}
             <div className="flex flex-col gap-1">
               <label htmlFor="node-title" className="text-sm font-semibold text-text-1">
                 Title <span className="text-red-500">*</span>
@@ -103,7 +80,6 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
               />
             </div>
 
-            {/* Type field */}
             <div className="flex flex-col gap-1">
               <label htmlFor="node-type" className="text-sm font-semibold text-text-1">
                 Type
@@ -122,7 +98,6 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
               </div>
             </div>
 
-            {/* Target roadmap selector — only for ROADMAP-type nodes */}
             {type === 'ROADMAP' && (
               <div className="flex flex-col gap-1">
                 <label htmlFor="node-target-roadmap" className="text-sm font-semibold text-text-1">
@@ -135,7 +110,7 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
                   className="w-full px-3 py-2 text-sm text-text-1 bg-bg-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo"
                 >
                   <option value="">— none —</option>
-                  {roadmaps.map((r) => (
+                  {allRoadmaps.map((r) => (
                     <option key={r.id} value={r.id}>
                       {r.title}
                     </option>
@@ -148,7 +123,6 @@ export function NodeSidePanel({ mode, initial, onSubmit, onClose }: NodeSidePane
             )}
           </div>
 
-          {/* Footer */}
           <div className="flex items-center justify-end gap-2 px-4 py-3 border-t border-border flex-shrink-0">
             <Button variant="ghost" type="button" onClick={onClose}>
               Discard
