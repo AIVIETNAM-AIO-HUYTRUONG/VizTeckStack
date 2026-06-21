@@ -34,10 +34,15 @@ jobs:
         run: pnpm build
 
       - name: Deploy apps/web to Vercel Staging
-        run: npx vercel --cwd apps/web --token ${{ secrets.VERCEL_TOKEN }} --yes
+        run: |
+          echo "ORG_ID set: $([[ -n "$VERCEL_ORG_ID" ]] && echo yes || echo NO)"
+          echo "PROJECT_ID set: $([[ -n "$VERCEL_PROJECT_ID" ]] && echo yes || echo NO)"
+          echo "TOKEN set: $([[ -n "$VERCEL_TOKEN" ]] && echo yes || echo NO)"
+          npx vercel deploy --cwd apps/web --token "$VERCEL_TOKEN" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
   deploy-admin-staging:
     name: Deploy apps/admin → Staging
@@ -66,7 +71,12 @@ jobs:
         run: pnpm build
 
       - name: Deploy apps/admin to Vercel Staging
-        run: npx vercel --cwd apps/admin --token ${{ secrets.VERCEL_TOKEN }} --yes
+        run: |
+          echo "ORG_ID set: $([[ -n "$VERCEL_ORG_ID" ]] && echo yes || echo NO)"
+          echo "PROJECT_ID set: $([[ -n "$VERCEL_PROJECT_ID" ]] && echo yes || echo NO)"
+          echo "TOKEN set: $([[ -n "$VERCEL_TOKEN" ]] && echo yes || echo NO)"
+          npx vercel deploy --cwd apps/admin --token "$VERCEL_TOKEN" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
