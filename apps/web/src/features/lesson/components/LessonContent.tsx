@@ -25,12 +25,9 @@ function parseBlocks(json: string): unknown[] | undefined {
 export function LessonContent({ contentJson }: LessonContentProps) {
   const blocks = parseBlocks(contentJson);
 
-  // useCreateBlockNote must be called unconditionally (React hook rules)
-  // Pass initialContent only when blocks are valid
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
 
-  // Defer theme detection to after mount to avoid SSR/client hydration mismatch
   const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
   useEffect(() => {
     const update = () =>
@@ -43,14 +40,7 @@ export function LessonContent({ contentJson }: LessonContentProps) {
 
   if (!blocks) {
     return (
-      <div
-        style={{
-          color: 'var(--text-3)',
-          fontFamily: 'Inter, sans-serif',
-          fontSize: 14,
-          padding: '24px 0',
-        }}
-      >
+      <div className="text-text-3 text-sm py-6">
         No content available.
       </div>
     );

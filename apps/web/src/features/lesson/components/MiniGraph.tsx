@@ -51,8 +51,6 @@ export function MiniGraph({
   const innerW = width - padding * 2;
   const innerH = height - padding * 2;
 
-  // Normalize coordinates to fit viewBox, keyed by node ID to avoid
-  // duplicate-coordinate collisions (WR-01)
   const posById =
     nodes.length > 0
       ? normalizePositions(nodes, padding, innerW, innerH)
@@ -87,13 +85,7 @@ export function MiniGraph({
         if (!pos) return null;
         const fill = n.type === 'ROADMAP' ? '#4F46E5' : '#059669';
         return (
-          <circle
-            key={n.id}
-            cx={pos.cx}
-            cy={pos.cy}
-            r={6}
-            fill={fill}
-          />
+          <circle key={n.id} cx={pos.cx} cy={pos.cy} r={6} fill={fill} />
         );
       })}
     </svg>

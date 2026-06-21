@@ -1,5 +1,5 @@
 import { Card } from '@vizteck/ui';
-import { fetchRoadmaps } from '../lib/api';
+import { fetchRoadmaps } from '@/features/roadmap/services/roadmap.service';
 
 export const revalidate = 0;
 
@@ -8,7 +8,6 @@ export default async function HomePage() {
   try {
     roadmaps = await fetchRoadmaps();
   } catch {
-    // api-gateway not running at build time — render empty grid
     roadmaps = [];
   }
 
@@ -30,7 +29,6 @@ export default async function HomePage() {
           <div className="grid grid-cols-3 gap-6">
             {roadmaps.map((r) => (
               <a key={r.id} href={`/roadmap/${r.slug}`} className="no-underline block">
-                {/* miniGraph omitted until /api/roadmaps returns node positions */}
                 <Card type="ROADMAP" title={r.title} description={r.description} />
               </a>
             ))}

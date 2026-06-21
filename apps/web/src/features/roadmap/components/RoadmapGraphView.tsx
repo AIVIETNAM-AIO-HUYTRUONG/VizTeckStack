@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { RoadmapGraph } from '@vizteck/graph';
 import type { NodeItem } from '@vizteck/graph';
-import { Breadcrumb } from './Breadcrumb';
-import type { RoadmapDetail } from '../lib/api';
+import { Breadcrumb } from '@/components/Breadcrumb';
+import type { RoadmapDetail } from '../services/roadmap.service';
 
 interface RoadmapGraphViewProps {
   detail: RoadmapDetail;
@@ -23,7 +23,6 @@ export function RoadmapGraphView({ detail, slug }: RoadmapGraphViewProps) {
     if (node.type === 'LESSON') {
       router.push(`/roadmap/${slug}/node/${node.id}`);
     } else if (node.type === 'ROADMAP' && (node.targetRoadmapSlug ?? node.targetRoadmapId)) {
-      // Prefer slug for human-readable URLs; fall back to ID until API returns slug
       router.push(`/roadmap/${node.targetRoadmapSlug ?? node.targetRoadmapId}`);
     }
   };
