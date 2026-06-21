@@ -1,7 +1,19 @@
-import { NodeBadge, Button } from '@vizteck/ui';
-import { LessonContent } from './LessonContent';
-import { MiniGraph } from './MiniGraph';
-import type { NodeItem } from '@/features/lesson/services/node.service';
+"use client";
+
+import dynamic from "next/dynamic";
+import { NodeBadge, Button } from "@vizteck/ui";
+import { MiniGraph } from "./MiniGraph";
+import type { NodeItem } from "@/features/lesson/services/node.service";
+
+const LessonViewer = dynamic(
+  () => import("@vizteck/lesson").then((m) => m.LessonViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="text-text-3 text-sm py-6">Loading content…</div>
+    ),
+  },
+);
 
 interface LessonLayoutProps {
   slug: string;
@@ -20,8 +32,8 @@ export function LessonLayout({ slug, node }: LessonLayoutProps) {
           {node.title}
         </h1>
         <hr className="border-0 border-t border-border mb-6" />
-        {node.type === 'LESSON' ? (
-          <LessonContent contentJson={node.content ?? '[]'} />
+        {node.type === "LESSON" ? (
+          <LessonViewer contentJson={node.content ?? "[]"} />
         ) : (
           <p className="text-text-3 text-sm">
             This node does not contain lesson content.
@@ -33,19 +45,28 @@ export function LessonLayout({ slug, node }: LessonLayoutProps) {
       <aside className="w-[280px] shrink-0 flex flex-col gap-4">
         {/* Progress card */}
         <div className="bg-bg-1 border border-border rounded-lg p-5">
-          <h3 className="font-display font-bold text-sm text-text-1 mb-3">Progress</h3>
-          <p className="text-[12px] text-text-3 mt-2">Progress tracking coming soon.</p>
+          <h3 className="font-display font-bold text-sm text-text-1 mb-3">
+            Progress
+          </h3>
+          <p className="text-[12px] text-text-3 mt-2">
+            Progress tracking coming soon.
+          </p>
         </div>
 
         {/* Mini graph card */}
         <div className="bg-bg-1 border border-border rounded-lg p-5">
-          <h3 className="font-display font-bold text-sm text-text-1 mb-3">Roadmap Overview</h3>
+          <h3 className="font-display font-bold text-sm text-text-1 mb-3">
+            Roadmap Overview
+          </h3>
           <MiniGraph nodes={[]} edges={[]} width={240} height={100} />
         </div>
 
         {/* Back CTA */}
         <a href={`/roadmap/${slug}`} className="no-underline">
-          <Button variant="primary" style={{ width: '100%', justifyContent: 'center' }}>
+          <Button
+            variant="primary"
+            style={{ width: "100%", justifyContent: "center" }}
+          >
             Back to Roadmap →
           </Button>
         </a>

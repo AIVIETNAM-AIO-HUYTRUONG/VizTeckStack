@@ -16,6 +16,7 @@
     "react-dom": "^19",
     "@vizteck/ui": "workspace:*",
     "@vizteck/graph": "workspace:*",
+    "@vizteck/lesson": "workspace:*",
     "@blocknote/react": "^0.51.4",
     "@blocknote/core": "^0.51.4",
     "@blocknote/mantine": "^0.51.4"

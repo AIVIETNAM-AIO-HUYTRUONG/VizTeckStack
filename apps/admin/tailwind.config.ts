@@ -5,6 +5,7 @@ const config: Config = {
     './src/**/*.{ts,tsx}',
     '../../packages/ui/src/**/*.{ts,tsx}',
     '../../packages/graph/src/**/*.{ts,tsx}',
+    '../../packages/lesson/src/**/*.{ts,tsx}',
   ],
   darkMode: 'class',
   theme: {
