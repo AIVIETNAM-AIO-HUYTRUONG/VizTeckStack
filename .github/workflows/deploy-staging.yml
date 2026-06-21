@@ -35,10 +35,9 @@ jobs:
 
       - name: Deploy apps/web to Vercel Staging
         run: |
-          echo "ORG_ID set: $([[ -n "$VERCEL_ORG_ID" ]] && echo yes || echo NO)"
-          echo "PROJECT_ID set: $([[ -n "$VERCEL_PROJECT_ID" ]] && echo yes || echo NO)"
-          echo "TOKEN set: $([[ -n "$VERCEL_TOKEN" ]] && echo yes || echo NO)"
-          npx vercel deploy --cwd apps/web --token "$VERCEL_TOKEN" --yes
+          npx vercel pull --cwd apps/web --token "$VERCEL_TOKEN" --yes
+          npx vercel build --cwd apps/web --token "$VERCEL_TOKEN" --yes
+          npx vercel deploy --prebuilt --cwd apps/web --token "$VERCEL_TOKEN" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
@@ -72,10 +71,9 @@ jobs:
 
       - name: Deploy apps/admin to Vercel Staging
         run: |
-          echo "ORG_ID set: $([[ -n "$VERCEL_ORG_ID" ]] && echo yes || echo NO)"
-          echo "PROJECT_ID set: $([[ -n "$VERCEL_PROJECT_ID" ]] && echo yes || echo NO)"
-          echo "TOKEN set: $([[ -n "$VERCEL_TOKEN" ]] && echo yes || echo NO)"
-          npx vercel deploy --cwd apps/admin --token "$VERCEL_TOKEN" --yes
+          npx vercel pull --cwd apps/admin --token "$VERCEL_TOKEN" --yes
+          npx vercel build --cwd apps/admin --token "$VERCEL_TOKEN" --yes
+          npx vercel deploy --prebuilt --cwd apps/admin --token "$VERCEL_TOKEN" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
