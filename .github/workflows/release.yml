@@ -23,6 +23,12 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Generate proto types
+        run: cd packages/proto && node generate.js
+
+      - name: Build
+        run: pnpm build
+
       - name: Deploy apps/web to Vercel Production
         run: npx vercel --cwd apps/web --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
         env:
@@ -45,6 +51,12 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
+
+      - name: Generate proto types
+        run: cd packages/proto && node generate.js
+
+      - name: Build
+        run: pnpm build
 
       - name: Deploy apps/admin to Vercel Production
         run: npx vercel --cwd apps/admin --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
