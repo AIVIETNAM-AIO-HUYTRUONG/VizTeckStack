@@ -118,3 +118,17 @@ export class EdgeInput {
   @ApiPropertyOptional({ example: "next" })
   label?: string;
 }
+
+@InputType()
+export class UpdateNodeContentInput {
+  @Field()
+  @ApiProperty({ example: '[{"type":"paragraph","content":[]}]', description: 'BlockNote JSON string' })
+  content!: string;
+}
+
+@InputType()
+export class UpdateNodeTitleInput {
+  @Field()
+  @ApiProperty({ example: 'HTML & CSS Basics' })
+  title!: string;
+}
