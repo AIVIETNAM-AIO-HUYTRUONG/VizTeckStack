@@ -99,6 +99,16 @@ message UpsertGraphRequest {
   repeated EdgeInput edges = 3;
 }
 
+message UpdateNodeContentRequest {
+  string id = 1;
+  string content = 2;
+}
+
+message UpdateNodeTitleRequest {
+  string id = 1;
+  string title = 2;
+}
+
 service RoadmapService {
   rpc GetRoadmaps (Empty) returns (RoadmapList);
   rpc GetRoadmap (SlugRequest) returns (RoadmapDetail);
@@ -107,4 +117,6 @@ service RoadmapService {
   rpc UpdateRoadmap (UpdateRoadmapRequest) returns (RoadmapItem);
   rpc DeleteRoadmap (IdRequest) returns (BoolResponse);
   rpc UpsertGraph (UpsertGraphRequest) returns (RoadmapDetail);
+  rpc UpdateNodeContent (UpdateNodeContentRequest) returns (NodeItem);
+  rpc UpdateNodeTitle (UpdateNodeTitleRequest) returns (NodeItem);
 }

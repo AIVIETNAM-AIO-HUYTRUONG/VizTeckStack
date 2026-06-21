@@ -1,8 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { RoadmapGrpcClient } from './roadmap.grpc-client';
 import { AdminGuard } from '../auth/admin.guard';
-import { CreateRoadmapInput, UpdateRoadmapInput, NodeInput, EdgeInput } from './roadmap.dto';
+import {
+  CreateRoadmapInput, UpdateRoadmapInput, NodeInput, EdgeInput,
+  UpdateNodeContentInput, UpdateNodeTitleInput,
+} from './roadmap.dto';
 
 @ApiTags('roadmaps')
 @Controller('api')
@@ -71,5 +74,23 @@ export class RoadmapRestController {
   @ApiParam({ name: 'id', type: String })
   upsertGraph(@Param('id') id: string, @Body() body: { nodes: NodeInput[]; edges: EdgeInput[] }) {
     return this.grpc.upsertGraph({ roadmapId: id, ...body });
+  }
+
+  @UseGuards(AdminGuard)
+  @Patch('nodes/:id/content')
+  @ApiOperation({ summary: 'Update lesson content (targeted — no graph upsert)' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: String })
+  updateNodeContent(@Param('id') id: string, @Body() body: UpdateNodeContentInput) {
+    return this.grpc.updateNodeContent(id, body.content);
+  }
+
+  @UseGuards(AdminGuard)
+  @Patch('nodes/:id/title')
+  @ApiOperation({ summary: 'Update node title' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: String })
+  updateNodeTitle(@Param('id') id: string, @Body() body: UpdateNodeTitleInput) {
+    return this.grpc.updateNodeTitle(id, body.title);
   }
 }

@@ -11,6 +11,8 @@ interface GrpcRoadmapService {
   updateRoadmap(data: object): Observable<any>;
   deleteRoadmap(data: { id: string }): Observable<any>;
   upsertGraph(data: object): Observable<any>;
+  updateNodeContent(data: { id: string; content: string }): Observable<any>;
+  updateNodeTitle(data: { id: string; title: string }): Observable<any>;
 }
 
 @Injectable()
@@ -51,5 +53,11 @@ export class RoadmapGrpcClient implements OnModuleInit {
   }
   upsertGraph(data: object) {
     return firstValueFrom(this.svc.upsertGraph(data));
+  }
+  updateNodeContent(id: string, content: string) {
+    return firstValueFrom(this.svc.updateNodeContent({ id, content }));
+  }
+  updateNodeTitle(id: string, title: string) {
+    return firstValueFrom(this.svc.updateNodeTitle({ id, title }));
   }
 }

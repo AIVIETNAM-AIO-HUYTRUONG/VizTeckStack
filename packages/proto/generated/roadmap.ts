@@ -110,6 +110,16 @@ export interface UpsertGraphRequest {
   edges: EdgeInput[];
 }
 
+export interface UpdateNodeContentRequest {
+  id: string;
+  content: string;
+}
+
+export interface UpdateNodeTitleRequest {
+  id: string;
+  title: string;
+}
+
 export const ROADMAP_PACKAGE_NAME = "roadmap";
 
 export interface RoadmapServiceClient {
@@ -126,6 +136,10 @@ export interface RoadmapServiceClient {
   deleteRoadmap(request: IdRequest): Observable<BoolResponse>;
 
   upsertGraph(request: UpsertGraphRequest): Observable<RoadmapDetail>;
+
+  updateNodeContent(request: UpdateNodeContentRequest): Observable<NodeItem>;
+
+  updateNodeTitle(request: UpdateNodeTitleRequest): Observable<NodeItem>;
 }
 
 export interface RoadmapServiceController {
@@ -142,6 +156,10 @@ export interface RoadmapServiceController {
   deleteRoadmap(request: IdRequest): Promise<BoolResponse> | Observable<BoolResponse> | BoolResponse;
 
   upsertGraph(request: UpsertGraphRequest): Promise<RoadmapDetail> | Observable<RoadmapDetail> | RoadmapDetail;
+
+  updateNodeContent(request: UpdateNodeContentRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  updateNodeTitle(request: UpdateNodeTitleRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
 }
 
 export function RoadmapServiceControllerMethods() {
@@ -154,6 +172,8 @@ export function RoadmapServiceControllerMethods() {
       "updateRoadmap",
       "deleteRoadmap",
       "upsertGraph",
+      "updateNodeContent",
+      "updateNodeTitle",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
