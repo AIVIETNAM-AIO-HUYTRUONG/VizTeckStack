@@ -34,6 +34,7 @@ services/svc-rust    — future Axum gRPC service (port 5003)
 | `packages/db` | `@vizteck/db` | Prisma client singleton + all Prisma types |
 | `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge) |
 | `packages/graph` | `@vizteck/graph` | `<RoadmapGraph>` built on `@xyflow/react` — `mode="view"` or `mode="edit"` |
+| `packages/lesson` | `@vizteck/lesson` | Shared BlockNote components — `<LessonEditor>` (editable, admin) and `<LessonViewer>` (read-only, web) |
 
 ## Admin frontend structure
 
@@ -53,11 +54,16 @@ src/features/
     components/GraphToolbar.tsx
     components/NodeInventory.tsx
     components/NodeSidePanel.tsx
-  nodes/
-    components/LessonEditor.tsx   — BlockNote rich-text editor
+  lessons/
+    services/lesson.service.ts    — fetchLesson, updateLessonContent, updateLessonTitle
+    hooks/useLessonEditor.ts      — fetch + save state, titleSaveStatus
+    components/LessonEditor.tsx   — BlockNote editor (wraps @vizteck/lesson)
+    components/LessonTitleEditor.tsx — inline title with blur-to-save
 ```
 
 Pages delegate all business logic to hooks and services; components are pure UI.
+
+Lesson content is saved via `PATCH /api/nodes/:id/content` — a targeted single-row update. Do not use the graph upsert endpoint (`POST /api/roadmaps/:id/graph`) for lesson saves; it replaces all nodes and edges.
 
 ## Quick start
 
