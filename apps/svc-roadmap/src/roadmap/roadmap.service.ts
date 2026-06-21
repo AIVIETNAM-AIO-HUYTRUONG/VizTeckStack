@@ -4,7 +4,8 @@ import { Prisma, db } from '@vizteck/db';
 import {
   Empty, RoadmapList, SlugRequest, RoadmapDetail, IdRequest,
   NodeDetail, CreateRoadmapRequest, RoadmapItem, UpdateRoadmapRequest,
-  BoolResponse, UpsertGraphRequest,
+  BoolResponse, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest,
+  NodeItem,
 } from '@vizteck/proto';
 
 function toRoadmapItem(r: any): RoadmapItem {
@@ -145,5 +146,35 @@ export class RoadmapService {
       select: { slug: true },
     });
     return this.getRoadmap({ slug: roadmap?.slug ?? '' });
+  }
+
+  async updateNodeContent({ id, content }: UpdateNodeContentRequest): Promise<NodeItem> {
+    try {
+      const node = await db.node.update({
+        where: { id },
+        data: { content: content ? JSON.parse(content) : null },
+      });
+      return toNodeItem(node);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
+        throw new RpcException({ code: 5, message: `Node '${id}' not found` });
+      }
+      throw e;
+    }
+  }
+
+  async updateNodeTitle({ id, title }: UpdateNodeTitleRequest): Promise<NodeItem> {
+    try {
+      const node = await db.node.update({
+        where: { id },
+        data: { title },
+      });
+      return toNodeItem(node);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
+        throw new RpcException({ code: 5, message: `Node '${id}' not found` });
+      }
+      throw e;
+    }
   }
 }

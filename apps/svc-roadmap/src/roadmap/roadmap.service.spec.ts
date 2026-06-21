@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RoadmapService } from './roadmap.service';
 
 jest.mock('@vizteck/db', () => ({
+  ...jest.requireActual('@vizteck/db'),
   db: {
     roadmap: {
       findMany: jest.fn(),
@@ -11,7 +12,10 @@ jest.mock('@vizteck/db', () => ({
       update: jest.fn(),
       delete: jest.fn(),
     },
-    node: { findUnique: jest.fn() },
+    node: {
+      findUnique: jest.fn(),
+      update: jest.fn(),
+    },
     edge: {},
     $transaction: jest.fn(),
   },
@@ -50,5 +54,70 @@ describe('RoadmapService', () => {
     expect(result.roadmap?.slug).toBe('frontend');
     expect(result.nodes).toHaveLength(1);
     expect(result.edges).toHaveLength(0);
+  });
+
+  describe('updateNodeContent', () => {
+    it('updates content and returns NodeItem', async () => {
+      const stored = {
+        id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro',
+        positionX: 0, positionY: 0, targetRoadmapId: null,
+        content: [{ type: 'paragraph', content: [] }],
+      };
+      (db.node.update as jest.Mock).mockResolvedValue(stored);
+
+      const result = await service.updateNodeContent({
+        id: 'n1',
+        content: JSON.stringify([{ type: 'paragraph', content: [] }]),
+      });
+
+      expect(db.node.update).toHaveBeenCalledWith({
+        where: { id: 'n1' },
+        data: { content: [{ type: 'paragraph', content: [] }] },
+      });
+      expect(result.id).toBe('n1');
+      expect(result.content).toBe(JSON.stringify([{ type: 'paragraph', content: [] }]));
+    });
+
+    it('throws RpcException NOT_FOUND when node missing', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { Prisma } = jest.requireActual('@vizteck/db') as any;
+      const err = new Prisma.PrismaClientKnownRequestError('Not found', {
+        code: 'P2025', clientVersion: '5.0.0', meta: undefined, batchRequestIdx: undefined,
+      });
+      (db.node.update as jest.Mock).mockRejectedValue(err);
+
+      await expect(service.updateNodeContent({ id: 'missing', content: '[]' }))
+        .rejects.toMatchObject({ error: { code: 5 } });
+    });
+  });
+
+  describe('updateNodeTitle', () => {
+    it('updates title and returns NodeItem', async () => {
+      const stored = {
+        id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'New Title',
+        positionX: 0, positionY: 0, targetRoadmapId: null, content: null,
+      };
+      (db.node.update as jest.Mock).mockResolvedValue(stored);
+
+      const result = await service.updateNodeTitle({ id: 'n1', title: 'New Title' });
+
+      expect(db.node.update).toHaveBeenCalledWith({
+        where: { id: 'n1' },
+        data: { title: 'New Title' },
+      });
+      expect(result.title).toBe('New Title');
+    });
+
+    it('throws RpcException NOT_FOUND when node missing', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { Prisma } = jest.requireActual('@vizteck/db') as any;
+      const err = new Prisma.PrismaClientKnownRequestError('Not found', {
+        code: 'P2025', clientVersion: '5.0.0', meta: undefined, batchRequestIdx: undefined,
+      });
+      (db.node.update as jest.Mock).mockRejectedValue(err);
+
+      await expect(service.updateNodeTitle({ id: 'missing', title: 'x' }))
+        .rejects.toMatchObject({ error: { code: 5 } });
+    });
   });
 });

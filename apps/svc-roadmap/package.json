@@ -33,7 +33,10 @@
     "moduleFileExtensions": ["js", "json", "ts"],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
-    "transform": { "^.+\\.(t|j)s$": "ts-jest" },
-    "testEnvironment": "node"
+    "transform": { "^.+\\.ts$": "ts-jest" },
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^@prisma/client$": "<rootDir>/../../../packages/db/node_modules/@prisma/client"
+    }
   }
 }
