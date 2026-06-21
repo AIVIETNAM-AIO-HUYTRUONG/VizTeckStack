@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install protoc
+        run: sudo apt-get install -y protobuf-compiler
+
       - name: Generate proto types
         run: cd packages/proto && node generate.js
 
