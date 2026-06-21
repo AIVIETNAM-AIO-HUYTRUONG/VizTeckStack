@@ -10,9 +10,7 @@ import { Button } from '@vizteck/ui';
 function tryParseBlocks(json: string): unknown[] | undefined {
   try {
     const parsed = JSON.parse(json) as unknown;
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed as unknown[];
-    }
+    if (Array.isArray(parsed) && parsed.length > 0) return parsed as unknown[];
   } catch {
     // Invalid JSON — return undefined
   }
@@ -21,15 +19,18 @@ function tryParseBlocks(json: string): unknown[] | undefined {
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
-interface LessonEditorProps {
+export interface LessonEditorProps {
   initialContentJson: string;
   onSave: (contentJson: string) => Promise<void>;
 }
 
 export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) {
-  const blocks = tryParseBlocks(initialContentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
+  const editor = useCreateBlockNote(
+    tryParseBlocks(initialContentJson)
+      ? { initialContent: tryParseBlocks(initialContentJson) as any }
+      : {},
+  );
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');

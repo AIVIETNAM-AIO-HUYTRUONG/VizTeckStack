@@ -6,25 +6,22 @@ import { useEffect, useState } from 'react';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 
-interface LessonContentProps {
-  contentJson: string;
-}
-
 function parseBlocks(json: string): unknown[] | undefined {
   try {
     const parsed = JSON.parse(json) as unknown;
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      return parsed as unknown[];
-    }
+    if (Array.isArray(parsed) && parsed.length > 0) return parsed as unknown[];
   } catch {
     // Invalid JSON — return undefined
   }
   return undefined;
 }
 
-export function LessonContent({ contentJson }: LessonContentProps) {
-  const blocks = parseBlocks(contentJson);
+export interface LessonViewerProps {
+  contentJson: string;
+}
 
+export function LessonViewer({ contentJson }: LessonViewerProps) {
+  const blocks = parseBlocks(contentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
 
@@ -39,11 +36,7 @@ export function LessonContent({ contentJson }: LessonContentProps) {
   }, []);
 
   if (!blocks) {
-    return (
-      <div className="text-text-3 text-sm py-6">
-        No content available.
-      </div>
-    );
+    return <div className="text-text-3 text-sm py-6">No content available.</div>;
   }
 
   return <BlockNoteView editor={editor} editable={false} theme={theme ?? 'light'} />;

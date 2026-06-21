@@ -1,16 +1,21 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { use } from 'react';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useAuthGuard } from '@/lib/useAuthGuard';
-import { useLessonEditor } from '@/features/lessons/hooks/useLessonEditor';
-import { LessonTitleEditor } from '@/features/lessons/components/LessonTitleEditor';
+import dynamic from "next/dynamic";
+import { use } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useAuthGuard } from "@/lib/useAuthGuard";
+import { useLessonEditor } from "@/features/lessons/hooks/useLessonEditor";
+import { LessonTitleEditor } from "@/features/lessons/components/LessonTitleEditor";
 
 const LessonEditor = dynamic(
-  () => import('@/features/lessons/components/LessonEditor').then((m) => m.LessonEditor),
-  { ssr: false, loading: () => <div className="text-sm text-text-2 py-4">Loading editor…</div> },
+  () => import("@vizteck/lesson").then((m) => m.LessonEditor),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="text-sm text-text-2 py-4">Loading editor…</div>
+    ),
+  },
 );
 
 export default function LessonEditorPage({
@@ -21,7 +26,7 @@ export default function LessonEditorPage({
   useAuthGuard();
   const { id, nodeId } = use(params);
   const searchParams = useSearchParams();
-  const slug = searchParams.get('slug') ?? '';
+  const slug = searchParams.get("slug") ?? "";
 
   const {
     loading,
@@ -43,8 +48,13 @@ export default function LessonEditorPage({
   if (notFound || !lesson) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-6">
-        <p className="text-sm text-text-2">Node not found. It may have been deleted.</p>
-        <Link href="/roadmaps" className="text-sm text-indigo hover:underline mt-2 inline-block">
+        <p className="text-sm text-text-2">
+          Node not found. It may have been deleted.
+        </p>
+        <Link
+          href="/roadmaps"
+          className="text-sm text-indigo hover:underline mt-2 inline-block"
+        >
           ← Back to Roadmaps
         </Link>
       </div>
@@ -75,7 +85,7 @@ export default function LessonEditorPage({
       />
 
       <LessonEditor
-        initialContentJson={lesson.content ?? ''}
+        initialContentJson={lesson.content ?? ""}
         onSave={handleSaveContent}
       />
     </div>
