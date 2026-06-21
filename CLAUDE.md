@@ -19,6 +19,7 @@ pnpm --filter @vizteck/db db:seed    # Seed demo data
 pnpm --filter @vizteck/db db:studio  # Open Prisma Studio
 
 # Single package test
+pnpm --filter @vizteck/admin test
 pnpm --filter @vizteck/svc-roadmap test
 pnpm --filter @vizteck/api-gateway test
 
@@ -75,6 +76,7 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 | `packages/db` | `@vizteck/db` | Exports `db` (PrismaClient singleton) and all Prisma types. |
 | `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge). |
 | `packages/graph` | `@vizteck/graph` | `<RoadmapGraph>` built on `@xyflow/react`. Accepts `mode="view"` (read-only) or `mode="edit"` (draggable + connectable). Re-exports `@xyflow/react` types and `applyEdgeChanges` so apps don't need a direct dep. |
+| `packages/lesson` | `@vizteck/lesson` | Shared BlockNote components: `<LessonEditor>` (editable, used by admin) and `<LessonViewer>` (read-only, for `apps/web`). Both detect dark mode via MutationObserver on `document.documentElement`. |
 
 **Dependency rule:** `apps/*` may import from `packages/*`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
 
@@ -128,3 +130,9 @@ All packages extend `tsconfig.base.json` (strict mode, commonjs, ES2022). NestJS
 **Web fetch cache** — all fetches in `apps/web/src/lib/api.ts` use `{ cache: 'no-store' }`. This is intentional so the public viewer reflects admin changes immediately.
 
 **Turbopack stale route cache** — if a newly added `app/` page returns 404 in dev mode despite the file existing, a stale `.next/` directory from a previous build session may be confusing the Turbopack route matcher. Fix: `rm -rf apps/admin/.next` (or the relevant app's `.next`) and restart `pnpm dev`. This is a known Turbopack limitation when switching between `next build` and `next dev` in the same working tree.
+
+**Lesson content save is targeted** — `PATCH /api/nodes/:id/content` and `PATCH /api/nodes/:id/title` each call a single `db.node.update`. Never save lesson content via `POST /api/roadmaps/:id/graph` (UpsertGraph) — that is a full DELETE+INSERT of all nodes and edges and will silently drop sibling node data if any node is missing from the payload.
+
+**Admin `features/lessons/` vs `packages/lesson`** — `apps/admin/src/features/lessons/` is the admin-specific layer: `useLessonEditor` hook and `LessonTitleEditor` (inline blur-to-save). The BlockNote components themselves (`LessonEditor`, `LessonViewer`) live in `packages/lesson` and are shared with `apps/web`. When adding lesson display to `apps/web`, import from `@vizteck/lesson`.
+
+**Prisma `instanceof` in svc-roadmap tests** — `apps/svc-roadmap/package.json` has a `moduleNameMapper` pinning `@prisma/client` to `packages/db/node_modules/@prisma/client`. Without it, pnpm's strict isolation causes the service and the test to load two different `PrismaClientKnownRequestError` class instances, making `instanceof` silently fail. If `packages/db`'s Prisma version changes, update this mapper path.
