@@ -65,6 +65,15 @@ Pages delegate all business logic to hooks and services; components are pure UI.
 
 Lesson content is saved via `PATCH /api/nodes/:id/content` — a targeted single-row update. Do not use the graph upsert endpoint (`POST /api/roadmaps/:id/graph`) for lesson saves; it replaces all nodes and edges.
 
+## Tài liệu cho developer mới
+
+| Tài liệu | Nội dung |
+|----------|---------|
+| [Bắt đầu](docs/onboarding/getting-started.md) | Cài đặt và chạy toàn bộ project trên máy local |
+| [Quy trình làm việc](docs/onboarding/daily-workflow.md) | GitFlow hàng ngày: feature branch, PR, release, hotfix |
+| [Cheat Sheet](docs/onboarding/cheatsheet.md) | Lệnh, port, biến môi trường, đặt tên nhánh |
+| [Kiến trúc](docs/onboarding/architecture.md) | Tại sao monorepo, gRPC, feature-first, GitFlow |
+
 ## Quick start
 
 ```bash

@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Root (runs all workspaces via Turborepo)
 pnpm dev          # Start all apps/services in watch mode
 pnpm build        # Build all packages (dependency-ordered)
-pnpm test         # Run all tests
+pnpm test         # Run all tests (skips e2e — see below)
 pnpm lint         # Lint all packages
 pnpm proto:gen    # Regenerate TypeScript from .proto files
 
@@ -23,9 +23,28 @@ pnpm --filter @vizteck/admin test
 pnpm --filter @vizteck/svc-roadmap test
 pnpm --filter @vizteck/api-gateway test
 
+# Test watch mode (admin uses Vitest)
+pnpm --filter @vizteck/admin test -- --watch
+
+# E2E tests (Playwright — requires all apps running via pnpm dev)
+pnpm --filter @vizteck/e2e test:e2e    # Headless
+pnpm --filter @vizteck/e2e test:ui     # Interactive UI mode
+pnpm --filter @vizteck/e2e test:headed # Headed browser
+
 # PostgreSQL (Docker)
 docker compose up -d postgres
+docker compose down
+docker compose ps
 ```
+
+### Testing frameworks by package
+
+| Package | Framework | Notes |
+|---------|-----------|-------|
+| `apps/admin` | Vitest + @testing-library/react | `*.spec.tsx` in `src/` |
+| `apps/api-gateway` | Jest + ts-jest | `*.spec.ts` in `src/` |
+| `apps/svc-roadmap` | Jest + ts-jest | `*.spec.ts` in `src/` |
+| `apps/e2e` | Playwright | Separate from `pnpm test`; needs apps running |
 
 ### First-time setup
 ```bash
@@ -41,6 +60,30 @@ Turborepo caches `pnpm proto:gen` and may replay an old result. After editing `r
 ```bash
 cd packages/proto && node generate.js
 ```
+
+## Git workflow
+
+Full GitFlow. Two long-lived branches: `main` (production) and `develop` (staging). Never push directly to either.
+
+**Branch naming:**
+- `feature/<name>` — new features and regular bugfixes (branch from `develop`)
+- `hotfix/<name>` — urgent production fixes (branch from `main`, merge back to both `main` and `develop`)
+- `release/<version>` — release preparation (lead only, e.g. `release/1.1.0`)
+- All lowercase kebab-case: `feature/lesson-crud`, not `feature/LessonCRUD`
+
+**Commit format (Conventional Commits):**
+```
+feat: add lesson CRUD endpoints
+fix: node drop broken on canvas
+chore: update prisma schema
+refactor: extract graph save logic
+test: add unit tests for graph hooks
+docs: update onboarding guide
+ci: fix deploy workflow
+```
+Format: `<type>: <description>` — no capital first letter, no trailing period.
+
+**CI pipeline** — runs `lint → test → build` on every PR and push to `main`, `develop`, or `release/*`. PRs cannot merge until CI passes. Staging deploys on push to `develop`; production deploys on `v*` tags.
 
 ## Architecture
 
@@ -80,6 +123,31 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 
 **Dependency rule:** `apps/*` may import from `packages/*`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
 
+### Admin frontend structure
+
+`apps/admin/src/features/` uses a feature-first layout. Pages delegate all business logic to hooks and services; components are pure UI.
+
+```
+src/features/
+  roadmaps/
+    services/roadmap.service.ts   — CRUD + cycleStatus + STATUS_* constants
+    hooks/useRoadmaps.ts          — list state, modal state, CRUD handlers
+    components/RoadmapModal.tsx   — create / edit modal
+  graph-editor/
+    services/graph.service.ts     — loadGraph, saveGraph, normalizeNodeType, makeSnapshot
+    hooks/useGraphEditor.ts       — graph load/save state, dirty tracking
+    hooks/useNodeActions.ts       — canvas interaction handlers (drop, connect, delete…)
+    hooks/useGraphDraft.ts        — sessionStorage draft side-effect
+    components/GraphToolbar.tsx
+    components/NodeInventory.tsx
+    components/NodeSidePanel.tsx
+  lessons/
+    services/lesson.service.ts    — fetchLesson, updateLessonContent, updateLessonTitle
+    hooks/useLessonEditor.ts      — fetch + save state, titleSaveStatus
+    components/LessonEditor.tsx   — BlockNote editor (wraps @vizteck/lesson)
+    components/LessonTitleEditor.tsx — inline title with blur-to-save
+```
+
 ### Data model key points
 
 - `Roadmap.status` — `DRAFT | PUBLIC | PRIVATE` (default `DRAFT`). Web viewer only shows `PUBLIC` roadmaps.
@@ -98,6 +166,8 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 | `ROADMAP_SERVICE_URL` | `localhost:5001` | `apps/api-gateway` |
 | `ADMIN_TOKEN` | `supersecret` | `apps/api-gateway` |
 | `NEXT_PUBLIC_API_URL` | `http://localhost:3000` | `apps/web`, `apps/admin` |
+| `PORT` | `3000` | `apps/api-gateway` |
+| `GRPC_PORT` | `5001` | `apps/svc-roadmap` |
 
 Each app has a `.env.example` — copy to `.env` (or `.env.local` for Next.js apps) before running.
 

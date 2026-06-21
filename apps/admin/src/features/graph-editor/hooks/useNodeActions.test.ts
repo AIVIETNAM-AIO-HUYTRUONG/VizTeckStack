@@ -92,7 +92,7 @@ describe('useNodeActions', () => {
       const { result } = renderHook(() => useNodeActions(params));
 
       act(() => {
-        result.current.handleNodesChange([{ type: 'add', item: NODE_A }]);
+        result.current.handleNodesChange([{ type: 'add', item: NODE_A } as never]);
       });
 
       expect(params.setEditorNodes).not.toHaveBeenCalled();
@@ -151,7 +151,7 @@ describe('useNodeActions', () => {
       const { result } = renderHook(() => useNodeActions(params));
 
       act(() => {
-        result.current.handleConnect({ source: null, target: 'n-b', sourceHandle: null, targetHandle: null });
+        result.current.handleConnect({ source: null as never, target: 'n-b', sourceHandle: null, targetHandle: null });
       });
 
       expect(params.setEditorEdges).not.toHaveBeenCalled();
