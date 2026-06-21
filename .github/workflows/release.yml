@@ -33,7 +33,10 @@ jobs:
         run: pnpm build
 
       - name: Deploy apps/web to Vercel Production
-        run: npx vercel --cwd apps/web --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+        run: |
+          cp -r apps/web/.vercel .vercel
+          npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+          rm -rf .vercel
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
@@ -65,7 +68,10 @@ jobs:
         run: pnpm build
 
       - name: Deploy apps/admin to Vercel Production
-        run: npx vercel --cwd apps/admin --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+        run: |
+          cp -r apps/admin/.vercel .vercel
+          npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --yes
+          rm -rf .vercel
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}

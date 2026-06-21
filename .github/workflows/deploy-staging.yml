@@ -35,9 +35,11 @@ jobs:
 
       - name: Deploy apps/web to Vercel Staging
         run: |
-          npx vercel pull --cwd apps/web --token "$VERCEL_TOKEN" --yes
-          npx vercel build --cwd apps/web --token "$VERCEL_TOKEN" --yes
-          npx vercel deploy --prebuilt --cwd apps/web --token "$VERCEL_TOKEN" --yes
+          cp -r apps/web/.vercel .vercel
+          npx vercel pull --token "$VERCEL_TOKEN" --yes
+          npx vercel build --token "$VERCEL_TOKEN" --yes
+          npx vercel deploy --prebuilt --token "$VERCEL_TOKEN" --yes
+          rm -rf .vercel
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
@@ -71,9 +73,11 @@ jobs:
 
       - name: Deploy apps/admin to Vercel Staging
         run: |
-          npx vercel pull --cwd apps/admin --token "$VERCEL_TOKEN" --yes
-          npx vercel build --cwd apps/admin --token "$VERCEL_TOKEN" --yes
-          npx vercel deploy --prebuilt --cwd apps/admin --token "$VERCEL_TOKEN" --yes
+          cp -r apps/admin/.vercel .vercel
+          npx vercel pull --token "$VERCEL_TOKEN" --yes
+          npx vercel build --token "$VERCEL_TOKEN" --yes
+          npx vercel deploy --prebuilt --token "$VERCEL_TOKEN" --yes
+          rm -rf .vercel
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}
