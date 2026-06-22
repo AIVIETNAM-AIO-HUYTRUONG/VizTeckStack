@@ -9,19 +9,13 @@ import { useAuthGuard } from '@/lib/useAuthGuard';
 import { useUnsavedGuard } from '@/lib/useRouteGuard';
 import { useGraphEditor } from '@/features/graph-editor/hooks/useGraphEditor';
 import { useNodeActions } from '@/features/graph-editor/hooks/useNodeActions';
+import type { SidePanelState } from '@/features/graph-editor/hooks/useNodeActions';
 import { useGraphDraft } from '@/features/graph-editor/hooks/useGraphDraft';
 import { GraphToolbar } from '@/features/graph-editor/components/GraphToolbar';
 import { NodeInventory } from '@/features/graph-editor/components/NodeInventory';
 import { NodeSidePanel } from '@/features/graph-editor/components/NodeSidePanel';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import type { EditorNode } from '@/features/graph-editor/services/graph.service';
-
-interface SidePanelState {
-  open: boolean;
-  mode: 'create' | 'edit';
-  nodeId?: string;
-  flowPosition?: { x: number; y: number };
-}
 
 interface DeleteConfirm {
   open: boolean;

@@ -1,72 +1,121 @@
 # Cheat Sheet cho Developer
 
-Tham chiếu nhanh cho các lệnh, port, biến môi trường và đặt tên nhánh.
+Tham chiếu nhanh hàng ngày: lệnh, ports, biến môi trường, nhánh, commit, packages, data model, auth, CI/CD và xử lý lỗi.
 
 ---
 
-## Lệnh thường dùng
+## 1. Lệnh thường dùng
 
 ### Phát triển hàng ngày
 
 ```bash
 pnpm dev              # Khởi động tất cả apps ở chế độ watch
-pnpm build            # Build tất cả packages (theo thứ tự Turborepo)
-pnpm test             # Chạy tất cả tests
-pnpm lint             # Lint tất cả packages
+pnpm build            # Build tất cả packages (theo thứ tự dependency Turborepo)
+pnpm test             # Chạy tất cả unit tests (bỏ qua e2e)
+pnpm lint             # Lint + type-check tất cả packages
+pnpm proto:gen        # Regenerate TypeScript từ .proto (qua Turborepo)
 ```
 
 ### Theo từng package
 
 ```bash
-pnpm --filter @vizteck/admin test          # Chỉ test admin
-pnpm --filter @vizteck/svc-roadmap test    # Chỉ test svc-roadmap
-pnpm --filter @vizteck/api-gateway test    # Chỉ test api-gateway
+pnpm --filter @vizteck/admin test          # Vitest — admin
+pnpm --filter @vizteck/api-gateway test    # Jest — api-gateway
+pnpm --filter @vizteck/svc-roadmap test    # Jest — svc-roadmap
 ```
 
-### Database
+### Database (cần chạy với DATABASE_URL)
 
 ```bash
-# Đặt biến môi trường trước khi chạy
-export DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack"
+DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" \
+  pnpm --filter @vizteck/db db:push      # Đẩy schema (không tạo migration file)
 
-pnpm --filter @vizteck/db db:push      # Đẩy thay đổi schema (không tạo migration file)
-pnpm --filter @vizteck/db db:migrate   # Tạo và áp dụng migration
-pnpm --filter @vizteck/db db:seed      # Seed dữ liệu demo
-pnpm --filter @vizteck/db db:studio    # Mở Prisma Studio trên trình duyệt
+DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" \
+  pnpm --filter @vizteck/db db:migrate   # Tạo và áp dụng migration
+
+DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" \
+  pnpm --filter @vizteck/db db:seed      # Seed dữ liệu demo
+
+DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" \
+  pnpm --filter @vizteck/db db:studio    # Mở Prisma Studio trên trình duyệt
 ```
 
-### gRPC types
+### gRPC / Proto codegen
 
 ```bash
-# Regenerate TypeScript từ roadmap.proto (bỏ qua Turborepo cache)
+# Bỏ qua Turborepo cache — dùng lệnh này sau khi sửa roadmap.proto
 cd packages/proto && node generate.js
 ```
+
+> **Lưu ý:** `pnpm proto:gen` dùng Turborepo và có thể replay cache cũ. Sau khi sửa `.proto`, luôn chạy trực tiếp `node generate.js` trong `packages/proto`.
 
 ### Docker
 
 ```bash
-docker compose up -d postgres    # Khởi động database
-docker compose down              # Dừng tất cả
+docker compose up -d postgres    # Khởi động PostgreSQL
+docker compose down              # Dừng và xoá containers
 docker compose ps                # Kiểm tra trạng thái container
 ```
 
 ---
 
-## Ports
+## 2. Test theo từng package
+
+| Package | Filter | Framework | File pattern |
+|---------|--------|-----------|-------------|
+| `apps/admin` | `@vizteck/admin` | Vitest + @testing-library/react | `src/**/*.spec.tsx` |
+| `apps/api-gateway` | `@vizteck/api-gateway` | Jest + ts-jest | `src/**/*.spec.ts` |
+| `apps/svc-roadmap` | `@vizteck/svc-roadmap` | Jest + ts-jest | `src/**/*.spec.ts` |
+| `apps/e2e` | `@vizteck/e2e` | Playwright | Cần tất cả apps đang chạy |
+
+---
+
+## 3. Test watch mode
+
+```bash
+# Admin (Vitest) — watch mode
+pnpm --filter @vizteck/admin test -- --watch
+
+# Hoặc dùng script test:watch trong package
+pnpm --filter @vizteck/admin test:watch
+
+# api-gateway / svc-roadmap (Jest) — watch mode
+pnpm --filter @vizteck/api-gateway test -- --watch
+pnpm --filter @vizteck/svc-roadmap test -- --watch
+```
+
+---
+
+## 4. E2E tests (Playwright)
+
+> Yêu cầu: tất cả apps phải đang chạy (`pnpm dev`) trước khi chạy e2e.
+
+```bash
+pnpm --filter @vizteck/e2e test:e2e     # Headless (CI)
+pnpm --filter @vizteck/e2e test:ui      # Interactive UI mode
+pnpm --filter @vizteck/e2e test:headed  # Headed browser
+pnpm --filter @vizteck/e2e test:report  # Xem báo cáo lần chạy trước
+```
+
+---
+
+## 5. Ports
 
 | Service | Port | URL |
 |---------|------|-----|
 | `apps/web` | 3001 | http://localhost:3001 |
 | `apps/admin` | 3002 | http://localhost:3002 |
 | `apps/api-gateway` | 3000 | http://localhost:3000 |
-| `apps/api-gateway` (GraphQL) | 3000 | http://localhost:3000/graphql |
-| `apps/api-gateway` (Swagger) | 3000 | http://localhost:3000/api-docs |
+| `apps/api-gateway` — GraphQL | 3000 | http://localhost:3000/graphql |
+| `apps/api-gateway` — Swagger | 3000 | http://localhost:3000/api-docs |
 | `apps/svc-roadmap` (gRPC) | 5001 | nội bộ, không truy cập trực tiếp |
 | PostgreSQL | 5432 | `localhost:5432` |
+| `services/svc-python` (FastAPI, tương lai) | 5002 | — |
+| `services/svc-rust` (Axum, tương lai) | 5003 | — |
 
 ---
 
-## Biến môi trường
+## 6. Biến môi trường
 
 | Biến | Giá trị mặc định | Dùng bởi |
 |------|-----------------|---------|
@@ -77,79 +126,103 @@ docker compose ps                # Kiểm tra trạng thái container
 | `PORT` | `3000` | `apps/api-gateway` |
 | `GRPC_PORT` | `5001` | `apps/svc-roadmap` |
 
-Copy `.env.example` → `.env` cho NestJS apps, `.env.example` → `.env.local` cho Next.js apps.
+**Cách cấu hình:**
+- NestJS apps (`api-gateway`, `svc-roadmap`): copy `.env.example` → `.env`
+- Next.js apps (`web`, `admin`): copy `.env.example` → `.env.local`
 
 ---
 
-## Đặt tên nhánh
+## 7. Đặt tên nhánh
 
-| Loại nhánh | Pattern | Ví dụ |
-|-----------|---------|-------|
-| Tính năng mới | `feature/<tên>` | `feature/lesson-crud` |
-| Bugfix thông thường | `feature/<tên>` | `feature/fix-graph-drop` |
-| Fix khẩn cấp production | `hotfix/<tên>` | `hotfix/fix-loi-dang-nhap` |
-| Chuẩn bị release | `release/<phiên bản>` | `release/1.2.0` |
+| Loại | Pattern | Gốc từ | Ví dụ |
+|------|---------|--------|-------|
+| Tính năng mới / bugfix thông thường | `feature/<tên>` | `develop` | `feature/lesson-crud` |
+| Fix khẩn cấp production | `hotfix/<tên>` | `main` | `hotfix/fix-loi-dang-nhap` |
+| Chuẩn bị release | `release/<phiên bản>` | `develop` | `release/1.2.0` |
 
-Quy tắc: luôn dùng lowercase, kebab-case, không chữ hoa, không khoảng trắng.
-
----
-
-## Các loại commit
-
-| Type | Khi nào dùng |
-|------|-------------|
-| `feat` | Tính năng mới cho người dùng |
-| `fix` | Sửa lỗi |
-| `chore` | Bảo trì (dependencies, config, tooling) |
-| `refactor` | Tái cấu trúc code mà không thay đổi hành vi |
-| `test` | Thêm hoặc sửa tests |
-| `docs` | Chỉ thay đổi tài liệu |
-| `ci` | Thay đổi cấu hình GitHub Actions / CI |
+**Quy tắc:** lowercase, kebab-case. Không viết hoa, không khoảng trắng, không dùng `feature/LessonCRUD`.
 
 ---
 
-## Packages dùng chung
+## 8. Commit types (Conventional Commits)
 
-| Package | Import | Xuất ra |
-|---------|--------|---------|
-| `packages/proto` | `@vizteck/proto` | Kiểu gRPC, được generate từ `roadmap.proto` |
-| `packages/db` | `@vizteck/db` | `db` (PrismaClient singleton), tất cả Prisma types |
+Format: `<type>: <mô tả ngắn>` — chữ thường, không dấu chấm cuối.
+
+| Type | Khi nào dùng | Ví dụ |
+|------|-------------|-------|
+| `feat` | Tính năng mới | `feat: add lesson CRUD endpoints` |
+| `fix` | Sửa lỗi | `fix: node drop broken on canvas` |
+| `chore` | Bảo trì, dependencies, config | `chore: update prisma schema` |
+| `refactor` | Tái cấu trúc, không đổi hành vi | `refactor: extract graph save logic` |
+| `test` | Thêm hoặc sửa tests | `test: add unit tests for graph hooks` |
+| `docs` | Chỉ thay đổi tài liệu | `docs: update onboarding guide` |
+| `ci` | Thay đổi cấu hình CI/CD | `ci: fix deploy workflow` |
+
+---
+
+## 9. Packages dùng chung
+
+| Package | Import path | Xuất ra |
+|---------|-------------|---------|
+| `packages/proto` | `@vizteck/proto` | Kiểu gRPC, generated từ `roadmap.proto`. Chỉnh `.proto` → chạy `node generate.js`. |
+| `packages/db` | `@vizteck/db` | `db` (PrismaClient singleton) + tất cả Prisma types |
 | `packages/ui` | `@vizteck/ui` | Components: `Button`, `Card`, `NodeBadge` |
-| `packages/graph` | `@vizteck/graph` | `<RoadmapGraph mode="view|edit">` |
-| `packages/lesson` | `@vizteck/lesson` | `<LessonEditor>` (có thể chỉnh sửa), `<LessonViewer>` (chỉ đọc) |
+| `packages/graph` | `@vizteck/graph` | `<RoadmapGraph mode="view">` (chỉ đọc) / `<RoadmapGraph mode="edit">` (kéo thả + kết nối). Re-exports `@xyflow/react` types và `applyEdgeChanges`. |
+| `packages/lesson` | `@vizteck/lesson` | `<LessonEditor>` (editable, dùng ở admin) + `<LessonViewer>` (read-only, dùng ở web) |
+
+**Quy tắc dependency:** `apps/*` import từ `packages/*`; `packages/*` không được import từ `apps/*`; `services/*` giao tiếp chỉ qua gRPC.
 
 ---
 
-## Data model tóm tắt
+## 10. Data model
 
-| Model | Các field quan trọng |
-|-------|---------------------|
-| `Roadmap` | `id`, `slug`, `title`, `status` (`DRAFT\|PUBLIC\|PRIVATE`) |
-| `Node` | `id`, `roadmapId`, `type` (`LESSON\|ROADMAP`), `positionX/Y`, `content` (BlockNote JSON) |
-| `Edge` | `id`, `roadmapId`, `sourceId`, `targetId` |
+| Model | Field quan trọng | Ghi chú |
+|-------|-----------------|---------|
+| `Roadmap` | `id`, `slug`, `title`, `status` | `status`: `DRAFT` / `PUBLIC` / `PRIVATE`. Web viewer chỉ hiển thị `PUBLIC`. |
+| `Node` | `id`, `roadmapId`, `type`, `positionX/Y`, `content`, `targetRoadmapId` | `positionX/Y = null` → node tồn tại nhưng chưa đặt lên canvas. `content` là BlockNote JSON (chỉ có nghĩa khi `type = LESSON`). |
+| `Edge` | `id`, `roadmapId`, `sourceId`, `targetId` | Kết nối giữa các nodes trong cùng roadmap. |
 
-Web viewer chỉ hiển thị roadmap có `status = PUBLIC`.
-`Node.positionX/Y = null` nghĩa là node tồn tại nhưng chưa được đặt lên canvas.
+**Proto enum NodeType:** `ROADMAP = 0`, `LESSON = 1` (số trên wire, chuỗi trong DB — luôn normalize khi đọc từ proto response).
 
 ---
 
-## Xác thực Admin
+## 11. Admin auth
 
-Admin panel dùng một Bearer token tĩnh:
+Dùng một Bearer token tĩnh — không có user management.
 
 ```
 Authorization: Bearer supersecret
 ```
 
-Set qua biến `ADMIN_TOKEN` trong `apps/api-gateway/.env`. Trên frontend, nhập token tại trang `/login` — được lưu vào `localStorage('admin_token')`.
+- Token được set qua `ADMIN_TOKEN` trong `apps/api-gateway/.env`.
+- Frontend lấy token từ `localStorage('admin_token')`.
+- `apiFetch` trong `apps/admin/src/lib/api.ts` tự động đính kèm token và redirect về `/login` khi nhận 401.
+- Nhập token lần đầu tại trang `http://localhost:3002/login`.
 
 ---
 
-## CI/CD
+## 12. CI/CD triggers
 
 | Trigger | Pipeline | Deploy tới |
 |---------|----------|-----------|
-| PR hoặc push lên bất kỳ nhánh | lint → test → build | — |
-| Push vào `develop` | lint → test → build → Vercel deploy | Staging |
-| Push vào `release/*` | lint → test → build → Vercel deploy | Staging preview |
-| Push tag `v*` | lint → test → build → Vercel deploy + GitHub Release | Production |
+| PR hoặc push lên bất kỳ nhánh | `lint → test → build` | — |
+| Push vào `develop` | `lint → test → build → Vercel deploy` | Staging |
+| Push vào `release/*` | `lint → test → build → Vercel deploy` | Staging preview |
+| Push tag `v*` | `lint → test → build → Vercel deploy + GitHub Release` | Production |
+
+PR không được merge cho đến khi CI pass.
+
+---
+
+## 13. Xử lý lỗi nhanh
+
+| Triệu chứng | Nguyên nhân thường gặp | Cách fix |
+|------------|----------------------|---------|
+| Trang mới trả về 404 dù file đã tồn tại | Stale `.next/` cache từ `next build` lẫn vào `next dev` (Turbopack) | `rm -rf apps/admin/.next` rồi restart `pnpm dev` |
+| `proto:gen` không cập nhật sau khi sửa `.proto` | Turborepo replay cache cũ | `cd packages/proto && node generate.js` |
+| `instanceof PrismaClientKnownRequestError` trả về `false` trong tests | Hai bản `@prisma/client` khác nhau được load | Kiểm tra `moduleNameMapper` trong `apps/svc-roadmap/package.json` — phải trỏ đúng `packages/db/node_modules/@prisma/client` |
+| Node bị `visibility: hidden` sau khi update position | `measuredRef` cache trong `RoadmapGraph` bị bỏ qua | Không xoá hoặc bypass cache `measuredRef` trong `packages/graph` |
+| Content bài học bị mất sau save | Gọi `POST /api/roadmaps/:id/graph` thay vì `PATCH /api/nodes/:id/content` | Dùng endpoint `PATCH` riêng cho content và title — không dùng UpsertGraph để save lesson |
+| FOUC (flash màu sai) khi tải trang admin | Script blocking dark mode chưa được chạy | Kiểm tra `<script>` blocking trong `apps/admin/src/app/layout.tsx` |
+| Node mới từ palette bị parse sai tên | `title` trong drag payload chứa ký tự đặc biệt | Dùng `parts.slice(3).join(':')` rồi `decodeURIComponent` khi parse `"newRoadmap:<id>:<slug>:<encodedTitle>"` |
+| Admin bị redirect về `/login` liên tục | Token không có trong `localStorage` hoặc sai | Vào `http://localhost:3002/login`, nhập lại `ADMIN_TOKEN` |

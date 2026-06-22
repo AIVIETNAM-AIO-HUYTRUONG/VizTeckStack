@@ -38,11 +38,11 @@ jobs:
       - name: Generate proto types
         run: cd packages/proto && node generate.js
 
+      - name: Build
+        run: pnpm build
+
       - name: Lint
         run: pnpm lint
 
       - name: Test
         run: pnpm test
-
-      - name: Build
-        run: pnpm build

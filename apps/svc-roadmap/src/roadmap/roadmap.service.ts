@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
-import { Prisma, db } from '@vizteck/db';
+import { status as GrpcStatus } from '@grpc/grpc-js';
+import { Prisma, db, type Roadmap, type Node as PrismaNode } from '@vizteck/db';
 import {
   Empty, RoadmapList, SlugRequest, RoadmapDetail, IdRequest,
   NodeDetail, CreateRoadmapRequest, RoadmapItem, UpdateRoadmapRequest,
@@ -8,15 +9,15 @@ import {
   NodeItem,
 } from '@vizteck/proto';
 
-function toRoadmapItem(r: any): RoadmapItem {
+function toRoadmapItem(r: Roadmap): RoadmapItem {
   return { id: r.id, slug: r.slug, title: r.title, description: r.description ?? '', coverImage: r.coverImage ?? '', status: r.status ?? 'DRAFT' };
 }
 
-function toNodeItem(n: any) {
+function toNodeItem(n: PrismaNode) {
   return {
     id: n.id, roadmapId: n.roadmapId,
     type: n.type === 'ROADMAP' ? 0 : 1,
-    title: n.title, positionX: n.positionX, positionY: n.positionY,
+    title: n.title, positionX: n.positionX ?? 0, positionY: n.positionY ?? 0,
     targetRoadmapId: n.targetRoadmapId ?? '',
     content: n.content ? JSON.stringify(n.content) : '',
   };
@@ -64,7 +65,7 @@ export class RoadmapService {
       return toRoadmapItem(r);
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
-        throw new RpcException({ code: 6, message: `Roadmap with slug '${req.slug}' already exists` });
+        throw new RpcException({ code: GrpcStatus.ALREADY_EXISTS, message: `Roadmap with slug '${req.slug}' already exists` });
       }
       throw e;
     }
@@ -85,7 +86,7 @@ export class RoadmapService {
       return toRoadmapItem(r);
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: 5, message: `Roadmap '${req.id}' not found` });
+        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Roadmap '${req.id}' not found` });
       }
       throw e;
     }
@@ -97,7 +98,7 @@ export class RoadmapService {
       return { success: true };
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: 5, message: `Roadmap '${id}' not found` });
+        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Roadmap '${id}' not found` });
       }
       throw e;
     }
@@ -138,7 +139,7 @@ export class RoadmapService {
       });
     } catch (err: any) {
       console.error('[upsertGraph] transaction error:', err?.message ?? err);
-      throw new RpcException({ code: 13, message: err?.message ?? 'upsertGraph failed' });
+      throw new RpcException({ code: GrpcStatus.INTERNAL, message: err?.message ?? 'upsertGraph failed' });
     }
 
     const roadmap = await db.roadmap.findUnique({
@@ -157,7 +158,7 @@ export class RoadmapService {
       return toNodeItem(node);
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: 5, message: `Node '${id}' not found` });
+        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
       }
       throw e;
     }
@@ -172,7 +173,7 @@ export class RoadmapService {
       return toNodeItem(node);
     } catch (e) {
       if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: 5, message: `Node '${id}' not found` });
+        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
       }
       throw e;
     }

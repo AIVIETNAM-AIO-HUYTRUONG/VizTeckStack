@@ -31,7 +31,7 @@ export async function fetchRoadmaps(): Promise<RoadmapItem[]> {
   const res = await fetch(`${API}/api/roadmaps`, { cache: 'no-store' });
   if (!res.ok) throw new Error(`fetchRoadmaps: ${res.status}`);
   const data = await res.json() as { roadmaps?: RoadmapItem[] } | RoadmapItem[];
-  const all = Array.isArray(data) ? data : (data as { roadmaps?: RoadmapItem[] }).roadmaps ?? [];
+  const all = Array.isArray(data) ? data : data.roadmaps ?? [];
   return all.filter((r) => r.status === 'PUBLIC');
 }
 
