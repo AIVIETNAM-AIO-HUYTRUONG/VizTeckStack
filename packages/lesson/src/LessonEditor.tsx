@@ -1,47 +1,47 @@
-'use client';
+"use client";
 
-import '@blocknote/core/fonts/inter.css';
-import '@blocknote/mantine/style.css';
-import { useEffect, useState } from 'react';
-import { useCreateBlockNote } from '@blocknote/react';
-import { BlockNoteView } from '@blocknote/mantine';
-import { Button } from '@vizteck/ui';
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/mantine/style.css";
+import { useEffect, useState } from "react";
+import { useCreateBlockNote } from "@blocknote/react";
+import { BlockNoteView } from "@blocknote/mantine";
+import { Button } from "@vizteck/ui";
+import { parseBlocks } from "./utils";
 
-function tryParseBlocks(json: string): unknown[] | undefined {
-  try {
-    const parsed = JSON.parse(json) as unknown;
-    if (Array.isArray(parsed) && parsed.length > 0) return parsed as unknown[];
-  } catch {
-    // Invalid JSON — return undefined
-  }
-  return undefined;
-}
-
-type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
+type SaveStatus = "idle" | "saving" | "saved" | "error";
 
 export interface LessonEditorProps {
   initialContentJson: string;
   onSave: (contentJson: string) => Promise<void>;
 }
 
-export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) {
+export function LessonEditor({
+  initialContentJson,
+  onSave,
+}: LessonEditorProps) {
+  const blocks = parseBlocks(initialContentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editor = useCreateBlockNote(
-    tryParseBlocks(initialContentJson)
-      ? { initialContent: tryParseBlocks(initialContentJson) as any }
-      : {},
+    blocks ? { initialContent: blocks as any } : {},
   );
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
-  const [saveTimerRef] = useState<{ id: ReturnType<typeof setTimeout> | null }>({ id: null });
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
+  const [saveTimerRef] = useState<{ id: ReturnType<typeof setTimeout> | null }>(
+    { id: null },
+  );
 
   useEffect(() => {
     const update = () =>
-      setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+      setTheme(
+        document.documentElement.classList.contains("dark") ? "dark" : "light",
+      );
     update();
     const obs = new MutationObserver(update);
-    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
     return () => obs.disconnect();
   }, []);
 
@@ -52,24 +52,28 @@ export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) 
   }, [saveTimerRef]);
 
   async function handleSave() {
-    if (saveStatus === 'saving') return;
-    setSaveStatus('saving');
+    if (saveStatus === "saving") return;
+    setSaveStatus("saving");
     try {
       await onSave(JSON.stringify(editor.document));
-      setSaveStatus('saved');
+      setSaveStatus("saved");
       if (saveTimerRef.id !== null) clearTimeout(saveTimerRef.id);
       saveTimerRef.id = setTimeout(() => {
-        setSaveStatus('idle');
+        setSaveStatus("idle");
         saveTimerRef.id = null;
       }, 2000);
     } catch {
-      setSaveStatus('error');
+      setSaveStatus("error");
     }
   }
 
   const buttonLabel =
-    saveStatus === 'saving' ? 'Saving…' : saveStatus === 'saved' ? 'Saved' : 'Save Lesson';
-  const buttonDisabled = saveStatus === 'saving';
+    saveStatus === "saving"
+      ? "Saving…"
+      : saveStatus === "saved"
+        ? "Saved"
+        : "Save Lesson";
+  const buttonDisabled = saveStatus === "saving";
 
   return (
     <div>
@@ -78,13 +82,15 @@ export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) 
           variant="primary"
           onClick={handleSave}
           disabled={buttonDisabled}
-          style={buttonDisabled ? { opacity: 0.6, cursor: 'not-allowed' } : undefined}
+          style={
+            buttonDisabled ? { opacity: 0.6, cursor: "not-allowed" } : undefined
+          }
         >
           {buttonLabel}
         </Button>
       </div>
 
-      {saveStatus === 'error' && (
+      {saveStatus === "error" && (
         <div className="mb-2 px-4 py-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-sm">
           Failed to save. Please try again.
         </div>

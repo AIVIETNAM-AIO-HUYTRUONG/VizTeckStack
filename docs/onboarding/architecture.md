@@ -1,11 +1,36 @@
 # Tổng quan kiến trúc
 
+<<<<<<< HEAD
 Tài liệu này giải thích tại sao VizTeckStack được thiết kế theo cách hiện tại — các quyết định và sự đánh đổi đằng sau các lựa chọn công nghệ.
+=======
+Tài liệu này giải thích **tại sao** VizTeckStack được thiết kế theo cách hiện tại — không chỉ liệt kê công nghệ mà còn giải thích lý do lựa chọn, các phương án đã xem xét và sự đánh đổi.
+
+---
+
+## Mục lục
+
+1. [Bức tranh tổng thể](#bức-tranh-tổng-thể)
+2. [Tại sao dùng monorepo?](#tại-sao-dùng-monorepo)
+3. [Hai frontend: web vs admin](#hai-frontend-web-vs-admin)
+4. [API Gateway và gRPC](#api-gateway-và-grpc)
+5. [Protocol Buffers là gì?](#protocol-buffers-là-gì)
+6. [Cấu trúc feature-first trong admin](#cấu-trúc-feature-first-trong-admin)
+7. [Shared packages](#shared-packages)
+8. [Quy tắc phụ thuộc](#quy-tắc-phụ-thuộc)
+9. [Data model](#data-model)
+10. [Xác thực admin](#xác-thực-admin)
+11. [Dark mode](#dark-mode)
+12. [E2E testing](#e2e-testing)
+13. [Luồng dữ liệu: xem roadmap](#luồng-dữ-liệu-xem-roadmap)
+14. [Luồng dữ liệu: lưu nội dung lesson](#luồng-dữ-liệu-lưu-nội-dung-lesson)
+15. [Tại sao dùng GitFlow?](#tại-sao-dùng-gitflow)
+>>>>>>> release/1.1.1-turbo
 
 ---
 
 ## Bức tranh tổng thể
 
+<<<<<<< HEAD
 ```
 Trình duyệt
   apps/web   (Next.js 15, :3001)   — public roadmap viewer
@@ -30,12 +55,66 @@ packages/
   ui      — React components dùng chung
   graph   — RoadmapGraph (React Flow)
   lesson  — LessonEditor / LessonViewer (BlockNote)
+=======
+VizTeckStack là một **polyglot monorepo** — tất cả ứng dụng và thư viện dùng chung đều nằm trong một Git repository, nhưng mỗi app có thể dùng ngôn ngữ/framework khác nhau.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                       TRÌNH DUYỆT                       │
+│                                                         │
+│  apps/web (:3001)          apps/admin (:3002)           │
+│  Next.js 15 — SSG          Next.js 15 — CSR             │
+│  Public roadmap viewer     Admin CMS + graph editor     │
+└──────────────┬─────────────────────┬────────────────────┘
+               │                     │
+               │   HTTP (REST/GraphQL)│
+               └──────────┬──────────┘
+                           │
+              ┌────────────▼──────────────┐
+              │  apps/api-gateway (:3000) │
+              │  NestJS                   │
+              │  /graphql  (Apollo)       │
+              │  /api/*    (REST)         │
+              │  /api-docs (Swagger)      │
+              │  AdminGuard (Bearer token)│
+              └────────────┬──────────────┘
+                           │
+                    gRPC (Protocol Buffers)
+                           │
+              ┌────────────▼──────────────┐
+              │  apps/svc-roadmap (:5001) │
+              │  NestJS microservice      │
+              └────────────┬──────────────┘
+                           │
+              ┌────────────▼──────────────┐
+              │  packages/db              │
+              │  Prisma ORM               │
+              └────────────┬──────────────┘
+                           │
+              ┌────────────▼──────────────┐
+              │  PostgreSQL (:5432)       │
+              │  (Docker)                 │
+              └───────────────────────────┘
+
+apps/e2e — Playwright tests (chạy riêng, cần tất cả apps đang chạy)
+
+services/svc-python (:5002) ┐  Tương lai — kết nối qua cùng
+services/svc-rust   (:5003) ┘  file .proto, giao tiếp gRPC
+
+packages/
+  proto   — hợp đồng gRPC (nguồn sự thật duy nhất cho types)
+  db      — Prisma client singleton + tất cả Prisma types
+  ui      — React components dùng chung (Button, Card, NodeBadge)
+  graph   — <RoadmapGraph> dựa trên @xyflow/react
+  lesson  — <LessonEditor> và <LessonViewer> dựa trên BlockNote
+>>>>>>> release/1.1.1-turbo
 ```
 
 ---
 
 ## Tại sao dùng monorepo?
 
+<<<<<<< HEAD
 Tất cả apps và packages nằm trong một Git repository, được quản lý bởi **pnpm workspaces** và **Turborepo**.
 
 Các phương án khác:
@@ -76,10 +155,207 @@ Sự đánh đổi: gRPC phức tạp hơn REST để thiết lập. Package `pa
 ## Tại sao cấu trúc feature-first trong admin?
 
 App admin tổ chức code theo tính năng, không theo tầng kỹ thuật:
+=======
+### Vấn đề nếu không có monorepo
+
+Hãy tưởng tượng `packages/proto` nằm trong repo riêng. Khi bạn thêm một field mới vào `roadmap.proto`:
+
+1. Commit và tạo PR cho repo `proto`
+2. Chờ PR merge, publish version mới
+3. Vào repo `api-gateway`, cập nhật dependency, import types mới
+4. Vào repo `svc-roadmap`, làm lại bước 3
+5. Phối hợp 3 PR để deploy đúng thứ tự
+
+Với monorepo, tất cả chỉ là **một PR duy nhất**.
+
+### pnpm workspaces
+
+`pnpm workspaces` cho phép các packages trong monorepo import lẫn nhau như npm packages bình thường:
+
+```typescript
+// apps/admin/src/features/graph-editor/components/...
+import { RoadmapGraph } from '@vizteck/graph';
+import { Button } from '@vizteck/ui';
+```
+
+Không cần publish lên npm. pnpm tự liên kết (symlink) chúng.
+
+### Turborepo
+
+Turborepo giải quyết bài toán **thứ tự build**. Ví dụ: `apps/admin` phụ thuộc `packages/graph`, `packages/graph` phụ thuộc `packages/ui`. Turborepo tự hiểu thứ tự đó và:
+
+- Build `packages/ui` → `packages/graph` → `apps/admin` đúng thứ tự
+- **Cache** output: nếu `packages/ui` chưa thay đổi, không build lại
+- Chạy các task song song khi có thể (ví dụ: build `packages/ui` và `packages/db` song song vì không phụ thuộc nhau)
+
+Lệnh `pnpm build` ở root chạy Turborepo, không cần vào từng thư mục thủ công.
+
+---
+
+## Hai frontend: web vs admin
+
+### Tại sao lại tách thành hai app?
+
+`apps/web` và `apps/admin` đều là Next.js 15, nhưng có yêu cầu hoàn toàn khác nhau:
+
+| Tiêu chí | `apps/web` (:3001) | `apps/admin` (:3002) |
+|---|---|---|
+| Đối tượng | Mọi người dùng internet | Admin đã đăng nhập |
+| Rendering | Static (SSG) — build trước | Client-side — fetch khi cần |
+| SEO | Quan trọng | Không cần |
+| Xác thực | Không cần | Bearer token bắt buộc |
+| Cache | `no-store` — phản ánh ngay thay đổi | Real-time |
+
+Nếu gộp thành một app, bạn phải auth-gate từng route, mix hai chiến lược render khác nhau trong cùng codebase, và xử lý edge case khi admin vô tình truy cập public page (hoặc ngược lại).
+
+### apps/web — Public viewer
+
+Là trang mà người học dùng. Chỉ hiển thị roadmaps có `status = PUBLIC`.
+
+```
+apps/web/src/
+  app/
+    page.tsx          — trang chủ, danh sách roadmaps
+    roadmap/
+      [slug]/page.tsx — xem roadmap theo slug
+  features/
+    roadmap/
+      components/     — hiển thị danh sách roadmap
+      services/       — gọi API để lấy dữ liệu roadmap
+    lesson/
+      components/     — hiển thị nội dung lesson
+      services/       — gọi API để lấy nội dung lesson
+```
+
+Fetches dùng `{ cache: 'no-store' }` — cố ý để public viewer phản ánh ngay các thay đổi từ admin mà không cần rebuild toàn bộ site.
+
+### apps/admin — CMS + Graph editor
+
+Nơi admin tạo và quản lý nội dung. Yêu cầu `Authorization: Bearer <token>` cho mọi API call.
+
+---
+
+## API Gateway và gRPC
+
+### Tại sao cần API Gateway?
+
+Không có api-gateway, `apps/web` và `apps/admin` sẽ phải:
+- Kết nối thẳng đến database (không an toàn từ browser)
+- Biết địa chỉ của tất cả microservices
+- Tự xử lý auth
+
+API Gateway là **single entry point**: một URL duy nhất (`localhost:3000`) cho tất cả clients. Nó xử lý auth, routing, và dịch từ REST/GraphQL sang gRPC.
+
+### Tại sao gRPC thay vì REST giữa services?
+
+Câu hỏi này rất hay. Tại sao không dùng REST ở khắp nơi cho đơn giản?
+
+```
+Phương án A: REST khắp nơi
+  admin → POST /api/... → api-gateway → POST /internal/... → svc-roadmap
+  ✓ Đơn giản
+  ✗ Types không được đảm bảo giữa services (chỉ là JSON string)
+  ✗ Khi thêm service Python/Rust, phải tự định nghĩa lại schema
+
+Phương án B: gRPC giữa services (hiện tại)
+  admin → POST /api/... → api-gateway → gRPC call → svc-roadmap
+  ✓ Types được generate từ .proto — compiler bắt lỗi ngay
+  ✓ Cùng .proto file cho Python, Rust service trong tương lai
+  ✓ HTTP/2 + binary serialization — nhanh hơn JSON cho service calls
+  ✗ Setup phức tạp hơn một chút
+```
+
+Với `services/svc-python` và `services/svc-rust` trong kế hoạch, gRPC là lựa chọn bền vững hơn.
+
+---
+
+## Protocol Buffers là gì?
+
+> Đây là khái niệm mới với nhiều developer. Đọc kỹ phần này trước khi động vào `packages/proto`.
+
+**Protocol Buffers** (viết tắt: protobuf) là ngôn ngữ định nghĩa **hợp đồng** (contract) giữa hai service. Giống như TypeScript interface, nhưng hoạt động với mọi ngôn ngữ lập trình.
+
+File `packages/proto/roadmap.proto` định nghĩa:
+
+```protobuf
+// Enum: loại node
+enum NodeType {
+  ROADMAP = 0;
+  LESSON  = 1;
+}
+
+// Message: cấu trúc dữ liệu (giống interface TypeScript)
+message RoadmapItem {
+  string id          = 1;
+  string slug        = 2;
+  string title       = 3;
+  string description = 4;
+  string coverImage  = 5;
+  string status      = 6;
+}
+
+message NodeItem {
+  string   id              = 1;
+  string   roadmapId       = 2;
+  NodeType type            = 3;  // enum — số trên wire, string trong DB
+  string   title           = 4;
+  double   positionX       = 5;
+  double   positionY       = 6;
+  string   targetRoadmapId = 7;
+  string   content         = 8;
+}
+
+// Service: các RPC methods (giống REST endpoints)
+service RoadmapService {
+  rpc GetRoadmaps        (Empty)                   returns (RoadmapList);
+  rpc GetRoadmap         (SlugRequest)             returns (RoadmapDetail);
+  rpc GetNode            (IdRequest)               returns (NodeDetail);
+  rpc CreateRoadmap      (CreateRoadmapRequest)    returns (RoadmapItem);
+  rpc UpdateRoadmap      (UpdateRoadmapRequest)    returns (RoadmapItem);
+  rpc DeleteRoadmap      (IdRequest)               returns (BoolResponse);
+  rpc UpsertGraph        (UpsertGraphRequest)      returns (RoadmapDetail);
+  rpc UpdateNodeContent  (UpdateNodeContentRequest) returns (NodeItem);
+  rpc UpdateNodeTitle    (UpdateNodeTitleRequest)  returns (NodeItem);
+}
+```
+
+Sau đó chạy `node generate.js` trong `packages/proto` để sinh ra TypeScript types và gRPC stubs. Cả `api-gateway` lẫn `svc-roadmap` đều import types này — nếu bạn đổi tên field trong `.proto`, TypeScript compiler báo lỗi ngay ở cả hai nơi.
+
+**Lưu ý quan trọng:** `NodeType` là số (0, 1) trên wire gRPC, nhưng là string (`ROADMAP`, `LESSON`) trong PostgreSQL. `api-gateway` phải normalize khi đọc từ proto response.
+
+**Lưu ý về `status`:** Field `status` trong `RoadmapItem` và `UpdateRoadmapRequest` là `string` (không phải proto enum). Lý do: nếu dùng enum, proto3 sẽ gửi giá trị mặc định (0) cho field không được set, có thể vô tình ghi đè status trong DB khi partial update.
+
+---
+
+## Cấu trúc feature-first trong admin
+
+### Layer-first (phương án không được chọn)
+
+```
+src/
+  services/
+    roadmap.service.ts
+    graph.service.ts
+    lesson.service.ts
+  hooks/
+    useRoadmaps.ts
+    useGraphEditor.ts
+    useLessonEditor.ts
+  components/
+    RoadmapModal.tsx
+    GraphToolbar.tsx
+    LessonEditor.tsx
+```
+
+Vấn đề: khi làm việc với tính năng "lesson", bạn phải tìm ở 3 thư mục khác nhau.
+
+### Feature-first (hiện tại)
+>>>>>>> release/1.1.1-turbo
 
 ```
 src/features/
   roadmaps/
+<<<<<<< HEAD
     services/   ← gọi API
     hooks/      ← React state
     components/ ← UI
@@ -130,11 +406,296 @@ Lưu JSON có nghĩa là:
 - Nội dung có thể query và transform mà không cần parse HTML.
 - Cùng một JSON nội dung có thể render khác nhau trên `apps/web` (chỉ đọc) và `apps/admin` (có thể chỉnh sửa) thông qua `<LessonViewer>` và `<LessonEditor>`.
 - Dark mode được component tự xử lý (MutationObserver trên `document.documentElement`) — không cần thêm code trong app.
+=======
+    services/
+      roadmap.service.ts    — CRUD roadmaps + cycleStatus + STATUS_* constants
+    hooks/
+      useRoadmaps.ts        — list state, modal state, CRUD handlers
+    components/
+      RoadmapModal.tsx      — modal tạo / sửa roadmap
+
+  graph-editor/
+    services/
+      graph.service.ts      — loadGraph, saveGraph, normalizeNodeType, makeSnapshot
+    hooks/
+      useGraphEditor.ts     — load/save state, dirty tracking
+      useNodeActions.ts     — canvas handlers (drop, connect, delete...)
+      useGraphDraft.ts      — sessionStorage draft side-effect
+    components/
+      GraphToolbar.tsx      — toolbar trên graph editor
+      NodeInventory.tsx     — danh sách nodes chưa đặt lên canvas
+      NodeSidePanel.tsx     — panel chi tiết khi chọn node
+
+  lessons/
+    services/
+      lesson.service.ts     — fetchLesson, updateLessonContent, updateLessonTitle
+    hooks/
+      useLessonEditor.ts    — fetch + save state, titleSaveStatus
+    components/
+      LessonEditor.tsx      — BlockNote editor (wraps @vizteck/lesson)
+      LessonTitleEditor.tsx — inline title với blur-to-save
+```
+
+Mỗi thư mục feature là **hoàn chỉnh**: service → hook → component. Tất cả code liên quan đến "graph editor" nằm trong một chỗ. Muốn xóa tính năng nào chỉ cần xóa thư mục.
+
+**Quy tắc:** Pages (`app/**/page.tsx`) chỉ được chứa layout và delegate logic xuống hooks/services. Components là pure UI, không gọi API trực tiếp.
+
+**Lưu ý đặc biệt:** Trang graph editor (`app/roadmaps/[id]/page.tsx`) **không dùng** `AdminLayout`. Nó tự quản lý toàn màn hình (`height: 100vh`) vì cần canvas chiếm toàn bộ viewport.
+
+---
+
+## Shared packages
+
+Bốn packages được dùng chung giữa các apps:
+
+### packages/proto — Hợp đồng gRPC
+
+Nguồn sự thật duy nhất cho tất cả gRPC types. Chỉnh `roadmap.proto`, chạy `node generate.js`, types lan truyền khắp nơi.
+
+Turborepo cache `pnpm proto:gen` — nếu đã edit `.proto` nhưng generate không chạy lại, force:
+```bash
+cd packages/proto && node generate.js
+```
+
+### packages/db — Prisma client
+
+Export singleton `db` (PrismaClient) và tất cả Prisma-generated types. Mọi thứ truy cập database phải đi qua đây.
+
+```typescript
+import { db } from '@vizteck/db';
+const roadmaps = await db.roadmap.findMany();
+```
+
+### packages/ui — React components cơ bản
+
+Ba components dùng chung:
+- `Button` — nút bấm với variants
+- `Card` — container card
+- `NodeBadge` — badge hiển thị loại node (ROADMAP / LESSON)
+
+Cả `apps/admin` và `apps/web` đều có thể import.
+
+### packages/graph — Graph viewer/editor
+
+```typescript
+import { RoadmapGraph } from '@vizteck/graph';
+
+// Read-only: dùng trên apps/web
+<RoadmapGraph mode="view" nodes={nodes} edges={edges} />
+
+// Editable: dùng trên apps/admin graph editor
+<RoadmapGraph mode="edit" nodes={nodes} edges={edges} onNodesChange={...} />
+```
+
+Cũng re-export các types từ `@xyflow/react` để apps không cần cài dependency trực tiếp:
+
+```typescript
+import type { NodeChange, EdgeChange, Connection } from '@vizteck/graph';
+```
+
+**Lưu ý kỹ thuật:** `RoadmapGraph` duy trì `measuredRef` (Map của node id → dimensions). React Flow reset `measured` mỗi lần re-render qua `adoptUserNodes`. Nếu xóa cache này, nodes sẽ bị `visibility: hidden` sau position update. Không bao giờ bỏ cache này.
+
+### packages/lesson — Lesson editor/viewer
+
+```typescript
+import { LessonEditor } from '@vizteck/lesson';  // dùng trong apps/admin
+import { LessonViewer } from '@vizteck/lesson';  // dùng trong apps/web
+```
+
+Nội dung lưu dưới dạng **BlockNote JSON** (không phải HTML hay markdown). Lợi ích:
+- Có thể query và transform mà không cần parse HTML
+- Cùng JSON render khác nhau: `LessonViewer` (chỉ đọc) và `LessonEditor` (chỉnh sửa)
+- Dark mode tự xử lý qua MutationObserver trên `document.documentElement`
+
+---
+
+## Quy tắc phụ thuộc
+
+```
+apps/web    ──import──→  packages/ui, packages/graph, packages/lesson
+apps/admin  ──import──→  packages/ui, packages/graph, packages/lesson
+apps/api-gateway ──import──→  packages/proto
+apps/svc-roadmap ──import──→  packages/proto, packages/db
+
+packages/graph  ──import──→  packages/ui     ✓ (packages có thể import packages)
+packages/lesson ──import──→  (không import package nội bộ nào)
+
+apps/*      ←─NO─── packages/*   ✗ packages không được import apps
+services/*  ←─NO─── apps/*       ✗ services chỉ giao tiếp qua gRPC
+```
+
+**Ví dụ vi phạm:**
+
+```typescript
+// packages/graph/src/RoadmapGraph.tsx
+import { fetchRoadmap } from '../../apps/web/src/lib/api'; // ✗ SAI
+```
+
+```typescript
+// packages/ui/src/Button.tsx
+import { useAdmin } from '../../apps/admin/src/...'; // ✗ SAI
+```
+
+**Ví dụ hợp lệ:**
+
+```typescript
+// apps/admin/src/features/graph-editor/components/SomeComponent.tsx
+import { RoadmapGraph } from '@vizteck/graph'; // ✓ apps import packages
+import { Button } from '@vizteck/ui';          // ✓
+```
+
+---
+
+## Data model
+
+Xác minh từ `packages/db/prisma/schema.prisma`:
+
+```
+┌──────────────────────────────────────────────┐
+│  Roadmap                                     │
+│  id          String  (cuid)  PK              │
+│  slug        String  UNIQUE                  │
+│  title       String                          │
+│  description String?                         │
+│  coverImage  String?                         │
+│  status      DRAFT | PUBLIC | PRIVATE        │
+│  createdAt   DateTime                        │
+│  updatedAt   DateTime                        │
+└──────────────┬───────────────────────────────┘
+               │ 1:N
+               │ (nodes)
+┌──────────────▼───────────────────────────────┐
+│  Node                                        │
+│  id              String  (cuid)  PK          │
+│  roadmapId       String  FK → Roadmap.id     │
+│  type            ROADMAP | LESSON            │
+│  title           String                      │
+│  positionX       Float?   — null = off canvas│
+│  positionY       Float?   — null = off canvas│
+│  targetRoadmapId String?  FK → Roadmap.id    │
+│  content         Json?    — BlockNote JSON   │
+│  createdAt       DateTime                    │
+│  updatedAt       DateTime                    │
+└──────┬───────────────────┬───────────────────┘
+       │ source            │ target
+       │                   │
+┌──────▼───────────────────▼───────────────────┐
+│  Edge                                        │
+│  id       String  (cuid)  PK                │
+│  sourceId String  FK → Node.id              │
+│  targetId String  FK → Node.id              │
+│  label    String?                           │
+└──────────────────────────────────────────────┘
+```
+
+### Các điểm quan trọng
+
+**`Roadmap.status`**: Web viewer (`apps/web`) chỉ hiển thị roadmaps có `status = PUBLIC`. `DRAFT` và `PRIVATE` chỉ visible trong admin.
+
+**`Node.positionX/Y`**: `null` nghĩa là node tồn tại trong DB nhưng chưa được đặt lên canvas — gọi là "off-canvas" hay "trong inventory". Kéo node từ NodeInventory lên canvas sẽ set tọa độ.
+
+**`Node.content`**: Chỉ có ý nghĩa với `type = LESSON`. Lưu BlockNote JSON. Đừng set field này cho `ROADMAP` nodes.
+
+**`Node.targetRoadmapId`**: Dùng cho `ROADMAP`-type node — link đến roadmap mà node này đại diện. `targetRoadmapSlug` **không** lưu trong DB — `api-gateway` tính toán on-the-fly từ danh sách roadmaps.
+
+**`Edge.onDelete: Cascade`**: Khi xóa Node, tất cả Edges có `sourceId` hoặc `targetId` trỏ đến Node đó cũng bị xóa tự động.
+
+---
+
+## Xác thực admin
+
+VizTeckStack dùng **single static token** — không có user management, không có database users.
+
+```
+apps/admin localStorage('admin_token')
+     │
+     │  Authorization: Bearer <token>
+     ▼
+apps/api-gateway AdminGuard
+     │
+     │  So sánh với process.env.ADMIN_TOKEN
+     │  ("supersecret" theo default)
+     ▼
+  PASS → request tiếp tục
+  FAIL → 401 Unauthorized
+```
+
+`AdminGuard` (`apps/api-gateway/src/auth/admin.guard.ts`) xử lý cả HTTP và GraphQL context:
+
+```typescript
+const req = context.getType() === 'http'
+  ? context.switchToHttp().getRequest()
+  : GqlExecutionContext.create(context).getContext().req;
+```
+
+`apiFetch` trong `apps/admin/src/lib/api.ts` tự động đính kèm token và redirect về `/login` khi nhận 401.
+
+**Trong production:** Đổi `ADMIN_TOKEN` thành giá trị ngẫu nhiên mạnh trong `.env` — không dùng `supersecret`.
+
+---
+
+## Dark mode
+
+Dark mode dùng **Tailwind class strategy** (`darkMode: 'class'`). Khi có class `.dark` trên `<html>`, tất cả CSS variables trong `globals.css` chuyển sang giá trị tối.
+
+**Vấn đề:** Nếu theme được detect sau khi JS bundle load, user sẽ thấy trang sáng nhấp nhánh trước khi tối — gọi là FOUC (Flash of Unstyled Content).
+
+**Giải pháp:** Một script nhỏ chạy **trước mọi thứ** (`strategy="beforeInteractive"`) trong `apps/admin/src/app/layout.tsx`:
+
+```javascript
+(function() {
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (t === null && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {}
+})();
+```
+
+Script này chạy đồng bộ trong `<head>`, trước khi browser paint lần đầu. Nó kiểm tra:
+1. Nếu user đã chọn theme trong `localStorage` → dùng theo lựa chọn đó
+2. Nếu chưa chọn → theo system preference (`prefers-color-scheme`)
+
+`ThemeToggle` component sau đó có thể toggle class `.dark` và ghi vào `localStorage('theme')` khi user click.
+
+**Token màu trong Tailwind:** Luôn dùng semantic tokens như `bg-bg-0`, `bg-bg-1`, `text-text-1`, `border-border`, `text-indigo` (được định nghĩa là CSS variables trong `globals.css`). Không bao giờ hardcode màu (`bg-gray-900`). Semantic tokens tự động chuyển đổi theo dark mode.
+
+---
+
+## E2E testing
+
+`apps/e2e` là một Playwright project riêng, **không** chạy cùng `pnpm test` bình thường.
+
+```
+apps/e2e/
+  tests/
+    web.spec.ts    — test apps/web (:3001)
+    admin.spec.ts  — test apps/admin (:3002)
+    api.spec.ts    — test apps/api-gateway (:3000)
+  playwright.config.ts
+```
+
+**Yêu cầu:** Tất cả apps phải đang chạy (qua `pnpm dev`) trước khi chạy E2E.
+
+```bash
+# Terminal 1
+pnpm dev
+
+# Terminal 2 — chạy sau khi tất cả apps đã start
+pnpm --filter @vizteck/e2e test:e2e    # Headless
+pnpm --filter @vizteck/e2e test:ui     # Interactive
+pnpm --filter @vizteck/e2e test:headed # Có browser
+```
+
+E2E tests chạy **tuần tự** (`workers: 1`, `fullyParallel: false`) để tránh race condition giữa tests khi share cùng một database.
+>>>>>>> release/1.1.1-turbo
 
 ---
 
 ## Luồng dữ liệu: xem roadmap
 
+<<<<<<< HEAD
 ```
 Người dùng truy cập /roadmap/frontend (apps/web)
   → web gọi GET /api/roadmaps/frontend (api-gateway, cache: no-store)
@@ -146,11 +707,59 @@ Người dùng truy cập /roadmap/frontend (apps/web)
 ```
 
 `cache: 'no-store'` trên web fetches là cố ý — public viewer phản ánh ngay các thay đổi từ admin mà không cần rebuild.
+=======
+Người dùng truy cập `http://localhost:3001/roadmap/javascript-fundamentals`:
+
+```
+Browser (apps/web)
+  │
+  │  1. Next.js render page.tsx cho route /roadmap/[slug]
+  │     fetch('http://localhost:3000/api/roadmaps/javascript-fundamentals',
+  │           { cache: 'no-store' })
+  │
+  ▼
+apps/api-gateway (:3000)
+  │
+  │  2. REST controller nhận GET /api/roadmaps/:slug
+  │     AdminGuard KHÔNG áp dụng cho public endpoints
+  │     Gọi gRPC: roadmapServiceClient.GetRoadmap({ slug })
+  │
+  ▼
+apps/svc-roadmap (:5001)
+  │
+  │  3. gRPC handler nhận GetRoadmap request
+  │     db.roadmap.findUnique({ where: { slug }, include: { nodes, edges } })
+  │     Kiểm tra status === PUBLIC (chỉ trả về public roadmaps)
+  │
+  ▼
+PostgreSQL (:5432) → trả về Roadmap + Nodes + Edges
+  │
+  │  4. svc-roadmap serialize thành RoadmapDetail (proto message)
+  │     Trả về qua gRPC stream
+  │
+  ▼
+apps/api-gateway
+  │
+  │  5. Nhận RoadmapDetail, normalize NodeType (số → string)
+  │     Tính targetRoadmapSlug on-the-fly từ danh sách roadmaps
+  │     Serialize thành JSON REST response
+  │
+  ▼
+Browser (apps/web)
+  │
+  │  6. Nhận JSON, render <RoadmapGraph mode="view" />
+  │     (từ packages/graph — React Flow read-only)
+  │
+  ▼
+Người dùng thấy roadmap graph
+```
+>>>>>>> release/1.1.1-turbo
 
 ---
 
 ## Luồng dữ liệu: lưu nội dung lesson
 
+<<<<<<< HEAD
 ```
 Admin chỉnh sửa lesson trong LessonEditor (apps/admin)
   → hook useLessonEditor gọi PATCH /api/nodes/:id/content
@@ -159,3 +768,58 @@ Admin chỉnh sửa lesson trong LessonEditor (apps/admin)
 ```
 
 Nội dung lesson được lưu qua **cập nhật từng dòng có mục tiêu** — không phải full graph upsert (`POST /api/roadmaps/:id/graph`). Graph upsert xóa và chèn lại toàn bộ nodes, dẫn đến mất dữ liệu từ các node không có trong payload.
+=======
+Admin chỉnh sửa nội dung lesson trong BlockNote editor:
+
+```
+Browser (apps/admin)
+  │
+  │  1. LessonEditor (packages/lesson) gọi onChange callback
+  │     useLessonEditor hook debounce 800ms
+  │     apiFetch('PATCH /api/nodes/:id/content', { content: blockNoteJSON })
+  │     (apiFetch tự đính kèm Authorization: Bearer <token>)
+  │
+  ▼
+apps/api-gateway (:3000)
+  │
+  │  2. AdminGuard xác thực Bearer token
+  │     REST controller nhận PATCH /api/nodes/:id/content
+  │     Gọi gRPC: roadmapServiceClient.UpdateNodeContent({ id, content })
+  │
+  ▼
+apps/svc-roadmap (:5001)
+  │
+  │  3. gRPC handler nhận UpdateNodeContent
+  │     db.node.update({ where: { id }, data: { content } })
+  │     Chỉ update field content — không đụng đến nodes/edges khác
+  │
+  ▼
+PostgreSQL (:5432) — cập nhật đúng một row
+
+  ✓ Xong. useLessonEditor cập nhật trạng thái "Saved"
+```
+
+**Tại sao không dùng UpsertGraph để lưu lesson?**
+
+`POST /api/roadmaps/:id/graph` (UpsertGraph) thực hiện **DELETE + INSERT** toàn bộ nodes và edges. Nếu bạn lưu lesson content qua endpoint này, bạn phải gửi toàn bộ graph — nếu thiếu bất kỳ node nào, node đó bị xóa khỏi DB. Thay vào đó, dùng endpoint có mục tiêu:
+
+- `PATCH /api/nodes/:id/content` — chỉ update content
+- `PATCH /api/nodes/:id/title` — chỉ update title
+
+---
+
+## Tại sao dùng GitFlow?
+
+VizTeckStack dùng **Full GitFlow** thay vì GitHub Flow (chỉ `main` + feature branches).
+
+GitHub Flow phù hợp với team deploy liên tục (mỗi PR merge là một deploy). VizTeckStack cần:
+- **Staging environment** để test trước production
+- **Release có phiên bản** để phối hợp deploy admin + web cùng lúc
+- **Hotfix** không cần đi qua toàn bộ staging cycle
+
+GitFlow cung cấp cấu trúc: `feature/*` → `develop` (staging) → `release/*` → `main` (production).
+
+Nhánh `develop` luôn phản ánh staging. `main` luôn phản ánh production. Không có tính năng nào lên production khi chưa qua staging — điều này quan trọng để admin và public viewer luôn nhất quán.
+
+Xem [Quy trình làm việc hàng ngày](./daily-workflow.md) để biết cách hoạt động cụ thể.
+>>>>>>> release/1.1.1-turbo

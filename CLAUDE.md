@@ -39,14 +39,15 @@ docker compose ps
 
 ### Testing frameworks by package
 
-| Package | Framework | Notes |
-|---------|-----------|-------|
-| `apps/admin` | Vitest + @testing-library/react | `*.spec.tsx` in `src/` |
-| `apps/api-gateway` | Jest + ts-jest | `*.spec.ts` in `src/` |
-| `apps/svc-roadmap` | Jest + ts-jest | `*.spec.ts` in `src/` |
-| `apps/e2e` | Playwright | Separate from `pnpm test`; needs apps running |
+| Package            | Framework                       | Notes                                         |
+| ------------------ | ------------------------------- | --------------------------------------------- |
+| `apps/admin`       | Vitest + @testing-library/react | `*.spec.tsx` in `src/`                        |
+| `apps/api-gateway` | Jest + ts-jest                  | `*.spec.ts` in `src/`                         |
+| `apps/svc-roadmap` | Jest + ts-jest                  | `*.spec.ts` in `src/`                         |
+| `apps/e2e`         | Playwright                      | Separate from `pnpm test`; needs apps running |
 
 ### First-time setup
+
 ```bash
 docker compose up -d postgres
 pnpm install
@@ -56,7 +57,9 @@ DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" pnpm --f
 ```
 
 ### Proto codegen gotcha
+
 Turborepo caches `pnpm proto:gen` and may replay an old result. After editing `roadmap.proto`, force regeneration:
+
 ```bash
 cd packages/proto && node generate.js
 ```
@@ -66,12 +69,14 @@ cd packages/proto && node generate.js
 Full GitFlow. Two long-lived branches: `main` (production) and `develop` (staging). Never push directly to either.
 
 **Branch naming:**
+
 - `feature/<name>` — new features and regular bugfixes (branch from `develop`)
 - `hotfix/<name>` — urgent production fixes (branch from `main`, merge back to both `main` and `develop`)
 - `release/<version>` — release preparation (lead only, e.g. `release/1.1.0`)
 - All lowercase kebab-case: `feature/lesson-crud`, not `feature/LessonCRUD`
 
 **Commit format (Conventional Commits):**
+
 ```
 feat: add lesson CRUD endpoints
 fix: node drop broken on canvas
@@ -81,9 +86,10 @@ test: add unit tests for graph hooks
 docs: update onboarding guide
 ci: fix deploy workflow
 ```
+
 Format: `<type>: <description>` — no capital first letter, no trailing period.
 
-**CI pipeline** — runs `lint → test → build` on every PR and push to `main`, `develop`, or `release/*`. PRs cannot merge until CI passes. Staging deploys on push to `develop`; production deploys on `v*` tags.
+**CI pipeline** — runs `build → lint → test` on every PR and push to `main`, `develop`, or `release/*`. PRs cannot merge until CI passes. Staging deploys on push to `develop`; production deploys on `v*` tags.
 
 ## Architecture
 
@@ -113,13 +119,13 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 
 ### packages
 
-| Package | Name | Purpose |
-|---------|------|---------|
-| `packages/proto` | `@vizteck/proto` | Single source of truth for gRPC contracts. Edit `roadmap.proto`, run `node generate.js` inside the package to regenerate. |
-| `packages/db` | `@vizteck/db` | Exports `db` (PrismaClient singleton) and all Prisma types. |
-| `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge). |
-| `packages/graph` | `@vizteck/graph` | `<RoadmapGraph>` built on `@xyflow/react`. Accepts `mode="view"` (read-only) or `mode="edit"` (draggable + connectable). Re-exports `@xyflow/react` types and `applyEdgeChanges` so apps don't need a direct dep. |
-| `packages/lesson` | `@vizteck/lesson` | Shared BlockNote components: `<LessonEditor>` (editable, used by admin) and `<LessonViewer>` (read-only, for `apps/web`). Both detect dark mode via MutationObserver on `document.documentElement`. |
+| Package           | Name              | Purpose                                                                                                                                                                                                           |
+| ----------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `packages/proto`  | `@vizteck/proto`  | Single source of truth for gRPC contracts. Edit `roadmap.proto`, run `node generate.js` inside the package to regenerate.                                                                                         |
+| `packages/db`     | `@vizteck/db`     | Exports `db` (PrismaClient singleton) and all Prisma types.                                                                                                                                                       |
+| `packages/ui`     | `@vizteck/ui`     | Shared React components (Button, Card, NodeBadge).                                                                                                                                                                |
+| `packages/graph`  | `@vizteck/graph`  | `<RoadmapGraph>` built on `@xyflow/react`. Accepts `mode="view"` (read-only) or `mode="edit"` (draggable + connectable). Re-exports `@xyflow/react` types and `applyEdgeChanges` so apps don't need a direct dep. |
+| `packages/lesson` | `@vizteck/lesson` | Shared BlockNote components: `<LessonEditor>` (editable, used by admin) and `<LessonViewer>` (read-only, for `apps/web`). Both detect dark mode via MutationObserver on `document.documentElement`.               |
 
 **Dependency rule:** `apps/*` may import from `packages/*`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
 
@@ -160,14 +166,14 @@ src/features/
 
 ### Environment variables
 
-| Var | Default | Where |
-|-----|---------|-------|
-| `DATABASE_URL` | `postgresql://vizteck:vizteck@localhost:5432/vizteckstack` | `packages/db`, `apps/svc-roadmap` |
-| `ROADMAP_SERVICE_URL` | `localhost:5001` | `apps/api-gateway` |
-| `ADMIN_TOKEN` | `supersecret` | `apps/api-gateway` |
-| `NEXT_PUBLIC_API_URL` | `http://localhost:3000` | `apps/web`, `apps/admin` |
-| `PORT` | `3000` | `apps/api-gateway` |
-| `GRPC_PORT` | `5001` | `apps/svc-roadmap` |
+| Var                   | Default                                                    | Where                             |
+| --------------------- | ---------------------------------------------------------- | --------------------------------- |
+| `DATABASE_URL`        | `postgresql://vizteck:vizteck@localhost:5432/vizteckstack` | `packages/db`, `apps/svc-roadmap` |
+| `ROADMAP_SERVICE_URL` | `localhost:5001`                                           | `apps/api-gateway`                |
+| `ADMIN_TOKEN`         | `supersecret`                                              | `apps/api-gateway`                |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:3000`                                    | `apps/web`, `apps/admin`          |
+| `PORT`                | `3000`                                                     | `apps/api-gateway`                |
+| `GRPC_PORT`           | `5001`                                                     | `apps/svc-roadmap`                |
 
 Each app has a `.env.example` — copy to `.env` (or `.env.local` for Next.js apps) before running.
 
@@ -190,6 +196,7 @@ All packages extend `tsconfig.base.json` (strict mode, commonjs, ES2022). NestJS
 **Tailwind semantic tokens** — always use `bg-bg-0/1/2`, `text-text-1/2/3`, `border-border`, `text-indigo`, etc. (defined as CSS variables in `globals.css`). These adapt to dark mode automatically. Never hardcode hex colors in Tailwind classes. `packages/ui` and `packages/graph` source paths are included in admin's Tailwind content scan.
 
 **NodeInventory drag data format** — the `nodeId` drag payload has two forms:
+
 - Existing node repositioning: bare node UUID (e.g. `"clx123..."`)
 - New roadmap node from palette: `"newRoadmap:<id>:<slug>:<encodeURIComponent(title)>"` — title is URL-encoded to handle colons and special characters. The handler in `handleDropNode` must parse it with `parts.slice(3).join(':')` then `decodeURIComponent`.
 

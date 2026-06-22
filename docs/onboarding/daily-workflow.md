@@ -1,148 +1,236 @@
 # Quy trình làm việc hàng ngày
 
-Hướng dẫn này giải thích những việc bạn làm mỗi ngày: nhận task, viết code và merge vào codebase.
+Hướng dẫn này giải thích mọi thứ bạn làm mỗi ngày: nhận task, viết code, commit, mở PR và merge vào codebase.
 
 ---
 
-## Mô hình nhánh (Branch model)
+## Tại sao dùng GitFlow?
 
-VizTeckStack dùng **Full GitFlow**. Hai nhánh tồn tại lâu dài:
+VizTeckStack dùng **Full GitFlow** thay vì GitHub Flow đơn giản hơn.
 
-| Nhánh | Tương ứng với | Bạn có push trực tiếp không? |
-|-------|--------------|------------------------------|
-| `main` | Production | Không — chỉ qua release |
-| `develop` | Staging | Không — chỉ qua feature PR |
+**GitHub Flow** (chỉ `main` + feature branches) phù hợp với team deploy liên tục mà không cần staging. VizTeckStack cần:
 
-Bạn luôn làm việc trên các nhánh ngắn hạn (short-lived) được tách ra từ `develop`, sau đó mở pull request trở về `develop`.
+1. **Môi trường staging** để team test trước khi lên production
+2. **Release có phiên bản** (`v1.0.0`, `v1.1.0`) với changelog rõ ràng
+3. **Hotfix** không làm gián đoạn các tính năng đang phát triển
+
+GitFlow giải quyết cả ba: `develop` → staging, `release/*` → chuẩn bị production, `hotfix/*` → fix khẩn cấp mà không ảnh hưởng `develop`.
 
 ---
 
-## Bắt đầu một tính năng mới
+## Hai nhánh tồn tại lâu dài
+
+| Nhánh     | Tương ứng với | Push trực tiếp?  | Merge từ đâu?               |
+| --------- | ------------- | ---------------- | --------------------------- |
+| `main`    | Production    | ❌ Không bao giờ | `release/*` hoặc `hotfix/*` |
+| `develop` | Staging       | ❌ Không bao giờ | `feature/*` qua PR          |
+
+```
+main      ──────────────────────────────────→  (production)
+develop   ──────────────────────────────────→  (staging)
+               ↑                     ↑
+          feature/them-tinh-nang  feature/sua-loi
+```
+
+> **Quy tắc vàng:** Bạn KHÔNG BAO GIỜ push trực tiếp lên `main` hoặc `develop`. Luôn qua PR.
+
+---
+
+## Lifecycle của một tính năng thông thường
+
+### Bước 1 — Tạo nhánh mới từ `develop`
 
 ```bash
-# 1. Luôn bắt đầu từ develop đã được cập nhật
 git checkout develop
-git pull origin develop
-
-# 2. Tạo nhánh feature
+git pull origin develop         # đảm bảo bạn đang ở trạng thái mới nhất
 git checkout -b feature/ten-tinh-nang
 ```
 
-Quy tắc đặt tên nhánh:
-- `feature/` — tính năng mới hoặc bugfix thông thường
-- `hotfix/` — fix khẩn cấp trên production (tách từ `main`, không phải `develop`)
-- `release/` — chuẩn bị release (chỉ lead tạo)
-- Dùng lowercase kebab-case: `feature/lesson-crud`, không phải `feature/LessonCRUD`
+Quy tắc đặt tên: `feature/<mô-tả-ngắn-gọn>`, luôn dùng lowercase kebab-case.
 
----
-
-## Cách commit
-
-Dùng định dạng Conventional Commits:
-
-```bash
-git commit -m "feat: thêm lesson CRUD endpoints"
-git commit -m "fix: sửa lỗi node drop trên canvas"
-git commit -m "chore: cập nhật prisma schema"
-git commit -m "test: thêm unit tests cho graph hooks"
-git commit -m "docs: cập nhật hướng dẫn onboarding"
 ```
+✅ feature/lesson-crud
+✅ feature/fix-graph-drop
+❌ feature/LessonCRUD
+❌ feature/them tinh nang moi
+```
+
+### Bước 2 — Code và commit theo Conventional Commits
 
 Định dạng: `<type>: <mô tả>` — không viết hoa chữ đầu, không dấu chấm cuối.
 
-Các type: `feat`, `fix`, `chore`, `refactor`, `test`, `docs`, `ci`
+| Type       | Khi nào dùng                        | Ví dụ tốt                                           |
+| ---------- | ----------------------------------- | --------------------------------------------------- |
+| `feat`     | Tính năng mới                       | `feat: add lesson title inline editor`              |
+| `fix`      | Sửa lỗi                             | `fix: node drop broken on canvas edge`              |
+| `chore`    | Bảo trì, dependencies               | `chore: update prisma to 6.x`                       |
+| `refactor` | Tái cấu trúc không thay đổi hành vi | `refactor: extract graph save logic to service`     |
+| `test`     | Thêm hoặc sửa tests                 | `test: add unit tests for roadmap resolver`         |
+| `docs`     | Chỉ thay đổi tài liệu               | `docs: update getting-started with SSH alternative` |
+| `ci`       | Thay đổi GitHub Actions             | `ci: fix pnpm version in deploy workflow`           |
 
----
+**Ví dụ commit tốt vs xấu:**
 
-## Mở pull request
+```
+✅ feat: add dark mode toggle to graph toolbar
+✅ fix: prevent duplicate node creation on double-click
+✅ refactor: move roadmap service to feature-first structure
 
-Push nhánh và mở PR nhắm vào `develop`:
+❌ Updated stuff
+❌ fix
+❌ feat: Added a new feature for users to be able to toggle dark mode
+   (quá dài, viết hoa, có dấu chấm ngầm)
+```
+
+### Bước 3 — Chạy tests trước khi push
+
+```bash
+# Chạy tất cả unit tests (không bao gồm E2E)
+pnpm test
+
+# Chỉ test package đang làm việc
+pnpm --filter @vizteck/admin test
+pnpm --filter @vizteck/svc-roadmap test
+pnpm --filter @vizteck/api-gateway test
+
+# Kiểm tra TypeScript (giống pnpm lint trên CI)
+pnpm lint
+```
+
+Nếu pass trên máy local, sẽ pass trên CI. Đừng push code khi tests đang fail.
+
+### Bước 4 — Push và mở Pull Request
 
 ```bash
 git push origin feature/ten-tinh-nang
 ```
 
-Vào GitHub → repo → "Compare & pull request". Thiết lập:
+Vào GitHub → repo → "Compare & pull request". Cấu hình:
+
 - **Base:** `develop`
 - **Compare:** `feature/ten-tinh-nang`
+- **Title:** Conventional Commit format (ví dụ: `feat: add lesson title editor`)
+- **Description:** Mô tả WHAT và WHY, không mô tả HOW (code đã làm điều đó)
 
-CI sẽ chạy tự động (`lint → test → build`). PR không thể merge khi CI chưa pass.
+**PR checklist trước khi mở:**
 
-Sau khi merge, GitHub tự động xóa nhánh feature của bạn.
+- [ ] `pnpm test` pass trên máy local
+- [ ] `pnpm lint` pass (không có TypeScript errors)
+- [ ] Code được review bởi chính bạn lần cuối (xóa `console.log`, code thừa, comment tạm thời)
+- [ ] Base branch là `develop`, không phải `main`
+- [ ] PR title theo Conventional Commits format
+
+### Bước 5 — CI chạy tự động
+
+Sau khi push, GitHub Actions tự động chạy `lint → test → build`. **PR không thể merge khi CI chưa pass.**
+
+Nếu CI fail:
+
+- Click vào link CI trong PR để xem log
+- Fix issue trên branch của bạn
+- Push lại — CI sẽ tự chạy lại
+
+### Bước 6 — Code review
+
+Reviewer sẽ để comment trên GitHub. Sau khi review:
+
+- **Resolve conversation** sau khi bạn fix từng comment
+- Không tự merge trước khi reviewer approve
+
+### Bước 7 — Merge vào `develop`
+
+Sau khi CI pass và được approve, merge PR vào `develop`. CI/CD sẽ tự động deploy lên **Vercel Staging**.
 
 ---
 
-## Fix lỗi production khẩn cấp (hotfix)
+## Lifecycle của hotfix (lỗi khẩn cấp trên production)
 
-Hotfix bỏ qua `develop` và đi thẳng vào `main`:
+Hotfix bỏ qua `develop` và đi **thẳng từ `main`** vì `develop` có thể đã có code chưa được test kỹ.
 
 ```bash
-# 1. Tách từ main
+# Bước 1 — Branch từ main, KHÔNG phải develop
 git checkout main
 git pull origin main
 git checkout -b hotfix/fix-loi-dang-nhap
 
-# 2. Fix, commit, push, mở PR vào main
+# Bước 2 — Fix, test, commit
+pnpm test   # phải pass
+git commit -m "fix: prevent crash on login when token is empty"
 git push origin hotfix/fix-loi-dang-nhap
-# Mở PR: hotfix/* → main
 
-# 3. Sau khi merge vào main, merge luôn vào develop
-git checkout develop
-git merge --no-ff main
-git push origin develop
+# Bước 3 — Mở 2 PR: hotfix → main, hotfix → develop
+# PR 1: hotfix/fix-loi-dang-nhap → main (ưu tiên merge trước)
+# PR 2: hotfix/fix-loi-dang-nhap → develop (để đồng bộ)
+
+# Sau khi merge vào main:
+git checkout main
+git tag v1.0.1      # tăng PATCH version
+git push origin main v1.0.1   # kích hoạt deploy production
 ```
 
-Hotfix luôn tăng PATCH version (ví dụ: `v1.0.0` → `v1.0.1`).
+Hotfix LUÔN tăng PATCH version (`v1.0.0` → `v1.0.1`).
 
 ---
 
-## Quy trình release
+## Lifecycle của release (lead làm)
 
-Việc này không cần làm cho feature thông thường — chỉ khi một batch tính năng sẵn sàng để ship.
+Release gom nhiều tính năng đã merge vào `develop` để đưa lên production cùng lúc.
 
 ```bash
-# 1. Tách release branch từ develop
+# Bước 1 — Tạo release branch từ develop
 git checkout develop
+git pull origin develop
 git checkout -b release/1.1.0
 
-# 2. Chỉ được commit bugfix tại đây — không thêm tính năng mới
+# Bước 2 — Chỉ được commit bugfix tại đây
+# KHÔNG thêm tính năng mới vào release branch
+git commit -m "chore: bump version to 1.1.0"
 
-# 3. Merge vào main
+# Bước 3 — Mở 2 PR:
+# PR 1: release/1.1.0 → main
+# PR 2: release/1.1.0 → develop
+
+# Bước 4 — Sau khi merge PR vào main:
 git checkout main
-git merge --no-ff release/1.1.0
 git tag v1.1.0
-git push origin main v1.1.0
-# → CI tự deploy lên production và tạo GitHub Release
+git push origin main v1.1.0    # kích hoạt pipeline release.yml → production
 
-# 4. Merge trở lại develop
+# Bước 5 — Đồng bộ về develop
 git checkout develop
 git merge --no-ff release/1.1.0
 git push origin develop
 
-# 5. Xóa release branch
+# Dọn dẹp release branch
 git branch -d release/1.1.0
 git push origin --delete release/1.1.0
 ```
 
 ---
 
-## Chạy tests trước khi push
+## Sơ đồ tổng quan GitFlow
 
-```bash
-# Chạy tất cả tests
-pnpm test
+```
+main      ─────────────────────────────────────────────────→
+            ↑ merge        ↑ hotfix merge   ↑ release merge
+         hotfix/x        hotfix/x        release/1.1.0
 
-# Chỉ chạy tests của admin
-pnpm --filter @vizteck/admin test
-
-# Chỉ chạy tests của svc-roadmap
-pnpm --filter @vizteck/svc-roadmap test
-
-# Chạy tests ở chế độ watch (trong khi phát triển)
-pnpm --filter @vizteck/admin test -- --watch
+develop   ─────────────────────────────────────────────────→
+            ↑ PR merge     ↑ PR merge    ↑ (sync từ release)
+         feature/A     feature/B      release/1.1.0 →→ main
 ```
 
-CI chạy cùng lệnh `pnpm test` — nếu pass trên máy local thì sẽ pass trên CI.
+---
+
+## Những điều tuyệt đối không làm
+
+```
+❌ git push origin main       → push thẳng vào main
+❌ git push -f origin develop → force push vào develop
+❌ Mở PR base vào main thay vì develop
+❌ Merge PR khi CI chưa pass
+❌ Merge PR trước khi được approve
+❌ Commit thẳng vào develop thay vì dùng feature branch
+```
 
 ---
 
@@ -151,25 +239,45 @@ CI chạy cùng lệnh `pnpm test` — nếu pass trên máy local thì sẽ pas
 Khi bạn thay đổi `packages/db/prisma/schema.prisma`:
 
 ```bash
-# Trong quá trình phát triển (không tạo migration file, nhanh hơn)
+# Trong quá trình phát triển local (không tạo migration file)
 DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" pnpm --filter @vizteck/db db:push
 
-# Cho migration thực sự (tạo migration file để commit)
+# Khi sẵn sàng commit thay đổi schema
 DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" pnpm --filter @vizteck/db db:migrate
 ```
 
-Luôn commit migration files trong cùng PR với code sử dụng schema mới.
+**Quy tắc:** Luôn commit migration files trong cùng PR với code sử dụng schema mới. Không bao giờ commit migration file riêng lẻ.
 
 ---
 
 ## Thêm gRPC method mới
 
-Contract gRPC nằm trong `packages/proto/roadmap.proto`. Khi thay đổi:
+Contract gRPC nằm trong `packages/proto/roadmap.proto`. Khi thêm hoặc thay đổi:
 
 ```bash
+# Chạy từ packages/proto, KHÔNG dùng pnpm proto:gen (có Turborepo cache)
 cd packages/proto && node generate.js
 ```
 
-Lệnh này regenerate `packages/proto/generated/roadmap.ts`. Commit cả file `.proto` và file generated.
+Lệnh này regenerate `packages/proto/generated/roadmap.ts`. Commit cả file `.proto` và file generated trong cùng PR.
 
-> Lưu ý: `pnpm proto:gen` dùng Turborepo cache và có thể replay kết quả cũ. Sau khi sửa `.proto`, luôn chạy `node generate.js` trực tiếp.
+---
+
+## Common mistakes của developer mới
+
+| Lỗi                                              | Hậu quả                                     | Cách tránh                                        |
+| ------------------------------------------------ | ------------------------------------------- | ------------------------------------------------- |
+| Tạo branch từ `main` thay vì `develop`           | Bỏ lỡ các tính năng mới nhất trên `develop` | Luôn `git checkout develop` trước                 |
+| Push thẳng vào `develop`                         | Bỏ qua CI và code review                    | Dùng feature branch + PR                          |
+| Commit message không theo Conventional Commits   | Release notes tự động sẽ lộn xộn            | Xem bảng commit types ở trên                      |
+| Merge khi CI đang fail                           | Bug lọt vào staging                         | Đợi CI pass, fix nếu cần                          |
+| Thay đổi `.proto` mà quên regenerate types       | TypeScript errors trên CI                   | Luôn chạy `node generate.js` sau khi sửa `.proto` |
+| Dùng `pnpm proto:gen` thay vì `node generate.js` | Turborepo replay cache cũ                   | Chạy trực tiếp từ `packages/proto`                |
+
+---
+
+## Liên quan
+
+- [Tổng quan kiến trúc](./architecture.md) — tại sao dùng GitFlow
+- [CI/CD Pipeline](./cicd.md) — mỗi hành động Git kích hoạt pipeline nào
+- [Kiểm thử](./testing.md) — cách viết và chạy tests

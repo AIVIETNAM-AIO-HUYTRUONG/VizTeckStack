@@ -12,7 +12,7 @@ import {
 import type { Dispatch, SetStateAction } from 'react';
 import type { EditorNode, EditorEdge } from '../services/graph.service';
 
-interface SidePanelState {
+export interface SidePanelState {
   open: boolean;
   mode: 'create' | 'edit';
   nodeId?: string;
