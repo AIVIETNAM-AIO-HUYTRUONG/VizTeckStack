@@ -93,6 +93,31 @@ test.describe('Web — Lesson node page', () => {
   });
 });
 
+test.describe('Web — Lesson sidebar features', () => {
+  test('progress card shows Coming soon badge', async ({ page }) => {
+    await page.goto(`/roadmap/frontend/node/${LESSON_NODE_ID}`);
+    await expect(page.getByText('Progress')).toBeVisible({ timeout: 8000 });
+    await expect(page.getByText('Coming soon')).toBeVisible();
+    await expect(page.getByText('0%')).toBeVisible();
+  });
+
+  test('mini graph SVG renders in sidebar', async ({ page }) => {
+    await page.goto(`/roadmap/frontend/node/${LESSON_NODE_ID}`);
+    await expect(page.getByText('Roadmap Overview')).toBeVisible({ timeout: 8000 });
+    await expect(page.locator('svg[aria-label="Mini graph preview"]')).toBeVisible();
+  });
+
+  test('mini graph SVG is not clickable (decorative only)', async ({ page }) => {
+    await page.goto(`/roadmap/frontend/node/${LESSON_NODE_ID}`);
+    const svg = page.locator('svg[aria-label="Mini graph preview"]');
+    await expect(svg).toBeVisible({ timeout: 8000 });
+    // Should have no pointer-events or role=link/button — just a static SVG
+    const role = await svg.getAttribute('role');
+    expect(role).not.toBe('button');
+    expect(role).not.toBe('link');
+  });
+});
+
 test.describe('Web — Dark mode', () => {
   test('toggles dark class on html element', async ({ page }) => {
     await page.goto('/');
