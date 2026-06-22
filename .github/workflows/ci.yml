@@ -14,6 +14,8 @@ jobs:
   ci:
     name: Lint, Test & Build
     runs-on: ubuntu-latest
+    env:
+      TURBO_UI: stream
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,10 +41,10 @@ jobs:
         run: cd packages/proto && node generate.js
 
       - name: Build
-        run: pnpm build -- --ui stream
+        run: pnpm build
 
       - name: Lint
-        run: pnpm lint -- --ui stream
+        run: pnpm lint
 
       - name: Test
-        run: pnpm test -- --ui stream
+        run: pnpm test
