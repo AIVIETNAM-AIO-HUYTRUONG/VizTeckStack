@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { NodeBadge } from '@vizteck/ui';
 import type { NodeItem } from '@vizteck/graph';
 import type { RoadmapEntry } from '../services/graph.service';
@@ -25,13 +25,12 @@ export function NodeInventory({
   const [filter, setFilter] = useState<FilterType>('ALL');
   const [dismissedIds, setDismissedIds] = useState<Set<string>>(new Set());
 
-  // Roadmaps not yet linked as nodes in this graph
-  const linkedRoadmapIds = new Set(
-    nodes.filter((n) => n.type === 'ROADMAP' && n.targetRoadmapId).map((n) => n.targetRoadmapId!),
-  );
-  const availableRoadmaps = allRoadmaps.filter(
-    (r) => !linkedRoadmapIds.has(r.id) && !dismissedIds.has(r.id),
-  );
+  const availableRoadmaps = useMemo(() => {
+    const linkedRoadmapIds = new Set(
+      nodes.filter((n) => n.type === 'ROADMAP' && n.targetRoadmapId).map((n) => n.targetRoadmapId!),
+    );
+    return allRoadmaps.filter((r) => !linkedRoadmapIds.has(r.id) && !dismissedIds.has(r.id));
+  }, [nodes, allRoadmaps, dismissedIds]);
 
   const filteredNodes = filter === 'ALL' ? nodes : nodes.filter((n) => n.type === filter);
   const showAvailable = filter === 'ALL' || filter === 'ROADMAP';

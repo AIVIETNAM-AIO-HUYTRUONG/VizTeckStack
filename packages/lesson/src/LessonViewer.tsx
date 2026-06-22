@@ -5,16 +5,7 @@ import '@blocknote/mantine/style.css';
 import { useEffect, useState } from 'react';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
-
-function parseBlocks(json: string): unknown[] | undefined {
-  try {
-    const parsed = JSON.parse(json) as unknown;
-    if (Array.isArray(parsed) && parsed.length > 0) return parsed as unknown[];
-  } catch {
-    // Invalid JSON — return undefined
-  }
-  return undefined;
-}
+import { parseBlocks } from './utils';
 
 export interface LessonViewerProps {
   contentJson: string;
