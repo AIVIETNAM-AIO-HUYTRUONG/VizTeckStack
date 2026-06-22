@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { NodeBadge, Button } from "@vizteck/ui";
 import { MiniGraph } from "./MiniGraph";
 import type { NodeItem } from "@/features/lesson/services/node.service";
+import type { EdgeItem } from "@/features/roadmap/services/roadmap.service";
 
 const LessonViewer = dynamic(
   () => import("@vizteck/lesson").then((m) => m.LessonViewer),
@@ -18,9 +19,20 @@ const LessonViewer = dynamic(
 interface LessonLayoutProps {
   slug: string;
   node: NodeItem;
+  roadmapNodes: NodeItem[];
+  roadmapEdges: EdgeItem[];
 }
 
-export function LessonLayout({ slug, node }: LessonLayoutProps) {
+export function LessonLayout({ slug, node, roadmapNodes, roadmapEdges }: LessonLayoutProps) {
+  const miniNodes = roadmapNodes
+    .filter((n) => n.positionX != null && n.positionY != null)
+    .map((n) => ({ id: n.id, x: n.positionX, y: n.positionY, type: n.type }));
+
+  const miniEdges = roadmapEdges.map((e) => ({
+    sourceId: e.sourceId,
+    targetId: e.targetId,
+  }));
+
   return (
     <div className="px-6 pb-12 pt-6 max-w-[1200px] mx-auto flex gap-8">
       {/* Left: lesson content */}
@@ -48,9 +60,15 @@ export function LessonLayout({ slug, node }: LessonLayoutProps) {
           <h3 className="font-display font-bold text-sm text-text-1 mb-3">
             Progress
           </h3>
-          <p className="text-[12px] text-text-3 mt-2">
-            Progress tracking coming soon.
-          </p>
+          <div className="flex items-center gap-2 mt-2">
+            <div className="flex-1 bg-bg-2 rounded-full h-1.5">
+              <div className="bg-indigo h-1.5 rounded-full w-0" />
+            </div>
+            <span className="text-[11px] text-text-3 whitespace-nowrap">0%</span>
+          </div>
+          <span className="inline-block mt-2 text-[11px] text-text-3 bg-bg-2 rounded-full px-2 py-0.5">
+            Coming soon
+          </span>
         </div>
 
         {/* Mini graph card */}
@@ -58,7 +76,13 @@ export function LessonLayout({ slug, node }: LessonLayoutProps) {
           <h3 className="font-display font-bold text-sm text-text-1 mb-3">
             Roadmap Overview
           </h3>
-          <MiniGraph nodes={[]} edges={[]} width={240} height={100} />
+          <MiniGraph
+            nodes={miniNodes}
+            edges={miniEdges}
+            currentNodeId={node.id}
+            width={240}
+            height={100}
+          />
         </div>
 
         {/* Back CTA */}
