@@ -69,10 +69,12 @@ Lesson content is saved via `PATCH /api/nodes/:id/content` — a targeted single
 
 | Tài liệu | Nội dung |
 |----------|---------|
-| [Bắt đầu](docs/onboarding/getting-started.md) | Cài đặt và chạy toàn bộ project trên máy local |
-| [Quy trình làm việc](docs/onboarding/daily-workflow.md) | GitFlow hàng ngày: feature branch, PR, release, hotfix |
-| [Cheat Sheet](docs/onboarding/cheatsheet.md) | Lệnh, port, biến môi trường, đặt tên nhánh |
-| [Kiến trúc](docs/onboarding/architecture.md) | Tại sao monorepo, gRPC, feature-first, GitFlow |
+| [Bắt đầu](docs/onboarding/getting-started.md) | Cài đặt và chạy toàn bộ project trên máy local (~15 phút) |
+| [Kiến trúc](docs/onboarding/architecture.md) | Tại sao monorepo, gRPC, feature-first, data model, data flows |
+| [Quy trình làm việc](docs/onboarding/daily-workflow.md) | GitFlow hàng ngày: feature branch, PR, commit format, release, hotfix |
+| [Kiểm thử](docs/onboarding/testing.md) | Vitest (admin), Jest (NestJS), Playwright E2E — cách viết và chạy tests |
+| [CI/CD Pipeline](docs/onboarding/cicd.md) | 3 pipeline GitHub Actions: CI, staging deploy, production release |
+| [Cheat Sheet](docs/onboarding/cheatsheet.md) | Lệnh, port, env vars, branch naming, data model — tham chiếu nhanh |
 
 ## Quick start
 
