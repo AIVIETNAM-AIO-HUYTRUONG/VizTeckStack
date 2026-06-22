@@ -13,8 +13,10 @@
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.0.0",
     "husky": "^9.1.7",
+    "js-yaml": "^5.0.0",
     "turbo": "^2.0.0",
     "typescript": "^5.4.0"
   },
