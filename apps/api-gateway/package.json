@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nest build",
     "dev": "nest start --watch",
+    "lint": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "start": "node dist/main"
   },

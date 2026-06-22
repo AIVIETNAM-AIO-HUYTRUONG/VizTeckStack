@@ -5,7 +5,7 @@ export interface EditorNode extends NodeItem {
   selected?: boolean;
 }
 
-export interface EditorEdge extends EdgeItem {}
+export type EditorEdge = EdgeItem;
 
 export interface RoadmapEntry {
   id: string;
