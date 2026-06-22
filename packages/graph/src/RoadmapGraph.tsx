@@ -1,6 +1,6 @@
 'use client';
 import '@xyflow/react/dist/style.css';
-import React, { useCallback, useRef, type MouseEvent } from 'react';
+import React, { useCallback, useMemo, useRef, type MouseEvent } from 'react';
 import {
   ReactFlow, Controls, Background, BackgroundVariant, ReactFlowProvider, useReactFlow,
   type Node,
@@ -154,19 +154,22 @@ export function RoadmapGraph(props: RoadmapGraphProps) {
     [onNodesChange],
   );
 
-  const rfNodes = nodes
-    .filter((n) => n.positionX != null && n.positionY != null)
-    .map((n) => ({
-      id: n.id,
-      type: 'roadmapNode' as const,
-      position: { x: n.positionX!, y: n.positionY! },
-      selected: (n as { selected?: boolean }).selected ?? false,
-      data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
-      // Include cached measured so nodes stay visible after external position updates
-      measured: measuredRef.current.get(n.id),
-    }));
+  const rfNodes = useMemo(
+    () =>
+      nodes
+        .filter((n) => n.positionX != null && n.positionY != null)
+        .map((n) => ({
+          id: n.id,
+          type: 'roadmapNode' as const,
+          position: { x: n.positionX!, y: n.positionY! },
+          selected: (n as { selected?: boolean }).selected ?? false,
+          data: { title: n.title, nodeType: n.type, targetRoadmapId: n.targetRoadmapId },
+          measured: measuredRef.current.get(n.id),
+        })),
+    [nodes],
+  );
 
-  const rfEdges = mapEdges(edges);
+  const rfEdges = useMemo(() => mapEdges(edges), [edges]);
   const isView = mode === 'view';
 
   return (

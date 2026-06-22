@@ -1,0 +1,1 @@
+node scripts/validate-yaml.cjs && pnpm lint && pnpm test

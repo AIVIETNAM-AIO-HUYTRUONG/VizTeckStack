@@ -83,7 +83,7 @@ ci: fix deploy workflow
 ```
 Format: `<type>: <description>` — no capital first letter, no trailing period.
 
-**CI pipeline** — runs `lint → test → build` on every PR and push to `main`, `develop`, or `release/*`. PRs cannot merge until CI passes. Staging deploys on push to `develop`; production deploys on `v*` tags.
+**CI pipeline** — runs `build → lint → test` on every PR and push to `main`, `develop`, or `release/*`. PRs cannot merge until CI passes. Staging deploys on push to `develop`; production deploys on `v*` tags.
 
 ## Architecture
 
