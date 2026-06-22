@@ -2,10 +2,9 @@
 
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
-import { Button } from "@vizteck/ui";
 import { parseBlocks } from "./utils";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
@@ -15,92 +14,87 @@ export interface LessonEditorProps {
   onSave: (contentJson: string) => Promise<void>;
 }
 
-export function LessonEditor({
-  initialContentJson,
-  onSave,
-}: LessonEditorProps) {
+export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) {
   const blocks = parseBlocks(initialContentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const editor = useCreateBlockNote(
-    blocks ? { initialContent: blocks as any } : {},
-  );
+  const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
 
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
-  const [saveTimerRef] = useState<{ id: ReturnType<typeof setTimeout> | null }>(
-    { id: null },
-  );
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isSavingRef = useRef(false);
+  const onSaveRef = useRef(onSave);
+  useEffect(() => { onSaveRef.current = onSave; });
 
   useEffect(() => {
     const update = () =>
-      setTheme(
-        document.documentElement.classList.contains("dark") ? "dark" : "light",
-      );
+      setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
     update();
     const obs = new MutationObserver(update);
-    obs.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => obs.disconnect();
   }, []);
 
   useEffect(() => {
     return () => {
-      if (saveTimerRef.id !== null) clearTimeout(saveTimerRef.id);
+      if (debounceTimerRef.current !== null) clearTimeout(debounceTimerRef.current);
+      if (idleTimerRef.current !== null) clearTimeout(idleTimerRef.current);
     };
-  }, [saveTimerRef]);
+  }, []);
 
-  async function handleSave() {
-    if (saveStatus === "saving") return;
+  const executeSave = useCallback(async () => {
+    if (isSavingRef.current) return;
+    isSavingRef.current = true;
     setSaveStatus("saving");
     try {
-      await onSave(JSON.stringify(editor.document));
+      await onSaveRef.current(JSON.stringify(editor.document));
+      isSavingRef.current = false;
       setSaveStatus("saved");
-      if (saveTimerRef.id !== null) clearTimeout(saveTimerRef.id);
-      saveTimerRef.id = setTimeout(() => {
+      if (idleTimerRef.current !== null) clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = setTimeout(() => {
         setSaveStatus("idle");
-        saveTimerRef.id = null;
+        idleTimerRef.current = null;
       }, 2000);
     } catch {
+      isSavingRef.current = false;
       setSaveStatus("error");
     }
-  }
+  }, [editor]);
 
-  const buttonLabel =
-    saveStatus === "saving"
-      ? "Saving…"
-      : saveStatus === "saved"
-        ? "Saved"
-        : "Save Lesson";
-  const buttonDisabled = saveStatus === "saving";
+  const handleChange = useCallback(() => {
+    if (debounceTimerRef.current !== null) clearTimeout(debounceTimerRef.current);
+    debounceTimerRef.current = setTimeout(() => {
+      debounceTimerRef.current = null;
+      void executeSave();
+    }, 2000);
+  }, [executeSave]);
 
   return (
     <div>
-      <div className="flex justify-end mb-2">
-        <Button
-          variant="primary"
-          onClick={handleSave}
-          disabled={buttonDisabled}
-          style={
-            buttonDisabled ? { opacity: 0.6, cursor: "not-allowed" } : undefined
-          }
-        >
-          {buttonLabel}
-        </Button>
+      <div className="flex justify-end mb-2 min-h-[28px] items-center">
+        {saveStatus === "saving" && (
+          <span className="text-xs text-text-3">Saving…</span>
+        )}
+        {saveStatus === "saved" && (
+          <span className="text-xs text-text-3">Saved</span>
+        )}
+        {saveStatus === "error" && (
+          <button
+            type="button"
+            onClick={() => void executeSave()}
+            className="text-xs text-red-500 hover:underline cursor-pointer"
+          >
+            Failed to save — click to retry
+          </button>
+        )}
       </div>
-
-      {saveStatus === "error" && (
-        <div className="mb-2 px-4 py-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-sm">
-          Failed to save. Please try again.
-        </div>
-      )}
 
       <div
         className="bg-bg-1 border border-border rounded-md px-6 py-4"
         style={{ minHeight: 400 }}
       >
-        <BlockNoteView editor={editor} editable={true} theme={theme} />
+        <BlockNoteView editor={editor} editable={true} theme={theme} onChange={handleChange} />
       </div>
     </div>
   );
