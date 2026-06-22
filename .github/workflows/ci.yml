@@ -41,10 +41,10 @@ jobs:
         run: cd packages/proto && node generate.js
 
       - name: Build
-        run: pnpm build
+        run: pnpm build -- --ui stream
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm lint -- --ui stream
 
       - name: Test
-        run: pnpm test
+        run: pnpm test -- --ui stream
