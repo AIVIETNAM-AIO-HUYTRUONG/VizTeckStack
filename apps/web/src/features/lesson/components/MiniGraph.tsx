@@ -15,6 +15,7 @@ interface MiniGraphProps {
   edges: MiniGraphEdge[];
   width?: number;
   height?: number;
+  currentNodeId?: string;
 }
 
 function normalizePositions(
@@ -46,6 +47,7 @@ export function MiniGraph({
   edges,
   width = 240,
   height = 120,
+  currentNodeId,
 }: MiniGraphProps) {
   const padding = 16;
   const innerW = width - padding * 2;
@@ -84,8 +86,17 @@ export function MiniGraph({
         const pos = posById.get(n.id);
         if (!pos) return null;
         const fill = n.type === 'ROADMAP' ? '#4F46E5' : '#059669';
+        const isCurrent = n.id === currentNodeId;
         return (
-          <circle key={n.id} cx={pos.cx} cy={pos.cy} r={6} fill={fill} />
+          <circle
+            key={n.id}
+            cx={pos.cx}
+            cy={pos.cy}
+            r={isCurrent ? 9 : 6}
+            fill={fill}
+            stroke={isCurrent ? 'white' : 'none'}
+            strokeWidth={isCurrent ? 2 : 0}
+          />
         );
       })}
     </svg>
