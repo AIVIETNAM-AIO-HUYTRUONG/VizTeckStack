@@ -34,6 +34,8 @@ model Node {
   targetRoadmapId String?
   targetRoadmap   Roadmap? @relation("NodeTarget", fields: [targetRoadmapId], references: [id])
   content         Json?
+  coverImage      String?
+  icon            String?
   edges           Edge[]   @relation("EdgeSource")
   edgesTarget     Edge[]   @relation("EdgeTarget")
   createdAt       DateTime @default(now())
