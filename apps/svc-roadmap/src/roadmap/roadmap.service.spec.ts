@@ -14,6 +14,7 @@ jest.mock('@vizteck/db', () => ({
     },
     node: {
       findUnique: jest.fn(),
+      findFirst: jest.fn(),
       update: jest.fn(),
     },
     edge: {},
@@ -118,6 +119,137 @@ describe('RoadmapService', () => {
 
       await expect(service.updateNodeTitle({ id: 'missing', title: 'x' }))
         .rejects.toMatchObject({ error: { code: 5 } });
+    });
+  });
+
+  describe('updateNodeCover', () => {
+    it('updates coverImage and returns NodeItem', async () => {
+      const stored = {
+        id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro',
+        positionX: 0, positionY: 0, targetRoadmapId: null, content: null,
+        coverImage: 'https://cdn.example.com/cover.jpg', icon: null,
+      };
+      (db.node.update as jest.Mock).mockResolvedValue(stored);
+      const result = await service.updateNodeCover({ id: 'n1', coverImage: 'https://cdn.example.com/cover.jpg' });
+      expect(db.node.update).toHaveBeenCalledWith({
+        where: { id: 'n1' },
+        data: { coverImage: 'https://cdn.example.com/cover.jpg' },
+      });
+      expect(result.coverImage).toBe('https://cdn.example.com/cover.jpg');
+    });
+
+    it('clears coverImage when empty string', async () => {
+      const stored = {
+        id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro',
+        positionX: 0, positionY: 0, targetRoadmapId: null, content: null,
+        coverImage: null, icon: null,
+      };
+      (db.node.update as jest.Mock).mockResolvedValue(stored);
+      await service.updateNodeCover({ id: 'n1', coverImage: '' });
+      expect(db.node.update).toHaveBeenCalledWith({
+        where: { id: 'n1' },
+        data: { coverImage: null },
+      });
+    });
+
+    it('throws NOT_FOUND when node missing', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { Prisma } = jest.requireActual('@vizteck/db') as any;
+      const err = new Prisma.PrismaClientKnownRequestError('Not found', {
+        code: 'P2025', clientVersion: '5.0.0', meta: undefined, batchRequestIdx: undefined,
+      });
+      (db.node.update as jest.Mock).mockRejectedValue(err);
+      await expect(service.updateNodeCover({ id: 'missing', coverImage: 'x' }))
+        .rejects.toMatchObject({ error: { code: 5 } });
+    });
+  });
+
+  describe('updateNodeIcon', () => {
+    it('updates icon and returns NodeItem', async () => {
+      const stored = {
+        id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro',
+        positionX: 0, positionY: 0, targetRoadmapId: null, content: null,
+        coverImage: null, icon: '⚡',
+      };
+      (db.node.update as jest.Mock).mockResolvedValue(stored);
+      const result = await service.updateNodeIcon({ id: 'n1', icon: '⚡' });
+      expect(db.node.update).toHaveBeenCalledWith({
+        where: { id: 'n1' },
+        data: { icon: '⚡' },
+      });
+      expect(result.icon).toBe('⚡');
+    });
+
+    it('clears icon when empty string', async () => {
+      const stored = {
+        id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro',
+        positionX: 0, positionY: 0, targetRoadmapId: null, content: null,
+        coverImage: null, icon: null,
+      };
+      (db.node.update as jest.Mock).mockResolvedValue(stored);
+      await service.updateNodeIcon({ id: 'n1', icon: '' });
+      expect(db.node.update).toHaveBeenCalledWith({
+        where: { id: 'n1' },
+        data: { icon: null },
+      });
+    });
+
+    it('throws NOT_FOUND when node missing', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { Prisma } = jest.requireActual('@vizteck/db') as any;
+      const err = new Prisma.PrismaClientKnownRequestError('Not found', {
+        code: 'P2025', clientVersion: '5.0.0', meta: undefined, batchRequestIdx: undefined,
+      });
+      (db.node.update as jest.Mock).mockRejectedValue(err);
+      await expect(service.updateNodeIcon({ id: 'missing', icon: '⚡' }))
+        .rejects.toMatchObject({ error: { code: 5 } });
+    });
+  });
+
+  describe('getNodeBreadcrumb', () => {
+    it('returns 1-item chain for root roadmap lesson', async () => {
+      (db.node.findUnique as jest.Mock).mockResolvedValue({
+        id: 'n1', title: 'Box Model', roadmapId: 'r1',
+        coverImage: null, icon: null,
+      });
+      (db.node.findFirst as jest.Mock).mockResolvedValue(null); // no parent
+      (db.roadmap.findUnique as jest.Mock).mockResolvedValue({
+        id: 'r1', title: 'Frontend Roadmap', slug: 'frontend',
+      });
+      const result = await service.getNodeBreadcrumb({ id: 'n1' });
+      expect(result.items).toEqual([
+        { title: 'Frontend Roadmap', slug: 'frontend', nodeId: '' },
+        { title: 'Box Model', slug: '', nodeId: 'n1' },
+      ]);
+    });
+
+    it('returns nested chain for sub-roadmap lesson', async () => {
+      (db.node.findUnique as jest.Mock).mockResolvedValue({
+        id: 'n2', title: 'CSS Selectors', roadmapId: 'r2',
+        coverImage: null, icon: null,
+      });
+      // First call: find parent of r2 → Node X in Roadmap r1
+      (db.node.findFirst as jest.Mock)
+        .mockResolvedValueOnce({
+          id: 'nx', title: 'HTML & CSS', roadmapId: 'r1',
+          targetRoadmap: { slug: 'html-css' },
+        })
+        .mockResolvedValueOnce(null); // no parent of r1
+      (db.roadmap.findUnique as jest.Mock).mockResolvedValue({
+        id: 'r1', title: 'Frontend Roadmap', slug: 'frontend',
+      });
+      const result = await service.getNodeBreadcrumb({ id: 'n2' });
+      expect(result.items).toEqual([
+        { title: 'Frontend Roadmap', slug: 'frontend', nodeId: '' },
+        { title: 'HTML & CSS', slug: 'html-css', nodeId: 'nx' },
+        { title: 'CSS Selectors', slug: '', nodeId: 'n2' },
+      ]);
+    });
+
+    it('returns empty array when node not found', async () => {
+      (db.node.findUnique as jest.Mock).mockResolvedValue(null);
+      const result = await service.getNodeBreadcrumb({ id: 'missing' });
+      expect(result.items).toEqual([]);
     });
   });
 });

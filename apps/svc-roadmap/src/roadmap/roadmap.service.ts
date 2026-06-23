@@ -213,21 +213,36 @@ export class RoadmapService {
   }
 
   async getNodeBreadcrumb({ id }: IdRequest): Promise<BreadcrumbResponse> {
-    // Walk the graph upward from the given node to build a breadcrumb trail.
-    // Strategy: find the node, get its roadmap (for the roadmap-level crumb),
-    // then return a single-level breadcrumb for now (full ancestor walk is Task 5+).
-    const node = await db.node.findUnique({
-      where: { id },
-      include: { roadmap: true },
-    });
-    if (!node) {
-      throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+    const node = await db.node.findUnique({ where: { id } });
+    if (!node) return { items: [] };
+
+    const chain: Array<{ title: string; slug: string; nodeId: string }> = [];
+    chain.unshift({ title: node.title, slug: '', nodeId: node.id });
+
+    let currentRoadmapId = node.roadmapId;
+
+    while (true) {
+      const parentNode = await db.node.findFirst({
+        where: { type: 'ROADMAP', targetRoadmapId: currentRoadmapId },
+        include: { targetRoadmap: true },
+      });
+
+      if (parentNode) {
+        chain.unshift({
+          title: parentNode.title,
+          slug: (parentNode as any).targetRoadmap?.slug ?? '',
+          nodeId: parentNode.id,
+        });
+        currentRoadmapId = parentNode.roadmapId;
+      } else {
+        const rootRoadmap = await db.roadmap.findUnique({ where: { id: currentRoadmapId } });
+        if (rootRoadmap) {
+          chain.unshift({ title: rootRoadmap.title, slug: rootRoadmap.slug, nodeId: '' });
+        }
+        break;
+      }
     }
-    if (!node.roadmap) throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Roadmap for node '${id}' not found` });
-    const items = [
-      { title: node.roadmap.title, slug: node.roadmap.slug, nodeId: '' },
-      { title: node.title, slug: '', nodeId: node.id },
-    ];
-    return { items };
+
+    return { items: chain };
   }
 }
