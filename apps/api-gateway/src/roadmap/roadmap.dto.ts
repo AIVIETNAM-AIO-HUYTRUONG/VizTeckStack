@@ -161,3 +161,24 @@ export class UpdateNodeIconInput {
   @ApiPropertyOptional({ example: '⚡', description: 'null removes the icon' })
   icon?: string;
 }
+
+@ObjectType()
+export class RoadmapTreeNodeDto {
+  @Field(() => ID) @ApiProperty({ example: 'node_001' }) id!: string;
+  @Field() @ApiProperty({ example: 'Box Model' }) title!: string;
+  @Field() @ApiProperty({ example: 'LESSON', enum: ['LESSON', 'ROADMAP'] }) type!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'html-css' }) slug?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'clx...' }) targetRoadmapId?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'frontend' }) roadmapSlug?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'clx...' }) roadmapId?: string;
+  @Field(() => [RoadmapTreeNodeDto], { nullable: true })
+  @ApiPropertyOptional({ type: () => [RoadmapTreeNodeDto] })
+  children?: RoadmapTreeNodeDto[];
+}
+
+@ObjectType()
+export class RoadmapTreeDto {
+  @Field() @ApiProperty({ example: 'frontend' }) rootSlug!: string;
+  @Field() @ApiProperty({ example: 'Frontend Roadmap' }) rootTitle!: string;
+  @Field(() => [RoadmapTreeNodeDto]) @ApiProperty({ type: () => [RoadmapTreeNodeDto] }) nodes!: RoadmapTreeNodeDto[];
+}
