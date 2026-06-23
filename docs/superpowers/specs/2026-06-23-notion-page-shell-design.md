@@ -164,22 +164,37 @@ extend type Mutation {
 }
 ```
 
-### Cloudflare R2 Upload Flow
+### Uploadthing Upload Flow
 
-1. Admin selects file → `POST /api/upload/cover` (multipart)
-2. api-gateway streams to R2 via `@aws-sdk/client-s3` (S3-compatible)
-3. Returns `{ url: string }` — R2 public bucket URL
+Storage: **Uploadthing** (uploadthing.com — free tier 2GB, sign in with Google, no credit card).
+
+Upload happens client-side via `@uploadthing/react` — no custom upload controller needed in api-gateway.
+
+Flow:
+1. Admin selects file in `CoverUploadModal`
+2. `useUploadThing("coverUploader")` hook uploads directly to Uploadthing CDN
+3. Hook returns `{ url: string }` — Uploadthing CDN URL
 4. Admin calls `updateNodeCover` mutation with URL
 5. UI updates optimistically
 
-R2 config env vars (add to `apps/api-gateway/.env.example`):
+Uploadthing route config (new file `apps/admin/src/app/api/uploadthing/core.ts`):
+```ts
+import { createUploadthing } from "uploadthing/next";
+const f = createUploadthing();
+
+export const ourFileRouter = {
+  coverUploader: f({ image: { maxFileSize: "4MB" } })
+    .middleware(() => ({ uploadedBy: "admin" }))
+    .onUploadComplete(({ file }) => ({ url: file.url })),
+};
 ```
-R2_ACCOUNT_ID=
-R2_ACCESS_KEY_ID=
-R2_SECRET_ACCESS_KEY=
-R2_BUCKET_NAME=vizteck-assets
-R2_PUBLIC_URL=https://pub-<hash>.r2.dev
+
+Env vars (add to `apps/admin/.env.example`):
 ```
+UPLOADTHING_TOKEN=
+```
+
+**No changes to api-gateway** — upload is handled entirely in the admin Next.js app via Uploadthing's built-in API route.
 
 ---
 
@@ -297,7 +312,7 @@ const [nodeResult, breadcrumbResult] = await Promise.allSettled([
 
 | Scenario | Behaviour |
 |---|---|
-| R2 upload fails | Show error toast in modal, stay on upload modal |
+| Uploadthing upload fails | Show error toast in modal, stay on upload modal |
 | `updateNodeCover` mutation fails | Rollback to previous cover, show error toast |
 | `updateNodeIcon` mutation fails | Rollback to previous icon, show error toast |
 | Breadcrumb API fails | Degrade: show `Roadmap title › Lesson title` |
@@ -335,9 +350,8 @@ This keeps `packages/lesson` as the source of truth for lesson UI, consistent wi
 | `apps/admin/src/features/lessons/components/CoverUploadModal.tsx` | Upload/URL modal |
 | `apps/admin/src/features/lessons/components/IconPicker.tsx` | 3-tab icon picker |
 | `apps/admin/src/features/lessons/hooks/useLessonPageShell.ts` | Cover/icon state + mutations |
-| `apps/api-gateway/src/upload/upload.controller.ts` | R2 upload endpoint |
-| `apps/api-gateway/src/upload/upload.module.ts` | Upload module |
-| `apps/api-gateway/src/upload/r2.service.ts` | Cloudflare R2 client |
+| `apps/admin/src/app/api/uploadthing/core.ts` | Uploadthing file router (coverUploader) |
+| `apps/admin/src/app/api/uploadthing/route.ts` | Uploadthing Next.js API route handler |
 
 ### Modified files
 | Path | Change |
@@ -353,6 +367,69 @@ This keeps `packages/lesson` as the source of truth for lesson UI, consistent wi
 | `apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx` | Use LessonPageShell (edit mode) |
 | `apps/web/src/features/lesson/components/LessonLayout.tsx` | Full rewrite — use LessonPageShell (view mode) from @vizteck/lesson |
 | `apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx` | Add breadcrumb fetch |
+
+---
+
+## Quality Control / Testing
+
+Following the project's testing conventions (see CLAUDE.md testing table).
+
+### svc-roadmap — Jest (`*.spec.ts`)
+
+| Test | What to verify |
+|------|---------------|
+| `UpdateNodeCover` — success | Returns `NodeItem` with updated `coverImage` |
+| `UpdateNodeCover` — null clears field | `coverImage` is `null` after passing empty string |
+| `UpdateNodeCover` — node not found | Throws `RpcException NOT_FOUND` |
+| `UpdateNodeIcon` — success | Returns `NodeItem` with updated `icon` |
+| `UpdateNodeIcon` — node not found | Throws `RpcException NOT_FOUND` |
+| `GetNodeBreadcrumb` — root roadmap lesson | Returns 1-item chain `[RootRoadmap]` |
+| `GetNodeBreadcrumb` — nested lesson | Returns full chain `[Root, SubRoadmapNode, Lesson]` |
+| `GetNodeBreadcrumb` — node not found | Returns empty array (degrade gracefully) |
+
+### api-gateway — Jest (`*.spec.ts`)
+
+| Test | What to verify |
+|------|---------------|
+| `PATCH /api/nodes/:id/cover` — 200 | Calls svc-roadmap, returns updated node |
+| `PATCH /api/nodes/:id/cover` — 401 | No token → Unauthorized |
+| `PATCH /api/nodes/:id/icon` — 200 | Calls svc-roadmap, returns updated node |
+| `GET /api/nodes/:id/breadcrumb` — 200 | Returns `BreadcrumbItem[]` |
+| GraphQL `updateNodeCover` mutation | Returns `Node` with updated `coverImage` |
+| GraphQL `nodeBreadcrumb` query | Returns `BreadcrumbItem[]` |
+
+### admin — Vitest (`*.spec.tsx`)
+
+| Test | What to verify |
+|------|---------------|
+| `useLessonPageShell` — `setCover` | Calls `updateNodeCover` mutation, updates local state |
+| `useLessonPageShell` — rollback on error | Reverts cover to previous value when mutation fails |
+| `useLessonPageShell` — `setIcon` | Calls `updateNodeIcon` mutation, updates local state |
+| `IconPicker` — tab switching | Renders Emoji/Text/Icons tabs, selecting calls `onIconChange` |
+| `CoverImage` — hover shows controls | Upload/Paste URL/Remove buttons visible on hover |
+
+### packages/lesson — Vitest (`*.spec.tsx`)
+
+| Test | What to verify |
+|------|---------------|
+| `CoverDisplay` — with image | Renders `<img>` with correct `src` |
+| `CoverDisplay` — no image | Renders gradient fallback (no `<img>`) |
+| `CoverDisplay` — with icon | Renders icon in floating element |
+| `CoverDisplay` — no icon | Renders default `📄` |
+| `BreadcrumbDisplay` — links | All items except last are `<a>` tags |
+| `BreadcrumbDisplay` — current item | Last item has no `href` |
+| `LessonPageShell` view mode | Renders `CoverDisplay` + title + `LessonViewer`, no edit controls |
+| `LessonPageShell` edit mode | Renders `CoverImage` + `IconPicker` + `LessonEditor` |
+
+### E2E — Playwright (requires apps running)
+
+| Scenario | Steps |
+|----------|-------|
+| Admin sets cover via URL | Navigate to lesson admin → paste URL → verify cover displays |
+| Admin sets emoji icon | Click icon → Emoji tab → select emoji → verify icon updates |
+| Web viewer shows cover | Navigate to web lesson page → verify cover image rendered |
+| Web breadcrumb navigates | Click breadcrumb item → verify navigation to correct roadmap |
+| Cover image fallback | Remove cover in admin → verify gradient shows on web |
 
 ---
 
