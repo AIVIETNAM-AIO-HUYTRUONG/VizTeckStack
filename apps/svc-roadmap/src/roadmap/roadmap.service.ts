@@ -223,6 +223,7 @@ export class RoadmapService {
     if (!node) {
       throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
     }
+    if (!node.roadmap) throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Roadmap for node '${id}' not found` });
     const items = [
       { title: node.roadmap.title, slug: node.roadmap.slug, nodeId: '' },
       { title: node.title, slug: '', nodeId: node.id },
