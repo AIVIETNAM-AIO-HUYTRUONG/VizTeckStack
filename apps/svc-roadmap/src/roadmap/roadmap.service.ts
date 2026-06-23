@@ -1,35 +1,62 @@
-import { Injectable } from '@nestjs/common';
-import { RpcException } from '@nestjs/microservices';
-import { status as GrpcStatus } from '@grpc/grpc-js';
-import { Prisma, db, type Roadmap, type Node as PrismaNode } from '@vizteck/db';
+import { Injectable } from "@nestjs/common";
+import { RpcException } from "@nestjs/microservices";
+import { status as GrpcStatus } from "@grpc/grpc-js";
+import { Prisma, db, type Roadmap, type Node as PrismaNode } from "@vizteck/db";
 import {
-  Empty, RoadmapList, SlugRequest, RoadmapDetail, IdRequest,
-  NodeDetail, CreateRoadmapRequest, RoadmapItem, UpdateRoadmapRequest,
-  BoolResponse, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest,
-  UpdateNodeCoverRequest, UpdateNodeIconRequest, BreadcrumbResponse,
-  NodeItem, RoadmapTreeRequest, RoadmapTreeResponse, RoadmapTreeNode,
-} from '@vizteck/proto';
+  Empty,
+  RoadmapList,
+  SlugRequest,
+  RoadmapDetail,
+  IdRequest,
+  NodeDetail,
+  CreateRoadmapRequest,
+  RoadmapItem,
+  UpdateRoadmapRequest,
+  BoolResponse,
+  UpsertGraphRequest,
+  UpdateNodeContentRequest,
+  UpdateNodeTitleRequest,
+  UpdateNodeCoverRequest,
+  UpdateNodeIconRequest,
+  BreadcrumbResponse,
+  NodeItem,
+  RoadmapTreeRequest,
+  RoadmapTreeResponse,
+  RoadmapTreeNode,
+} from "@vizteck/proto";
 
 function toRoadmapItem(r: Roadmap): RoadmapItem {
-  return { id: r.id, slug: r.slug, title: r.title, description: r.description ?? '', coverImage: r.coverImage ?? '', status: r.status ?? 'DRAFT' };
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    description: r.description ?? "",
+    coverImage: r.coverImage ?? "",
+    status: r.status ?? "DRAFT",
+  };
 }
 
 function toNodeItem(n: PrismaNode): NodeItem {
   return {
-    id: n.id, roadmapId: n.roadmapId,
-    type: n.type === 'ROADMAP' ? 0 : 1,
-    title: n.title, positionX: n.positionX ?? 0, positionY: n.positionY ?? 0,
-    targetRoadmapId: n.targetRoadmapId ?? '',
-    content: n.content ? JSON.stringify(n.content) : '',
-    coverImage: n.coverImage ?? '',
-    icon: n.icon ?? '',
+    id: n.id,
+    roadmapId: n.roadmapId,
+    type: n.type === "ROADMAP" ? 0 : 1,
+    title: n.title,
+    positionX: n.positionX ?? 0,
+    positionY: n.positionY ?? 0,
+    targetRoadmapId: n.targetRoadmapId ?? "",
+    content: n.content ? JSON.stringify(n.content) : "",
+    coverImage: n.coverImage ?? "",
+    icon: n.icon ?? "",
   };
 }
 
 @Injectable()
 export class RoadmapService {
   async getRoadmaps(_: Empty): Promise<RoadmapList> {
-    const roadmaps = await db.roadmap.findMany({ orderBy: { createdAt: 'asc' } });
+    const roadmaps = await db.roadmap.findMany({
+      orderBy: { createdAt: "asc" },
+    });
     return { roadmaps: roadmaps.map(toRoadmapItem) };
   }
 
@@ -44,7 +71,12 @@ export class RoadmapService {
     return {
       roadmap: toRoadmapItem(roadmap),
       nodes: roadmap.nodes.map(toNodeItem),
-      edges: allEdges.map((e: any) => ({ id: e.id, sourceId: e.sourceId, targetId: e.targetId, label: e.label ?? '' })),
+      edges: allEdges.map((e: any) => ({
+        id: e.id,
+        sourceId: e.sourceId,
+        targetId: e.targetId,
+        label: e.label ?? "",
+      })),
     };
   }
 
@@ -56,19 +88,32 @@ export class RoadmapService {
     if (!node) return { node: undefined, targetRoadmap: undefined };
     return {
       node: toNodeItem(node),
-      targetRoadmap: node.targetRoadmap ? toRoadmapItem(node.targetRoadmap) : undefined,
+      targetRoadmap: node.targetRoadmap
+        ? toRoadmapItem(node.targetRoadmap)
+        : undefined,
     };
   }
 
   async createRoadmap(req: CreateRoadmapRequest): Promise<RoadmapItem> {
     try {
       const r = await db.roadmap.create({
-        data: { slug: req.slug, title: req.title, description: req.description || null, coverImage: req.coverImage || null },
+        data: {
+          slug: req.slug,
+          title: req.title,
+          description: req.description || null,
+          coverImage: req.coverImage || null,
+        },
       });
       return toRoadmapItem(r);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2002') {
-        throw new RpcException({ code: GrpcStatus.ALREADY_EXISTS, message: `Roadmap with slug '${req.slug}' already exists` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2002"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.ALREADY_EXISTS,
+          message: `Roadmap with slug '${req.slug}' already exists`,
+        });
       }
       throw e;
     }
@@ -88,8 +133,14 @@ export class RoadmapService {
       });
       return toRoadmapItem(r);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Roadmap '${req.id}' not found` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.NOT_FOUND,
+          message: `Roadmap '${req.id}' not found`,
+        });
       }
       throw e;
     }
@@ -100,8 +151,14 @@ export class RoadmapService {
       await db.roadmap.delete({ where: { id } });
       return { success: true };
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Roadmap '${id}' not found` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.NOT_FOUND,
+          message: `Roadmap '${id}' not found`,
+        });
       }
       throw e;
     }
@@ -111,7 +168,10 @@ export class RoadmapService {
     try {
       await db.$transaction(async (tx: any) => {
         // Delete edges first (FK constraint), then nodes
-        const existingNodes = await tx.node.findMany({ where: { roadmapId: req.roadmapId }, select: { id: true } });
+        const existingNodes = await tx.node.findMany({
+          where: { roadmapId: req.roadmapId },
+          select: { id: true },
+        });
         const nodeIds = existingNodes.map((n: any) => n.id);
         await tx.edge.deleteMany({ where: { sourceId: { in: nodeIds } } });
         await tx.node.deleteMany({ where: { roadmapId: req.roadmapId } });
@@ -121,7 +181,7 @@ export class RoadmapService {
             data: {
               id: n.id || undefined,
               roadmap: { connect: { id: req.roadmapId } },
-              type: n.type === 0 ? 'ROADMAP' : 'LESSON',
+              type: n.type === 0 ? "ROADMAP" : "LESSON",
               title: n.title,
               // proto3 double defaults to 0 for unset — treat 0 as unplaced (null in DB)
               ...(n.positionX ? { positionX: n.positionX } : {}),
@@ -136,23 +196,33 @@ export class RoadmapService {
 
         for (const e of req.edges ?? []) {
           await tx.edge.create({
-            data: { sourceId: e.sourceId, targetId: e.targetId, label: e.label || null },
+            data: {
+              sourceId: e.sourceId,
+              targetId: e.targetId,
+              label: e.label || null,
+            },
           });
         }
       });
     } catch (err: any) {
-      console.error('[upsertGraph] transaction error:', err?.message ?? err);
-      throw new RpcException({ code: GrpcStatus.INTERNAL, message: err?.message ?? 'upsertGraph failed' });
+      console.error("[upsertGraph] transaction error:", err?.message ?? err);
+      throw new RpcException({
+        code: GrpcStatus.INTERNAL,
+        message: err?.message ?? "upsertGraph failed",
+      });
     }
 
     const roadmap = await db.roadmap.findUnique({
       where: { id: req.roadmapId },
       select: { slug: true },
     });
-    return this.getRoadmap({ slug: roadmap?.slug ?? '' });
+    return this.getRoadmap({ slug: roadmap?.slug ?? "" });
   }
 
-  async updateNodeContent({ id, content }: UpdateNodeContentRequest): Promise<NodeItem> {
+  async updateNodeContent({
+    id,
+    content,
+  }: UpdateNodeContentRequest): Promise<NodeItem> {
     try {
       const node = await db.node.update({
         where: { id },
@@ -160,14 +230,23 @@ export class RoadmapService {
       });
       return toNodeItem(node);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.NOT_FOUND,
+          message: `Node '${id}' not found`,
+        });
       }
       throw e;
     }
   }
 
-  async updateNodeTitle({ id, title }: UpdateNodeTitleRequest): Promise<NodeItem> {
+  async updateNodeTitle({
+    id,
+    title,
+  }: UpdateNodeTitleRequest): Promise<NodeItem> {
     try {
       const node = await db.node.update({
         where: { id },
@@ -175,14 +254,23 @@ export class RoadmapService {
       });
       return toNodeItem(node);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.NOT_FOUND,
+          message: `Node '${id}' not found`,
+        });
       }
       throw e;
     }
   }
 
-  async updateNodeCover({ id, coverImage }: UpdateNodeCoverRequest): Promise<NodeItem> {
+  async updateNodeCover({
+    id,
+    coverImage,
+  }: UpdateNodeCoverRequest): Promise<NodeItem> {
     try {
       const node = await db.node.update({
         where: { id },
@@ -190,8 +278,14 @@ export class RoadmapService {
       });
       return toNodeItem(node);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.NOT_FOUND,
+          message: `Node '${id}' not found`,
+        });
       }
       throw e;
     }
@@ -205,16 +299,24 @@ export class RoadmapService {
       });
       return toNodeItem(node);
     } catch (e) {
-      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
-        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+      if (
+        e instanceof Prisma.PrismaClientKnownRequestError &&
+        e.code === "P2025"
+      ) {
+        throw new RpcException({
+          code: GrpcStatus.NOT_FOUND,
+          message: `Node '${id}' not found`,
+        });
       }
       throw e;
     }
   }
 
-  async getRoadmapTree({ slug }: RoadmapTreeRequest): Promise<RoadmapTreeResponse> {
+  async getRoadmapTree({
+    slug,
+  }: RoadmapTreeRequest): Promise<RoadmapTreeResponse> {
     const root = await db.roadmap.findUnique({ where: { slug } });
-    if (!root) return { rootSlug: '', rootTitle: '', nodes: [] };
+    if (!root) return { rootSlug: "", rootTitle: "", nodes: [] };
 
     const rootNodes = await db.node.findMany({ where: { roadmapId: root.id } });
 
@@ -222,43 +324,67 @@ export class RoadmapService {
     // When depth > 2 is needed, replace with a single Prisma query using include.
     const nodes: RoadmapTreeNode[] = await Promise.all(
       rootNodes.map(async (n): Promise<RoadmapTreeNode> => {
-        if (n.type === 'LESSON') {
+        if (n.type === "LESSON") {
           return {
-            id: n.id, title: n.title, type: 'LESSON',
-            slug: '', targetRoadmapId: '',
-            roadmapSlug: root.slug, roadmapId: root.id,
+            id: n.id,
+            title: n.title,
+            type: "LESSON",
+            slug: "",
+            targetRoadmapId: "",
+            roadmapSlug: root.slug,
+            roadmapId: root.id,
             children: [],
           };
         }
         // ROADMAP node
         if (!n.targetRoadmapId) {
           return {
-            id: n.id, title: n.title, type: 'ROADMAP',
-            slug: '', targetRoadmapId: '',
-            roadmapSlug: '', roadmapId: '',
+            id: n.id,
+            title: n.title,
+            type: "ROADMAP",
+            slug: "",
+            targetRoadmapId: "",
+            roadmapSlug: "",
+            roadmapId: "",
             children: [],
           };
         }
-        const subRoadmap = await db.roadmap.findUnique({ where: { id: n.targetRoadmapId } });
+        const subRoadmap = await db.roadmap.findUnique({
+          where: { id: n.targetRoadmapId },
+        });
         if (!subRoadmap) {
           return {
-            id: n.id, title: n.title, type: 'ROADMAP',
-            slug: '', targetRoadmapId: n.targetRoadmapId,
-            roadmapSlug: '', roadmapId: '',
+            id: n.id,
+            title: n.title,
+            type: "ROADMAP",
+            slug: "",
+            targetRoadmapId: n.targetRoadmapId,
+            roadmapSlug: "",
+            roadmapId: "",
             children: [],
           };
         }
-        const subNodes = await db.node.findMany({ where: { roadmapId: subRoadmap.id } });
+        const subNodes = await db.node.findMany({
+          where: { roadmapId: subRoadmap.id },
+        });
         const children: RoadmapTreeNode[] = subNodes.map((sn) => ({
-          id: sn.id, title: sn.title, type: sn.type,
-          slug: '', targetRoadmapId: sn.targetRoadmapId ?? '',
-          roadmapSlug: subRoadmap.slug, roadmapId: subRoadmap.id,
+          id: sn.id,
+          title: sn.title,
+          type: sn.type,
+          slug: "",
+          targetRoadmapId: sn.targetRoadmapId ?? "",
+          roadmapSlug: subRoadmap.slug,
+          roadmapId: subRoadmap.id,
           children: [],
         }));
         return {
-          id: n.id, title: n.title, type: 'ROADMAP',
-          slug: subRoadmap.slug, targetRoadmapId: subRoadmap.id,
-          roadmapSlug: '', roadmapId: '',
+          id: n.id,
+          title: n.title,
+          type: "ROADMAP",
+          slug: subRoadmap.slug,
+          targetRoadmapId: subRoadmap.id,
+          roadmapSlug: "",
+          roadmapId: "",
           children,
         };
       }),
@@ -272,7 +398,7 @@ export class RoadmapService {
     if (!node) return { items: [] };
 
     const chain: Array<{ title: string; slug: string; nodeId: string }> = [];
-    chain.unshift({ title: node.title, slug: '', nodeId: node.id });
+    chain.unshift({ title: node.title, slug: "", nodeId: node.id });
 
     let currentRoadmapId = node.roadmapId;
     const visited = new Set<string>();
@@ -282,21 +408,27 @@ export class RoadmapService {
       visited.add(currentRoadmapId);
 
       const parentNode = await db.node.findFirst({
-        where: { type: 'ROADMAP', targetRoadmapId: currentRoadmapId },
+        where: { type: "ROADMAP", targetRoadmapId: currentRoadmapId },
         include: { targetRoadmap: true },
       });
 
       if (parentNode) {
         chain.unshift({
           title: parentNode.title,
-          slug: parentNode.targetRoadmap?.slug ?? '',
+          slug: parentNode.targetRoadmap?.slug ?? "",
           nodeId: parentNode.id,
         });
         currentRoadmapId = parentNode.roadmapId;
       } else {
-        const rootRoadmap = await db.roadmap.findUnique({ where: { id: currentRoadmapId } });
+        const rootRoadmap = await db.roadmap.findUnique({
+          where: { id: currentRoadmapId },
+        });
         if (rootRoadmap) {
-          chain.unshift({ title: rootRoadmap.title, slug: rootRoadmap.slug, nodeId: '' });
+          chain.unshift({
+            title: rootRoadmap.title,
+            slug: rootRoadmap.slug,
+            nodeId: "",
+          });
         }
         break;
       }
