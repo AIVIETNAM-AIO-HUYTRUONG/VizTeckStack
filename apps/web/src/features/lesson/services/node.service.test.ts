@@ -75,30 +75,25 @@ describe('fetchNode', () => {
 describe('fetchBreadcrumb', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('returns breadcrumb items on success', async () => {
+  it('calls the correct API endpoint and returns breadcrumb items', async () => {
     const items = [
       { title: 'Frontend', slug: 'frontend', nodeId: null },
       { title: 'Box Model', slug: null, nodeId: 'n1' },
     ];
-    global.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => items,
-    });
+    mockOk(items);
     const result = await fetchBreadcrumb('n1');
+    expect(mockFetch).toHaveBeenCalledWith(`${BASE}/api/nodes/n1/breadcrumb`, { cache: 'no-store' });
     expect(result).toEqual(items);
   });
 
   it('returns empty array on fetch failure', async () => {
-    global.fetch = vi.fn().mockResolvedValue({ ok: false, status: 404 });
+    mockFetch.mockResolvedValue({ ok: false, status: 404 } as Response);
     const result = await fetchBreadcrumb('missing');
     expect(result).toEqual([]);
   });
 
   it('returns empty array on non-array response', async () => {
-    global.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => null,
-    });
+    mockOk(null);
     const result = await fetchBreadcrumb('n1');
     expect(result).toEqual([]);
   });
