@@ -5,9 +5,11 @@ import { use } from "react";
 import { useAuthGuard } from "@/lib/useAuthGuard";
 import { useLessonEditor } from "@/features/lessons/hooks/useLessonEditor";
 import { useLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
+import { usePageTree } from "@/features/lessons/hooks/usePageTree";
 import { LessonTitleEditor } from "@/features/lessons/components/LessonTitleEditor";
 import { CoverImage } from "@/features/lessons/components/CoverImage";
-import { LessonPageShell } from "@vizteck/lesson";
+import { LessonPageShell, LessonPageLayout } from "@vizteck/lesson";
+import type { PageTreeNode } from "@vizteck/lesson";
 
 const LessonEditor = dynamic(
   () => import("@vizteck/lesson").then((m) => m.LessonEditor),
@@ -36,6 +38,8 @@ export default function LessonEditorPage({
     lesson?.coverImage,
     lesson?.icon,
   );
+
+  const tree = usePageTree(nodeId);
 
   if (loading) {
     return (
@@ -66,32 +70,41 @@ export default function LessonEditorPage({
   };
 
   return (
-    <LessonPageShell
-      mode="edit"
-      node={shellNode}
-      breadcrumb={[]}
-      coverSlot={
-        <CoverImage
-          cover={cover}
-          icon={icon}
-          breadcrumb={[]}
-          onCoverChange={setCover}
-          onIconChange={setIcon}
-        />
+    <LessonPageLayout
+      tree={tree ?? undefined}
+      currentNodeId={nodeId}
+      getLessonHref={(n: PageTreeNode) => `/roadmaps/${n.roadmapId}/nodes/${n.id}`}
+      getRoadmapHref={(n: PageTreeNode) =>
+        n.targetRoadmapId ? `/roadmaps/${n.targetRoadmapId}` : undefined
       }
-      titleSlot={
-        <LessonTitleEditor
-          title={lesson.title}
-          saveStatus={titleSaveStatus}
-          onSave={handleSaveTitle}
-        />
-      }
-      contentSlot={
-        <LessonEditor
-          initialContentJson={lesson.content ?? ""}
-          onSave={handleSaveContent}
-        />
-      }
-    />
+    >
+      <LessonPageShell
+        mode="edit"
+        node={shellNode}
+        breadcrumb={[]}
+        coverSlot={
+          <CoverImage
+            cover={cover}
+            icon={icon}
+            breadcrumb={[]}
+            onCoverChange={setCover}
+            onIconChange={setIcon}
+          />
+        }
+        titleSlot={
+          <LessonTitleEditor
+            title={lesson.title}
+            saveStatus={titleSaveStatus}
+            onSave={handleSaveTitle}
+          />
+        }
+        contentSlot={
+          <LessonEditor
+            initialContentJson={lesson.content ?? ""}
+            onSave={handleSaveContent}
+          />
+        }
+      />
+    </LessonPageLayout>
   );
 }
