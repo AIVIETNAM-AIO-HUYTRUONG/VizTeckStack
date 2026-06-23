@@ -1,6 +1,6 @@
 "use client";
 
-import type { PageTreeNode } from './types';
+import type { PageTreeNode } from "./types";
 
 export interface PageTreeItemProps {
   node: PageTreeNode;
@@ -13,12 +13,18 @@ export interface PageTreeItemProps {
 }
 
 export function PageTreeItem({
-  node, depth, currentNodeId, isExpanded, onToggle, getLessonHref, getRoadmapHref,
+  node,
+  depth,
+  currentNodeId,
+  isExpanded,
+  onToggle,
+  getLessonHref,
+  getRoadmapHref,
 }: PageTreeItemProps) {
   const isCurrent = node.id === currentNodeId;
   const indent = depth * 12;
 
-  if (node.type === 'LESSON') {
+  if (node.type === "LESSON") {
     const href = getLessonHref(node);
     return (
       <div style={{ paddingLeft: `${indent}px` }}>
@@ -26,11 +32,13 @@ export function PageTreeItem({
           href={href}
           className={`flex items-center gap-1.5 px-2 py-1 rounded text-sm transition-colors ${
             isCurrent
-              ? 'bg-indigo/10 text-indigo font-medium'
-              : 'text-text-2 hover:bg-bg-2 hover:text-text-1'
+              ? "bg-indigo/10 text-indigo font-medium"
+              : "text-text-2 hover:bg-bg-2 hover:text-text-1"
           }`}
         >
-          <span className="shrink-0 text-xs" aria-hidden="true">📄</span>
+          <span className="shrink-0 text-xs" aria-hidden="true">
+            📄
+          </span>
           <span className="truncate">{node.title}</span>
         </a>
       </div>
@@ -49,7 +57,9 @@ export function PageTreeItem({
           onClick={() => onToggle(node.id)}
           className="flex items-center gap-1.5 flex-1 px-2 py-1 rounded text-sm text-text-2 hover:bg-bg-2 hover:text-text-1 transition-colors text-left"
         >
-          <span className="shrink-0 text-xs" aria-hidden="true">{isExpanded ? '📂' : '📁'}</span>
+          <span className="shrink-0 text-xs" aria-hidden="true">
+            {isExpanded ? "📂" : "📁"}
+          </span>
           {roadmapHref ? (
             <a
               href={roadmapHref}
