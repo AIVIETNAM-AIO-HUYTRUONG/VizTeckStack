@@ -6,6 +6,8 @@ export interface LessonNode {
   type: string;
   title: string;
   content?: string;
+  coverImage?: string | null;
+  icon?: string | null;
 }
 
 export async function fetchLesson(nodeId: string): Promise<LessonNode> {
@@ -21,10 +23,7 @@ export async function updateLessonContent(nodeId: string, content: string): Prom
     method: 'PATCH',
     body: JSON.stringify({ content }),
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Save failed (${res.status}): ${text}`);
-  }
+  if (!res.ok) throw new Error(`Save failed (${res.status}): ${await res.text()}`);
 }
 
 export async function updateLessonTitle(nodeId: string, title: string): Promise<void> {
@@ -32,8 +31,21 @@ export async function updateLessonTitle(nodeId: string, title: string): Promise<
     method: 'PATCH',
     body: JSON.stringify({ title }),
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Update title failed (${res.status}): ${text}`);
-  }
+  if (!res.ok) throw new Error(`Update title failed (${res.status}): ${await res.text()}`);
+}
+
+export async function updateNodeCover(nodeId: string, coverImage: string | null): Promise<void> {
+  const res = await apiFetch(`/api/nodes/${nodeId}/cover`, {
+    method: 'PATCH',
+    body: JSON.stringify({ coverImage }),
+  });
+  if (!res.ok) throw new Error(`Update cover failed (${res.status}): ${await res.text()}`);
+}
+
+export async function updateNodeIcon(nodeId: string, icon: string | null): Promise<void> {
+  const res = await apiFetch(`/api/nodes/${nodeId}/icon`, {
+    method: 'PATCH',
+    body: JSON.stringify({ icon }),
+  });
+  if (!res.ok) throw new Error(`Update icon failed (${res.status}): ${await res.text()}`);
 }
