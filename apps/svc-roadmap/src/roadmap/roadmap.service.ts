@@ -230,7 +230,7 @@ export class RoadmapService {
       if (parentNode) {
         chain.unshift({
           title: parentNode.title,
-          slug: (parentNode as any).targetRoadmap?.slug ?? '',
+          slug: parentNode.targetRoadmap?.slug ?? '',
           nodeId: parentNode.id,
         });
         currentRoadmapId = parentNode.roadmapId;
