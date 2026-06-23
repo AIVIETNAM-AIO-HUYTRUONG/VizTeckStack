@@ -218,6 +218,8 @@ export class RoadmapService {
 
     const rootNodes = await db.node.findMany({ where: { roadmapId: root.id } });
 
+    // N+1 queries intentional at depth-2 fixed scope: 1 root + 2 per ROADMAP node.
+    // When depth > 2 is needed, replace with a single Prisma query using include.
     const nodes: RoadmapTreeNode[] = await Promise.all(
       rootNodes.map(async (n): Promise<RoadmapTreeNode> => {
         if (n.type === 'LESSON') {

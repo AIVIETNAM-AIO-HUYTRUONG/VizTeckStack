@@ -65,18 +65,21 @@ export function PageTreeItem({
       </div>
       {isExpanded && hasChildren && (
         <div>
-          {node.children!.map((child) => (
-            <PageTreeItem
-              key={child.id}
-              node={child}
-              depth={depth + 1}
-              currentNodeId={currentNodeId}
-              isExpanded={false}
-              onToggle={onToggle}
-              getLessonHref={getLessonHref}
-              getRoadmapHref={getRoadmapHref}
-            />
-          ))}
+          {node.children!.map((child) => {
+            // isExpanded is always false here: at depth-2, children are LESSON nodes with no subtrees
+            return (
+              <PageTreeItem
+                key={child.id}
+                node={child}
+                depth={depth + 1}
+                currentNodeId={currentNodeId}
+                isExpanded={false}
+                onToggle={onToggle}
+                getLessonHref={getLessonHref}
+                getRoadmapHref={getRoadmapHref}
+              />
+            );
+          })}
         </div>
       )}
     </div>
