@@ -11,6 +11,7 @@ import {
   UpdateRoadmapInput,
   NodeInput,
   EdgeInput,
+  BreadcrumbItemDto,
 } from "./roadmap.dto";
 
 // Proto sends NodeType as numeric (ROADMAP=0, LESSON=1); GraphQL enum expects strings.
@@ -78,5 +79,35 @@ export class RoadmapResolver {
     @Args("edges", { type: () => [EdgeInput] }) edges: EdgeInput[],
   ): Promise<RoadmapDetailDto> {
     return this.grpc.upsertGraph({ roadmapId, nodes, edges });
+  }
+
+  @Query(() => [BreadcrumbItemDto])
+  async nodeBreadcrumb(
+    @Args("id", { type: () => ID }) id: string,
+  ): Promise<BreadcrumbItemDto[]> {
+    const result = await this.grpc.getNodeBreadcrumb(id) as { items?: Array<{ title: string; slug: string; nodeId: string }> };
+    return (result.items ?? []).map((item) => ({
+      title: item.title,
+      slug: item.slug || undefined,
+      nodeId: item.nodeId || undefined,
+    }));
+  }
+
+  @UseGuards(AdminGuard)
+  @Mutation(() => NodeDto)
+  updateNodeCover(
+    @Args("id", { type: () => ID }) id: string,
+    @Args("coverImage", { nullable: true }) coverImage?: string,
+  ): Promise<NodeDto> {
+    return this.grpc.updateNodeCover(id, coverImage ?? '') as Promise<NodeDto>;
+  }
+
+  @UseGuards(AdminGuard)
+  @Mutation(() => NodeDto)
+  updateNodeIcon(
+    @Args("id", { type: () => ID }) id: string,
+    @Args("icon", { nullable: true }) icon?: string,
+  ): Promise<NodeDto> {
+    return this.grpc.updateNodeIcon(id, icon ?? '') as Promise<NodeDto>;
   }
 }

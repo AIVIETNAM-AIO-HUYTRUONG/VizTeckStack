@@ -46,6 +46,14 @@ export class NodeDto {
   @Field({ nullable: true })
   @ApiPropertyOptional({ example: null })
   content?: string;
+
+  @Field({ nullable: true })
+  @ApiPropertyOptional({ example: 'https://cdn.example.com/cover.jpg' })
+  coverImage?: string;
+
+  @Field({ nullable: true })
+  @ApiPropertyOptional({ example: '⚡' })
+  icon?: string;
 }
 
 @ObjectType()
@@ -131,4 +139,25 @@ export class UpdateNodeTitleInput {
   @Field()
   @ApiProperty({ example: 'HTML & CSS Basics' })
   title!: string;
+}
+
+@ObjectType()
+export class BreadcrumbItemDto {
+  @Field() @ApiProperty({ example: 'Frontend Roadmap' }) title!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'frontend' }) slug?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'clx...' }) nodeId?: string;
+}
+
+@InputType()
+export class UpdateNodeCoverInput {
+  @Field({ nullable: true })
+  @ApiPropertyOptional({ example: 'https://cdn.example.com/cover.jpg', description: 'null removes the cover' })
+  coverImage?: string;
+}
+
+@InputType()
+export class UpdateNodeIconInput {
+  @Field({ nullable: true })
+  @ApiPropertyOptional({ example: '⚡', description: 'null removes the icon' })
+  icon?: string;
 }
