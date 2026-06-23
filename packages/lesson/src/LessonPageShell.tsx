@@ -15,6 +15,7 @@ export interface LessonPageShellProps {
   coverSlot?: React.ReactNode;
   titleSlot?: React.ReactNode;
   contentSlot?: React.ReactNode;
+  getLinkHref?: (item: BreadcrumbItem) => string | undefined;
 }
 
 export function LessonPageShell({
@@ -24,12 +25,14 @@ export function LessonPageShell({
   coverSlot,
   titleSlot,
   contentSlot,
+  getLinkHref,
 }: LessonPageShellProps) {
   const cover = coverSlot ?? (
     <CoverDisplay
       coverImage={node.coverImage}
       icon={node.icon}
       breadcrumb={breadcrumb}
+      getLinkHref={getLinkHref}
     />
   );
 

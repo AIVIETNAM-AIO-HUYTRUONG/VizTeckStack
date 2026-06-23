@@ -1,6 +1,5 @@
 import { LessonLayout } from '@/features/lesson/components/LessonLayout';
-import { fetchNode } from '@/features/lesson/services/node.service';
-import { fetchRoadmap } from '@/features/roadmap/services/roadmap.service';
+import { fetchNode, fetchBreadcrumb } from '@/features/lesson/services/node.service';
 
 export const revalidate = 0;
 export const dynamicParams = true;
@@ -14,11 +13,11 @@ export default async function LessonPage({
 }: {
   params: Promise<{ slug: string; id: string }>;
 }) {
-  const { slug, id } = await params;
+  const { id } = await params;
 
-  const [nodeResult, roadmapResult] = await Promise.allSettled([
+  const [nodeResult, breadcrumbResult] = await Promise.allSettled([
     fetchNode(id),
-    fetchRoadmap(slug),
+    fetchBreadcrumb(id),
   ]);
 
   if (nodeResult.status === 'rejected') {
@@ -29,17 +28,13 @@ export default async function LessonPage({
     );
   }
 
-  const roadmapNodes =
-    roadmapResult.status === 'fulfilled' ? roadmapResult.value.nodes : [];
-  const roadmapEdges =
-    roadmapResult.status === 'fulfilled' ? roadmapResult.value.edges : [];
+  const breadcrumb =
+    breadcrumbResult.status === 'fulfilled' ? breadcrumbResult.value : [];
 
   return (
     <LessonLayout
-      slug={slug}
       node={nodeResult.value}
-      roadmapNodes={roadmapNodes}
-      roadmapEdges={roadmapEdges}
+      breadcrumb={breadcrumb}
     />
   );
 }

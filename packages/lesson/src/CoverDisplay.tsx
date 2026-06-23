@@ -9,6 +9,7 @@ export interface CoverDisplayProps {
   icon: string | null;
   breadcrumb: BreadcrumbItem[];
   onIconClick?: () => void;
+  getLinkHref?: (item: BreadcrumbItem) => string | undefined;
 }
 
 export function CoverDisplay({
@@ -16,6 +17,7 @@ export function CoverDisplay({
   icon,
   breadcrumb,
   onIconClick,
+  getLinkHref,
 }: CoverDisplayProps) {
   const [imgError, setImgError] = useState(false);
   const showImage = !!coverImage && !imgError;
@@ -35,7 +37,7 @@ export function CoverDisplay({
 
       {breadcrumb.length > 0 && (
         <div className="absolute top-3 left-4">
-          <BreadcrumbDisplay items={breadcrumb} variant="overlay" />
+          <BreadcrumbDisplay items={breadcrumb} variant="overlay" getLinkHref={getLinkHref} />
         </div>
       )}
 
