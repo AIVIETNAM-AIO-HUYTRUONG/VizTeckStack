@@ -6,6 +6,7 @@ import {
   Empty, RoadmapList, SlugRequest, RoadmapDetail, IdRequest,
   NodeDetail, CreateRoadmapRequest, RoadmapItem, UpdateRoadmapRequest,
   BoolResponse, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest,
+  UpdateNodeCoverRequest, UpdateNodeIconRequest, BreadcrumbResponse,
   NodeItem,
 } from '@vizteck/proto';
 
@@ -13,13 +14,15 @@ function toRoadmapItem(r: Roadmap): RoadmapItem {
   return { id: r.id, slug: r.slug, title: r.title, description: r.description ?? '', coverImage: r.coverImage ?? '', status: r.status ?? 'DRAFT' };
 }
 
-function toNodeItem(n: PrismaNode) {
+function toNodeItem(n: PrismaNode): NodeItem {
   return {
     id: n.id, roadmapId: n.roadmapId,
     type: n.type === 'ROADMAP' ? 0 : 1,
     title: n.title, positionX: n.positionX ?? 0, positionY: n.positionY ?? 0,
     targetRoadmapId: n.targetRoadmapId ?? '',
     content: n.content ? JSON.stringify(n.content) : '',
+    coverImage: n.coverImage ?? '',
+    icon: n.icon ?? '',
   };
 }
 
@@ -177,5 +180,53 @@ export class RoadmapService {
       }
       throw e;
     }
+  }
+
+  async updateNodeCover({ id, coverImage }: UpdateNodeCoverRequest): Promise<NodeItem> {
+    try {
+      const node = await db.node.update({
+        where: { id },
+        data: { coverImage: coverImage || null },
+      });
+      return toNodeItem(node);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
+        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+      }
+      throw e;
+    }
+  }
+
+  async updateNodeIcon({ id, icon }: UpdateNodeIconRequest): Promise<NodeItem> {
+    try {
+      const node = await db.node.update({
+        where: { id },
+        data: { icon: icon || null },
+      });
+      return toNodeItem(node);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === 'P2025') {
+        throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+      }
+      throw e;
+    }
+  }
+
+  async getNodeBreadcrumb({ id }: IdRequest): Promise<BreadcrumbResponse> {
+    // Walk the graph upward from the given node to build a breadcrumb trail.
+    // Strategy: find the node, get its roadmap (for the roadmap-level crumb),
+    // then return a single-level breadcrumb for now (full ancestor walk is Task 5+).
+    const node = await db.node.findUnique({
+      where: { id },
+      include: { roadmap: true },
+    });
+    if (!node) {
+      throw new RpcException({ code: GrpcStatus.NOT_FOUND, message: `Node '${id}' not found` });
+    }
+    const items = [
+      { title: node.roadmap.title, slug: node.roadmap.slug, nodeId: '' },
+      { title: node.title, slug: '', nodeId: node.id },
+    ];
+    return { items };
   }
 }

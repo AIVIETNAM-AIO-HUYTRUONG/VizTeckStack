@@ -49,6 +49,8 @@ export interface NodeItem {
   positionY: number;
   targetRoadmapId: string;
   content: string;
+  coverImage: string;
+  icon: string;
 }
 
 export interface EdgeItem {
@@ -120,6 +122,26 @@ export interface UpdateNodeTitleRequest {
   title: string;
 }
 
+export interface UpdateNodeCoverRequest {
+  id: string;
+  coverImage: string;
+}
+
+export interface UpdateNodeIconRequest {
+  id: string;
+  icon: string;
+}
+
+export interface BreadcrumbItem {
+  title: string;
+  slug: string;
+  nodeId: string;
+}
+
+export interface BreadcrumbResponse {
+  items: BreadcrumbItem[];
+}
+
 export const ROADMAP_PACKAGE_NAME = "roadmap";
 
 export interface RoadmapServiceClient {
@@ -140,6 +162,12 @@ export interface RoadmapServiceClient {
   updateNodeContent(request: UpdateNodeContentRequest): Observable<NodeItem>;
 
   updateNodeTitle(request: UpdateNodeTitleRequest): Observable<NodeItem>;
+
+  updateNodeCover(request: UpdateNodeCoverRequest): Observable<NodeItem>;
+
+  updateNodeIcon(request: UpdateNodeIconRequest): Observable<NodeItem>;
+
+  getNodeBreadcrumb(request: IdRequest): Observable<BreadcrumbResponse>;
 }
 
 export interface RoadmapServiceController {
@@ -160,6 +188,14 @@ export interface RoadmapServiceController {
   updateNodeContent(request: UpdateNodeContentRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
 
   updateNodeTitle(request: UpdateNodeTitleRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  updateNodeCover(request: UpdateNodeCoverRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  updateNodeIcon(request: UpdateNodeIconRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  getNodeBreadcrumb(
+    request: IdRequest,
+  ): Promise<BreadcrumbResponse> | Observable<BreadcrumbResponse> | BreadcrumbResponse;
 }
 
 export function RoadmapServiceControllerMethods() {
@@ -174,6 +210,9 @@ export function RoadmapServiceControllerMethods() {
       "upsertGraph",
       "updateNodeContent",
       "updateNodeTitle",
+      "updateNodeCover",
+      "updateNodeIcon",
+      "getNodeBreadcrumb",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

@@ -38,6 +38,8 @@ message NodeItem {
   double positionY = 6;
   string targetRoadmapId = 7;
   string content = 8;
+  string coverImage = 9;
+  string icon = 10;
 }
 
 message EdgeItem {
@@ -109,6 +111,26 @@ message UpdateNodeTitleRequest {
   string title = 2;
 }
 
+message UpdateNodeCoverRequest {
+  string id = 1;
+  string coverImage = 2;
+}
+
+message UpdateNodeIconRequest {
+  string id = 1;
+  string icon = 2;
+}
+
+message BreadcrumbItem {
+  string title = 1;
+  string slug = 2;
+  string nodeId = 3;
+}
+
+message BreadcrumbResponse {
+  repeated BreadcrumbItem items = 1;
+}
+
 service RoadmapService {
   rpc GetRoadmaps (Empty) returns (RoadmapList);
   rpc GetRoadmap (SlugRequest) returns (RoadmapDetail);
@@ -119,4 +141,7 @@ service RoadmapService {
   rpc UpsertGraph (UpsertGraphRequest) returns (RoadmapDetail);
   rpc UpdateNodeContent (UpdateNodeContentRequest) returns (NodeItem);
   rpc UpdateNodeTitle (UpdateNodeTitleRequest) returns (NodeItem);
+  rpc UpdateNodeCover (UpdateNodeCoverRequest) returns (NodeItem);
+  rpc UpdateNodeIcon (UpdateNodeIconRequest) returns (NodeItem);
+  rpc GetNodeBreadcrumb (IdRequest) returns (BreadcrumbResponse);
 }
