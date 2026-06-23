@@ -220,8 +220,12 @@ export class RoadmapService {
     chain.unshift({ title: node.title, slug: '', nodeId: node.id });
 
     let currentRoadmapId = node.roadmapId;
+    const visited = new Set<string>();
 
     while (true) {
+      if (visited.has(currentRoadmapId)) break;
+      visited.add(currentRoadmapId);
+
       const parentNode = await db.node.findFirst({
         where: { type: 'ROADMAP', targetRoadmapId: currentRoadmapId },
         include: { targetRoadmap: true },

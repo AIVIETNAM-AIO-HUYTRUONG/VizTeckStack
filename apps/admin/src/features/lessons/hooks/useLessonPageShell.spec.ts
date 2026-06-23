@@ -53,3 +53,14 @@ it("setIcon rolls back on API error", async () => {
   });
   expect(result.current.icon).toBe("⚡");
 });
+
+it("syncs cover when initialCover changes from undefined to a value", async () => {
+  const { result, rerender } = renderHook(
+    ({ cover }: { cover: string | null | undefined }) =>
+      useLessonPageShell("n1", cover, null),
+    { initialProps: { cover: undefined as string | null | undefined } },
+  );
+  expect(result.current.cover).toBeNull();
+  rerender({ cover: "https://loaded.jpg" });
+  expect(result.current.cover).toBe("https://loaded.jpg");
+});

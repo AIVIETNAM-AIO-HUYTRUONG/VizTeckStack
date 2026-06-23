@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { use } from "react";
-import { useSearchParams } from "next/navigation";
 import { useAuthGuard } from "@/lib/useAuthGuard";
 import { useLessonEditor } from "@/features/lessons/hooks/useLessonEditor";
 import { useLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
@@ -22,8 +21,6 @@ export default function LessonEditorPage({
 }) {
   useAuthGuard();
   const { id, nodeId } = use(params);
-  const searchParams = useSearchParams();
-  const slug = searchParams.get("slug") ?? "";
 
   const {
     loading,

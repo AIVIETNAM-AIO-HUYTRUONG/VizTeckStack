@@ -37,8 +37,11 @@ export function IconPicker({ icon, onIconChange, isOpen, onToggle }: IconPickerP
     <div className="relative">
       {/* Trigger */}
       <div
+        role="button"
+        tabIndex={0}
         className="w-10 h-10 bg-bg-0 border border-border rounded-lg flex items-center justify-center text-2xl cursor-pointer hover:border-indigo transition-colors select-none"
         onClick={onToggle}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onToggle()}
       >
         {icon || "📄"}
       </div>
