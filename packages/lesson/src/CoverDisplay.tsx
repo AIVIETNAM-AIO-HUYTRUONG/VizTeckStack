@@ -42,6 +42,7 @@ export function CoverDisplay({
       <div
         className={`absolute left-4 -bottom-5 w-10 h-10 bg-bg-0 border border-border rounded-lg flex items-center justify-center text-2xl z-10 select-none${onIconClick ? " cursor-pointer hover:border-indigo transition-colors" : ""}`}
         onClick={onIconClick}
+        {...(onIconClick ? { role: "button", tabIndex: 0 } : {})}
       >
         {icon || "📄"}
       </div>

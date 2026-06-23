@@ -26,7 +26,7 @@ export function BreadcrumbDisplay({
         const isLast = i === items.length - 1;
         const href = !isLast && getLinkHref ? getLinkHref(item) : undefined;
         return (
-          <span key={i} className="flex items-center gap-1">
+          <span key={item.nodeId ?? item.slug ?? item.title ?? i} className="flex items-center gap-1">
             {i > 0 && <span className={sepClass}>›</span>}
             {isLast ? (
               <span className={currentClass}>{item.title}</span>
