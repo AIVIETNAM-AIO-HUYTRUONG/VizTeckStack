@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { WebApolloProvider } from '../components/ApolloProvider';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -43,13 +44,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} bg-bg-0 text-text-1`}>
-        <header className="h-14 px-6 flex items-center justify-between bg-bg-1 border-b border-border">
-          <a href="/" className="font-display font-bold text-lg text-text-1 no-underline">
-            VizTeckStack
-          </a>
-          <ThemeToggle />
-        </header>
-        <main>{children}</main>
+        <WebApolloProvider>
+          <header className="h-14 px-6 flex items-center justify-between bg-bg-1 border-b border-border">
+            <a href="/" className="font-display font-bold text-lg text-text-1 no-underline">
+              VizTeckStack
+            </a>
+            <ThemeToggle />
+          </header>
+          <main>{children}</main>
+        </WebApolloProvider>
       </body>
     </html>
   );
