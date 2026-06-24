@@ -107,7 +107,8 @@ export class RoadmapResolver {
     @Args('roadmapId', { type: () => ID, nullable: true }) roadmapId?: string,
     @Context() ctx?: { req: { headers: { authorization?: string } } },
   ): Promise<SearchResultDto[]> {
-    const isAdmin = Boolean(ctx?.req?.headers?.authorization?.startsWith('Bearer '));
+    const token = ctx?.req?.headers?.authorization?.replace('Bearer ', '');
+    const isAdmin = Boolean(token && token === process.env.ADMIN_TOKEN);
     const raw = await this.grpc.searchNodes({ q, titleOnly, roadmapId: roadmapId ?? '' }) as { results?: any[] };
     const items: any[] = raw.results ?? [];
 

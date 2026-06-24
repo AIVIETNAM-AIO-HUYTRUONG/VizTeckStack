@@ -20,9 +20,10 @@ function groupByTime(results: SearchResultItem[]): TimeGroup[] {
 
   for (const r of results) {
     if (!r) continue;
-    const diffDays = Math.floor(
-      (now.getTime() - new Date(r.updatedAt).getTime()) / 86400000,
-    );
+    const updated = new Date(r.updatedAt);
+    const nowDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const updatedDate = new Date(updated.getFullYear(), updated.getMonth(), updated.getDate());
+    const diffDays = Math.round((nowDate.getTime() - updatedDate.getTime()) / 86400000);
     if (diffDays === 0) buckets['Today'].push(r);
     else if (diffDays === 1) buckets['Yesterday'].push(r);
     else if (diffDays <= 7) buckets['Past week'].push(r);
