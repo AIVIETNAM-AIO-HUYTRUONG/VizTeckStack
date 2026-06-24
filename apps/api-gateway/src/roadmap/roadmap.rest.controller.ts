@@ -121,7 +121,9 @@ export class RoadmapRestController {
     return this.grpc.updateNodeIcon(id, body.icon ?? '');
   }
 
+  @UseGuards(AdminGuard)
   @Get('search')
+  @ApiBearerAuth()
   @ApiOperation({ summary: 'Search nodes and roadmaps (full-text) — Swagger docs only, use GraphQL in FE' })
   async searchNodes(
     @Query('q') q: string,

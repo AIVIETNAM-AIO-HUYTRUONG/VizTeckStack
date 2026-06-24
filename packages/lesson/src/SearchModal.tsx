@@ -71,7 +71,7 @@ export function SearchModal({ open, onClose, getLessonHref, getRoadmapHref }: Se
             placeholder="Search or ask a question..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-transparent text-text-1 placeholder-text-3 text-sm outline-none"
+            className="flex-1 bg-transparent text-text-1 placeholder:text-text-3 text-sm outline-none"
           />
         </div>
 

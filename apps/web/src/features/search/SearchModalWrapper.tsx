@@ -9,7 +9,7 @@ export function SearchModalWrapper() {
     <SearchModal
       open={open}
       onClose={() => setOpen(false)}
-      getLessonHref={(roadmapSlug, nodeId) =>
+      getLessonHref={(roadmapSlug, nodeId, _roadmapId) =>
         `/roadmap/${roadmapSlug}/node/${nodeId}`
       }
       getRoadmapHref={(roadmapSlug) => `/roadmap/${roadmapSlug}`}

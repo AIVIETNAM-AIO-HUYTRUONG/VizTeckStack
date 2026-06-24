@@ -6,7 +6,7 @@ import { MockedProvider } from '@apollo/client/testing';
 const defaultProps = {
   open: true,
   onClose: vi.fn(),
-  getLessonHref: (slug: string, nodeId: string) => `/roadmap/${slug}/node/${nodeId}`,
+  getLessonHref: (slug: string, nodeId: string, _roadmapId: string) => `/roadmap/${slug}/node/${nodeId}`,
 };
 
 function Wrapper({ children }: { children: React.ReactNode }) {
