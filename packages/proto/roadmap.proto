@@ -131,6 +131,27 @@ message BreadcrumbResponse {
   repeated BreadcrumbItem items = 1;
 }
 
+message RoadmapTreeNode {
+  string id               = 1;
+  string title            = 2;
+  string type             = 3;
+  string slug             = 4;
+  string targetRoadmapId  = 5;
+  string roadmapSlug      = 6;
+  string roadmapId        = 7;
+  repeated RoadmapTreeNode children = 8;
+}
+
+message RoadmapTreeRequest {
+  string slug = 1;
+}
+
+message RoadmapTreeResponse {
+  string rootSlug  = 1;
+  string rootTitle = 2;
+  repeated RoadmapTreeNode nodes = 3;
+}
+
 service RoadmapService {
   rpc GetRoadmaps (Empty) returns (RoadmapList);
   rpc GetRoadmap (SlugRequest) returns (RoadmapDetail);
@@ -144,4 +165,5 @@ service RoadmapService {
   rpc UpdateNodeCover (UpdateNodeCoverRequest) returns (NodeItem);
   rpc UpdateNodeIcon (UpdateNodeIconRequest) returns (NodeItem);
   rpc GetNodeBreadcrumb (IdRequest) returns (BreadcrumbResponse);
+  rpc GetRoadmapTree (RoadmapTreeRequest) returns (RoadmapTreeResponse);
 }

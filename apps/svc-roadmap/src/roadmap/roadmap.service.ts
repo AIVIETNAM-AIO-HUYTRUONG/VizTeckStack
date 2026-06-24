@@ -7,7 +7,7 @@ import {
   NodeDetail, CreateRoadmapRequest, RoadmapItem, UpdateRoadmapRequest,
   BoolResponse, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest,
   UpdateNodeCoverRequest, UpdateNodeIconRequest, BreadcrumbResponse,
-  NodeItem,
+  NodeItem, RoadmapTreeRequest, RoadmapTreeResponse, RoadmapTreeNode,
 } from '@vizteck/proto';
 
 function toRoadmapItem(r: Roadmap): RoadmapItem {
@@ -210,6 +210,61 @@ export class RoadmapService {
       }
       throw e;
     }
+  }
+
+  async getRoadmapTree({ slug }: RoadmapTreeRequest): Promise<RoadmapTreeResponse> {
+    const root = await db.roadmap.findUnique({ where: { slug } });
+    if (!root) return { rootSlug: '', rootTitle: '', nodes: [] };
+
+    const rootNodes = await db.node.findMany({ where: { roadmapId: root.id } });
+
+    // N+1 queries intentional at depth-2 fixed scope: 1 root + 2 per ROADMAP node.
+    // When depth > 2 is needed, replace with a single Prisma query using include.
+    const nodes: RoadmapTreeNode[] = await Promise.all(
+      rootNodes.map(async (n): Promise<RoadmapTreeNode> => {
+        if (n.type === 'LESSON') {
+          return {
+            id: n.id, title: n.title, type: 'LESSON',
+            slug: '', targetRoadmapId: '',
+            roadmapSlug: root.slug, roadmapId: root.id,
+            children: [],
+          };
+        }
+        // ROADMAP node
+        if (!n.targetRoadmapId) {
+          return {
+            id: n.id, title: n.title, type: 'ROADMAP',
+            slug: '', targetRoadmapId: '',
+            roadmapSlug: '', roadmapId: '',
+            children: [],
+          };
+        }
+        const subRoadmap = await db.roadmap.findUnique({ where: { id: n.targetRoadmapId } });
+        if (!subRoadmap) {
+          return {
+            id: n.id, title: n.title, type: 'ROADMAP',
+            slug: '', targetRoadmapId: n.targetRoadmapId,
+            roadmapSlug: '', roadmapId: '',
+            children: [],
+          };
+        }
+        const subNodes = await db.node.findMany({ where: { roadmapId: subRoadmap.id } });
+        const children: RoadmapTreeNode[] = subNodes.map((sn) => ({
+          id: sn.id, title: sn.title, type: sn.type,
+          slug: '', targetRoadmapId: sn.targetRoadmapId ?? '',
+          roadmapSlug: subRoadmap.slug, roadmapId: subRoadmap.id,
+          children: [],
+        }));
+        return {
+          id: n.id, title: n.title, type: 'ROADMAP',
+          slug: subRoadmap.slug, targetRoadmapId: subRoadmap.id,
+          roadmapSlug: '', roadmapId: '',
+          children,
+        };
+      }),
+    );
+
+    return { rootSlug: root.slug, rootTitle: root.title, nodes };
   }
 
   async getNodeBreadcrumb({ id }: IdRequest): Promise<BreadcrumbResponse> {

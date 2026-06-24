@@ -20,11 +20,13 @@ pnpm --filter @vizteck/db db:studio  # Open Prisma Studio
 
 # Single package test
 pnpm --filter @vizteck/admin test
+pnpm --filter @vizteck/lesson test
 pnpm --filter @vizteck/svc-roadmap test
 pnpm --filter @vizteck/api-gateway test
 
-# Test watch mode (admin uses Vitest)
+# Test watch mode (admin and packages/lesson use Vitest)
 pnpm --filter @vizteck/admin test -- --watch
+pnpm --filter @vizteck/lesson test -- --watch
 
 # E2E tests (Playwright — requires all apps running via pnpm dev)
 pnpm --filter @vizteck/e2e test:e2e    # Headless
@@ -42,6 +44,7 @@ docker compose ps
 | Package | Framework | Notes |
 |---------|-----------|-------|
 | `apps/admin` | Vitest + @testing-library/react | `*.spec.tsx` in `src/` |
+| `packages/lesson` | Vitest + @testing-library/react | `*.spec.tsx` in `src/` |
 | `apps/api-gateway` | Jest + ts-jest | `*.spec.ts` in `src/` |
 | `apps/svc-roadmap` | Jest + ts-jest | `*.spec.ts` in `src/` |
 | `apps/e2e` | Playwright | Separate from `pnpm test`; needs apps running |
@@ -119,7 +122,7 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 | `packages/db` | `@vizteck/db` | Exports `db` (PrismaClient singleton) and all Prisma types. |
 | `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge). |
 | `packages/graph` | `@vizteck/graph` | `<RoadmapGraph>` built on `@xyflow/react`. Accepts `mode="view"` (read-only) or `mode="edit"` (draggable + connectable). Re-exports `@xyflow/react` types and `applyEdgeChanges` so apps don't need a direct dep. |
-| `packages/lesson` | `@vizteck/lesson` | Shared BlockNote components: `<LessonEditor>` (editable, used by admin) and `<LessonViewer>` (read-only, for `apps/web`). Both detect dark mode via MutationObserver on `document.documentElement`. |
+| `packages/lesson` | `@vizteck/lesson` | Shared lesson UI. Exports `<LessonEditor>` (BlockNote, editable), `<LessonViewer>` (read-only), `<LessonPageShell>` (Notion-style page layout used by both apps), `<CoverDisplay>`, `<BreadcrumbDisplay>`, and types `LessonShellNode`, `BreadcrumbItem`. Both BlockNote components detect dark mode via MutationObserver on `document.documentElement`. |
 
 **Dependency rule:** `apps/*` may import from `packages/*`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
 
@@ -142,10 +145,14 @@ src/features/
     components/NodeInventory.tsx
     components/NodeSidePanel.tsx
   lessons/
-    services/lesson.service.ts    — fetchLesson, updateLessonContent, updateLessonTitle
+    services/lesson.service.ts    — fetchLesson, updateLessonContent, updateLessonTitle, updateNodeCover, updateNodeIcon
     hooks/useLessonEditor.ts      — fetch + save state, titleSaveStatus
+    hooks/useLessonPageShell.ts   — optimistic cover/icon state with API sync + rollback
     components/LessonEditor.tsx   — BlockNote editor (wraps @vizteck/lesson)
     components/LessonTitleEditor.tsx — inline title with blur-to-save
+    components/CoverImage.tsx     — editable cover area (hover controls: upload, paste URL, remove)
+    components/CoverUploadModal.tsx — uploadthing file upload modal
+    components/IconPicker.tsx     — emoji picker for node icon
 ```
 
 ### Data model key points
@@ -153,6 +160,8 @@ src/features/
 - `Roadmap.status` — `DRAFT | PUBLIC | PRIVATE` (default `DRAFT`). Web viewer only shows `PUBLIC` roadmaps.
 - `Node.positionX/Y` — React Flow canvas coordinates; `null` means the node exists but is not placed on canvas ("off canvas" in inventory).
 - `Node.content` — BlockNote JSON (only meaningful when `type = LESSON`)
+- `Node.coverImage` — URL string (uploadthing or external URL); `null` means no cover set
+- `Node.icon` — emoji string (e.g. `"📚"`); `null` means no icon set
 - `Node.targetRoadmapId` — links a `ROADMAP`-type node to its target roadmap. `targetRoadmapSlug` is **not** stored in DB — the api-gateway REST controller computes it on the fly from the full roadmap list.
 - `Edge` — connection between nodes within the same roadmap
 - Proto `NodeType` enum: `ROADMAP = 0`, `LESSON = 1` (numeric on wire, string in DB — always normalize when reading from proto responses)
@@ -168,6 +177,7 @@ src/features/
 | `NEXT_PUBLIC_API_URL` | `http://localhost:3000` | `apps/web`, `apps/admin` |
 | `PORT` | `3000` | `apps/api-gateway` |
 | `GRPC_PORT` | `5001` | `apps/svc-roadmap` |
+| `UPLOADTHING_TOKEN` | _(no default)_ | `apps/admin` — required for cover image uploads |
 
 Each app has a `.env.example` — copy to `.env` (or `.env.local` for Next.js apps) before running.
 
@@ -201,8 +211,12 @@ All packages extend `tsconfig.base.json` (strict mode, commonjs, ES2022). NestJS
 
 **Turbopack stale route cache** — if a newly added `app/` page returns 404 in dev mode despite the file existing, a stale `.next/` directory from a previous build session may be confusing the Turbopack route matcher. Fix: `rm -rf apps/admin/.next` (or the relevant app's `.next`) and restart `pnpm dev`. This is a known Turbopack limitation when switching between `next build` and `next dev` in the same working tree.
 
-**Lesson content save is targeted** — `PATCH /api/nodes/:id/content` and `PATCH /api/nodes/:id/title` each call a single `db.node.update`. Never save lesson content via `POST /api/roadmaps/:id/graph` (UpsertGraph) — that is a full DELETE+INSERT of all nodes and edges and will silently drop sibling node data if any node is missing from the payload.
+**Lesson content save is targeted** — `PATCH /api/nodes/:id/content`, `/title`, `/cover`, and `/icon` each call a single `db.node.update`. Never save lesson content via `POST /api/roadmaps/:id/graph` (UpsertGraph) — that is a full DELETE+INSERT of all nodes and edges and will silently drop sibling node data if any node is missing from the payload.
 
-**Admin `features/lessons/` vs `packages/lesson`** — `apps/admin/src/features/lessons/` is the admin-specific layer: `useLessonEditor` hook and `LessonTitleEditor` (inline blur-to-save). The BlockNote components themselves (`LessonEditor`, `LessonViewer`) live in `packages/lesson` and are shared with `apps/web`. When adding lesson display to `apps/web`, import from `@vizteck/lesson`.
+**`LessonPageShell` slot pattern** — `<LessonPageShell>` in `packages/lesson` accepts optional `coverSlot`, `titleSlot`, and `contentSlot` props. When a slot is provided, it renders instead of the default. Admin uses this to inject editable versions (`CoverImage`, `LessonTitleEditor`, `LessonEditor`) while `apps/web` passes no slots and gets the read-only defaults. The shell's `mode` prop (`"edit"` | `"view"`) also guards content rendering — view mode renders `<LessonViewer>` lazily; edit mode renders only the `contentSlot`.
+
+**`useLessonPageShell` optimistic updates** — cover and icon state is updated immediately in React state, then synced to the API (`PATCH /api/nodes/:id/cover` and `/icon`). On API failure, the previous value is restored. This is the correct pattern for any cover/icon update; do not call `updateNodeCover`/`updateNodeIcon` directly from components.
+
+**Admin `features/lessons/` vs `packages/lesson`** — `apps/admin/src/features/lessons/` is the admin-specific layer: hooks (`useLessonEditor`, `useLessonPageShell`) and admin-only UI (`LessonTitleEditor`, `CoverImage`, `CoverUploadModal`, `IconPicker`). The shared display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `CoverDisplay`, `BreadcrumbDisplay`) live in `packages/lesson` and are imported by both admin and `apps/web`. When adding lesson display to `apps/web`, import from `@vizteck/lesson`.
 
 **Prisma `instanceof` in svc-roadmap tests** — `apps/svc-roadmap/package.json` has a `moduleNameMapper` pinning `@prisma/client` to `packages/db/node_modules/@prisma/client`. Without it, pnpm's strict isolation causes the service and the test to load two different `PrismaClientKnownRequestError` class instances, making `instanceof` silently fail. If `packages/db`'s Prisma version changes, update this mapper path.

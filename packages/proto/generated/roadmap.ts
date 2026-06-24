@@ -142,6 +142,27 @@ export interface BreadcrumbResponse {
   items: BreadcrumbItem[];
 }
 
+export interface RoadmapTreeNode {
+  id: string;
+  title: string;
+  type: string;
+  slug: string;
+  targetRoadmapId: string;
+  roadmapSlug: string;
+  roadmapId: string;
+  children: RoadmapTreeNode[];
+}
+
+export interface RoadmapTreeRequest {
+  slug: string;
+}
+
+export interface RoadmapTreeResponse {
+  rootSlug: string;
+  rootTitle: string;
+  nodes: RoadmapTreeNode[];
+}
+
 export const ROADMAP_PACKAGE_NAME = "roadmap";
 
 export interface RoadmapServiceClient {
@@ -168,6 +189,8 @@ export interface RoadmapServiceClient {
   updateNodeIcon(request: UpdateNodeIconRequest): Observable<NodeItem>;
 
   getNodeBreadcrumb(request: IdRequest): Observable<BreadcrumbResponse>;
+
+  getRoadmapTree(request: RoadmapTreeRequest): Observable<RoadmapTreeResponse>;
 }
 
 export interface RoadmapServiceController {
@@ -196,6 +219,10 @@ export interface RoadmapServiceController {
   getNodeBreadcrumb(
     request: IdRequest,
   ): Promise<BreadcrumbResponse> | Observable<BreadcrumbResponse> | BreadcrumbResponse;
+
+  getRoadmapTree(
+    request: RoadmapTreeRequest,
+  ): Promise<RoadmapTreeResponse> | Observable<RoadmapTreeResponse> | RoadmapTreeResponse;
 }
 
 export function RoadmapServiceControllerMethods() {
@@ -213,6 +240,7 @@ export function RoadmapServiceControllerMethods() {
       "updateNodeCover",
       "updateNodeIcon",
       "getNodeBreadcrumb",
+      "getRoadmapTree",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

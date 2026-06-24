@@ -12,6 +12,7 @@ import {
   NodeInput,
   EdgeInput,
   BreadcrumbItemDto,
+  RoadmapTreeDto,
 } from "./roadmap.dto";
 
 // Proto sends NodeType as numeric (ROADMAP=0, LESSON=1); GraphQL enum expects strings.
@@ -91,6 +92,11 @@ export class RoadmapResolver {
       slug: item.slug || undefined,
       nodeId: item.nodeId || undefined,
     }));
+  }
+
+  @Query(() => RoadmapTreeDto, { nullable: true })
+  async roadmapTree(@Args("slug") slug: string): Promise<RoadmapTreeDto> {
+    return this.grpc.getRoadmapTree(slug);
   }
 
   @UseGuards(AdminGuard)

@@ -15,6 +15,7 @@ jest.mock('@vizteck/db', () => ({
     node: {
       findUnique: jest.fn(),
       findFirst: jest.fn(),
+      findMany: jest.fn(),
       update: jest.fn(),
     },
     edge: {},
@@ -250,6 +251,68 @@ describe('RoadmapService', () => {
       (db.node.findUnique as jest.Mock).mockResolvedValue(null);
       const result = await service.getNodeBreadcrumb({ id: 'missing' });
       expect(result.items).toEqual([]);
+    });
+  });
+
+  describe('getRoadmapTree', () => {
+    const ROOT = { id: 'r1', slug: 'frontend', title: 'Frontend', description: null, coverImage: null, status: 'PUBLIC' };
+    const SUB = { id: 'r2', slug: 'html-css', title: 'HTML & CSS', description: null, coverImage: null, status: 'PUBLIC' };
+
+    it('returns correct tree for roadmap with mixed LESSON + ROADMAP nodes', async () => {
+      (db.roadmap.findUnique as jest.Mock)
+        .mockResolvedValueOnce(ROOT)   // first call: root roadmap
+        .mockResolvedValueOnce(SUB);   // second call: sub-roadmap
+      (db.node.findMany as jest.Mock)
+        .mockResolvedValueOnce([
+          { id: 'n1', title: 'Intro', type: 'LESSON', roadmapId: 'r1', targetRoadmapId: null, coverImage: null, icon: null },
+          { id: 'n2', title: 'HTML & CSS', type: 'ROADMAP', roadmapId: 'r1', targetRoadmapId: 'r2', coverImage: null, icon: null },
+        ])  // root nodes
+        .mockResolvedValueOnce([
+          { id: 'n3', title: 'Box Model', type: 'LESSON', roadmapId: 'r2', targetRoadmapId: null, coverImage: null, icon: null },
+        ]);  // sub-roadmap nodes
+      const result = await service.getRoadmapTree({ slug: 'frontend' });
+      expect(result.rootSlug).toBe('frontend');
+      expect(result.rootTitle).toBe('Frontend');
+      expect(result.nodes).toHaveLength(2);
+      const lessonNode = result.nodes.find((n) => n.id === 'n1')!;
+      expect(lessonNode.type).toBe('LESSON');
+      expect(lessonNode.roadmapSlug).toBe('frontend');
+      expect(lessonNode.roadmapId).toBe('r1');
+      const roadmapNode = result.nodes.find((n) => n.id === 'n2')!;
+      expect(roadmapNode.type).toBe('ROADMAP');
+      expect(roadmapNode.slug).toBe('html-css');
+      expect(roadmapNode.targetRoadmapId).toBe('r2');
+      expect(roadmapNode.children).toHaveLength(1);
+      expect(roadmapNode.children![0].id).toBe('n3');
+      expect(roadmapNode.children![0].roadmapSlug).toBe('html-css');
+      expect(roadmapNode.children![0].roadmapId).toBe('r2');
+    });
+
+    it('returns empty nodes array for roadmap with no nodes', async () => {
+      (db.roadmap.findUnique as jest.Mock).mockResolvedValueOnce(ROOT);
+      (db.node.findMany as jest.Mock).mockResolvedValueOnce([]);
+      const result = await service.getRoadmapTree({ slug: 'frontend' });
+      expect(result.rootSlug).toBe('frontend');
+      expect(result.nodes).toEqual([]);
+    });
+
+    it('returns empty response for unknown slug', async () => {
+      (db.roadmap.findUnique as jest.Mock).mockResolvedValueOnce(null);
+      const result = await service.getRoadmapTree({ slug: 'nonexistent' });
+      expect(result.rootSlug).toBe('');
+      expect(result.rootTitle).toBe('');
+      expect(result.nodes).toEqual([]);
+    });
+
+    it('sub-roadmap ROADMAP node with null targetRoadmapId yields no children', async () => {
+      (db.roadmap.findUnique as jest.Mock).mockResolvedValueOnce(ROOT);
+      (db.node.findMany as jest.Mock).mockResolvedValueOnce([
+        { id: 'n2', title: 'Orphan ROADMAP', type: 'ROADMAP', roadmapId: 'r1', targetRoadmapId: null, coverImage: null, icon: null },
+      ]);
+      const result = await service.getRoadmapTree({ slug: 'frontend' });
+      expect(result.nodes[0].children).toEqual([]);
+      expect(result.nodes[0].slug).toBe('');
+      expect(result.nodes[0].targetRoadmapId).toBe('');
     });
   });
 });

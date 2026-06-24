@@ -16,6 +16,7 @@ interface GrpcRoadmapService {
   updateNodeCover(data: { id: string; coverImage: string }): Observable<any>;
   updateNodeIcon(data: { id: string; icon: string }): Observable<any>;
   getNodeBreadcrumb(data: { id: string }): Observable<any>;
+  getRoadmapTree(data: { slug: string }): Observable<any>;
 }
 
 @Injectable()
@@ -71,5 +72,8 @@ export class RoadmapGrpcClient implements OnModuleInit {
   }
   getNodeBreadcrumb(id: string) {
     return firstValueFrom(this.svc.getNodeBreadcrumb({ id }));
+  }
+  getRoadmapTree(slug: string) {
+    return firstValueFrom(this.svc.getRoadmapTree({ slug }));
   }
 }

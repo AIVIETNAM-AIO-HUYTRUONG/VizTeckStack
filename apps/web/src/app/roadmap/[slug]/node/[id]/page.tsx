@@ -1,5 +1,6 @@
 import { LessonLayout } from '@/features/lesson/components/LessonLayout';
 import { fetchNode, fetchBreadcrumb } from '@/features/lesson/services/node.service';
+import { fetchRoadmapTree } from '@/features/lesson/services/tree.service';
 
 export const revalidate = 0;
 export const dynamicParams = true;
@@ -13,11 +14,12 @@ export default async function LessonPage({
 }: {
   params: Promise<{ slug: string; id: string }>;
 }) {
-  const { id } = await params;
+  const { slug, id } = await params;
 
-  const [nodeResult, breadcrumbResult] = await Promise.allSettled([
+  const [nodeResult, breadcrumbResult, treeResult] = await Promise.allSettled([
     fetchNode(id),
     fetchBreadcrumb(id),
+    fetchRoadmapTree(slug),
   ]);
 
   if (nodeResult.status === 'rejected') {
@@ -30,11 +32,14 @@ export default async function LessonPage({
 
   const breadcrumb =
     breadcrumbResult.status === 'fulfilled' ? breadcrumbResult.value : [];
+  const tree =
+    treeResult.status === 'fulfilled' ? treeResult.value : null;
 
   return (
     <LessonLayout
       node={nodeResult.value}
       breadcrumb={breadcrumb}
+      tree={tree}
     />
   );
 }

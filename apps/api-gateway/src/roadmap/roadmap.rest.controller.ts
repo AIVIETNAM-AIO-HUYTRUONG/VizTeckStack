@@ -6,6 +6,7 @@ import {
   CreateRoadmapInput, UpdateRoadmapInput, NodeInput, EdgeInput,
   UpdateNodeContentInput, UpdateNodeTitleInput,
   UpdateNodeCoverInput, UpdateNodeIconInput,
+  RoadmapTreeDto,
 } from './roadmap.dto';
 
 @ApiTags('roadmaps')
@@ -33,6 +34,13 @@ export class RoadmapRestController {
       ...(n.targetRoadmapId ? { targetRoadmapSlug: idToSlug.get(n.targetRoadmapId) } : {}),
     }));
     return { ...detail, nodes };
+  }
+
+  @Get('roadmaps/:slug/tree')
+  @ApiOperation({ summary: 'Get page tree for a roadmap by slug' })
+  @ApiParam({ name: 'slug', type: String })
+  async getRoadmapTree(@Param('slug') slug: string): Promise<RoadmapTreeDto> {
+    return this.grpc.getRoadmapTree(slug);
   }
 
   @Get('nodes/:id')
