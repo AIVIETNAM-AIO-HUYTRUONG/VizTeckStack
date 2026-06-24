@@ -31,7 +31,7 @@ export function LessonPageLayout({
   }
 
   return (
-    <div className="flex h-full">
+    <div className="flex min-h-screen">
       <div
         data-testid="lesson-sidebar"
         className={`shrink-0 border-r border-border bg-bg-1 transition-all duration-200 overflow-hidden ${

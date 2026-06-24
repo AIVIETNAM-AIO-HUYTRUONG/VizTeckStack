@@ -1,0 +1,14 @@
+query Search($q: String!, $titleOnly: Boolean, $roadmapId: ID) {
+  search(q: $q, titleOnly: $titleOnly, roadmapId: $roadmapId) {
+    id
+    type
+    title
+    icon
+    coverImage
+    roadmapSlug
+    roadmapTitle
+    roadmapId
+    updatedAt
+    breadcrumb
+  }
+}

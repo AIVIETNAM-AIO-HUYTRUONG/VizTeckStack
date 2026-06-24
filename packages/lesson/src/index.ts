@@ -16,3 +16,8 @@ export type { PageTreeSidebarProps } from './PageTreeSidebar';
 export { PageTreeItem } from './PageTreeItem';
 export type { PageTreeItemProps } from './PageTreeItem';
 export type { PageTreeNode, PageTree } from './types';
+export { SearchModal } from './SearchModal';
+export type { SearchModalProps } from './SearchModal';
+export { useSearchModal } from './useSearchModal';
+export { useSearch } from './useSearch';
+export type { TimeGroup } from './useSearch';

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, ID } from "@nestjs/graphql";
+import { Resolver, Query, Mutation, Args, ID, Context } from "@nestjs/graphql";
 import { UseGuards } from "@nestjs/common";
 import { RoadmapGrpcClient } from "./roadmap.grpc-client";
 import { AdminGuard } from "../auth/admin.guard";
@@ -13,6 +13,7 @@ import {
   EdgeInput,
   BreadcrumbItemDto,
   RoadmapTreeDto,
+  SearchResultDto,
 } from "./roadmap.dto";
 
 // Proto sends NodeType as numeric (ROADMAP=0, LESSON=1); GraphQL enum expects strings.
@@ -97,6 +98,43 @@ export class RoadmapResolver {
   @Query(() => RoadmapTreeDto, { nullable: true })
   async roadmapTree(@Args("slug") slug: string): Promise<RoadmapTreeDto> {
     return this.grpc.getRoadmapTree(slug);
+  }
+
+  @Query(() => [SearchResultDto])
+  async search(
+    @Args('q') q: string,
+    @Args('titleOnly', { nullable: true, defaultValue: false }) titleOnly: boolean,
+    @Args('roadmapId', { type: () => ID, nullable: true }) roadmapId?: string,
+    @Context() ctx?: { req: { headers: { authorization?: string } } },
+  ): Promise<SearchResultDto[]> {
+    const token = ctx?.req?.headers?.authorization?.replace('Bearer ', '');
+    const isAdmin = Boolean(token && token === process.env.ADMIN_TOKEN);
+    const raw = await this.grpc.searchNodes({ q, titleOnly, roadmapId: roadmapId ?? '' }) as { results?: any[] };
+    const items: any[] = raw.results ?? [];
+
+    let filtered = items;
+    if (!isAdmin) {
+      const listRaw = await this.grpc.getRoadmaps() as { roadmaps?: any[] };
+      const publicIds = new Set(
+        (listRaw.roadmaps ?? [])
+          .filter((r: any) => r.status === 'PUBLIC')
+          .map((r: any) => r.id),
+      );
+      filtered = items.filter((r: any) => publicIds.has(r.roadmapId));
+    }
+
+    return filtered.map((r: any) => ({
+      id: r.id,
+      type: r.type === 0 ? NodeTypeEnum.ROADMAP : NodeTypeEnum.LESSON,
+      title: r.title,
+      icon: r.icon || undefined,
+      coverImage: r.coverImage || undefined,
+      roadmapSlug: r.roadmapSlug,
+      roadmapTitle: r.roadmapTitle,
+      roadmapId: r.roadmapId,
+      updatedAt: r.updatedAt,
+      breadcrumb: r.breadcrumb ?? [],
+    }));
   }
 
   @UseGuards(AdminGuard)

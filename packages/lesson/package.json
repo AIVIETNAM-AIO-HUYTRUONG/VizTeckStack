@@ -9,10 +9,13 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.0",
     "@blocknote/core": "^0.51.4",
     "@blocknote/mantine": "^0.51.4",
     "@blocknote/react": "^0.51.4",
+    "@vizteck/graphql-client": "workspace:*",
     "@vizteck/ui": "workspace:*",
+    "graphql": "^16.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
