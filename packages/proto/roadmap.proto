@@ -152,6 +152,29 @@ message RoadmapTreeResponse {
   repeated RoadmapTreeNode nodes = 3;
 }
 
+message SearchRequest {
+  string q = 1;
+  bool titleOnly = 2;
+  string roadmapId = 3;
+}
+
+message SearchResultItem {
+  string id = 1;
+  int32 type = 2;
+  string title = 3;
+  string icon = 4;
+  string coverImage = 5;
+  string roadmapSlug = 6;
+  string roadmapTitle = 7;
+  string roadmapId = 8;
+  string updatedAt = 9;
+  repeated string breadcrumb = 10;
+}
+
+message SearchResponse {
+  repeated SearchResultItem results = 1;
+}
+
 service RoadmapService {
   rpc GetRoadmaps (Empty) returns (RoadmapList);
   rpc GetRoadmap (SlugRequest) returns (RoadmapDetail);
@@ -166,4 +189,5 @@ service RoadmapService {
   rpc UpdateNodeIcon (UpdateNodeIconRequest) returns (NodeItem);
   rpc GetNodeBreadcrumb (IdRequest) returns (BreadcrumbResponse);
   rpc GetRoadmapTree (RoadmapTreeRequest) returns (RoadmapTreeResponse);
+  rpc SearchNodes (SearchRequest) returns (SearchResponse);
 }
