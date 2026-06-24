@@ -38,7 +38,7 @@ function groupByTime(results: SearchResultItem[]): TimeGroup[] {
 function groupByRoadmap(results: SearchResultItem[]): TimeGroup[] {
   const map = new Map<string, SearchResultItem[]>();
   for (const r of results) {
-    if (!r) continue;
+    if (!r || r.type === 'ROADMAP') continue;
     const key = r.roadmapTitle;
     if (!map.has(key)) map.set(key, []);
     map.get(key)!.push(r);
