@@ -269,7 +269,40 @@ export class RoadmapService {
   }
 
   async searchNodes({ q, titleOnly, roadmapId }: SearchRequest): Promise<SearchResponse> {
-    if (!q || q.length < 2) return { results: [] };
+    type Row = { id: string; type: string; title: string; icon: string | null; coverImage: string | null; roadmapId: string; updatedAt: Date; roadmapSlug: string; roadmapTitle: string };
+    const toResult = (row: Row) => ({
+      id: row.id,
+      type: row.type === 'ROADMAP' ? 0 : 1,
+      title: row.title,
+      icon: row.icon ?? '',
+      coverImage: row.coverImage ?? '',
+      roadmapSlug: row.roadmapSlug,
+      roadmapTitle: row.roadmapTitle,
+      roadmapId: row.roadmapId,
+      updatedAt: row.updatedAt.toISOString(),
+      breadcrumb: [row.roadmapTitle, row.title],
+    });
+
+    const isEmptyQuery = !q || q.length === 0;
+
+    if (!isEmptyQuery && q.length < 2) return { results: [] };
+
+    if (isEmptyQuery) {
+      const whereClause = roadmapId
+        ? Prisma.sql`WHERE n."roadmapId" = ${roadmapId}`
+        : Prisma.empty;
+      const rows = await db.$queryRaw<Row[]>`
+        SELECT n.id, n.type, n.title, n.icon,
+               n."coverImage", n."roadmapId", n."updatedAt",
+               r.slug as "roadmapSlug", r.title as "roadmapTitle"
+        FROM "Node" n
+        JOIN "Roadmap" r ON n."roadmapId" = r.id
+        ${whereClause}
+        ORDER BY r.title ASC, n."updatedAt" DESC
+        LIMIT 50
+      `;
+      return { results: rows.map(toResult) };
+    }
 
     const like = `%${q}%`;
     const contentClause = titleOnly
@@ -279,17 +312,7 @@ export class RoadmapService {
       ? Prisma.sql`AND n."roadmapId" = ${roadmapId}`
       : Prisma.empty;
 
-    const rows = await db.$queryRaw<Array<{
-      id: string;
-      type: string;
-      title: string;
-      icon: string | null;
-      coverImage: string | null;
-      roadmapId: string;
-      updatedAt: Date;
-      roadmapSlug: string;
-      roadmapTitle: string;
-    }>>`
+    const rows = await db.$queryRaw<Row[]>`
       SELECT n.id, n.type, n.title, n.icon,
              n."coverImage", n."roadmapId", n."updatedAt",
              r.slug as "roadmapSlug", r.title as "roadmapTitle"
@@ -301,20 +324,7 @@ export class RoadmapService {
       LIMIT 20
     `;
 
-    return {
-      results: rows.map((row) => ({
-        id: row.id,
-        type: row.type === 'ROADMAP' ? 0 : 1,
-        title: row.title,
-        icon: row.icon ?? '',
-        coverImage: row.coverImage ?? '',
-        roadmapSlug: row.roadmapSlug,
-        roadmapTitle: row.roadmapTitle,
-        roadmapId: row.roadmapId,
-        updatedAt: row.updatedAt.toISOString(),
-        breadcrumb: [row.roadmapTitle, row.title],
-      })),
-    };
+    return { results: rows.map(toResult) };
   }
 
   async getNodeBreadcrumb({ id }: IdRequest): Promise<BreadcrumbResponse> {

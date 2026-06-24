@@ -35,21 +35,37 @@ function groupByTime(results: SearchResultItem[]): TimeGroup[] {
     .map(([label, items]) => ({ label, items }));
 }
 
-export function useSearch() {
+function groupByRoadmap(results: SearchResultItem[]): TimeGroup[] {
+  const map = new Map<string, SearchResultItem[]>();
+  for (const r of results) {
+    if (!r) continue;
+    const key = r.roadmapTitle;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key)!.push(r);
+  }
+  return Array.from(map.entries()).map(([label, items]) => ({ label, items }));
+}
+
+export function useSearch(initialTrigger?: boolean) {
   const [query, setQuery] = useState('');
   const [titleOnly, setTitleOnly] = useState(false);
   const [roadmapId, setRoadmapId] = useState<string | undefined>();
   const [search, { data, loading, error }] = useSearchLazyQuery();
 
   useEffect(() => {
-    if (query.length < 2) return;
+    // skip single-character queries (too short to be useful)
+    if (query.length === 1) return;
+    const delay = query.length === 0 ? 0 : 300;
     const timer = setTimeout(() => {
       search({ variables: { q: query, titleOnly, roadmapId } });
-    }, 300);
+    }, delay);
     return () => clearTimeout(timer);
   }, [query, titleOnly, roadmapId, search]);
 
-  const grouped = groupByTime(data?.search ?? []);
+  const results = data?.search ?? [];
+  const grouped = query.length === 0
+    ? groupByRoadmap(results)
+    : groupByTime(results);
 
   return {
     query, setQuery,
