@@ -182,3 +182,17 @@ export class RoadmapTreeDto {
   @Field() @ApiProperty({ example: 'Frontend Roadmap' }) rootTitle!: string;
   @Field(() => [RoadmapTreeNodeDto]) @ApiProperty({ type: () => [RoadmapTreeNodeDto] }) nodes!: RoadmapTreeNodeDto[];
 }
+
+@ObjectType()
+export class SearchResultDto {
+  @Field(() => ID) @ApiProperty({ example: 'node_001' }) id!: string;
+  @Field(() => NodeTypeEnum) @ApiProperty({ enum: NodeTypeEnum }) type!: NodeTypeEnum;
+  @Field() @ApiProperty({ example: 'HTML & CSS Basics' }) title!: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: '📚' }) icon?: string;
+  @Field({ nullable: true }) @ApiPropertyOptional({ example: 'https://cdn.example.com/cover.jpg' }) coverImage?: string;
+  @Field() @ApiProperty({ example: 'frontend' }) roadmapSlug!: string;
+  @Field() @ApiProperty({ example: 'Frontend Developer' }) roadmapTitle!: string;
+  @Field(() => ID) @ApiProperty({ example: 'clx1234abcd' }) roadmapId!: string;
+  @Field() @ApiProperty({ example: '2026-06-20T10:00:00.000Z' }) updatedAt!: string;
+  @Field(() => [String]) @ApiProperty({ type: [String], example: ['Frontend', 'HTML'] }) breadcrumb!: string[];
+}

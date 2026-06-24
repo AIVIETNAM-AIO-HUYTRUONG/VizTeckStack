@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { RoadmapGrpcClient } from './roadmap.grpc-client';
 import { AdminGuard } from '../auth/admin.guard';
@@ -6,7 +6,7 @@ import {
   CreateRoadmapInput, UpdateRoadmapInput, NodeInput, EdgeInput,
   UpdateNodeContentInput, UpdateNodeTitleInput,
   UpdateNodeCoverInput, UpdateNodeIconInput,
-  RoadmapTreeDto,
+  RoadmapTreeDto, SearchResultDto,
 } from './roadmap.dto';
 
 @ApiTags('roadmaps')
@@ -119,6 +119,16 @@ export class RoadmapRestController {
   @ApiParam({ name: 'id', type: String })
   updateNodeIcon(@Param('id') id: string, @Body() body: UpdateNodeIconInput) {
     return this.grpc.updateNodeIcon(id, body.icon ?? '');
+  }
+
+  @Get('search')
+  @ApiOperation({ summary: 'Search nodes and roadmaps (full-text) — Swagger docs only, use GraphQL in FE' })
+  async searchNodes(
+    @Query('q') q: string,
+    @Query('titleOnly') titleOnly?: string,
+    @Query('roadmapId') roadmapId?: string,
+  ): Promise<SearchResultDto[]> {
+    return this.grpc.searchNodes({ q: q ?? '', titleOnly: titleOnly === 'true', roadmapId: roadmapId ?? '' }) as Promise<SearchResultDto[]>;
   }
 
   @Get('nodes/:id/breadcrumb')
