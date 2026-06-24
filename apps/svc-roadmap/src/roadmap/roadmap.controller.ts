@@ -2,7 +2,7 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { RoadmapService } from './roadmap.service';
-import { Empty, SlugRequest, IdRequest, CreateRoadmapRequest, UpdateRoadmapRequest, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest, UpdateNodeCoverRequest, UpdateNodeIconRequest, RoadmapTreeRequest } from '@vizteck/proto';
+import { Empty, SlugRequest, IdRequest, CreateRoadmapRequest, UpdateRoadmapRequest, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest, UpdateNodeCoverRequest, UpdateNodeIconRequest, RoadmapTreeRequest, SearchRequest } from '@vizteck/proto';
 
 @Controller()
 export class RoadmapController {
@@ -46,4 +46,7 @@ export class RoadmapController {
 
   @GrpcMethod('RoadmapService', 'GetRoadmapTree')
   getRoadmapTree(data: RoadmapTreeRequest) { return this.svc.getRoadmapTree(data); }
+
+  @GrpcMethod('RoadmapService', 'SearchNodes')
+  searchNodes(data: SearchRequest) { return this.svc.searchNodes(data); }
 }

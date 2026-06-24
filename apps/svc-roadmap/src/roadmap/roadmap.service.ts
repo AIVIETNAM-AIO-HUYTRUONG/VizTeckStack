@@ -8,6 +8,7 @@ import {
   BoolResponse, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest,
   UpdateNodeCoverRequest, UpdateNodeIconRequest, BreadcrumbResponse,
   NodeItem, RoadmapTreeRequest, RoadmapTreeResponse, RoadmapTreeNode,
+  SearchRequest, SearchResponse,
 } from '@vizteck/proto';
 
 function toRoadmapItem(r: Roadmap): RoadmapItem {
@@ -265,6 +266,55 @@ export class RoadmapService {
     );
 
     return { rootSlug: root.slug, rootTitle: root.title, nodes };
+  }
+
+  async searchNodes({ q, titleOnly, roadmapId }: SearchRequest): Promise<SearchResponse> {
+    if (!q || q.length < 2) return { results: [] };
+
+    const like = `%${q}%`;
+    const contentClause = titleOnly
+      ? Prisma.empty
+      : Prisma.sql`OR n.content::text ILIKE ${like}`;
+    const roadmapClause = roadmapId
+      ? Prisma.sql`AND n."roadmapId" = ${roadmapId}`
+      : Prisma.empty;
+
+    const rows = await db.$queryRaw<Array<{
+      id: string;
+      type: string;
+      title: string;
+      icon: string | null;
+      coverImage: string | null;
+      roadmapId: string;
+      updatedAt: Date;
+      roadmapSlug: string;
+      roadmapTitle: string;
+    }>>`
+      SELECT n.id, n.type, n.title, n.icon,
+             n."coverImage", n."roadmapId", n."updatedAt",
+             r.slug as "roadmapSlug", r.title as "roadmapTitle"
+      FROM "Node" n
+      JOIN "Roadmap" r ON n."roadmapId" = r.id
+      WHERE (n.title ILIKE ${like} ${contentClause})
+      ${roadmapClause}
+      ORDER BY n."updatedAt" DESC
+      LIMIT 20
+    `;
+
+    return {
+      results: rows.map((row) => ({
+        id: row.id,
+        type: row.type === 'ROADMAP' ? 0 : 1,
+        title: row.title,
+        icon: row.icon ?? '',
+        coverImage: row.coverImage ?? '',
+        roadmapSlug: row.roadmapSlug,
+        roadmapTitle: row.roadmapTitle,
+        roadmapId: row.roadmapId,
+        updatedAt: row.updatedAt.toISOString(),
+        breadcrumb: [row.roadmapTitle, row.title],
+      })),
+    };
   }
 
   async getNodeBreadcrumb({ id }: IdRequest): Promise<BreadcrumbResponse> {
