@@ -20,6 +20,7 @@ jest.mock('@vizteck/db', () => ({
     },
     edge: {},
     $transaction: jest.fn(),
+    $queryRaw: jest.fn(),
   },
 }));
 
@@ -313,6 +314,53 @@ describe('RoadmapService', () => {
       expect(result.nodes[0].children).toEqual([]);
       expect(result.nodes[0].slug).toBe('');
       expect(result.nodes[0].targetRoadmapId).toBe('');
+    });
+  });
+
+  describe('searchNodes', () => {
+    const mockRow = {
+      id: 'n1',
+      type: 'LESSON',
+      title: 'HTML Basics',
+      icon: null,
+      coverImage: null,
+      roadmapId: 'r1',
+      updatedAt: new Date('2026-06-20T10:00:00Z'),
+      roadmapSlug: 'frontend',
+      roadmapTitle: 'Frontend',
+    };
+
+    it('returns matching nodes by title', async () => {
+      (db.$queryRaw as jest.Mock).mockResolvedValue([mockRow]);
+      const result = await service.searchNodes({ q: 'HTML', titleOnly: false, roadmapId: '' });
+      expect(result.results).toHaveLength(1);
+      expect(result.results[0].title).toBe('HTML Basics');
+      expect(result.results[0].roadmapSlug).toBe('frontend');
+      expect(result.results[0].type).toBe(1);
+      expect(result.results[0].updatedAt).toBe('2026-06-20T10:00:00.000Z');
+    });
+
+    it('returns empty array when q is shorter than 2 characters', async () => {
+      const result = await service.searchNodes({ q: 'H', titleOnly: false, roadmapId: '' });
+      expect(result.results).toHaveLength(0);
+      expect(db.$queryRaw).not.toHaveBeenCalled();
+    });
+
+    it('returns empty array when q is empty string', async () => {
+      const result = await service.searchNodes({ q: '', titleOnly: false, roadmapId: '' });
+      expect(result.results).toHaveLength(0);
+    });
+
+    it('maps ROADMAP type node to type=0', async () => {
+      (db.$queryRaw as jest.Mock).mockResolvedValue([{ ...mockRow, type: 'ROADMAP' }]);
+      const result = await service.searchNodes({ q: 'HTML', titleOnly: false, roadmapId: '' });
+      expect(result.results[0].type).toBe(0);
+    });
+
+    it('includes breadcrumb as [roadmapTitle, nodeTitle]', async () => {
+      (db.$queryRaw as jest.Mock).mockResolvedValue([mockRow]);
+      const result = await service.searchNodes({ q: 'HTML', titleOnly: false, roadmapId: '' });
+      expect(result.results[0].breadcrumb).toEqual(['Frontend', 'HTML Basics']);
     });
   });
 });
