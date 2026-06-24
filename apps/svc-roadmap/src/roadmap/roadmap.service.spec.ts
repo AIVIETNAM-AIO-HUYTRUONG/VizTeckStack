@@ -346,9 +346,11 @@ describe('RoadmapService', () => {
       expect(db.$queryRaw).not.toHaveBeenCalled();
     });
 
-    it('returns empty array when q is empty string', async () => {
+    it('returns all nodes when q is empty string', async () => {
+      (db.$queryRaw as jest.Mock).mockResolvedValue([mockRow]);
       const result = await service.searchNodes({ q: '', titleOnly: false, roadmapId: '' });
-      expect(result.results).toHaveLength(0);
+      expect(result.results).toHaveLength(1);
+      expect(db.$queryRaw).toHaveBeenCalled();
     });
 
     it('maps ROADMAP type node to type=0', async () => {

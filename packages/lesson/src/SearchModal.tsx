@@ -102,14 +102,12 @@ export function SearchModal({ open, onClose, getLessonHref, getRoadmapHref }: Se
                 ))}
               </div>
             )}
-            {!loading && query.length >= 2 && allItems.length === 0 && (
+            {!loading && query.length === 1 && (
+              <p className="text-text-3 text-sm text-center py-6">Keep typing…</p>
+            )}
+            {!loading && query.length !== 1 && allItems.length === 0 && query.length >= 2 && (
               <p className="text-text-3 text-sm text-center py-6">
                 No results for &ldquo;{query}&rdquo;
-              </p>
-            )}
-            {!loading && query.length < 2 && (
-              <p className="text-text-3 text-sm text-center py-6">
-                Type at least 2 characters to search…
               </p>
             )}
             {grouped.map(({ label, items }) => (

@@ -31,6 +31,7 @@
 New shared package `@vizteck/graphql-client`. Single source of truth for all GraphQL query definitions and generated types.
 
 **Files:**
+
 ```
 packages/graphql-client/
   package.json             (@vizteck/graphql-client)
@@ -44,15 +45,20 @@ packages/graphql-client/
 ```
 
 **`codegen.ts` config:**
+
 ```ts
-import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: 'http://localhost:3000/graphql',
-  documents: 'src/queries/**/*.graphql',
+  schema: "http://localhost:3000/graphql",
+  documents: "src/queries/**/*.graphql",
   generates: {
-    'src/generated/graphql.ts': {
-      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
+    "src/generated/graphql.ts": {
+      plugins: [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-apollo",
+      ],
       config: { withHooks: true },
     },
   },
@@ -61,6 +67,7 @@ export default config;
 ```
 
 **`search.graphql`:**
+
 ```graphql
 query Search($q: String!, $titleOnly: Boolean, $roadmapId: ID) {
   search(q: $q, titleOnly: $titleOnly, roadmapId: $roadmapId) {
@@ -85,6 +92,7 @@ Generates `useSearchLazyQuery` with full TypeScript types. Run `pnpm codegen` fr
 ## 2. Backend: Proto
 
 **Add to `packages/proto/roadmap.proto`:**
+
 ```proto
 message SearchRequest {
   string q = 1;
@@ -111,6 +119,7 @@ message SearchResponse {
 ```
 
 **Add to `RoadmapService` RPC block:**
+
 ```proto
 rpc SearchNodes(SearchRequest) returns (SearchResponse);
 ```
@@ -227,18 +236,22 @@ search(
 ### `packages/graphql-client` exports
 
 ```ts
-export { useSearchLazyQuery } from './src/generated/graphql';
-export type { SearchQuery, SearchQueryVariables, SearchResultDtoFragment } from './src/generated/graphql';
+export { useSearchLazyQuery } from "./src/generated/graphql";
+export type {
+  SearchQuery,
+  SearchQueryVariables,
+  SearchResultDtoFragment,
+} from "./src/generated/graphql";
 ```
 
 ### `apps/web` — `ApolloProvider.tsx`
 
 ```tsx
-'use client';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+"use client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000'}/graphql`,
+  uri: `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000"}/graphql`,
   cache: new InMemoryCache(),
 });
 
@@ -252,13 +265,19 @@ Mount in `apps/web/src/app/layout.tsx` wrapping all children.
 ### `apps/admin` — `ApolloProvider.tsx`
 
 ```tsx
-'use client';
-import { ApolloClient, ApolloProvider, InMemoryCache, ApolloLink, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { getToken } from '@/lib/api';
+"use client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  ApolloLink,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { getToken } from "@/lib/api";
 
 const httpLink = createHttpLink({
-  uri: `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000'}/graphql`,
+  uri: `${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000"}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => ({
@@ -270,7 +289,11 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export function AdminApolloProvider({ children }: { children: React.ReactNode }) {
+export function AdminApolloProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }
 ```
@@ -300,13 +323,13 @@ export function useSearchModal() {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
         e.preventDefault();
         setOpen((v) => !v);
       }
     };
-    window.addEventListener('keydown', handler);
-    return () => window.removeEventListener('keydown', handler);
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
 
   return { open, setOpen };
@@ -317,7 +340,7 @@ export function useSearchModal() {
 
 ```ts
 export function useSearch() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [titleOnly, setTitleOnly] = useState(false);
   const [roadmapId, setRoadmapId] = useState<string | undefined>();
   const [search, { data, loading, error }] = useSearchLazyQuery();
@@ -332,7 +355,17 @@ export function useSearch() {
 
   const grouped = groupByTime(data?.search ?? []);
 
-  return { query, setQuery, titleOnly, setTitleOnly, roadmapId, setRoadmapId, grouped, loading, error };
+  return {
+    query,
+    setQuery,
+    titleOnly,
+    setTitleOnly,
+    roadmapId,
+    setRoadmapId,
+    grouped,
+    loading,
+    error,
+  };
 }
 ```
 
@@ -342,15 +375,18 @@ export function useSearch() {
 function groupByTime(results: SearchResult[]) {
   const now = new Date();
   const groups: Record<string, SearchResult[]> = {
-    Today: [], Yesterday: [], 'Past week': [], Older: [],
+    Today: [],
+    Yesterday: [],
+    "Past week": [],
+    Older: [],
   };
   for (const r of results) {
     const d = new Date(r.updatedAt);
     const diffDays = Math.floor((now.getTime() - d.getTime()) / 86400000);
-    if (diffDays === 0) groups['Today'].push(r);
-    else if (diffDays === 1) groups['Yesterday'].push(r);
-    else if (diffDays <= 7) groups['Past week'].push(r);
-    else groups['Older'].push(r);
+    if (diffDays === 0) groups["Today"].push(r);
+    else if (diffDays === 1) groups["Yesterday"].push(r);
+    else if (diffDays <= 7) groups["Past week"].push(r);
+    else groups["Older"].push(r);
   }
   return Object.entries(groups).filter(([, items]) => items.length > 0);
 }
@@ -364,10 +400,10 @@ function groupByTime(results: SearchResult[]) {
 │ [Title only] [Created by ▾] [In ▾] [+ Filter]          │
 ├──────────────────────────┬──────────────────────────────┤
 │ Yesterday                │                              │
-│  📄 Lesson Title — path  │   [cover image]              │
-│  📄 Lesson Title — path  │                              │
+│   Lesson Title — path  │   [cover image]              │
+│  Lesson Title — path  │                              │
 │ Past week                │   Hovered lesson title       │
-│  📄 Lesson Title — path  │   Roadmap › Lesson           │
+│  Lesson Title — path  │   Roadmap › Lesson           │
 │                          │                              │
 └──────────────────────────┴──────────────────────────────┘
 │ Ctrl+. Open in new tab                                  │
@@ -392,9 +428,10 @@ Both apps pass their own href builders; modal has no routing dependency.
 ## 7. Integration in Apps
 
 ### `apps/web/src/app/layout.tsx`
+
 ```tsx
 <WebApolloProvider>
-  <SearchModalWrapper />  {/* 'use client' wrapper that calls useSearchModal */}
+  <SearchModalWrapper /> {/* 'use client' wrapper that calls useSearchModal */}
   {children}
 </WebApolloProvider>
 ```
@@ -402,6 +439,7 @@ Both apps pass their own href builders; modal has no routing dependency.
 `getLessonHref`: `(roadmapSlug, nodeId) => /roadmap/${roadmapSlug}/node/${nodeId}`
 
 ### `apps/admin/src/app/layout.tsx`
+
 ```tsx
 <AdminApolloProvider>
   <SearchModalWrapper />
@@ -415,25 +453,25 @@ Both apps pass their own href builders; modal has no routing dependency.
 
 ## 8. Error Handling
 
-| Scenario | Behavior |
-|----------|----------|
-| `q.length < 2` | Show "Type at least 2 characters..." — no API call |
-| Network / GraphQL error | Show "Search unavailable" — do not crash modal |
-| Empty results | Show "No results for '...'" |
-| Loading | Skeleton list (3 rows, pulsing) — no flash of empty |
-| Modal close | Reset query + results state |
+| Scenario                | Behavior                                            |
+| ----------------------- | --------------------------------------------------- |
+| `q.length < 2`          | Show "Type at least 2 characters..." — no API call  |
+| Network / GraphQL error | Show "Search unavailable" — do not crash modal      |
+| Empty results           | Show "No results for '...'"                         |
+| Loading                 | Skeleton list (3 rows, pulsing) — no flash of empty |
+| Modal close             | Reset query + results state                         |
 
 ---
 
 ## 9. Testing
 
-| Layer | What | Framework |
-|-------|------|-----------|
-| `svc-roadmap` | `searchNodes` with ILIKE — title match, content match, titleOnly flag, roadmapId filter, empty q returns [] | Jest |
-| `api-gateway` | GraphQL `search` query resolver — public filter, admin bypass | Jest |
-| `packages/lesson` | `useSearchModal` — Ctrl+K opens, Escape closes | Vitest |
-| `packages/lesson` | `SearchModal` — renders results, Title only toggle, group headings | Vitest + @testing-library |
-| E2E | Ctrl+K opens modal → type "lesson" → result appears → click → navigates | Playwright |
+| Layer             | What                                                                                                        | Framework                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `svc-roadmap`     | `searchNodes` with ILIKE — title match, content match, titleOnly flag, roadmapId filter, empty q returns [] | Jest                      |
+| `api-gateway`     | GraphQL `search` query resolver — public filter, admin bypass                                               | Jest                      |
+| `packages/lesson` | `useSearchModal` — Ctrl+K opens, Escape closes                                                              | Vitest                    |
+| `packages/lesson` | `SearchModal` — renders results, Title only toggle, group headings                                          | Vitest + @testing-library |
+| E2E               | Ctrl+K opens modal → type "lesson" → result appears → click → navigates                                     | Playwright                |
 
 ---
 
