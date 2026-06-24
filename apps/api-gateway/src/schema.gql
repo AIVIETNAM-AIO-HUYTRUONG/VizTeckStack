@@ -1,0 +1,127 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RoadmapDto {
+  id: ID!
+  slug: String!
+  title: String!
+  description: String
+  coverImage: String
+  status: String
+}
+
+type NodeDto {
+  id: ID!
+  roadmapId: String!
+  type: NodeType!
+  title: String!
+  positionX: Float
+  positionY: Float
+  targetRoadmapId: String
+  content: String
+  coverImage: String
+  icon: String
+}
+
+enum NodeType {
+  ROADMAP
+  LESSON
+}
+
+type EdgeDto {
+  id: ID!
+  sourceId: String!
+  targetId: String!
+  label: String
+}
+
+type RoadmapDetailDto {
+  roadmap: RoadmapDto
+  nodes: [NodeDto!]!
+  edges: [EdgeDto!]!
+}
+
+type BreadcrumbItemDto {
+  title: String!
+  slug: String
+  nodeId: String
+}
+
+type RoadmapTreeNodeDto {
+  id: ID!
+  title: String!
+  type: String!
+  slug: String
+  targetRoadmapId: String
+  roadmapSlug: String
+  roadmapId: String
+  children: [RoadmapTreeNodeDto!]
+}
+
+type RoadmapTreeDto {
+  rootSlug: String!
+  rootTitle: String!
+  nodes: [RoadmapTreeNodeDto!]!
+}
+
+type SearchResultDto {
+  id: ID!
+  type: NodeType!
+  title: String!
+  icon: String
+  coverImage: String
+  roadmapSlug: String!
+  roadmapTitle: String!
+  roadmapId: ID!
+  updatedAt: String!
+  breadcrumb: [String!]!
+}
+
+type Query {
+  roadmaps: [RoadmapDto!]!
+  roadmap(slug: String!): RoadmapDetailDto
+  node(id: ID!): NodeDto
+  nodeBreadcrumb(id: ID!): [BreadcrumbItemDto!]!
+  roadmapTree(slug: String!): RoadmapTreeDto
+  search(q: String!, titleOnly: Boolean = false, roadmapId: ID): [SearchResultDto!]!
+}
+
+type Mutation {
+  createRoadmap(input: CreateRoadmapInput!): RoadmapDto!
+  updateRoadmap(id: ID!, input: UpdateRoadmapInput!): RoadmapDto!
+  deleteRoadmap(id: ID!): Boolean!
+  upsertGraph(roadmapId: ID!, nodes: [NodeInput!]!, edges: [EdgeInput!]!): RoadmapDetailDto!
+  updateNodeCover(id: ID!, coverImage: String): NodeDto!
+  updateNodeIcon(id: ID!, icon: String): NodeDto!
+}
+
+input CreateRoadmapInput {
+  slug: String!
+  title: String!
+  description: String
+  coverImage: String
+}
+
+input UpdateRoadmapInput {
+  title: String
+  description: String
+  coverImage: String
+  status: String
+}
+
+input NodeInput {
+  id: String!
+  type: NodeType!
+  title: String!
+  positionX: Float
+  positionY: Float
+  targetRoadmapId: String
+  content: String
+}
+
+input EdgeInput {
+  sourceId: String!
+  targetId: String!
+  label: String
+}
