@@ -38,6 +38,8 @@ message NodeItem {
   double positionY = 6;
   string targetRoadmapId = 7;
   string content = 8;
+  string coverImage = 9;
+  string icon = 10;
 }
 
 message EdgeItem {
@@ -109,6 +111,70 @@ message UpdateNodeTitleRequest {
   string title = 2;
 }
 
+message UpdateNodeCoverRequest {
+  string id = 1;
+  string coverImage = 2;
+}
+
+message UpdateNodeIconRequest {
+  string id = 1;
+  string icon = 2;
+}
+
+message BreadcrumbItem {
+  string title = 1;
+  string slug = 2;
+  string nodeId = 3;
+}
+
+message BreadcrumbResponse {
+  repeated BreadcrumbItem items = 1;
+}
+
+message RoadmapTreeNode {
+  string id               = 1;
+  string title            = 2;
+  string type             = 3;
+  string slug             = 4;
+  string targetRoadmapId  = 5;
+  string roadmapSlug      = 6;
+  string roadmapId        = 7;
+  repeated RoadmapTreeNode children = 8;
+}
+
+message RoadmapTreeRequest {
+  string slug = 1;
+}
+
+message RoadmapTreeResponse {
+  string rootSlug  = 1;
+  string rootTitle = 2;
+  repeated RoadmapTreeNode nodes = 3;
+}
+
+message SearchRequest {
+  string q = 1;
+  bool titleOnly = 2;
+  string roadmapId = 3;
+}
+
+message SearchResultItem {
+  string id = 1;
+  int32 type = 2;
+  string title = 3;
+  string icon = 4;
+  string coverImage = 5;
+  string roadmapSlug = 6;
+  string roadmapTitle = 7;
+  string roadmapId = 8;
+  string updatedAt = 9;
+  repeated string breadcrumb = 10;
+}
+
+message SearchResponse {
+  repeated SearchResultItem results = 1;
+}
+
 service RoadmapService {
   rpc GetRoadmaps (Empty) returns (RoadmapList);
   rpc GetRoadmap (SlugRequest) returns (RoadmapDetail);
@@ -119,4 +185,9 @@ service RoadmapService {
   rpc UpsertGraph (UpsertGraphRequest) returns (RoadmapDetail);
   rpc UpdateNodeContent (UpdateNodeContentRequest) returns (NodeItem);
   rpc UpdateNodeTitle (UpdateNodeTitleRequest) returns (NodeItem);
+  rpc UpdateNodeCover (UpdateNodeCoverRequest) returns (NodeItem);
+  rpc UpdateNodeIcon (UpdateNodeIconRequest) returns (NodeItem);
+  rpc GetNodeBreadcrumb (IdRequest) returns (BreadcrumbResponse);
+  rpc GetRoadmapTree (RoadmapTreeRequest) returns (RoadmapTreeResponse);
+  rpc SearchNodes (SearchRequest) returns (SearchResponse);
 }

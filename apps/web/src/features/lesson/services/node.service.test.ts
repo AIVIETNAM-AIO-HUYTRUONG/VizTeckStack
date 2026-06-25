@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 vi.stubGlobal('fetch', vi.fn());
 const mockFetch = vi.mocked(fetch);
 
-import { normalizeNodeType, fetchNode } from './node.service';
+import { normalizeNodeType, fetchNode, fetchBreadcrumb } from './node.service';
 
 const BASE = 'http://localhost:3000';
 
@@ -69,5 +69,32 @@ describe('fetchNode', () => {
   it('throws when response is not ok', async () => {
     mockFetch.mockResolvedValue({ ok: false, status: 404 } as Response);
     await expect(fetchNode('missing')).rejects.toThrow('fetchNode(missing): 404');
+  });
+});
+
+describe('fetchBreadcrumb', () => {
+  beforeEach(() => vi.clearAllMocks());
+
+  it('calls the correct API endpoint and returns breadcrumb items', async () => {
+    const items = [
+      { title: 'Frontend', slug: 'frontend', nodeId: null },
+      { title: 'Box Model', slug: null, nodeId: 'n1' },
+    ];
+    mockOk(items);
+    const result = await fetchBreadcrumb('n1');
+    expect(mockFetch).toHaveBeenCalledWith(`${BASE}/api/nodes/n1/breadcrumb`, { cache: 'no-store' });
+    expect(result).toEqual(items);
+  });
+
+  it('returns empty array on fetch failure', async () => {
+    mockFetch.mockResolvedValue({ ok: false, status: 404 } as Response);
+    const result = await fetchBreadcrumb('missing');
+    expect(result).toEqual([]);
+  });
+
+  it('returns empty array on non-array response', async () => {
+    mockOk(null);
+    const result = await fetchBreadcrumb('n1');
+    expect(result).toEqual([]);
   });
 });

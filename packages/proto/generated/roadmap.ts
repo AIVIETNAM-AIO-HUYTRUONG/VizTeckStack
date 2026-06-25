@@ -49,6 +49,8 @@ export interface NodeItem {
   positionY: number;
   targetRoadmapId: string;
   content: string;
+  coverImage: string;
+  icon: string;
 }
 
 export interface EdgeItem {
@@ -120,6 +122,70 @@ export interface UpdateNodeTitleRequest {
   title: string;
 }
 
+export interface UpdateNodeCoverRequest {
+  id: string;
+  coverImage: string;
+}
+
+export interface UpdateNodeIconRequest {
+  id: string;
+  icon: string;
+}
+
+export interface BreadcrumbItem {
+  title: string;
+  slug: string;
+  nodeId: string;
+}
+
+export interface BreadcrumbResponse {
+  items: BreadcrumbItem[];
+}
+
+export interface RoadmapTreeNode {
+  id: string;
+  title: string;
+  type: string;
+  slug: string;
+  targetRoadmapId: string;
+  roadmapSlug: string;
+  roadmapId: string;
+  children: RoadmapTreeNode[];
+}
+
+export interface RoadmapTreeRequest {
+  slug: string;
+}
+
+export interface RoadmapTreeResponse {
+  rootSlug: string;
+  rootTitle: string;
+  nodes: RoadmapTreeNode[];
+}
+
+export interface SearchRequest {
+  q: string;
+  titleOnly: boolean;
+  roadmapId: string;
+}
+
+export interface SearchResultItem {
+  id: string;
+  type: number;
+  title: string;
+  icon: string;
+  coverImage: string;
+  roadmapSlug: string;
+  roadmapTitle: string;
+  roadmapId: string;
+  updatedAt: string;
+  breadcrumb: string[];
+}
+
+export interface SearchResponse {
+  results: SearchResultItem[];
+}
+
 export const ROADMAP_PACKAGE_NAME = "roadmap";
 
 export interface RoadmapServiceClient {
@@ -140,6 +206,16 @@ export interface RoadmapServiceClient {
   updateNodeContent(request: UpdateNodeContentRequest): Observable<NodeItem>;
 
   updateNodeTitle(request: UpdateNodeTitleRequest): Observable<NodeItem>;
+
+  updateNodeCover(request: UpdateNodeCoverRequest): Observable<NodeItem>;
+
+  updateNodeIcon(request: UpdateNodeIconRequest): Observable<NodeItem>;
+
+  getNodeBreadcrumb(request: IdRequest): Observable<BreadcrumbResponse>;
+
+  getRoadmapTree(request: RoadmapTreeRequest): Observable<RoadmapTreeResponse>;
+
+  searchNodes(request: SearchRequest): Observable<SearchResponse>;
 }
 
 export interface RoadmapServiceController {
@@ -160,6 +236,20 @@ export interface RoadmapServiceController {
   updateNodeContent(request: UpdateNodeContentRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
 
   updateNodeTitle(request: UpdateNodeTitleRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  updateNodeCover(request: UpdateNodeCoverRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  updateNodeIcon(request: UpdateNodeIconRequest): Promise<NodeItem> | Observable<NodeItem> | NodeItem;
+
+  getNodeBreadcrumb(
+    request: IdRequest,
+  ): Promise<BreadcrumbResponse> | Observable<BreadcrumbResponse> | BreadcrumbResponse;
+
+  getRoadmapTree(
+    request: RoadmapTreeRequest,
+  ): Promise<RoadmapTreeResponse> | Observable<RoadmapTreeResponse> | RoadmapTreeResponse;
+
+  searchNodes(request: SearchRequest): Promise<SearchResponse> | Observable<SearchResponse> | SearchResponse;
 }
 
 export function RoadmapServiceControllerMethods() {
@@ -174,6 +264,11 @@ export function RoadmapServiceControllerMethods() {
       "upsertGraph",
       "updateNodeContent",
       "updateNodeTitle",
+      "updateNodeCover",
+      "updateNodeIcon",
+      "getNodeBreadcrumb",
+      "getRoadmapTree",
+      "searchNodes",
     ];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);

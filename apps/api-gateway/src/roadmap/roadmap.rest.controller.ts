@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { RoadmapGrpcClient } from './roadmap.grpc-client';
 import { AdminGuard } from '../auth/admin.guard';
 import {
   CreateRoadmapInput, UpdateRoadmapInput, NodeInput, EdgeInput,
   UpdateNodeContentInput, UpdateNodeTitleInput,
+  UpdateNodeCoverInput, UpdateNodeIconInput,
+  RoadmapTreeDto, SearchResultDto,
 } from './roadmap.dto';
 
 @ApiTags('roadmaps')
@@ -32,6 +34,13 @@ export class RoadmapRestController {
       ...(n.targetRoadmapId ? { targetRoadmapSlug: idToSlug.get(n.targetRoadmapId) } : {}),
     }));
     return { ...detail, nodes };
+  }
+
+  @Get('roadmaps/:slug/tree')
+  @ApiOperation({ summary: 'Get page tree for a roadmap by slug' })
+  @ApiParam({ name: 'slug', type: String })
+  async getRoadmapTree(@Param('slug') slug: string): Promise<RoadmapTreeDto> {
+    return this.grpc.getRoadmapTree(slug);
   }
 
   @Get('nodes/:id')
@@ -92,5 +101,47 @@ export class RoadmapRestController {
   @ApiParam({ name: 'id', type: String })
   updateNodeTitle(@Param('id') id: string, @Body() body: UpdateNodeTitleInput) {
     return this.grpc.updateNodeTitle(id, body.title);
+  }
+
+  @UseGuards(AdminGuard)
+  @Patch('nodes/:id/cover')
+  @ApiOperation({ summary: 'Update node cover image' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: String })
+  updateNodeCover(@Param('id') id: string, @Body() body: UpdateNodeCoverInput) {
+    return this.grpc.updateNodeCover(id, body.coverImage ?? '');
+  }
+
+  @UseGuards(AdminGuard)
+  @Patch('nodes/:id/icon')
+  @ApiOperation({ summary: 'Update node icon' })
+  @ApiBearerAuth()
+  @ApiParam({ name: 'id', type: String })
+  updateNodeIcon(@Param('id') id: string, @Body() body: UpdateNodeIconInput) {
+    return this.grpc.updateNodeIcon(id, body.icon ?? '');
+  }
+
+  @UseGuards(AdminGuard)
+  @Get('search')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Search nodes and roadmaps (full-text) — Swagger docs only, use GraphQL in FE' })
+  async searchNodes(
+    @Query('q') q: string,
+    @Query('titleOnly') titleOnly?: string,
+    @Query('roadmapId') roadmapId?: string,
+  ): Promise<SearchResultDto[]> {
+    return this.grpc.searchNodes({ q: q ?? '', titleOnly: titleOnly === 'true', roadmapId: roadmapId ?? '' }) as Promise<SearchResultDto[]>;
+  }
+
+  @Get('nodes/:id/breadcrumb')
+  @ApiOperation({ summary: 'Get node breadcrumb path' })
+  @ApiParam({ name: 'id', type: String })
+  async getNodeBreadcrumb(@Param('id') id: string) {
+    const result = await this.grpc.getNodeBreadcrumb(id) as { items?: Array<{ title: string; slug: string; nodeId: string }> };
+    return (result.items ?? []).map((item) => ({
+      title: item.title,
+      slug: item.slug || null,
+      nodeId: item.nodeId || null,
+    }));
   }
 }

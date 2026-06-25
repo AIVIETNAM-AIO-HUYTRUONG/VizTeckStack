@@ -2,7 +2,7 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { RoadmapService } from './roadmap.service';
-import { Empty, SlugRequest, IdRequest, CreateRoadmapRequest, UpdateRoadmapRequest, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest } from '@vizteck/proto';
+import { Empty, SlugRequest, IdRequest, CreateRoadmapRequest, UpdateRoadmapRequest, UpsertGraphRequest, UpdateNodeContentRequest, UpdateNodeTitleRequest, UpdateNodeCoverRequest, UpdateNodeIconRequest, RoadmapTreeRequest, SearchRequest } from '@vizteck/proto';
 
 @Controller()
 export class RoadmapController {
@@ -34,4 +34,19 @@ export class RoadmapController {
 
   @GrpcMethod('RoadmapService', 'UpdateNodeTitle')
   updateNodeTitle(data: UpdateNodeTitleRequest) { return this.svc.updateNodeTitle(data); }
+
+  @GrpcMethod('RoadmapService', 'UpdateNodeCover')
+  updateNodeCover(data: UpdateNodeCoverRequest) { return this.svc.updateNodeCover(data); }
+
+  @GrpcMethod('RoadmapService', 'UpdateNodeIcon')
+  updateNodeIcon(data: UpdateNodeIconRequest) { return this.svc.updateNodeIcon(data); }
+
+  @GrpcMethod('RoadmapService', 'GetNodeBreadcrumb')
+  getNodeBreadcrumb(data: IdRequest) { return this.svc.getNodeBreadcrumb(data); }
+
+  @GrpcMethod('RoadmapService', 'GetRoadmapTree')
+  getRoadmapTree(data: RoadmapTreeRequest) { return this.svc.getRoadmapTree(data); }
+
+  @GrpcMethod('RoadmapService', 'SearchNodes')
+  searchNodes(data: SearchRequest) { return this.svc.searchNodes(data); }
 }

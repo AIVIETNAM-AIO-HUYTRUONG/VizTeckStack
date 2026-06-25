@@ -1,3 +1,5 @@
+import type { BreadcrumbItem } from '@vizteck/lesson';
+
 export interface NodeItem {
   id: string;
   roadmapId: string;
@@ -8,6 +10,8 @@ export interface NodeItem {
   targetRoadmapId?: string;
   targetRoadmapSlug?: string;
   content?: string;
+  coverImage?: string | null;
+  icon?: string | null;
 }
 
 const NODE_TYPE_MAP: Record<number | string, 'ROADMAP' | 'LESSON'> = {
@@ -28,4 +32,11 @@ export async function fetchNode(id: string): Promise<NodeItem> {
   const raw = await res.json() as { node?: Partial<NodeItem> } | Partial<NodeItem>;
   const n = (raw as { node?: Partial<NodeItem> }).node ?? (raw as Partial<NodeItem>);
   return { ...n, type: normalizeNodeType(n.type) } as NodeItem;
+}
+
+export async function fetchBreadcrumb(nodeId: string): Promise<BreadcrumbItem[]> {
+  const res = await fetch(`${API}/api/nodes/${nodeId}/breadcrumb`, { cache: 'no-store' });
+  if (!res.ok) return [];
+  const data = await res.json() as Array<{ title: string; slug: string | null; nodeId: string | null }>;
+  return Array.isArray(data) ? data : [];
 }

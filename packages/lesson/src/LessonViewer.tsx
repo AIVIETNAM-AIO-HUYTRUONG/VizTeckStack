@@ -11,12 +11,16 @@ export interface LessonViewerProps {
   contentJson: string;
 }
 
-export function LessonViewer({ contentJson }: LessonViewerProps) {
+// React.lazy in LessonPageShell does not prevent SSR in Next.js; BlockNote's
+// useCreateBlockNote accesses `window` at hook-call time. Moving BlockNote hooks
+// into this inner component and guarding the outer with a mounted flag ensures
+// they only run on the client.
+function LessonViewerInner({ contentJson }: LessonViewerProps) {
   const blocks = parseBlocks(contentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
 
-  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   useEffect(() => {
     const update = () =>
       setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light');
@@ -30,5 +34,13 @@ export function LessonViewer({ contentJson }: LessonViewerProps) {
     return <div className="text-text-3 text-sm py-6">No content available.</div>;
   }
 
-  return <BlockNoteView editor={editor} editable={false} theme={theme ?? 'light'} />;
+  return <BlockNoteView editor={editor} editable={false} theme={theme} />;
+}
+
+export function LessonViewer({ contentJson }: LessonViewerProps) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!mounted) return null;
+  return <LessonViewerInner contentJson={contentJson} />;
 }

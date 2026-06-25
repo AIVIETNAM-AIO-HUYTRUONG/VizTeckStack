@@ -2,10 +2,11 @@
   "name": "@vizteck/proto",
   "version": "0.0.1",
   "private": true,
-  "main": "./generated/roadmap.js",
-  "types": "./generated/roadmap.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "proto:gen": "node generate.js"
+    "proto:gen": "node generate.js",
+    "build": "tsc"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.10.0",

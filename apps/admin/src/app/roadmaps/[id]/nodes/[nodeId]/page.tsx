@@ -2,20 +2,18 @@
 
 import dynamic from "next/dynamic";
 import { use } from "react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useAuthGuard } from "@/lib/useAuthGuard";
 import { useLessonEditor } from "@/features/lessons/hooks/useLessonEditor";
+import { useLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
+import { usePageTree } from "@/features/lessons/hooks/usePageTree";
 import { LessonTitleEditor } from "@/features/lessons/components/LessonTitleEditor";
+import { CoverImage } from "@/features/lessons/components/CoverImage";
+import { LessonPageShell, LessonPageLayout } from "@vizteck/lesson";
+import type { PageTreeNode } from "@vizteck/lesson";
 
 const LessonEditor = dynamic(
   () => import("@vizteck/lesson").then((m) => m.LessonEditor),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="text-sm text-text-2 py-4">Loading editor…</div>
-    ),
-  },
+  { ssr: false, loading: () => <div className="text-sm text-text-2 py-4">Loading editor…</div> }
 );
 
 export default function LessonEditorPage({
@@ -25,8 +23,6 @@ export default function LessonEditorPage({
 }) {
   useAuthGuard();
   const { id, nodeId } = use(params);
-  const searchParams = useSearchParams();
-  const slug = searchParams.get("slug") ?? "";
 
   const {
     loading,
@@ -36,6 +32,14 @@ export default function LessonEditorPage({
     handleSaveContent,
     handleSaveTitle,
   } = useLessonEditor(nodeId);
+
+  const { cover, icon, setCover, setIcon } = useLessonPageShell(
+    nodeId,
+    lesson?.coverImage,
+    lesson?.icon,
+  );
+
+  const tree = usePageTree(nodeId);
 
   if (loading) {
     return (
@@ -48,46 +52,59 @@ export default function LessonEditorPage({
   if (notFound || !lesson) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-6">
-        <p className="text-sm text-text-2">
-          Node not found. It may have been deleted.
-        </p>
-        <Link
-          href="/roadmaps"
-          className="text-sm text-indigo hover:underline mt-2 inline-block"
-        >
+        <p className="text-sm text-text-2">Node not found. It may have been deleted.</p>
+        <a href="/roadmaps" className="text-sm text-indigo hover:underline mt-2 inline-block">
           ← Back to Roadmaps
-        </Link>
+        </a>
       </div>
     );
   }
 
+  const shellNode = {
+    id: nodeId,
+    title: lesson.title,
+    coverImage: cover,
+    icon,
+    content: lesson.content ?? null,
+    type: (lesson.type === "ROADMAP" ? "ROADMAP" : "LESSON") as "LESSON" | "ROADMAP",
+  };
+
   return (
-    <div className="max-w-3xl mx-auto px-6 py-6">
-      <nav className="flex items-center gap-1 text-sm text-text-3 mb-4">
-        <Link href="/roadmaps" className="hover:text-indigo transition-colors">
-          ← Roadmaps
-        </Link>
-        <span>/</span>
-        <Link
-          href={`/roadmaps/${id}?slug=${slug}`}
-          className="hover:text-indigo transition-colors"
-        >
-          Graph Editor
-        </Link>
-        <span>/</span>
-        <span className="text-text-1">{lesson.title}</span>
-      </nav>
-
-      <LessonTitleEditor
-        title={lesson.title}
-        saveStatus={titleSaveStatus}
-        onSave={handleSaveTitle}
+    <LessonPageLayout
+      tree={tree ?? undefined}
+      currentNodeId={nodeId}
+      getLessonHref={(n: PageTreeNode) => `/roadmaps/${n.roadmapId}/nodes/${n.id}`}
+      getRoadmapHref={(n: PageTreeNode) =>
+        n.targetRoadmapId ? `/roadmaps/${n.targetRoadmapId}` : undefined
+      }
+    >
+      <LessonPageShell
+        mode="edit"
+        node={shellNode}
+        breadcrumb={[]}
+        coverSlot={
+          <CoverImage
+            cover={cover}
+            icon={icon}
+            breadcrumb={[]}
+            onCoverChange={setCover}
+            onIconChange={setIcon}
+          />
+        }
+        titleSlot={
+          <LessonTitleEditor
+            title={lesson.title}
+            saveStatus={titleSaveStatus}
+            onSave={handleSaveTitle}
+          />
+        }
+        contentSlot={
+          <LessonEditor
+            initialContentJson={lesson.content ?? ""}
+            onSave={handleSaveContent}
+          />
+        }
       />
-
-      <LessonEditor
-        initialContentJson={lesson.content ?? ""}
-        onSave={handleSaveContent}
-      />
-    </div>
+    </LessonPageLayout>
   );
 }
