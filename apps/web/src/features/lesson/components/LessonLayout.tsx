@@ -2,7 +2,7 @@
 
 import { LessonPageShell, LessonPageLayout } from "@vizteck/lesson";
 import type { LessonShellNode, BreadcrumbItem, PageTree, PageTreeNode } from "@vizteck/lesson";
-import type { NodeItem } from "@/features/lesson/services/node.service";
+import type { NodeItem } from "@/lib/gql";
 
 interface LessonLayoutProps {
   node: NodeItem;

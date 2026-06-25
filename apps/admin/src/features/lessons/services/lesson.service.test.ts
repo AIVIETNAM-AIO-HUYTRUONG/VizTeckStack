@@ -1,62 +1,50 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fetchLesson, updateLessonContent, updateLessonTitle } from './lesson.service';
 
-vi.mock('@/lib/api', () => ({ apiFetch: vi.fn() }));
-import { apiFetch } from '@/lib/api';
-const mockFetch = vi.mocked(apiFetch);
+vi.mock('@/lib/apolloClient', () => ({
+  adminApolloClient: { query: vi.fn(), mutate: vi.fn() },
+}));
 
-const mockNode = {
-  id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro', content: '[]',
-};
+import { adminApolloClient } from '@/lib/apolloClient';
+const mockQuery = vi.mocked(adminApolloClient.query);
+const mockMutate = vi.mocked(adminApolloClient.mutate);
+
+const mockNode = { id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Intro', content: '[]' };
 
 describe('fetchLesson', () => {
   beforeEach(() => vi.clearAllMocks());
 
   it('returns the node on success', async () => {
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({ node: mockNode }),
-    } as Response);
-
+    mockQuery.mockResolvedValue({ data: { node: mockNode } } as never);
     const result = await fetchLesson('n1');
     expect(result.id).toBe('n1');
-    expect(mockFetch).toHaveBeenCalledWith('/api/nodes/n1');
-  });
-
-  it('throws when response is not ok', async () => {
-    mockFetch.mockResolvedValue({ ok: false, status: 404 } as Response);
-    await expect(fetchLesson('n1')).rejects.toThrow('Failed to fetch lesson');
+    expect(mockQuery).toHaveBeenCalledOnce();
   });
 
   it('throws when node is missing from response', async () => {
-    mockFetch.mockResolvedValue({
-      ok: true,
-      json: async () => ({}),
-    } as Response);
+    mockQuery.mockResolvedValue({ data: { node: null } } as never);
     await expect(fetchLesson('n1')).rejects.toThrow('Lesson not found');
+  });
+
+  it('throws when query rejects', async () => {
+    mockQuery.mockRejectedValue(new Error('Network error'));
+    await expect(fetchLesson('n1')).rejects.toThrow('Network error');
   });
 });
 
 describe('updateLessonContent', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('calls PATCH /api/nodes/:id/content', async () => {
-    mockFetch.mockResolvedValue({ ok: true } as Response);
+  it('calls UpdateNodeContent mutation with correct variables', async () => {
+    mockMutate.mockResolvedValue({ errors: undefined } as never);
     await updateLessonContent('n1', '[]');
-    expect(mockFetch).toHaveBeenCalledWith(
-      '/api/nodes/n1/content',
-      expect.objectContaining({ method: 'PATCH' }),
-    );
-    const body = JSON.parse(
-      (mockFetch.mock.calls[0][1] as { body: string }).body,
-    ) as { content: string };
-    expect(body.content).toBe('[]');
+    const call = mockMutate.mock.calls[0][0] as unknown as { variables: { id: string; content: string } };
+    expect(call.variables.id).toBe('n1');
+    expect(call.variables.content).toBe('[]');
   });
 
-  it('throws on non-ok response', async () => {
-    mockFetch.mockResolvedValue({
-      ok: false, status: 500, text: async () => 'Internal error',
-    } as Response);
+  it('throws on GraphQL errors', async () => {
+    mockMutate.mockResolvedValue({ errors: [{ message: 'Internal error' }] } as never);
     await expect(updateLessonContent('n1', '[]')).rejects.toThrow('Save failed');
   });
 });
@@ -64,23 +52,16 @@ describe('updateLessonContent', () => {
 describe('updateLessonTitle', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('calls PATCH /api/nodes/:id/title', async () => {
-    mockFetch.mockResolvedValue({ ok: true } as Response);
+  it('calls UpdateNodeTitle mutation with correct variables', async () => {
+    mockMutate.mockResolvedValue({ errors: undefined } as never);
     await updateLessonTitle('n1', 'New Title');
-    expect(mockFetch).toHaveBeenCalledWith(
-      '/api/nodes/n1/title',
-      expect.objectContaining({ method: 'PATCH' }),
-    );
-    const body = JSON.parse(
-      (mockFetch.mock.calls[0][1] as { body: string }).body,
-    ) as { title: string };
-    expect(body.title).toBe('New Title');
+    const call = mockMutate.mock.calls[0][0] as unknown as { variables: { id: string; title: string } };
+    expect(call.variables.id).toBe('n1');
+    expect(call.variables.title).toBe('New Title');
   });
 
-  it('throws on non-ok response', async () => {
-    mockFetch.mockResolvedValue({
-      ok: false, status: 500, text: async () => 'error',
-    } as Response);
+  it('throws on GraphQL errors', async () => {
+    mockMutate.mockResolvedValue({ errors: [{ message: 'error' }] } as never);
     await expect(updateLessonTitle('n1', 'x')).rejects.toThrow('Update title failed');
   });
 });

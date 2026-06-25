@@ -1,0 +1,96 @@
+query ListRoadmaps {
+  roadmaps {
+    id
+    slug
+    title
+    description
+    coverImage
+    status
+  }
+}
+
+query GetRoadmap($slug: String!) {
+  roadmap(slug: $slug) {
+    roadmap {
+      id
+      slug
+      title
+      description
+      coverImage
+      status
+    }
+    nodes {
+      id
+      roadmapId
+      type
+      title
+      positionX
+      positionY
+      targetRoadmapId
+      targetRoadmapSlug
+      content
+      coverImage
+      icon
+    }
+    edges {
+      id
+      sourceId
+      targetId
+      label
+    }
+  }
+}
+
+mutation CreateRoadmap($input: CreateRoadmapInput!) {
+  createRoadmap(input: $input) {
+    id
+    slug
+    title
+    description
+    status
+  }
+}
+
+mutation UpdateRoadmap($id: ID!, $input: UpdateRoadmapInput!) {
+  updateRoadmap(id: $id, input: $input) {
+    id
+    slug
+    title
+    description
+    status
+  }
+}
+
+mutation DeleteRoadmap($id: ID!) {
+  deleteRoadmap(id: $id)
+}
+
+mutation UpsertGraph($roadmapId: ID!, $nodes: [NodeInput!]!, $edges: [EdgeInput!]!) {
+  upsertGraph(roadmapId: $roadmapId, nodes: $nodes, edges: $edges) {
+    roadmap {
+      id
+      slug
+      title
+      status
+    }
+    nodes {
+      id
+      roadmapId
+      type
+      title
+      positionX
+      positionY
+      targetRoadmapId
+      targetRoadmapSlug
+      content
+      coverImage
+      icon
+    }
+    edges {
+      id
+      sourceId
+      targetId
+      label
+    }
+  }
+}

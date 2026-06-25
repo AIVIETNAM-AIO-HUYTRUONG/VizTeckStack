@@ -1,6 +1,5 @@
 import { LessonLayout } from '@/features/lesson/components/LessonLayout';
-import { fetchNode, fetchBreadcrumb } from '@/features/lesson/services/node.service';
-import { fetchRoadmapTree } from '@/features/lesson/services/tree.service';
+import { fetchNode, fetchBreadcrumb, fetchRoadmapTree } from '@/lib/gql';
 
 export const revalidate = 0;
 export const dynamicParams = true;

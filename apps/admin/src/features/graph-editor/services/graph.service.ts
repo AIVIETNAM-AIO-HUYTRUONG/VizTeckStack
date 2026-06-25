@@ -1,4 +1,13 @@
-import { apiFetch } from '@/lib/api';
+import { adminApolloClient } from '@/lib/apolloClient';
+import {
+  ListRoadmapsDocument,
+  GetRoadmapDocument,
+  UpsertGraphDocument,
+  NodeType,
+  type ListRoadmapsQuery,
+  type GetRoadmapQuery,
+  type UpsertGraphMutationVariables,
+} from '@vizteck/graphql-client';
 import type { NodeItem, EdgeItem } from '@vizteck/graph';
 
 export interface EditorNode extends NodeItem {
@@ -48,28 +57,24 @@ export function makeSnapshot(nodes: EditorNode[], edges: EditorEdge[]): string {
 }
 
 export async function loadGraph(slug: string, roadmapId: string): Promise<GraphData> {
-  const [graphRes, roadmapsRes] = await Promise.all([
-    apiFetch(`/api/roadmaps/${slug}`),
-    apiFetch('/api/roadmaps'),
+  const [graphResult, roadmapsResult] = await Promise.all([
+    adminApolloClient.query<GetRoadmapQuery>({
+      query: GetRoadmapDocument,
+      variables: { slug },
+    }),
+    adminApolloClient.query<ListRoadmapsQuery>({
+      query: ListRoadmapsDocument,
+    }),
   ]);
 
-  if (!graphRes.ok) throw new Error(`Failed to load graph: ${graphRes.status}`);
+  const detail = graphResult.data.roadmap;
+  if (!detail) throw new Error(`Failed to load graph for slug: ${slug}`);
 
-  const data = (await graphRes.json()) as {
-    roadmap: { title: string; status?: string };
-    nodes?: NodeItem[];
-    edges?: EdgeItem[];
-  };
-
-  const roadmapsData = roadmapsRes.ok
-    ? ((await roadmapsRes.json()) as { roadmaps?: RoadmapEntry[] })
-    : { roadmaps: [] };
-
-  const nodes: EditorNode[] = (data.nodes ?? []).map((n) => ({
-    ...n,
+  const nodes: EditorNode[] = (detail.nodes ?? []).map((n) => ({
+    ...(n as unknown as NodeItem),
     type: normalizeNodeType(n.type),
   }));
-  const edges: EditorEdge[] = (data.edges ?? []).map((e) => ({ ...e }));
+  const edges: EditorEdge[] = (detail.edges ?? []).map((e) => ({ ...(e as unknown as EdgeItem) }));
   const savedSnapshot = makeSnapshot(nodes, edges);
 
   // Restore sessionStorage draft if present and different from API state
@@ -91,12 +96,11 @@ export async function loadGraph(slug: string, roadmapId: string): Promise<GraphD
   }
 
   return {
-    roadmapTitle: data.roadmap?.title ?? '',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    roadmapStatus: (data.roadmap as any)?.status ?? 'DRAFT',
+    roadmapTitle: detail.roadmap?.title ?? '',
+    roadmapStatus: detail.roadmap?.status ?? 'DRAFT',
     nodes: restoredNodes,
     edges: restoredEdges,
-    allRoadmaps: roadmapsData.roadmaps ?? [],
+    allRoadmaps: (roadmapsResult.data.roadmaps ?? []) as RoadmapEntry[],
     savedSnapshot,
   };
 }
@@ -106,12 +110,13 @@ export async function saveGraph(
   nodes: EditorNode[],
   edges: EditorEdge[],
 ): Promise<void> {
-  const res = await apiFetch(`/api/roadmaps/${roadmapId}/graph`, {
-    method: 'POST',
-    body: JSON.stringify({
+  const { errors } = await adminApolloClient.mutate<unknown, UpsertGraphMutationVariables>({
+    mutation: UpsertGraphDocument,
+    variables: {
+      roadmapId,
       nodes: nodes.map((n) => ({
         id: n.id,
-        type: n.type,
+        type: n.type === 'ROADMAP' ? NodeType.Roadmap : NodeType.Lesson,
         title: n.title,
         positionX: n.positionX ?? undefined,
         positionY: n.positionY ?? undefined,
@@ -123,11 +128,8 @@ export async function saveGraph(
         targetId: e.targetId,
         label: e.label,
       })),
-    }),
+    },
   });
 
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Save failed: ${text || res.status}`);
-  }
+  if (errors?.length) throw new Error(`Save failed: ${errors[0].message}`);
 }

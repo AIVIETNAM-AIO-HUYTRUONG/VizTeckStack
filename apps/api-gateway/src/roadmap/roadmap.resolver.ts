@@ -11,20 +11,22 @@ import {
   UpdateRoadmapInput,
   NodeInput,
   EdgeInput,
-  BreadcrumbItemDto,
   RoadmapTreeDto,
   SearchResultDto,
 } from "./roadmap.dto";
 
-// Proto sends NodeType as numeric (ROADMAP=0, LESSON=1); GraphQL enum expects strings.
 function normalizeNodeType(type: unknown): NodeTypeEnum {
   if (type === 0 || type === "ROADMAP") return NodeTypeEnum.ROADMAP;
   if (type === 1 || type === "LESSON") return NodeTypeEnum.LESSON;
   return NodeTypeEnum.LESSON;
 }
 
-function normalizeNodes(nodes: any[]): NodeDto[] {
-  return (nodes ?? []).map((n) => ({ ...n, type: normalizeNodeType(n.type) }));
+function normalizeNodes(nodes: any[], idToSlug: Map<string, string>): NodeDto[] {
+  return (nodes ?? []).map((n) => ({
+    ...n,
+    type: normalizeNodeType(n.type),
+    targetRoadmapSlug: n.targetRoadmapId ? idToSlug.get(n.targetRoadmapId) : undefined,
+  }));
 }
 
 @Resolver()
@@ -39,14 +41,14 @@ export class RoadmapResolver {
 
   @Query(() => RoadmapDetailDto, { nullable: true })
   async roadmap(@Args("slug") slug: string): Promise<RoadmapDetailDto> {
-    const result = await this.grpc.getRoadmap(slug);
-    return { ...result, nodes: normalizeNodes(result.nodes) };
-  }
-
-  @Query(() => NodeDto, { nullable: true })
-  async node(@Args("id", { type: () => ID }) id: string): Promise<NodeDto> {
-    const result = await this.grpc.getNode(id);
-    return result.node;
+    const [result, listResult] = await Promise.all([
+      this.grpc.getRoadmap(slug),
+      this.grpc.getRoadmaps(),
+    ]) as [any, any];
+    const idToSlug = new Map<string, string>(
+      (listResult.roadmaps ?? []).map((r: any) => [r.id, r.slug]),
+    );
+    return { ...result, nodes: normalizeNodes(result.nodes ?? [], idToSlug), edges: result.edges ?? [] };
   }
 
   @UseGuards(AdminGuard)
@@ -75,24 +77,13 @@ export class RoadmapResolver {
 
   @UseGuards(AdminGuard)
   @Mutation(() => RoadmapDetailDto)
-  upsertGraph(
+  async upsertGraph(
     @Args("roadmapId", { type: () => ID }) roadmapId: string,
     @Args("nodes", { type: () => [NodeInput] }) nodes: NodeInput[],
     @Args("edges", { type: () => [EdgeInput] }) edges: EdgeInput[],
   ): Promise<RoadmapDetailDto> {
-    return this.grpc.upsertGraph({ roadmapId, nodes, edges });
-  }
-
-  @Query(() => [BreadcrumbItemDto])
-  async nodeBreadcrumb(
-    @Args("id", { type: () => ID }) id: string,
-  ): Promise<BreadcrumbItemDto[]> {
-    const result = await this.grpc.getNodeBreadcrumb(id) as { items?: Array<{ title: string; slug: string; nodeId: string }> };
-    return (result.items ?? []).map((item) => ({
-      title: item.title,
-      slug: item.slug || undefined,
-      nodeId: item.nodeId || undefined,
-    }));
+    const result = await this.grpc.upsertGraph({ roadmapId, nodes, edges }) as any;
+    return { ...result, nodes: normalizeNodes(result.nodes ?? [], new Map()), edges: result.edges ?? [] };
   }
 
   @Query(() => RoadmapTreeDto, { nullable: true })
@@ -137,21 +128,4 @@ export class RoadmapResolver {
     }));
   }
 
-  @UseGuards(AdminGuard)
-  @Mutation(() => NodeDto)
-  updateNodeCover(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("coverImage", { nullable: true }) coverImage?: string,
-  ): Promise<NodeDto> {
-    return this.grpc.updateNodeCover(id, coverImage ?? '') as Promise<NodeDto>;
-  }
-
-  @UseGuards(AdminGuard)
-  @Mutation(() => NodeDto)
-  updateNodeIcon(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("icon", { nullable: true }) icon?: string,
-  ): Promise<NodeDto> {
-    return this.grpc.updateNodeIcon(id, icon ?? '') as Promise<NodeDto>;
-  }
 }

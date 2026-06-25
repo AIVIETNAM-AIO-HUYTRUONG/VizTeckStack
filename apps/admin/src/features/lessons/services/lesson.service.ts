@@ -1,4 +1,16 @@
-import { apiFetch } from '@/lib/api';
+import { adminApolloClient } from '@/lib/apolloClient';
+import {
+  GetNodeDocument,
+  GetNodeBreadcrumbDocument,
+  GetRoadmapTreeDocument,
+  UpdateNodeContentDocument,
+  UpdateNodeTitleDocument,
+  UpdateNodeCoverDocument,
+  UpdateNodeIconDocument,
+  type GetNodeQuery,
+  type GetNodeBreadcrumbQuery,
+  type GetRoadmapTreeQuery,
+} from '@vizteck/graphql-client';
 import type { BreadcrumbItem, PageTree } from '@vizteck/lesson';
 
 export interface LessonNode {
@@ -12,59 +24,71 @@ export interface LessonNode {
 }
 
 export async function fetchLesson(nodeId: string): Promise<LessonNode> {
-  const res = await apiFetch(`/api/nodes/${nodeId}`);
-  if (!res.ok) throw new Error(`Failed to fetch lesson: ${res.status}`);
-  const data = (await res.json()) as { node?: LessonNode };
+  const { data } = await adminApolloClient.query<GetNodeQuery>({
+    query: GetNodeDocument,
+    variables: { id: nodeId },
+  });
   if (!data.node) throw new Error('Lesson not found');
-  return data.node;
+  return data.node as LessonNode;
 }
 
 export async function updateLessonContent(nodeId: string, content: string): Promise<void> {
-  const res = await apiFetch(`/api/nodes/${nodeId}/content`, {
-    method: 'PATCH',
-    body: JSON.stringify({ content }),
+  const { errors } = await adminApolloClient.mutate({
+    mutation: UpdateNodeContentDocument,
+    variables: { id: nodeId, content },
   });
-  if (!res.ok) throw new Error(`Save failed (${res.status}): ${await res.text()}`);
+  if (errors?.length) throw new Error(`Save failed: ${errors[0].message}`);
 }
 
 export async function updateLessonTitle(nodeId: string, title: string): Promise<void> {
-  const res = await apiFetch(`/api/nodes/${nodeId}/title`, {
-    method: 'PATCH',
-    body: JSON.stringify({ title }),
+  const { errors } = await adminApolloClient.mutate({
+    mutation: UpdateNodeTitleDocument,
+    variables: { id: nodeId, title },
   });
-  if (!res.ok) throw new Error(`Update title failed (${res.status}): ${await res.text()}`);
+  if (errors?.length) throw new Error(`Update title failed: ${errors[0].message}`);
 }
 
 export async function updateNodeCover(nodeId: string, coverImage: string | null): Promise<void> {
-  const res = await apiFetch(`/api/nodes/${nodeId}/cover`, {
-    method: 'PATCH',
-    body: JSON.stringify({ coverImage }),
+  const { errors } = await adminApolloClient.mutate({
+    mutation: UpdateNodeCoverDocument,
+    variables: { id: nodeId, coverImage: coverImage ?? undefined },
   });
-  if (!res.ok) throw new Error(`Update cover failed (${res.status}): ${await res.text()}`);
+  if (errors?.length) throw new Error(`Update cover failed: ${errors[0].message}`);
 }
 
 export async function updateNodeIcon(nodeId: string, icon: string | null): Promise<void> {
-  const res = await apiFetch(`/api/nodes/${nodeId}/icon`, {
-    method: 'PATCH',
-    body: JSON.stringify({ icon }),
+  const { errors } = await adminApolloClient.mutate({
+    mutation: UpdateNodeIconDocument,
+    variables: { id: nodeId, icon: icon ?? undefined },
   });
-  if (!res.ok) throw new Error(`Update icon failed (${res.status}): ${await res.text()}`);
+  if (errors?.length) throw new Error(`Update icon failed: ${errors[0].message}`);
 }
 
 export async function fetchBreadcrumb(nodeId: string): Promise<BreadcrumbItem[]> {
-  const res = await apiFetch(`/api/nodes/${nodeId}/breadcrumb`);
-  if (!res.ok) return [];
-  const data = (await res.json()) as Array<{ title: string; slug: string | null; nodeId: string | null }>;
-  return Array.isArray(data) ? data : [];
+  try {
+    const { data } = await adminApolloClient.query<GetNodeBreadcrumbQuery>({
+      query: GetNodeBreadcrumbDocument,
+      variables: { id: nodeId },
+    });
+    return (data.nodeBreadcrumb ?? []) as BreadcrumbItem[];
+  } catch {
+    return [];
+  }
 }
 
 export async function fetchRoadmapTree(nodeId: string): Promise<PageTree | null> {
   const crumbs = await fetchBreadcrumb(nodeId);
   const rootSlug = crumbs[0]?.slug;
   if (!rootSlug) return null;
-  const res = await apiFetch(`/api/roadmaps/${rootSlug}/tree`);
-  if (!res.ok) return null;
-  const data = (await res.json()) as Partial<PageTree>;
-  if (!data.rootSlug) return null;
-  return data as PageTree;
+  try {
+    const { data } = await adminApolloClient.query<GetRoadmapTreeQuery>({
+      query: GetRoadmapTreeDocument,
+      variables: { slug: rootSlug },
+    });
+    const tree = data.roadmapTree;
+    if (!tree?.rootSlug) return null;
+    return tree as unknown as PageTree;
+  } catch {
+    return null;
+  }
 }

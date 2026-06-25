@@ -1,5 +1,5 @@
 import { Card } from '@vizteck/ui';
-import { fetchRoadmaps } from '@/features/roadmap/services/roadmap.service';
+import { fetchRoadmaps } from '@/lib/gql';
 
 export const revalidate = 0;
 

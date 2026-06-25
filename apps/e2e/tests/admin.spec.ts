@@ -1,15 +1,22 @@
 import { test, expect, type Page } from '@playwright/test';
 
 const ADMIN_TOKEN = 'supersecret';
-const ROADMAP_ID = 'cmqjg391q0000tux4lzw52wao'; // "Frontend Developer"
+const ROADMAP_ID = 'cmqsv716g00005etzboyvqzkn'; // "Frontend Developer"
 const ROADMAP_SLUG = 'frontend';
+
+async function waitForLoginReady(page: Page) {
+  // data-ready is set by useEffect once React has hydrated
+  await page.locator('button[data-ready="true"]').waitFor({ timeout: 10000 });
+}
 
 async function loginAsAdmin(page: Page) {
   await page.goto('/login');
+  await waitForLoginReady(page);
   await page.locator('#admin-token').fill(ADMIN_TOKEN);
   await page.getByRole('button', { name: /sign in/i }).click();
-  await expect(page).toHaveURL(/\/roadmaps$/, { timeout: 8000 });
+  await expect(page).toHaveURL(/\/roadmaps$/, { timeout: 10000 });
 }
+
 
 test.describe('Admin — Login', () => {
   test('login page renders token input and submit button', async ({ page }) => {
@@ -20,6 +27,7 @@ test.describe('Admin — Login', () => {
 
   test('wrong token shows error', async ({ page }) => {
     await page.goto('/login');
+    await waitForLoginReady(page);
     await page.locator('#admin-token').fill('wrongtoken');
     await page.getByRole('button', { name: /sign in/i }).click();
     await expect(page.getByText('Invalid token')).toBeVisible({ timeout: 8000 });

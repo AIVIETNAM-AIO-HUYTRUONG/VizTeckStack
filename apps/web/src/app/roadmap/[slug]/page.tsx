@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { RoadmapGraphView } from '@/features/roadmap/components/RoadmapGraphView';
-import { fetchRoadmap } from '@/features/roadmap/services/roadmap.service';
+import { fetchRoadmap } from '@/lib/gql';
 
 export const revalidate = 0;
 export const dynamicParams = true;

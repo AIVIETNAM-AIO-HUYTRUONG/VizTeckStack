@@ -57,6 +57,9 @@ importers:
       '@vizteck/graph':
         specifier: workspace:*
         version: link:../../packages/graph
+      '@vizteck/graphql-client':
+        specifier: workspace:*
+        version: link:../../packages/graphql-client
       '@vizteck/lesson':
         specifier: workspace:*
         version: link:../../packages/lesson
@@ -273,6 +276,9 @@ importers:
       '@vizteck/graph':
         specifier: workspace:*
         version: link:../../packages/graph
+      '@vizteck/graphql-client':
+        specifier: workspace:*
+        version: link:../../packages/graphql-client
       '@vizteck/lesson':
         specifier: workspace:*
         version: link:../../packages/lesson
@@ -282,6 +288,9 @@ importers:
       graphql:
         specifier: ^17.0.1
         version: 17.0.1
+      graphql-request:
+        specifier: ^7.1.0
+        version: 7.4.0(graphql@17.0.1)
       next:
         specifier: ^16.2.9
         version: 16.2.9(@babel/core@7.29.7)(@playwright/test@1.61.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -3913,6 +3922,11 @@ packages:
 
   graphql-request@6.1.0:
     resolution: {integrity: sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==}
+    peerDependencies:
+      graphql: 14 - 16
+
+  graphql-request@7.4.0:
+    resolution: {integrity: sha512-xfr+zFb/QYbs4l4ty0dltqiXIp07U6sl+tOKAb0t50/EnQek6CVVBLjETXi+FghElytvgaAWtIOt3EV7zLzIAQ==}
     peerDependencies:
       graphql: 14 - 16
 
@@ -10278,6 +10292,11 @@ snapshots:
       graphql: 16.14.2
     transitivePeerDependencies:
       - encoding
+
+  graphql-request@7.4.0(graphql@17.0.1):
+    dependencies:
+      '@graphql-typed-document-node/core': 3.2.0(graphql@17.0.1)
+      graphql: 17.0.1
 
   graphql-tag@2.12.6(graphql@16.14.2):
     dependencies:

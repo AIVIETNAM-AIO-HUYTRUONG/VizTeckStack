@@ -1,4 +1,13 @@
-import { apiFetch } from '@/lib/api';
+import { adminApolloClient } from '@/lib/apolloClient';
+import {
+  ListRoadmapsDocument,
+  CreateRoadmapDocument,
+  UpdateRoadmapDocument,
+  DeleteRoadmapDocument,
+  type ListRoadmapsQuery,
+  type CreateRoadmapMutationVariables,
+  type UpdateRoadmapMutationVariables,
+} from '@vizteck/graphql-client';
 
 export interface Roadmap {
   id: string;
@@ -41,34 +50,35 @@ export const STATUS_CLASS: Record<string, string> = {
 };
 
 export async function getRoadmaps(): Promise<Roadmap[]> {
-  const res = await apiFetch('/api/roadmaps');
-  const data = (await res.json()) as { roadmaps?: Roadmap[] };
-  return data.roadmaps ?? [];
+  const { data } = await adminApolloClient.query<ListRoadmapsQuery>({
+    query: ListRoadmapsDocument,
+  });
+  return (data.roadmaps ?? []) as Roadmap[];
 }
 
-export async function createRoadmap(data: CreateRoadmapInput): Promise<void> {
-  await apiFetch('/api/roadmaps', {
-    method: 'POST',
-    body: JSON.stringify({ title: data.title, slug: data.slug, description: data.description }),
+export async function createRoadmap(input: CreateRoadmapInput): Promise<void> {
+  await adminApolloClient.mutate<unknown, CreateRoadmapMutationVariables>({
+    mutation: CreateRoadmapDocument,
+    variables: { input },
   });
 }
 
-export async function updateRoadmap(id: string, data: UpdateRoadmapInput): Promise<void> {
-  await apiFetch(`/api/roadmaps/${id}`, {
-    method: 'PUT',
-    body: JSON.stringify(data),
+export async function updateRoadmap(id: string, input: UpdateRoadmapInput): Promise<void> {
+  await adminApolloClient.mutate<unknown, UpdateRoadmapMutationVariables>({
+    mutation: UpdateRoadmapDocument,
+    variables: { id, input },
   });
 }
 
 export async function deleteRoadmap(id: string): Promise<void> {
-  await apiFetch(`/api/roadmaps/${id}`, { method: 'DELETE' });
+  await adminApolloClient.mutate({
+    mutation: DeleteRoadmapDocument,
+    variables: { id },
+  });
 }
 
 export async function cycleStatus(roadmap: Roadmap): Promise<string> {
   const next = STATUS_CYCLE[roadmap.status ?? 'DRAFT'] ?? 'DRAFT';
-  await apiFetch(`/api/roadmaps/${roadmap.id}`, {
-    method: 'PUT',
-    body: JSON.stringify({ status: next }),
-  });
+  await updateRoadmap(roadmap.id, { status: next });
   return next;
 }

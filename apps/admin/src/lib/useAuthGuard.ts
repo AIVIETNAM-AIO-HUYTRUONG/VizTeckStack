@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export function useAuthGuard() {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
+    const token = localStorage.getItem("admin_token");
     if (!token) {
-      router.replace('/login');
+      router.replace("/login");
     }
   }, [router]);
 }

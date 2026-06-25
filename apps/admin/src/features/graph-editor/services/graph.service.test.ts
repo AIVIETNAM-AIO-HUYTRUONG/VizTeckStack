@@ -2,12 +2,13 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { normalizeNodeType, makeSnapshot, loadGraph, saveGraph } from './graph.service';
 import type { EditorNode, EditorEdge } from './graph.service';
 
-vi.mock('@/lib/api', () => ({
-  apiFetch: vi.fn(),
+vi.mock('@/lib/apolloClient', () => ({
+  adminApolloClient: { query: vi.fn(), mutate: vi.fn() },
 }));
 
-import { apiFetch } from '@/lib/api';
-const mockApiFetch = vi.mocked(apiFetch);
+import { adminApolloClient } from '@/lib/apolloClient';
+const mockQuery = vi.mocked(adminApolloClient.query);
+const mockMutate = vi.mocked(adminApolloClient.mutate);
 
 const nodeA: EditorNode = {
   id: 'n1',
@@ -72,31 +73,31 @@ describe('loadGraph', () => {
   beforeEach(() => vi.clearAllMocks());
 
   it('returns parsed roadmap data', async () => {
-    mockApiFetch
+    mockQuery
       .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({
-          roadmap: { title: 'My Roadmap', status: 'PUBLIC' },
-          nodes: [{ id: 'n1', roadmapId: 'r1', type: 0, title: 'Node 1', positionX: 0, positionY: 0 }],
-          edges: [],
-        }),
-      } as Response)
+        data: {
+          roadmap: {
+            roadmap: { id: 'r1', title: 'My Roadmap', slug: 'my-roadmap', status: 'PUBLIC' },
+            nodes: [{ id: 'n1', roadmapId: 'r1', type: 0, title: 'Node 1', positionX: 0, positionY: 0 }],
+            edges: [],
+          },
+        },
+      } as never)
       .mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ roadmaps: [{ id: 'r2', slug: 'other', title: 'Other' }] }),
-      } as Response);
+        data: { roadmaps: [{ id: 'r2', slug: 'other', title: 'Other' }] },
+      } as never);
 
     const data = await loadGraph('my-roadmap', 'r1');
     expect(data.roadmapTitle).toBe('My Roadmap');
     expect(data.roadmapStatus).toBe('PUBLIC');
-    expect(data.nodes[0].type).toBe('ROADMAP'); // numeric 0 normalized
+    expect(data.nodes[0].type).toBe('ROADMAP');
     expect(data.allRoadmaps).toHaveLength(1);
   });
 
   it('throws when graph fetch fails', async () => {
-    mockApiFetch
-      .mockResolvedValueOnce({ ok: false, status: 404 } as Response)
-      .mockResolvedValueOnce({ ok: true, json: async () => ({ roadmaps: [] }) } as Response);
+    mockQuery
+      .mockResolvedValueOnce({ data: { roadmap: null } } as never)
+      .mockResolvedValueOnce({ data: { roadmaps: [] } } as never);
 
     await expect(loadGraph('missing', 'r1')).rejects.toThrow('Failed to load graph');
   });
@@ -105,27 +106,18 @@ describe('loadGraph', () => {
 describe('saveGraph', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('calls POST /api/roadmaps/:id/graph with nodes and edges', async () => {
-    mockApiFetch.mockResolvedValue({ ok: true } as Response);
+  it('calls UpsertGraph mutation with nodes and edges', async () => {
+    mockMutate.mockResolvedValue({ errors: undefined } as never);
     await saveGraph('r1', [nodeA], [edgeA]);
-    expect(mockApiFetch).toHaveBeenCalledWith(
-      '/api/roadmaps/r1/graph',
-      expect.objectContaining({ method: 'POST' }),
-    );
-    const body = JSON.parse((mockApiFetch.mock.calls[0][1] as { body: string }).body) as {
-      nodes: unknown[];
-      edges: unknown[];
-    };
-    expect(body.nodes).toHaveLength(1);
-    expect(body.edges).toHaveLength(1);
+    expect(mockMutate).toHaveBeenCalledOnce();
+    const call = mockMutate.mock.calls[0][0] as unknown as { variables: { roadmapId: string; nodes: unknown[]; edges: unknown[] } };
+    expect(call.variables.roadmapId).toBe('r1');
+    expect(call.variables.nodes).toHaveLength(1);
+    expect(call.variables.edges).toHaveLength(1);
   });
 
-  it('throws on non-ok response', async () => {
-    mockApiFetch.mockResolvedValue({
-      ok: false,
-      status: 500,
-      text: async () => 'Internal error',
-    } as Response);
+  it('throws on GraphQL errors', async () => {
+    mockMutate.mockResolvedValue({ errors: [{ message: '500' }] } as never);
     await expect(saveGraph('r1', [], [])).rejects.toThrow('Save failed');
   });
 });

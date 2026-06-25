@@ -1,0 +1,76 @@
+query GetNode($id: ID!) {
+  node(id: $id) {
+    id
+    roadmapId
+    type
+    title
+    positionX
+    positionY
+    targetRoadmapId
+    targetRoadmapSlug
+    content
+    coverImage
+    icon
+  }
+}
+
+query GetNodeBreadcrumb($id: ID!) {
+  nodeBreadcrumb(id: $id) {
+    title
+    slug
+    nodeId
+  }
+}
+
+query GetRoadmapTree($slug: String!) {
+  roadmapTree(slug: $slug) {
+    rootSlug
+    rootTitle
+    nodes {
+      id
+      title
+      type
+      slug
+      targetRoadmapId
+      roadmapSlug
+      roadmapId
+      children {
+        id
+        title
+        type
+        slug
+        targetRoadmapId
+        roadmapSlug
+        roadmapId
+      }
+    }
+  }
+}
+
+mutation UpdateNodeContent($id: ID!, $content: String!) {
+  updateNodeContent(id: $id, content: $content) {
+    id
+    content
+  }
+}
+
+mutation UpdateNodeTitle($id: ID!, $title: String!) {
+  updateNodeTitle(id: $id, title: $title) {
+    id
+    title
+  }
+}
+
+mutation UpdateNodeCover($id: ID!, $coverImage: String) {
+  updateNodeCover(id: $id, coverImage: $coverImage) {
+    id
+    coverImage
+  }
+}
+
+mutation UpdateNodeIcon($id: ID!, $icon: String) {
+  updateNodeIcon(id: $id, icon: $icon) {
+    id
+    icon
+  }
+}
