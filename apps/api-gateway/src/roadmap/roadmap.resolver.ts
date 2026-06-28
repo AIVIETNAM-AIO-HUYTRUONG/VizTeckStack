@@ -1,94 +1,111 @@
-import { Resolver, Query, Mutation, Args, ID, Context } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
-import { RoadmapGrpcClient } from "./roadmap.grpc-client";
-import { AdminGuard } from "../auth/admin.guard";
+import { Resolver, Query, Mutation, Args, ID, Context } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { AdminGuard } from '../auth/admin.guard';
+import { ListRoadmapsUseCase } from '../application/use-cases/roadmap/list-roadmaps.use-case';
+import { GetRoadmapUseCase } from '../application/use-cases/roadmap/get-roadmap.use-case';
+import { CreateRoadmapUseCase } from '../application/use-cases/roadmap/create-roadmap.use-case';
+import { UpdateRoadmapUseCase } from '../application/use-cases/roadmap/update-roadmap.use-case';
+import { DeleteRoadmapUseCase } from '../application/use-cases/roadmap/delete-roadmap.use-case';
+import { UpsertGraphUseCase } from '../application/use-cases/roadmap/upsert-graph.use-case';
+import { GetRoadmapTreeUseCase } from '../application/use-cases/roadmap/get-roadmap-tree.use-case';
+import { SearchNodesUseCase } from '../application/use-cases/roadmap/search-nodes.use-case';
 import {
-  RoadmapDto,
-  RoadmapDetailDto,
-  NodeDto,
-  NodeTypeEnum,
-  CreateRoadmapInput,
-  UpdateRoadmapInput,
-  NodeInput,
-  EdgeInput,
-  RoadmapTreeDto,
-  SearchResultDto,
-} from "./roadmap.dto";
+  RoadmapDto, RoadmapDetailDto, NodeTypeEnum,
+  CreateRoadmapInput, UpdateRoadmapInput, NodeInput, EdgeInput,
+  RoadmapTreeDto, SearchResultDto,
+} from './roadmap.dto';
 
 function normalizeNodeType(type: unknown): NodeTypeEnum {
-  if (type === 0 || type === "ROADMAP") return NodeTypeEnum.ROADMAP;
-  if (type === 1 || type === "LESSON") return NodeTypeEnum.LESSON;
-  return NodeTypeEnum.LESSON;
-}
-
-function normalizeNodes(nodes: any[], idToSlug: Map<string, string>): NodeDto[] {
-  return (nodes ?? []).map((n) => ({
-    ...n,
-    type: normalizeNodeType(n.type),
-    targetRoadmapSlug: n.targetRoadmapId ? idToSlug.get(n.targetRoadmapId) : undefined,
-  }));
+  return type === 'ROADMAP' ? NodeTypeEnum.ROADMAP : NodeTypeEnum.LESSON;
 }
 
 @Resolver()
 export class RoadmapResolver {
-  constructor(private readonly grpc: RoadmapGrpcClient) {}
+  constructor(
+    private readonly listRoadmapsUseCase: ListRoadmapsUseCase,
+    private readonly getRoadmapUseCase: GetRoadmapUseCase,
+    private readonly createRoadmapUseCase: CreateRoadmapUseCase,
+    private readonly updateRoadmapUseCase: UpdateRoadmapUseCase,
+    private readonly deleteRoadmapUseCase: DeleteRoadmapUseCase,
+    private readonly upsertGraphUseCase: UpsertGraphUseCase,
+    private readonly getRoadmapTreeUseCase: GetRoadmapTreeUseCase,
+    private readonly searchNodesUseCase: SearchNodesUseCase,
+  ) {}
 
   @Query(() => [RoadmapDto])
-  async roadmaps(): Promise<RoadmapDto[]> {
-    const result = await this.grpc.getRoadmaps();
-    return result.roadmaps ?? [];
+  roadmaps(): Promise<RoadmapDto[]> {
+    return this.listRoadmapsUseCase.execute() as Promise<RoadmapDto[]>;
   }
 
   @Query(() => RoadmapDetailDto, { nullable: true })
-  async roadmap(@Args("slug") slug: string): Promise<RoadmapDetailDto> {
-    const [result, listResult] = await Promise.all([
-      this.grpc.getRoadmap(slug),
-      this.grpc.getRoadmaps(),
-    ]) as [any, any];
-    const idToSlug = new Map<string, string>(
-      (listResult.roadmaps ?? []).map((r: any) => [r.id, r.slug]),
-    );
-    return { ...result, nodes: normalizeNodes(result.nodes ?? [], idToSlug), edges: result.edges ?? [] };
+  async roadmap(@Args('slug') slug: string): Promise<RoadmapDetailDto | null> {
+    const [detail, allRoadmaps] = await Promise.all([
+      this.getRoadmapUseCase.execute(slug),
+      this.listRoadmapsUseCase.execute(),
+    ]);
+    if (!detail) return null;
+    const idToSlug = new Map(allRoadmaps.map(r => [r.id, r.slug]));
+    return {
+      roadmap: detail.roadmap as RoadmapDto,
+      nodes: detail.nodes.map(n => ({
+        ...n,
+        type: normalizeNodeType(n.type),
+        content: n.content ? JSON.stringify(n.content) : undefined,
+        targetRoadmapSlug: n.targetRoadmapId ? idToSlug.get(n.targetRoadmapId) : undefined,
+      })) as any,
+      edges: detail.edges as any,
+    };
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => RoadmapDto)
-  createRoadmap(@Args("input") input: CreateRoadmapInput): Promise<RoadmapDto> {
-    return this.grpc.createRoadmap(input);
+  createRoadmap(@Args('input') input: CreateRoadmapInput): Promise<RoadmapDto> {
+    return this.createRoadmapUseCase.execute(input) as Promise<RoadmapDto>;
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => RoadmapDto)
   updateRoadmap(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("input") input: UpdateRoadmapInput,
+    @Args('id', { type: () => ID }) id: string,
+    @Args('input') input: UpdateRoadmapInput,
   ): Promise<RoadmapDto> {
-    return this.grpc.updateRoadmap({ id, ...input });
+    return this.updateRoadmapUseCase.execute(id, input) as Promise<RoadmapDto>;
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => Boolean)
-  async deleteRoadmap(
-    @Args("id", { type: () => ID }) id: string,
-  ): Promise<boolean> {
-    const result = await this.grpc.deleteRoadmap(id);
-    return result.success;
+  async deleteRoadmap(@Args('id', { type: () => ID }) id: string): Promise<boolean> {
+    await this.deleteRoadmapUseCase.execute(id);
+    return true;
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => RoadmapDetailDto)
   async upsertGraph(
-    @Args("roadmapId", { type: () => ID }) roadmapId: string,
-    @Args("nodes", { type: () => [NodeInput] }) nodes: NodeInput[],
-    @Args("edges", { type: () => [EdgeInput] }) edges: EdgeInput[],
+    @Args('roadmapId', { type: () => ID }) roadmapId: string,
+    @Args('nodes', { type: () => [NodeInput] }) nodes: NodeInput[],
+    @Args('edges', { type: () => [EdgeInput] }) edges: EdgeInput[],
   ): Promise<RoadmapDetailDto> {
-    const result = await this.grpc.upsertGraph({ roadmapId, nodes, edges }) as any;
-    return { ...result, nodes: normalizeNodes(result.nodes ?? [], new Map()), edges: result.edges ?? [] };
+    const nodeInputs = nodes.map(n => ({
+      ...n,
+      type: n.type as 'ROADMAP' | 'LESSON',
+      content: n.content ? JSON.parse(n.content) : null,
+    }));
+    const detail = await this.upsertGraphUseCase.execute(roadmapId, nodeInputs, edges);
+    return {
+      roadmap: detail.roadmap as RoadmapDto,
+      nodes: detail.nodes.map(n => ({
+        ...n,
+        type: normalizeNodeType(n.type),
+        content: n.content ? JSON.stringify(n.content) : undefined,
+      })) as any,
+      edges: detail.edges as any,
+    };
   }
 
   @Query(() => RoadmapTreeDto, { nullable: true })
-  async roadmapTree(@Args("slug") slug: string): Promise<RoadmapTreeDto> {
-    return this.grpc.getRoadmapTree(slug);
+  roadmapTree(@Args('slug') slug: string): Promise<RoadmapTreeDto> {
+    return this.getRoadmapTreeUseCase.execute(slug) as Promise<RoadmapTreeDto>;
   }
 
   @Query(() => [SearchResultDto])
@@ -100,32 +117,11 @@ export class RoadmapResolver {
   ): Promise<SearchResultDto[]> {
     const token = ctx?.req?.headers?.authorization?.replace('Bearer ', '');
     const isAdmin = Boolean(token && token === process.env.ADMIN_TOKEN);
-    const raw = await this.grpc.searchNodes({ q, titleOnly, roadmapId: roadmapId ?? '' }) as { results?: any[] };
-    const items: any[] = raw.results ?? [];
-
-    let filtered = items;
-    if (!isAdmin) {
-      const listRaw = await this.grpc.getRoadmaps() as { roadmaps?: any[] };
-      const publicIds = new Set(
-        (listRaw.roadmaps ?? [])
-          .filter((r: any) => r.status === 'PUBLIC')
-          .map((r: any) => r.id),
-      );
-      filtered = items.filter((r: any) => publicIds.has(r.roadmapId));
-    }
-
-    return filtered.map((r: any) => ({
-      id: r.id,
-      type: r.type === 0 ? NodeTypeEnum.ROADMAP : NodeTypeEnum.LESSON,
-      title: r.title,
-      icon: r.icon || undefined,
-      coverImage: r.coverImage || undefined,
-      roadmapSlug: r.roadmapSlug,
-      roadmapTitle: r.roadmapTitle,
-      roadmapId: r.roadmapId,
-      updatedAt: r.updatedAt,
-      breadcrumb: r.breadcrumb ?? [],
-    }));
+    const results = await this.searchNodesUseCase.execute({ q, titleOnly, roadmapId }, isAdmin);
+    return results.map(r => ({
+      ...r,
+      type: normalizeNodeType(r.type),
+      updatedAt: r.updatedAt instanceof Date ? r.updatedAt.toISOString() : r.updatedAt,
+    })) as SearchResultDto[];
   }
-
 }

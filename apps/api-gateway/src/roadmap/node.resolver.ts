@@ -1,81 +1,64 @@
-import { Resolver, Query, Mutation, Args, ID } from "@nestjs/graphql";
-import { UseGuards } from "@nestjs/common";
-import { RoadmapGrpcClient } from "./roadmap.grpc-client";
-import { AdminGuard } from "../auth/admin.guard";
-import { NodeDto, BreadcrumbItemDto } from "./roadmap.dto";
+import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
+import { AdminGuard } from '../auth/admin.guard';
+import { GetNodeUseCase } from '../application/use-cases/node/get-node.use-case';
+import { GetNodeBreadcrumbUseCase } from '../application/use-cases/node/get-node-breadcrumb.use-case';
+import { UpdateNodeContentUseCase } from '../application/use-cases/node/update-node-content.use-case';
+import { UpdateNodeTitleUseCase } from '../application/use-cases/node/update-node-title.use-case';
+import { UpdateNodeCoverUseCase } from '../application/use-cases/node/update-node-cover.use-case';
+import { UpdateNodeIconUseCase } from '../application/use-cases/node/update-node-icon.use-case';
+import { NodeDto, BreadcrumbItemDto } from './roadmap.dto';
 
-function normalizeNodeType(type: unknown): "ROADMAP" | "LESSON" {
-  if (type === 0 || type === "ROADMAP") return "ROADMAP";
-  return "LESSON";
+function toNodeDto(node: any): NodeDto {
+  const type = node.type === 'ROADMAP' ? 'ROADMAP' : 'LESSON';
+  return { ...node, type, content: node.content ? JSON.stringify(node.content) : undefined };
 }
 
 @Resolver()
 export class NodeResolver {
-  constructor(private readonly grpc: RoadmapGrpcClient) {}
+  constructor(
+    private readonly getNodeUseCase: GetNodeUseCase,
+    private readonly getNodeBreadcrumbUseCase: GetNodeBreadcrumbUseCase,
+    private readonly updateNodeContentUseCase: UpdateNodeContentUseCase,
+    private readonly updateNodeTitleUseCase: UpdateNodeTitleUseCase,
+    private readonly updateNodeCoverUseCase: UpdateNodeCoverUseCase,
+    private readonly updateNodeIconUseCase: UpdateNodeIconUseCase,
+  ) {}
 
   @Query(() => NodeDto, { nullable: true })
-  async node(@Args("id", { type: () => ID }) id: string): Promise<NodeDto> {
-    const result = await this.grpc.getNode(id) as { node?: any };
-    if (!result.node) return null as unknown as NodeDto;
-    const n = result.node;
-    return { ...n, type: normalizeNodeType(n.type) } as NodeDto;
+  async node(@Args('id', { type: () => ID }) id: string): Promise<NodeDto | null> {
+    const detail = await this.getNodeUseCase.execute(id);
+    if (!detail) return null;
+    return toNodeDto(detail.node);
   }
 
   @Query(() => [BreadcrumbItemDto])
-  async nodeBreadcrumb(
-    @Args("id", { type: () => ID }) id: string,
-  ): Promise<BreadcrumbItemDto[]> {
-    const result = await this.grpc.getNodeBreadcrumb(id) as {
-      items?: Array<{ title: string; slug: string; nodeId: string }>;
-    };
-    return (result.items ?? []).map((item) => ({
-      title: item.title,
-      slug: item.slug || undefined,
-      nodeId: item.nodeId || undefined,
-    }));
+  async nodeBreadcrumb(@Args('id', { type: () => ID }) id: string): Promise<BreadcrumbItemDto[]> {
+    const items = await this.getNodeBreadcrumbUseCase.execute(id);
+    return items.map(item => ({ title: item.title, slug: item.slug ?? undefined, nodeId: item.nodeId ?? undefined }));
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => NodeDto)
-  async updateNodeContent(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("content") content: string,
-  ): Promise<NodeDto> {
-    const result = await this.grpc.updateNodeContent(id, content) as { node?: NodeDto } | NodeDto;
-    const node = (result as any).node ?? result;
-    return { ...node, type: normalizeNodeType(node.type) } as NodeDto;
+  async updateNodeContent(@Args('id', { type: () => ID }) id: string, @Args('content') content: string): Promise<NodeDto> {
+    return toNodeDto(await this.updateNodeContentUseCase.execute(id, content));
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => NodeDto)
-  async updateNodeTitle(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("title") title: string,
-  ): Promise<NodeDto> {
-    const result = await this.grpc.updateNodeTitle(id, title) as { node?: NodeDto } | NodeDto;
-    const node = (result as any).node ?? result;
-    return { ...node, type: normalizeNodeType(node.type) } as NodeDto;
+  async updateNodeTitle(@Args('id', { type: () => ID }) id: string, @Args('title') title: string): Promise<NodeDto> {
+    return toNodeDto(await this.updateNodeTitleUseCase.execute(id, title));
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => NodeDto)
-  async updateNodeCover(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("coverImage", { nullable: true }) coverImage?: string,
-  ): Promise<NodeDto> {
-    const result = await this.grpc.updateNodeCover(id, coverImage ?? "") as { node?: NodeDto } | NodeDto;
-    const node = (result as any).node ?? result;
-    return { ...node, type: normalizeNodeType(node.type) } as NodeDto;
+  async updateNodeCover(@Args('id', { type: () => ID }) id: string, @Args('coverImage', { nullable: true }) coverImage?: string): Promise<NodeDto> {
+    return toNodeDto(await this.updateNodeCoverUseCase.execute(id, coverImage ?? ''));
   }
 
   @UseGuards(AdminGuard)
   @Mutation(() => NodeDto)
-  async updateNodeIcon(
-    @Args("id", { type: () => ID }) id: string,
-    @Args("icon", { nullable: true }) icon?: string,
-  ): Promise<NodeDto> {
-    const result = await this.grpc.updateNodeIcon(id, icon ?? "") as { node?: NodeDto } | NodeDto;
-    const node = (result as any).node ?? result;
-    return { ...node, type: normalizeNodeType(node.type) } as NodeDto;
+  async updateNodeIcon(@Args('id', { type: () => ID }) id: string, @Args('icon', { nullable: true }) icon?: string): Promise<NodeDto> {
+    return toNodeDto(await this.updateNodeIconUseCase.execute(id, icon ?? ''));
   }
 }
