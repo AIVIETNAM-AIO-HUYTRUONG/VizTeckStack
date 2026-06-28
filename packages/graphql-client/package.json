@@ -8,11 +8,10 @@
     "codegen": "graphql-codegen --config codegen.ts",
     "build": "tsc"
   },
-  "dependencies": {
-    "@apollo/client": "^3.11.0",
-    "graphql": "^16.9.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@apollo/client": "^3.11.0",
+    "graphql": "^16.9.0",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.0",
     "@graphql-codegen/typescript-operations": "^4.0.0",
@@ -20,6 +19,8 @@
     "typescript": "^5.4.0"
   },
   "peerDependencies": {
-    "react": "^19.0.0"
+    "@apollo/client": ">=3.11.0",
+    "graphql": ">=16.0.0",
+    "react": ">=18.0.0"
   }
 }

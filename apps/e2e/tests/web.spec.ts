@@ -7,7 +7,7 @@ const ROADMAPS = [
   { slug: 'fullstack', title: 'Fullstack Developer' },
 ];
 
-const LESSON_NODE_ID = 'ff67a53e-94ee-4d21-bb4b-d7eb5e76b2d1'; // "tesst" node in frontend
+const LESSON_NODE_ID = 'lesson-intro'; // "Intro to HTML" node in frontend
 
 test.describe('Web — Homepage', () => {
   test('loads and shows roadmap cards', async ({ page }) => {
@@ -71,17 +71,19 @@ test.describe('Web — Roadmap page', () => {
 test.describe('Web — Lesson node page', () => {
   test('loads lesson node page correctly', async ({ page }) => {
     await page.goto(`/roadmap/frontend/node/${LESSON_NODE_ID}`);
-    // Should show the NodeBadge (span with uppercase type label)
-    await expect(page.locator('span').filter({ hasText: /^(ROADMAP|LESSON)$/ }).first()).toBeVisible({
+    // Should show the lesson title
+    await expect(page.locator('h1').filter({ hasText: /intro to html/i })).toBeVisible({
       timeout: 8000,
     });
-    // Back to Roadmap button present
-    await expect(page.getByRole('button', { name: /back to roadmap/i })).toBeVisible();
+    // Sidebar should show the roadmap tree
+    await expect(page.locator('[data-testid="lesson-sidebar"]')).toBeVisible();
   });
 
   test('back to roadmap button navigates correctly', async ({ page }) => {
     await page.goto(`/roadmap/frontend/node/${LESSON_NODE_ID}`);
-    await page.getByRole('button', { name: /back to roadmap/i }).click();
+    // Breadcrumb "Frontend" link navigates back to the roadmap
+    await expect(page.locator('a[href="/roadmap/frontend"]').first()).toBeVisible({ timeout: 8000 });
+    await page.locator('a[href="/roadmap/frontend"]').first().click();
     await expect(page).toHaveURL(/\/roadmap\/frontend$/);
   });
 

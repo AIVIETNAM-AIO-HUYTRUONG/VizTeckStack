@@ -1,16 +1,21 @@
-export { RoadmapGraph } from './RoadmapGraph';
-export type { RoadmapGraphProps } from './RoadmapGraph';
-export { RoadmapNode } from './RoadmapNode';
-export type { NodeItem, EdgeItem, GraphNodeType } from './types';
-// Re-export @xyflow/react types needed by admin editor (avoids direct @xyflow/react dep in apps/admin)
+// ponytail: shim — all exports moved to @vizteck/core
+export {
+  RoadmapGraph,
+  RoadmapNode,
+  applyNodeChanges,
+  applyEdgeChanges,
+} from '@vizteck/core';
 export type {
+  RoadmapGraphProps,
+  NodeItem,
+  EdgeItem,
+  GraphNodeType,
   NodeChange,
   EdgeChange,
   Connection,
-  Node as RFNode,
+  RFNode,
   OnNodesChange,
   OnEdgesChange,
   OnConnect,
   OnNodesDelete,
-} from '@xyflow/react';
-export { applyNodeChanges, applyEdgeChanges } from '@xyflow/react';
+} from '@vizteck/core';

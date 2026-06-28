@@ -8,14 +8,11 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@vizteck/ui": "workspace:*",
-    "@xyflow/react": "^12.11.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@vizteck/core": "workspace:*",
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
     "typescript": "^5.4.0"
   }
 }

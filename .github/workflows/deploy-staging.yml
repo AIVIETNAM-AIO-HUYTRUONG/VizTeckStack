@@ -24,20 +24,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Install protoc
-        run: sudo apt-get install -y protobuf-compiler
-
-      - name: Generate proto types
-        run: cd packages/proto && node generate.js
-
-      - name: Build
-        run: pnpm build
-
       - name: Deploy apps/web to Vercel Staging
         run: |
-          npx vercel pull --token "$VERCEL_TOKEN" --yes
-          npx vercel build --token "$VERCEL_TOKEN" --yes
-          npx vercel deploy --prebuilt --token "$VERCEL_TOKEN" --yes
+          npx vercel pull --cwd apps/web --token "$VERCEL_TOKEN" --yes
+          npx vercel build --cwd apps/web --token "$VERCEL_TOKEN" --yes
+          npx vercel deploy --prebuilt --cwd apps/web --token "$VERCEL_TOKEN" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
@@ -60,20 +51,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Install protoc
-        run: sudo apt-get install -y protobuf-compiler
-
-      - name: Generate proto types
-        run: cd packages/proto && node generate.js
-
-      - name: Build
-        run: pnpm build
-
       - name: Deploy apps/admin to Vercel Staging
         run: |
-          npx vercel pull --token "$VERCEL_TOKEN" --yes
-          npx vercel build --token "$VERCEL_TOKEN" --yes
-          npx vercel deploy --prebuilt --token "$VERCEL_TOKEN" --yes
+          npx vercel pull --cwd apps/admin --token "$VERCEL_TOKEN" --yes
+          npx vercel build --cwd apps/admin --token "$VERCEL_TOKEN" --yes
+          npx vercel deploy --prebuilt --cwd apps/admin --token "$VERCEL_TOKEN" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ADMIN }}

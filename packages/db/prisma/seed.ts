@@ -5,31 +5,34 @@ const prisma = new PrismaClient();
 async function main() {
   const frontend = await prisma.roadmap.upsert({
     where: { slug: 'frontend' },
-    update: {},
+    update: { status: 'PUBLIC' },
     create: {
       slug: 'frontend',
       title: 'Frontend Developer',
       description: 'Step by step guide to becoming a frontend developer',
+      status: 'PUBLIC',
     },
   });
 
   const backend = await prisma.roadmap.upsert({
     where: { slug: 'backend' },
-    update: {},
+    update: { status: 'PUBLIC' },
     create: {
       slug: 'backend',
       title: 'Backend Developer',
       description: 'Step by step guide to becoming a backend developer',
+      status: 'PUBLIC',
     },
   });
 
   await prisma.roadmap.upsert({
     where: { slug: 'fullstack' },
-    update: {},
+    update: { status: 'PUBLIC' },
     create: {
       slug: 'fullstack',
       title: 'Fullstack Developer',
       description: 'Step by step guide to becoming a fullstack developer',
+      status: 'PUBLIC',
       nodes: {
         create: [
           {

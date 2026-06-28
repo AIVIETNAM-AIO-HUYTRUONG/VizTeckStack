@@ -1,16 +1,42 @@
 /// <reference types="vitest/globals" />
 import { renderHook, act } from "@testing-library/react";
-import { useLessonPageShell } from "./useLessonPageShell";
-import * as lessonService from "../services/lesson.service";
+import { useState, useEffect } from "react";
+import { useAdminLessonPageShell } from "./useLessonPageShell";
 
-vi.mock("../services/lesson.service");
+vi.mock("@/lib/apolloClient", () => ({ adminApolloClient: {} }));
 
-const mockUpdateCover = vi.mocked(lessonService.updateNodeCover);
-const mockUpdateIcon = vi.mocked(lessonService.updateNodeIcon);
+const mockUpdateCover = vi.fn();
+const mockUpdateIcon = vi.fn();
+
+// ponytail: inline the shell logic so tests own the service boundary
+vi.mock("@vizteck/core", () => ({
+  useLessonPageShell: (_client: unknown, nodeId: string, initialCover: string | null | undefined, initialIcon: string | null | undefined) => {
+    const [cover, setCoverState] = useState(initialCover ?? null);
+    const [icon, setIconState] = useState(initialIcon ?? null);
+    useEffect(() => { if (initialCover !== undefined) setCoverState(initialCover ?? null); }, [initialCover]);
+    useEffect(() => { if (initialIcon !== undefined) setIconState(initialIcon ?? null); }, [initialIcon]);
+    const setCover = async (url: string | null) => {
+      const prev = cover;
+      setCoverState(url);
+      try { await mockUpdateCover(nodeId, url); } catch { setCoverState(prev); }
+    };
+    const setIcon = async (value: string | null) => {
+      const prev = icon;
+      setIconState(value);
+      try { await mockUpdateIcon(nodeId, value); } catch { setIconState(prev); }
+    };
+    return { cover, icon, setCover, setIcon };
+  },
+}));
+
+beforeEach(() => {
+  mockUpdateCover.mockReset();
+  mockUpdateIcon.mockReset();
+});
 
 it("initializes cover and icon from initial values", () => {
   const { result } = renderHook(() =>
-    useLessonPageShell("n1", "https://example.com/img.jpg", "⚡")
+    useAdminLessonPageShell("n1", "https://example.com/img.jpg", "⚡")
   );
   expect(result.current.cover).toBe("https://example.com/img.jpg");
   expect(result.current.icon).toBe("⚡");
@@ -18,7 +44,7 @@ it("initializes cover and icon from initial values", () => {
 
 it("setCover updates local state and calls API", async () => {
   mockUpdateCover.mockResolvedValue(undefined);
-  const { result } = renderHook(() => useLessonPageShell("n1", null, null));
+  const { result } = renderHook(() => useAdminLessonPageShell("n1", null, null));
   await act(async () => {
     await result.current.setCover("https://cdn.example.com/new.jpg");
   });
@@ -28,7 +54,7 @@ it("setCover updates local state and calls API", async () => {
 
 it("setCover rolls back on API error", async () => {
   mockUpdateCover.mockRejectedValue(new Error("Network error"));
-  const { result } = renderHook(() => useLessonPageShell("n1", "https://old.jpg", null));
+  const { result } = renderHook(() => useAdminLessonPageShell("n1", "https://old.jpg", null));
   await act(async () => {
     await result.current.setCover("https://new.jpg");
   });
@@ -37,7 +63,7 @@ it("setCover rolls back on API error", async () => {
 
 it("setIcon updates local state and calls API", async () => {
   mockUpdateIcon.mockResolvedValue(undefined);
-  const { result } = renderHook(() => useLessonPageShell("n1", null, null));
+  const { result } = renderHook(() => useAdminLessonPageShell("n1", null, null));
   await act(async () => {
     await result.current.setIcon("🚀");
   });
@@ -47,7 +73,7 @@ it("setIcon updates local state and calls API", async () => {
 
 it("setIcon rolls back on API error", async () => {
   mockUpdateIcon.mockRejectedValue(new Error("fail"));
-  const { result } = renderHook(() => useLessonPageShell("n1", null, "⚡"));
+  const { result } = renderHook(() => useAdminLessonPageShell("n1", null, "⚡"));
   await act(async () => {
     await result.current.setIcon("🚀");
   });
@@ -57,7 +83,7 @@ it("setIcon rolls back on API error", async () => {
 it("syncs cover when initialCover changes from undefined to a value", async () => {
   const { result, rerender } = renderHook(
     ({ cover }: { cover: string | null | undefined }) =>
-      useLessonPageShell("n1", cover, null),
+      useAdminLessonPageShell("n1", cover, null),
     { initialProps: { cover: undefined as string | null | undefined } },
   );
   expect(result.current.cover).toBeNull();

@@ -1,17 +1,8 @@
-import { useState, useEffect } from 'react';
-import type { PageTree } from '@vizteck/lesson';
-import { fetchRoadmapTree } from '../services/lesson.service';
+'use client';
 
-export function usePageTree(nodeId: string): PageTree | null {
-  const [tree, setTree] = useState<PageTree | null>(null);
+import { usePageTree } from '@vizteck/core';
+import { adminApolloClient } from '@/lib/apolloClient';
 
-  useEffect(() => {
-    let cancelled = false;
-    fetchRoadmapTree(nodeId)
-      .then((t) => { if (!cancelled) setTree(t); })
-      .catch(() => { if (!cancelled) setTree(null); });
-    return () => { cancelled = true; };
-  }, [nodeId]);
-
-  return tree;
+export function useAdminPageTree(nodeId: string) {
+  return usePageTree(adminApolloClient, nodeId);
 }

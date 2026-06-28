@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@vizteck/ui';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { STATUS_CYCLE, STATUS_LABEL, STATUS_CLASS } from '@/features/roadmaps/services/roadmap.service';
+import { STATUS_CYCLE, STATUS_LABEL, STATUS_CLASS } from '@vizteck/core';
 
 interface GraphToolbarProps {
   roadmapTitle: string;

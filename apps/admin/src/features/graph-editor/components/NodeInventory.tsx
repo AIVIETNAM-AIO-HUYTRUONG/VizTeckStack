@@ -2,8 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { NodeBadge } from '@vizteck/ui';
-import type { NodeItem } from '@vizteck/graph';
-import type { RoadmapEntry } from '../services/graph.service';
+import type { NodeItem } from '@vizteck/core';
+import type { RoadmapEntry } from '@vizteck/core';
 
 export type { RoadmapEntry };
 

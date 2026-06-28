@@ -17,3 +17,5 @@ apps/*/next-env.d.ts
 
 # Feature Loop state (local session tracking)
 .claude/loop-state.json
+
+.vercel/

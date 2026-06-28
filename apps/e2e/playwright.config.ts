@@ -24,7 +24,8 @@ export default defineConfig({
     },
     {
       name: 'api',
-      use: { ...devices['Desktop Chrome'], baseURL: 'http://localhost:3000' },
+      // NestJS binds to 0.0.0.0 but not always IPv6 — use 127.0.0.1 explicitly
+      use: { ...devices['Desktop Chrome'], baseURL: 'http://127.0.0.1:3000' },
       testMatch: 'tests/api.spec.ts',
     },
   ],

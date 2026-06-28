@@ -1,10 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { RoadmapGraph } from '@vizteck/graph';
-import type { NodeItem } from '@vizteck/graph';
+import { RoadmapGraph } from '@vizteck/core';
+import type { NodeItem } from '@vizteck/core';
 import { Breadcrumb } from '@/components/Breadcrumb';
-import type { RoadmapDetail } from '../services/roadmap.service';
+import type { RoadmapDetail } from '@/lib/gql';
 
 interface RoadmapGraphViewProps {
   detail: RoadmapDetail;

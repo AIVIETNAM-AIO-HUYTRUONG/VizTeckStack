@@ -8,37 +8,38 @@ const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [token, setToken] = useState('');
+  const [hydrated, setHydrated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Redirect if already logged in
+    setHydrated(true);
     const stored = localStorage.getItem('admin_token');
     if (stored) {
       router.replace('/roadmaps');
     }
   }, [router]);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
-    if (!token.trim()) return;
+    const tokenValue = inputRef.current?.value ?? '';
+    if (!tokenValue.trim()) return;
 
     setLoading(true);
     setError('');
 
     try {
       const res = await fetch(`${API}/api/admin/validate`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${tokenValue}` },
       });
 
       if (res.ok) {
-        localStorage.setItem('admin_token', token);
+        localStorage.setItem('admin_token', tokenValue);
         router.push('/roadmaps');
       } else if (res.status === 401) {
         setError('Invalid token. Please try again.');
-        setToken('');
+        if (inputRef.current) inputRef.current.value = '';
         inputRef.current?.focus();
       } else {
         setError('Could not reach server. Check your connection.');
@@ -52,7 +53,7 @@ export default function LoginPage() {
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter') {
-      handleSubmit(e as unknown as React.FormEvent);
+      handleSubmit(e);
     }
   }
 
@@ -77,8 +78,6 @@ export default function LoginPage() {
               ref={inputRef}
               id="admin-token"
               type="password"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Enter your token"
               autoFocus
@@ -93,9 +92,11 @@ export default function LoginPage() {
           )}
 
           <Button
-            type="submit"
+            type="button"
             variant="primary"
             disabled={loading}
+            onClick={handleSubmit}
+            data-ready={hydrated ? 'true' : undefined}
             style={{ width: '100%', height: 40, opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
           >
             {loading ? 'Signing in…' : 'Sign In'}

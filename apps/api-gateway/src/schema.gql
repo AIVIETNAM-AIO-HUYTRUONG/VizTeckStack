@@ -19,6 +19,7 @@ type NodeDto {
   positionX: Float
   positionY: Float
   targetRoadmapId: String
+  targetRoadmapSlug: String
   content: String
   coverImage: String
   icon: String
@@ -81,10 +82,10 @@ type SearchResultDto {
 type Query {
   roadmaps: [RoadmapDto!]!
   roadmap(slug: String!): RoadmapDetailDto
-  node(id: ID!): NodeDto
-  nodeBreadcrumb(id: ID!): [BreadcrumbItemDto!]!
   roadmapTree(slug: String!): RoadmapTreeDto
   search(q: String!, titleOnly: Boolean = false, roadmapId: ID): [SearchResultDto!]!
+  node(id: ID!): NodeDto
+  nodeBreadcrumb(id: ID!): [BreadcrumbItemDto!]!
 }
 
 type Mutation {
@@ -92,6 +93,8 @@ type Mutation {
   updateRoadmap(id: ID!, input: UpdateRoadmapInput!): RoadmapDto!
   deleteRoadmap(id: ID!): Boolean!
   upsertGraph(roadmapId: ID!, nodes: [NodeInput!]!, edges: [EdgeInput!]!): RoadmapDetailDto!
+  updateNodeContent(id: ID!, content: String!): NodeDto!
+  updateNodeTitle(id: ID!, title: String!): NodeDto!
   updateNodeCover(id: ID!, coverImage: String): NodeDto!
   updateNodeIcon(id: ID!, icon: String): NodeDto!
 }

@@ -44,6 +44,9 @@ export class NodeDto {
   @ApiPropertyOptional({ example: null })
   targetRoadmapId?: string;
   @Field({ nullable: true })
+  @ApiPropertyOptional({ example: 'frontend' })
+  targetRoadmapSlug?: string;
+  @Field({ nullable: true })
   @ApiPropertyOptional({ example: null })
   content?: string;
 
