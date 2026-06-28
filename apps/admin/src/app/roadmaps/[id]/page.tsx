@@ -7,15 +7,15 @@ import { RoadmapGraph } from '@vizteck/graph';
 import type { NodeType } from '@vizteck/ui';
 import { useAuthGuard } from '@/lib/useAuthGuard';
 import { useUnsavedGuard } from '@/lib/useRouteGuard';
-import { useGraphEditor } from '@/features/graph-editor/hooks/useGraphEditor';
+import { useAdminGraphEditor } from '@/features/graph-editor/hooks/useGraphEditor';
+import type { EditorNode } from '@/features/graph-editor/hooks/useGraphEditor';
 import { useNodeActions } from '@/features/graph-editor/hooks/useNodeActions';
-import type { SidePanelState } from '@/features/graph-editor/hooks/useNodeActions';
+import type { SidePanelState } from '@vizteck/core';
 import { useGraphDraft } from '@/features/graph-editor/hooks/useGraphDraft';
 import { GraphToolbar } from '@/features/graph-editor/components/GraphToolbar';
 import { NodeInventory } from '@/features/graph-editor/components/NodeInventory';
 import { NodeSidePanel } from '@/features/graph-editor/components/NodeSidePanel';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
-import type { EditorNode } from '@/features/graph-editor/services/graph.service';
 
 interface DeleteConfirm {
   open: boolean;
@@ -41,7 +41,7 @@ export default function GraphEditorPage({
     editorNodes, editorEdges, allRoadmaps,
     setEditorNodes, setEditorEdges,
     handleSave, handleChangeStatus,
-  } = useGraphEditor(id, slug);
+  } = useAdminGraphEditor(id, slug);
 
   const [panel, setPanel] = useState<SidePanelState>({ open: false, mode: 'create' });
   const [deleteConfirm, setDeleteConfirm] = useState<DeleteConfirm>({ open: false, nodeId: '', nodeTitle: '' });

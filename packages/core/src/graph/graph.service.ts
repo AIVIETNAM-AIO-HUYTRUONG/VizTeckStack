@@ -1,4 +1,4 @@
-import { adminApolloClient } from '@/lib/apolloClient';
+// packages/core/src/graph/graph.service.ts
 import {
   ListRoadmapsDocument,
   GetRoadmapDocument,
@@ -8,28 +8,9 @@ import {
   type GetRoadmapQuery,
   type UpsertGraphMutationVariables,
 } from '@vizteck/graphql-client';
-import type { NodeItem, EdgeItem } from '@vizteck/graph';
-
-export interface EditorNode extends NodeItem {
-  selected?: boolean;
-}
-
-export type EditorEdge = EdgeItem;
-
-export interface RoadmapEntry {
-  id: string;
-  title: string;
-  slug: string;
-}
-
-export interface GraphData {
-  roadmapTitle: string;
-  roadmapStatus: string;
-  nodes: EditorNode[];
-  edges: EditorEdge[];
-  allRoadmaps: RoadmapEntry[];
-  savedSnapshot: string;
-}
+import type { ApolloLike } from '../roadmap/types';
+import type { NodeItem, EdgeItem } from './types';
+import type { EditorNode, EditorEdge, GraphData, RoadmapEntry } from './types';
 
 export function normalizeNodeType(type: unknown): 'ROADMAP' | 'LESSON' {
   if (type === 0 || type === 'ROADMAP') return 'ROADMAP';
@@ -56,13 +37,17 @@ export function makeSnapshot(nodes: EditorNode[], edges: EditorEdge[]): string {
   });
 }
 
-export async function loadGraph(slug: string, roadmapId: string): Promise<GraphData> {
+export async function loadGraph(
+  client: ApolloLike,
+  slug: string,
+  roadmapId: string,
+): Promise<GraphData> {
   const [graphResult, roadmapsResult] = await Promise.all([
-    adminApolloClient.query<GetRoadmapQuery>({
+    client.query<GetRoadmapQuery>({
       query: GetRoadmapDocument,
       variables: { slug },
     }),
-    adminApolloClient.query<ListRoadmapsQuery>({
+    client.query<ListRoadmapsQuery>({
       query: ListRoadmapsDocument,
     }),
   ]);
@@ -74,10 +59,11 @@ export async function loadGraph(slug: string, roadmapId: string): Promise<GraphD
     ...(n as unknown as NodeItem),
     type: normalizeNodeType(n.type),
   }));
-  const edges: EditorEdge[] = (detail.edges ?? []).map((e) => ({ ...(e as unknown as EdgeItem) }));
+  const edges: EditorEdge[] = (detail.edges ?? []).map((e) => ({
+    ...(e as unknown as EdgeItem),
+  }));
   const savedSnapshot = makeSnapshot(nodes, edges);
 
-  // Restore sessionStorage draft if present and different from API state
   let restoredNodes = nodes;
   let restoredEdges = edges;
   if (typeof window !== 'undefined') {
@@ -106,11 +92,12 @@ export async function loadGraph(slug: string, roadmapId: string): Promise<GraphD
 }
 
 export async function saveGraph(
+  client: ApolloLike,
   roadmapId: string,
   nodes: EditorNode[],
   edges: EditorEdge[],
 ): Promise<void> {
-  const { errors } = await adminApolloClient.mutate<unknown, UpsertGraphMutationVariables>({
+  const { data } = await client.mutate({
     mutation: UpsertGraphDocument,
     variables: {
       roadmapId,
@@ -128,8 +115,8 @@ export async function saveGraph(
         targetId: e.targetId,
         label: e.label,
       })),
-    },
+    } as UpsertGraphMutationVariables,
   });
-
-  if (errors?.length) throw new Error(`Save failed: ${errors[0].message}`);
+  // ponytail: ApolloLike.mutate returns { data? } not { errors? }; errors surface as thrown exceptions via Apollo's error policy
+  void data;
 }

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, NodeBadge } from '@vizteck/ui';
 import type { NodeType } from '@vizteck/ui';
-import type { RoadmapEntry } from '../services/graph.service';
+import type { RoadmapEntry } from '@vizteck/core';
 
 interface NodeSidePanelProps {
   mode: 'create' | 'edit';

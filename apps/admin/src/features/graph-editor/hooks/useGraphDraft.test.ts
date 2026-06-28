@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useGraphDraft } from './useGraphDraft';
-import type { EditorNode, EditorEdge } from '../services/graph.service';
+import type { EditorNode, EditorEdge } from '@vizteck/core';
 
 const NODES: EditorNode[] = [
   { id: 'n1', roadmapId: 'r1', type: 'LESSON', title: 'Node 1', positionX: 10, positionY: 20 },

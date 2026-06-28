@@ -2,7 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ApolloLike {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  query<T>(options: { query: any; fetchPolicy?: string }): Promise<{ data: T }>;
+  query<T>(options: { query: any; variables?: Record<string, any>; fetchPolicy?: string }): Promise<{ data: T }>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mutate(options: { mutation: any; variables?: Record<string, any> }): Promise<{ data?: any }>;
 }

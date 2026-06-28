@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useNodeActions } from './useNodeActions';
 import type { UseNodeActionsParams } from './useNodeActions';
-import type { EditorNode, EditorEdge } from '../services/graph.service';
+import type { EditorNode, EditorEdge } from '@vizteck/core';
 
 // ---------------------------------------------------------------------------
 // Mocks

@@ -10,14 +10,7 @@ import {
   type NodeItem,
 } from '@vizteck/graph';
 import type { Dispatch, SetStateAction } from 'react';
-import type { EditorNode, EditorEdge } from '../services/graph.service';
-
-export interface SidePanelState {
-  open: boolean;
-  mode: 'create' | 'edit';
-  nodeId?: string;
-  flowPosition?: { x: number; y: number };
-}
+import type { EditorNode, EditorEdge, SidePanelState } from '@vizteck/core';
 
 export interface UseNodeActionsParams {
   id: string;
