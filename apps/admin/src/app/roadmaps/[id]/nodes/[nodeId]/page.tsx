@@ -3,9 +3,9 @@
 import dynamic from "next/dynamic";
 import { use } from "react";
 import { useAuthGuard } from "@/lib/useAuthGuard";
-import { useLessonEditor } from "@/features/lessons/hooks/useLessonEditor";
-import { useLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
-import { usePageTree } from "@/features/lessons/hooks/usePageTree";
+import { useAdminLessonEditor } from "@/features/lessons/hooks/useLessonEditor";
+import { useAdminLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
+import { useAdminPageTree } from "@/features/lessons/hooks/usePageTree";
 import { LessonTitleEditor } from "@/features/lessons/components/LessonTitleEditor";
 import { CoverImage } from "@/features/lessons/components/CoverImage";
 import { LessonPageShell, LessonPageLayout } from "@vizteck/lesson";
@@ -31,15 +31,15 @@ export default function LessonEditorPage({
     titleSaveStatus,
     handleSaveContent,
     handleSaveTitle,
-  } = useLessonEditor(nodeId);
+  } = useAdminLessonEditor(nodeId);
 
-  const { cover, icon, setCover, setIcon } = useLessonPageShell(
+  const { cover, icon, setCover, setIcon } = useAdminLessonPageShell(
     nodeId,
     lesson?.coverImage,
     lesson?.icon,
   );
 
-  const tree = usePageTree(nodeId);
+  const tree = useAdminPageTree(nodeId);
 
   if (loading) {
     return (
