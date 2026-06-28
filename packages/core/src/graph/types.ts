@@ -1,10 +1,25 @@
 // packages/core/src/graph/types.ts
-// Note: NodeItem and EdgeItem are temporarily imported from @vizteck/graph.
-// Task 5 will inline them here and remove the @vizteck/graph dependency.
-import type { NodeItem, EdgeItem } from '@vizteck/graph';
+// NodeItem, EdgeItem, GraphNodeType were previously in packages/graph/src/types.ts
+export type GraphNodeType = 'ROADMAP' | 'LESSON';
 
-export type { NodeItem, EdgeItem };
-export type { GraphNodeType } from '@vizteck/graph';
+export interface NodeItem {
+  id: string;
+  roadmapId: string;
+  type: GraphNodeType;
+  title: string;
+  positionX: number | null;
+  positionY: number | null;
+  targetRoadmapId?: string;
+  targetRoadmapSlug?: string;
+  content?: string;
+}
+
+export interface EdgeItem {
+  id: string;
+  sourceId: string;
+  targetId: string;
+  label?: string;
+}
 
 export interface EditorNode extends NodeItem {
   selected?: boolean;

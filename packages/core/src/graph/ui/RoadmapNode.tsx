@@ -1,7 +1,7 @@
 'use client';
 import { Handle, Position, type Node, type NodeProps } from '@xyflow/react';
 import { NodeBadge } from '@vizteck/ui';
-import type { GraphNodeType } from './types';
+import type { GraphNodeType } from '../types';
 
 export interface RoadmapNodeData extends Record<string, unknown> {
   title: string;

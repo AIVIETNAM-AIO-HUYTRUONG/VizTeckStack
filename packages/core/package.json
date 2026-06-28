@@ -13,8 +13,9 @@
   "dependencies": {
     "@vizteck/graphql-client": "workspace:*",
     "@vizteck/lesson": "workspace:*",
-    "@vizteck/graph": "workspace:*",
-    "@xyflow/react": "^12.0.0"
+    "@vizteck/ui": "workspace:*",
+    "@xyflow/react": "^12.11.0",
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.0.0",

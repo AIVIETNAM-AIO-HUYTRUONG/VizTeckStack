@@ -7,7 +7,7 @@ import {
   type OnNodesChange, type OnEdgesChange, type OnConnect, type OnNodesDelete,
 } from '@xyflow/react';
 import { RoadmapNode } from './RoadmapNode';
-import type { NodeItem, EdgeItem } from './types';
+import type { NodeItem, EdgeItem } from '../types';
 
 // nodeTypes must be defined at module scope (stable reference — prevents remount on render)
 const nodeTypes = { roadmapNode: RoadmapNode };

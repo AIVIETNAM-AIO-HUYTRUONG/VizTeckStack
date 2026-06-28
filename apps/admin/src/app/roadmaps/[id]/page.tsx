@@ -3,7 +3,7 @@
 import React, { use, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-import { RoadmapGraph } from '@vizteck/graph';
+import { RoadmapGraph } from '@vizteck/core';
 import type { NodeType } from '@vizteck/ui';
 import { useAuthGuard } from '@/lib/useAuthGuard';
 import { useUnsavedGuard } from '@/lib/useRouteGuard';

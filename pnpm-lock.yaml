@@ -276,6 +276,9 @@ importers:
       '@blocknote/react':
         specifier: ^0.51.4
         version: 0.51.4(@floating-ui/dom@1.7.6)(@types/hast@3.0.4)(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@vizteck/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@vizteck/graph':
         specifier: workspace:*
         version: link:../../packages/graph
@@ -331,20 +334,20 @@ importers:
 
   packages/core:
     dependencies:
-      '@vizteck/graph':
-        specifier: workspace:*
-        version: link:../graph
       '@vizteck/graphql-client':
         specifier: workspace:*
         version: link:../graphql-client
       '@vizteck/lesson':
         specifier: workspace:*
         version: link:../lesson
+      '@vizteck/ui':
+        specifier: workspace:*
+        version: link:../ui
       '@xyflow/react':
-        specifier: ^12.0.0
+        specifier: ^12.11.0
         version: 12.11.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react:
-        specifier: '>=18.0.0'
+        specifier: ^19.0.0
         version: 19.2.7
     devDependencies:
       '@types/react':
@@ -378,25 +381,16 @@ importers:
 
   packages/graph:
     dependencies:
-      '@vizteck/ui':
+      '@vizteck/core':
         specifier: workspace:*
-        version: link:../ui
-      '@xyflow/react':
-        specifier: ^12.11.0
-        version: 12.11.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: link:../core
       react:
         specifier: ^19.0.0
         version: 19.2.7
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.2.7(react@19.2.7)
     devDependencies:
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.17
-      '@types/react-dom':
-        specifier: ^19.0.0
-        version: 19.2.3(@types/react@19.2.17)
       typescript:
         specifier: ^5.4.0
         version: 5.9.3

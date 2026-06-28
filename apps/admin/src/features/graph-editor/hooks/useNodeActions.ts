@@ -8,7 +8,7 @@ import {
   type EdgeChange,
   type Connection,
   type NodeItem,
-} from '@vizteck/graph';
+} from '@vizteck/core';
 import type { Dispatch, SetStateAction } from 'react';
 import type { EditorNode, EditorEdge, SidePanelState } from '@vizteck/core';
 
