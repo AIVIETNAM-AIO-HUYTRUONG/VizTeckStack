@@ -1,6 +1,6 @@
 'use client';
 
-import { SearchModal, useSearchModal } from '@vizteck/lesson';
+import { SearchModal, useSearchModal } from '@vizteck/core';
 
 export function SearchModalWrapper() {
   const { open, setOpen } = useSearchModal();

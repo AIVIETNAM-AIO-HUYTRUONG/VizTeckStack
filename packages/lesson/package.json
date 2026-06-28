@@ -13,6 +13,7 @@
     "@blocknote/core": "^0.51.4",
     "@blocknote/mantine": "^0.51.4",
     "@blocknote/react": "^0.51.4",
+    "@vizteck/core": "workspace:*",
     "@vizteck/graphql-client": "workspace:*",
     "@vizteck/ui": "workspace:*",
     "graphql": "^16.9.0",

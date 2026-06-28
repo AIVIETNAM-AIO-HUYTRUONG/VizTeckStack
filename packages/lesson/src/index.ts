@@ -1,23 +1,30 @@
-export { LessonEditor } from './LessonEditor';
-export type { LessonEditorProps } from './LessonEditor';
-export { LessonViewer } from './LessonViewer';
-export type { LessonViewerProps } from './LessonViewer';
-export { LessonPageShell } from './LessonPageShell';
-export type { LessonPageShellProps } from './LessonPageShell';
-export { CoverDisplay } from './CoverDisplay';
-export type { CoverDisplayProps } from './CoverDisplay';
-export { BreadcrumbDisplay } from './BreadcrumbDisplay';
-export type { BreadcrumbDisplayProps } from './BreadcrumbDisplay';
-export type { BreadcrumbItem, LessonShellNode } from './types';
-export { LessonPageLayout } from './LessonPageLayout';
-export type { LessonPageLayoutProps } from './LessonPageLayout';
-export { PageTreeSidebar } from './PageTreeSidebar';
-export type { PageTreeSidebarProps } from './PageTreeSidebar';
-export { PageTreeItem } from './PageTreeItem';
-export type { PageTreeItemProps } from './PageTreeItem';
-export type { PageTreeNode, PageTree } from './types';
-export { SearchModal } from './SearchModal';
-export type { SearchModalProps } from './SearchModal';
-export { useSearchModal } from './useSearchModal';
-export { useSearch } from './useSearch';
-export type { TimeGroup } from './useSearch';
+// ponytail: shim — all exports moved to @vizteck/core
+export {
+  LessonEditor,
+  LessonViewer,
+  LessonPageShell,
+  LessonPageLayout,
+  CoverDisplay,
+  BreadcrumbDisplay,
+  PageTreeSidebar,
+  PageTreeItem,
+  SearchModal,
+  useSearchModal,
+  useSearch,
+} from '@vizteck/core';
+export type {
+  LessonEditorProps,
+  LessonViewerProps,
+  LessonPageShellProps,
+  LessonPageLayoutProps,
+  CoverDisplayProps,
+  BreadcrumbDisplayProps,
+  PageTreeSidebarProps,
+  PageTreeItemProps,
+  SearchModalProps,
+  TimeGroup,
+  BreadcrumbItem,
+  LessonShellNode,
+  PageTreeNode,
+  PageTree,
+} from '@vizteck/core';

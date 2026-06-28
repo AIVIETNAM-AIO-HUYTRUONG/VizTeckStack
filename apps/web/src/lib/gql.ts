@@ -11,7 +11,7 @@ import {
   type GetNodeBreadcrumbQuery,
   type GetRoadmapTreeQuery,
 } from '@vizteck/graphql-client';
-import type { BreadcrumbItem, PageTree } from '@vizteck/lesson';
+import type { BreadcrumbItem, PageTree } from '@vizteck/core';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
 

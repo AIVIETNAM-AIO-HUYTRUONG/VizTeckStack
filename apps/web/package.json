@@ -15,7 +15,6 @@
     "@blocknote/mantine": "^0.51.4",
     "@blocknote/react": "^0.51.4",
     "@vizteck/core": "workspace:*",
-    "@vizteck/graph": "workspace:*",
     "@vizteck/graphql-client": "workspace:*",
     "@vizteck/lesson": "workspace:*",
     "@vizteck/ui": "workspace:*",
