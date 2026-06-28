@@ -44,7 +44,8 @@ docker compose ps
 | Package | Framework | Notes |
 |---------|-----------|-------|
 | `apps/admin` | Vitest + @testing-library/react | `*.spec.tsx` in `src/` |
-| `packages/lesson` | Vitest + @testing-library/react | `*.spec.tsx` in `src/` |
+| `packages/core` | Vitest + @testing-library/react | specs live alongside source in `src/` |
+| `packages/lesson` | Vitest + @testing-library/react | shim only — no specs (all specs moved to `packages/core`) |
 | `apps/api-gateway` | Jest + ts-jest | `*.spec.ts` in `src/` |
 | `apps/svc-roadmap` | Jest + ts-jest | `*.spec.ts` in `src/` |
 | `apps/e2e` | Playwright | Separate from `pnpm test`; needs apps running |
@@ -118,42 +119,42 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 
 | Package | Name | Purpose |
 |---------|------|---------|
+| `packages/core` | `@vizteck/core` | **Single source of truth for all feature logic.** Feature-first layout: `roadmap/`, `graph/`, `lesson/` — each with `types.ts`, `*.service.ts`, hooks, and a `ui/` subfolder for display components. Apps import from here. |
 | `packages/proto` | `@vizteck/proto` | Single source of truth for gRPC contracts. Edit `roadmap.proto`, run `node generate.js` inside the package to regenerate. |
 | `packages/db` | `@vizteck/db` | Exports `db` (PrismaClient singleton) and all Prisma types. |
 | `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge). |
-| `packages/graph` | `@vizteck/graph` | `<RoadmapGraph>` built on `@xyflow/react`. Accepts `mode="view"` (read-only) or `mode="edit"` (draggable + connectable). Re-exports `@xyflow/react` types and `applyEdgeChanges` so apps don't need a direct dep. |
-| `packages/lesson` | `@vizteck/lesson` | Shared lesson UI. Exports `<LessonEditor>` (BlockNote, editable), `<LessonViewer>` (read-only), `<LessonPageShell>` (Notion-style page layout used by both apps), `<CoverDisplay>`, `<BreadcrumbDisplay>`, and types `LessonShellNode`, `BreadcrumbItem`. Both BlockNote components detect dark mode via MutationObserver on `document.documentElement`. |
+| `packages/graph` | `@vizteck/graph` | **Shim only** — re-exports `RoadmapGraph`, `RoadmapNode`, and all graph types from `@vizteck/core`. Do not add source files here. |
+| `packages/lesson` | `@vizteck/lesson` | **Shim only** — re-exports `LessonEditor`, `LessonViewer`, `LessonPageShell`, and all lesson types from `@vizteck/core`. Do not add source files here. |
 
-**Dependency rule:** `apps/*` may import from `packages/*`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
+**Dependency rule:** `apps/*` may import from `packages/*`; `packages/core` imports from `packages/graphql-client`, `@xyflow/react`, `packages/ui`; `packages/graph` and `packages/lesson` import only from `packages/core`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
 
 ### Admin frontend structure
 
-`apps/admin/src/features/` uses a feature-first layout. Pages delegate all business logic to hooks and services; components are pure UI.
+`apps/admin/src/features/` contains only admin-specific wrappers and UI. All business logic (services, hooks) lives in `@vizteck/core`; admin hooks are thin wrappers that inject `adminApolloClient`.
 
 ```
 src/features/
   roadmaps/
-    services/roadmap.service.ts   — CRUD + cycleStatus + STATUS_* constants
-    hooks/useRoadmaps.ts          — list state, modal state, CRUD handlers
+    hooks/useRoadmaps.ts          — useAdminRoadmaps() injects adminApolloClient → @vizteck/core useRoadmaps
     components/RoadmapModal.tsx   — create / edit modal
   graph-editor/
-    services/graph.service.ts     — loadGraph, saveGraph, normalizeNodeType, makeSnapshot
-    hooks/useGraphEditor.ts       — graph load/save state, dirty tracking
-    hooks/useNodeActions.ts       — canvas interaction handlers (drop, connect, delete…)
-    hooks/useGraphDraft.ts        — sessionStorage draft side-effect
+    hooks/useGraphEditor.ts       — useAdminGraphEditor(id, slug) → @vizteck/core useGraphEditor
+    hooks/useNodeActions.ts       — canvas interaction handlers (drop, connect, delete) — stays in admin (Next.js router)
+    hooks/useGraphDraft.ts        — re-export from @vizteck/core
     components/GraphToolbar.tsx
     components/NodeInventory.tsx
     components/NodeSidePanel.tsx
   lessons/
-    services/lesson.service.ts    — fetchLesson, updateLessonContent, updateLessonTitle, updateNodeCover, updateNodeIcon
-    hooks/useLessonEditor.ts      — fetch + save state, titleSaveStatus
-    hooks/useLessonPageShell.ts   — optimistic cover/icon state with API sync + rollback
-    components/LessonEditor.tsx   — BlockNote editor (wraps @vizteck/lesson)
-    components/LessonTitleEditor.tsx — inline title with blur-to-save
+    hooks/useLessonEditor.ts      — useAdminLessonEditor(nodeId) → @vizteck/core useLessonEditor
+    hooks/useLessonPageShell.ts   — useAdminLessonPageShell(nodeId, cover, icon) → @vizteck/core
+    hooks/usePageTree.ts          — useAdminPageTree(nodeId) → @vizteck/core usePageTree
+    components/LessonTitleEditor.tsx — inline title with blur-to-save (admin-only)
     components/CoverImage.tsx     — editable cover area (hover controls: upload, paste URL, remove)
     components/CoverUploadModal.tsx — uploadthing file upload modal
     components/IconPicker.tsx     — emoji picker for node icon
 ```
+
+Feature display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `RoadmapGraph`, etc.) are imported from `@vizteck/core`, not defined in `apps/admin`.
 
 ### Data model key points
 
@@ -213,10 +214,12 @@ All packages extend `tsconfig.base.json` (strict mode, commonjs, ES2022). NestJS
 
 **Lesson content save is targeted** — `PATCH /api/nodes/:id/content`, `/title`, `/cover`, and `/icon` each call a single `db.node.update`. Never save lesson content via `POST /api/roadmaps/:id/graph` (UpsertGraph) — that is a full DELETE+INSERT of all nodes and edges and will silently drop sibling node data if any node is missing from the payload.
 
-**`LessonPageShell` slot pattern** — `<LessonPageShell>` in `packages/lesson` accepts optional `coverSlot`, `titleSlot`, and `contentSlot` props. When a slot is provided, it renders instead of the default. Admin uses this to inject editable versions (`CoverImage`, `LessonTitleEditor`, `LessonEditor`) while `apps/web` passes no slots and gets the read-only defaults. The shell's `mode` prop (`"edit"` | `"view"`) also guards content rendering — view mode renders `<LessonViewer>` lazily; edit mode renders only the `contentSlot`.
+**`LessonPageShell` slot pattern** — `<LessonPageShell>` in `@vizteck/core` accepts optional `coverSlot`, `titleSlot`, and `contentSlot` props. When a slot is provided, it renders instead of the default. Admin uses this to inject editable versions (`CoverImage`, `LessonTitleEditor`, `LessonEditor`) while `apps/web` passes no slots and gets the read-only defaults. The shell's `mode` prop (`"edit"` | `"view"`) also guards content rendering — view mode renders `<LessonViewer>` lazily; edit mode renders only the `contentSlot`.
 
 **`useLessonPageShell` optimistic updates** — cover and icon state is updated immediately in React state, then synced to the API (`PATCH /api/nodes/:id/cover` and `/icon`). On API failure, the previous value is restored. This is the correct pattern for any cover/icon update; do not call `updateNodeCover`/`updateNodeIcon` directly from components.
 
-**Admin `features/lessons/` vs `packages/lesson`** — `apps/admin/src/features/lessons/` is the admin-specific layer: hooks (`useLessonEditor`, `useLessonPageShell`) and admin-only UI (`LessonTitleEditor`, `CoverImage`, `CoverUploadModal`, `IconPicker`). The shared display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `CoverDisplay`, `BreadcrumbDisplay`) live in `packages/lesson` and are imported by both admin and `apps/web`. When adding lesson display to `apps/web`, import from `@vizteck/lesson`.
+**`ApolloLike` pattern** — `packages/core` services and hooks accept `ApolloLike` (`{ query, mutate }`) as first parameter instead of importing `adminApolloClient` directly. This is a structural duck-type to avoid a graphql@16/17 dual-instance collision between `@vizteck/graphql-client` and the admin app. Admin features inject `adminApolloClient` via thin `useAdmin*` wrapper hooks. Never import `adminApolloClient` directly from `packages/core`.
+
+**Admin `features/lessons/` vs `@vizteck/core`** — `apps/admin/src/features/lessons/` contains only hooks (`useAdminLessonEditor`, `useAdminLessonPageShell`, `useAdminPageTree`) that inject the Apollo client, and admin-only UI (`LessonTitleEditor`, `CoverImage`, `CoverUploadModal`, `IconPicker`). The shared display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `CoverDisplay`, `BreadcrumbDisplay`) live in `packages/core/src/lesson/ui/` and are importable from `@vizteck/core` (or the `@vizteck/lesson` shim). When adding lesson display to `apps/web`, import from `@vizteck/core`.
 
 **Prisma `instanceof` in svc-roadmap tests** — `apps/svc-roadmap/package.json` has a `moduleNameMapper` pinning `@prisma/client` to `packages/db/node_modules/@prisma/client`. Without it, pnpm's strict isolation causes the service and the test to load two different `PrismaClientKnownRequestError` class instances, making `instanceof` silently fail. If `packages/db`'s Prisma version changes, update this mapper path.

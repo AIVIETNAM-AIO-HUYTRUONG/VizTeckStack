@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { BreadcrumbDisplay } from "@vizteck/core";
-import type { BreadcrumbItem } from "@vizteck/core";
+import { BreadcrumbDisplay } from "./BreadcrumbDisplay";
+import type { BreadcrumbItem } from "../types";
 
 const items: BreadcrumbItem[] = [
   { title: "Frontend Roadmap", slug: "frontend", nodeId: null },

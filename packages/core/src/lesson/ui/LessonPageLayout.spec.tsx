@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { render, screen, fireEvent } from '@testing-library/react';
-import { LessonPageLayout } from '@vizteck/core';
-import type { PageTree } from '@vizteck/core';
+import { LessonPageLayout } from './LessonPageLayout';
+import type { PageTree } from '../types';
 
 const tree: PageTree = {
   rootSlug: 'frontend',
@@ -34,7 +34,6 @@ it('reads initial collapsed state from localStorage', () => {
       <div>Content</div>
     </LessonPageLayout>
   );
-  // Sidebar should be collapsed — width 0
   const sidebar = document.querySelector('[data-testid="lesson-sidebar"]');
   expect(sidebar?.className).toContain('w-0');
 });

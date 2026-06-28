@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { useSearchModal } from '@vizteck/core';
+import { useSearchModal } from './useSearchModal';
 
 describe('useSearchModal', () => {
   it('starts closed', () => {

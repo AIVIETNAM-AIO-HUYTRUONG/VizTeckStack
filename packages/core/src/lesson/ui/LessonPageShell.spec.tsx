@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { LessonPageShell } from "@vizteck/core";
-import type { LessonShellNode, BreadcrumbItem } from "@vizteck/core";
+import { LessonPageShell } from "./LessonPageShell";
+import type { LessonShellNode, BreadcrumbItem } from "../types";
 
 const node: LessonShellNode = {
   id: "n1",

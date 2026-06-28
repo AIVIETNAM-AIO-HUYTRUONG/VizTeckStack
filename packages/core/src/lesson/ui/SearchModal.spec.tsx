@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { SearchModal } from '@vizteck/core';
+import { SearchModal } from './SearchModal';
 import { MockedProvider } from '@apollo/client/testing';
 
 const defaultProps = {
@@ -10,7 +10,7 @@ const defaultProps = {
 };
 
 function Wrapper({ children }: { children: React.ReactNode }) {
-  return <MockedProvider mocks={[]} addTypename={false}>{children}</MockedProvider>;
+  return <MockedProvider mocks={[]}>{children}</MockedProvider>;
 }
 
 describe('SearchModal', () => {

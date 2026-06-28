@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: [
+    '@vizteck/core',
+    '@vizteck/lesson',
+    '@vizteck/graphql-client',
     '@vizteck/ui',
     '@vizteck/graph',
     '@xyflow/react',
