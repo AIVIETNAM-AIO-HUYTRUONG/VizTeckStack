@@ -13,11 +13,6 @@
     "test": {
       "dependsOn": ["^build"]
     },
-    "lint": {},
-    "proto:gen": {
-      "inputs": ["packages/proto/**/*.proto"],
-      "outputs": ["packages/proto/generated/**"],
-      "cache": true
-    }
+    "lint": {}
   }
 }

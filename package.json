@@ -7,8 +7,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
-    "proto:gen": "turbo run proto:gen",
-    "prepare": "husky"
+"prepare": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",

@@ -10,8 +10,6 @@ pnpm dev          # Start all apps/services in watch mode
 pnpm build        # Build all packages (dependency-ordered)
 pnpm test         # Run all tests (skips e2e — see below)
 pnpm lint         # Lint all packages
-pnpm proto:gen    # Regenerate TypeScript from .proto files
-
 # packages/db (run from repo root or packages/db)
 pnpm --filter @vizteck/db db:push    # Push schema to DB (no migration file)
 pnpm --filter @vizteck/db db:migrate # Create and run migration
@@ -21,7 +19,6 @@ pnpm --filter @vizteck/db db:studio  # Open Prisma Studio
 # Single package test
 pnpm --filter @vizteck/admin test
 pnpm --filter @vizteck/lesson test
-pnpm --filter @vizteck/svc-roadmap test
 pnpm --filter @vizteck/api-gateway test
 
 # Test watch mode (admin and packages/lesson use Vitest)
@@ -47,22 +44,14 @@ docker compose ps
 | `packages/core` | Vitest + @testing-library/react | specs live alongside source in `src/` |
 | `packages/lesson` | Vitest + @testing-library/react | shim only — no specs (all specs moved to `packages/core`) |
 | `apps/api-gateway` | Jest + ts-jest | `*.spec.ts` in `src/` |
-| `apps/svc-roadmap` | Jest + ts-jest | `*.spec.ts` in `src/` |
 | `apps/e2e` | Playwright | Separate from `pnpm test`; needs apps running |
 
 ### First-time setup
 ```bash
 docker compose up -d postgres
 pnpm install
-pnpm proto:gen
 DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" pnpm --filter @vizteck/db db:push
 DATABASE_URL="postgresql://vizteck:vizteck@localhost:5432/vizteckstack" pnpm --filter @vizteck/db db:seed
-```
-
-### Proto codegen gotcha
-Turborepo caches `pnpm proto:gen` and may replay an old result. After editing `roadmap.proto`, force regeneration:
-```bash
-cd packages/proto && node generate.js
 ```
 
 ## Git workflow
@@ -91,7 +80,7 @@ Format: `<type>: <description>` — no capital first letter, no trailing period.
 
 ## Architecture
 
-Polyglot monorepo: public roadmap viewer + admin CMS + NestJS API gateway + NestJS gRPC service.
+Monorepo: public roadmap viewer + admin CMS + NestJS API gateway.
 
 ```
 Browser
@@ -105,14 +94,7 @@ Browser
     /api/*        — REST controllers
     /api-docs     — Swagger UI
     AdminGuard    — Bearer token from ADMIN_TOKEN env var
-
-    ↓ gRPC
-
-  apps/svc-roadmap (NestJS microservice, port 5001)
     → packages/db (Prisma + PostgreSQL)
-
-services/svc-python  — future FastAPI gRPC service (port 5002, outside pnpm workspace)
-services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm workspace)
 ```
 
 ### packages
@@ -120,13 +102,12 @@ services/svc-rust    — future Axum gRPC service (port 5003, outside pnpm works
 | Package | Name | Purpose |
 |---------|------|---------|
 | `packages/core` | `@vizteck/core` | **Single source of truth for all feature logic.** Feature-first layout: `roadmap/`, `graph/`, `lesson/` — each with `types.ts`, `*.service.ts`, hooks, and a `ui/` subfolder for display components. Apps import from here. |
-| `packages/proto` | `@vizteck/proto` | Single source of truth for gRPC contracts. Edit `roadmap.proto`, run `node generate.js` inside the package to regenerate. |
 | `packages/db` | `@vizteck/db` | Exports `db` (PrismaClient singleton) and all Prisma types. |
 | `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge). |
 | `packages/graph` | `@vizteck/graph` | **Shim only** — re-exports `RoadmapGraph`, `RoadmapNode`, and all graph types from `@vizteck/core`. Do not add source files here. |
 | `packages/lesson` | `@vizteck/lesson` | **Shim only** — re-exports `LessonEditor`, `LessonViewer`, `LessonPageShell`, and all lesson types from `@vizteck/core`. Do not add source files here. |
 
-**Dependency rule:** `apps/*` may import from `packages/*`; `packages/core` imports from `packages/graphql-client`, `@xyflow/react`, `packages/ui`; `packages/graph` and `packages/lesson` import only from `packages/core`; `packages/*` must not import from `apps/*`; `services/*` are fully isolated and communicate only via gRPC.
+**Dependency rule:** `apps/*` may import from `packages/*`; `packages/core` imports from `packages/graphql-client`, `@xyflow/react`, `packages/ui`; `packages/graph` and `packages/lesson` import only from `packages/core`; `packages/*` must not import from `apps/*`.
 
 ### Admin frontend structure
 
@@ -165,19 +146,15 @@ Feature display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `
 - `Node.icon` — emoji string (e.g. `"📚"`); `null` means no icon set
 - `Node.targetRoadmapId` — links a `ROADMAP`-type node to its target roadmap. `targetRoadmapSlug` is **not** stored in DB — the api-gateway REST controller computes it on the fly from the full roadmap list.
 - `Edge` — connection between nodes within the same roadmap
-- Proto `NodeType` enum: `ROADMAP = 0`, `LESSON = 1` (numeric on wire, string in DB — always normalize when reading from proto responses)
-- Proto `status` field is a **string** (not a proto enum) on both `RoadmapItem` and `UpdateRoadmapRequest` to avoid proto3 zero-default overwriting stored values on partial updates. Empty string = no change.
 
 ### Environment variables
 
 | Var | Default | Where |
 |-----|---------|-------|
-| `DATABASE_URL` | `postgresql://vizteck:vizteck@localhost:5432/vizteckstack` | `packages/db`, `apps/svc-roadmap` |
-| `ROADMAP_SERVICE_URL` | `localhost:5001` | `apps/api-gateway` |
+| `DATABASE_URL` | `postgresql://vizteck:vizteck@localhost:5432/vizteckstack` | `packages/db`, `apps/api-gateway` |
 | `ADMIN_TOKEN` | `supersecret` | `apps/api-gateway` |
 | `NEXT_PUBLIC_API_URL` | `http://localhost:3000` | `apps/web`, `apps/admin` |
 | `PORT` | `3000` | `apps/api-gateway` |
-| `GRPC_PORT` | `5001` | `apps/svc-roadmap` |
 | `UPLOADTHING_TOKEN` | _(no default)_ | `apps/admin` — required for cover image uploads |
 
 Each app has a `.env.example` — copy to `.env` (or `.env.local` for Next.js apps) before running.
@@ -222,4 +199,3 @@ All packages extend `tsconfig.base.json` (strict mode, commonjs, ES2022). NestJS
 
 **Admin `features/lessons/` vs `@vizteck/core`** — `apps/admin/src/features/lessons/` contains only hooks (`useAdminLessonEditor`, `useAdminLessonPageShell`, `useAdminPageTree`) that inject the Apollo client, and admin-only UI (`LessonTitleEditor`, `CoverImage`, `CoverUploadModal`, `IconPicker`). The shared display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `CoverDisplay`, `BreadcrumbDisplay`) live in `packages/core/src/lesson/ui/` and are importable from `@vizteck/core` (or the `@vizteck/lesson` shim). When adding lesson display to `apps/web`, import from `@vizteck/core`.
 
-**Prisma `instanceof` in svc-roadmap tests** — `apps/svc-roadmap/package.json` has a `moduleNameMapper` pinning `@prisma/client` to `packages/db/node_modules/@prisma/client`. Without it, pnpm's strict isolation causes the service and the test to load two different `PrismaClientKnownRequestError` class instances, making `instanceof` silently fail. If `packages/db`'s Prisma version changes, update this mapper path.
