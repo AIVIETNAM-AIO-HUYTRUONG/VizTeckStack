@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { renderHook, waitFor } from '@testing-library/react';
 import { useAdminPageTree } from './usePageTree';
-import type { PageTree } from '@vizteck/lesson';
+import type { PageTree } from '@vizteck/core';
 
 vi.mock('@/lib/apolloClient', () => ({ adminApolloClient: {} }));
 
