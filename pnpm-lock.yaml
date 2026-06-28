@@ -331,9 +331,6 @@ importers:
 
   packages/core:
     dependencies:
-      '@apollo/client':
-        specifier: ^3.11.0
-        version: 3.14.1(@types/react@19.2.17)(graphql-ws@6.0.8(graphql@16.14.2)(ws@8.21.0))(graphql@16.14.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(subscriptions-transport-ws@0.11.0(graphql@16.14.2))
       '@vizteck/graph':
         specifier: workspace:*
         version: link:../graph
@@ -346,11 +343,8 @@ importers:
       '@xyflow/react':
         specifier: ^12.0.0
         version: 12.11.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      graphql:
-        specifier: ^16.9.0
-        version: 16.14.2
       react:
-        specifier: ^19.0.0
+        specifier: '>=18.0.0'
         version: 19.2.7
     devDependencies:
       '@types/react':
@@ -409,16 +403,13 @@ importers:
 
   packages/graphql-client:
     dependencies:
+      react:
+        specifier: '>=18.0.0'
+        version: 19.2.7
+    devDependencies:
       '@apollo/client':
         specifier: ^3.11.0
         version: 3.14.1(@types/react@19.2.17)(graphql-ws@6.0.8(graphql@16.14.2)(ws@8.21.0))(graphql@16.14.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(subscriptions-transport-ws@0.11.0(graphql@16.14.2))
-      graphql:
-        specifier: ^16.9.0
-        version: 16.14.2
-      react:
-        specifier: ^19.0.0
-        version: 19.2.7
-    devDependencies:
       '@graphql-codegen/cli':
         specifier: ^5.0.0
         version: 5.0.7(@types/node@20.19.43)(graphql@16.14.2)(typescript@5.9.3)
@@ -431,6 +422,9 @@ importers:
       '@graphql-codegen/typescript-react-apollo':
         specifier: ^4.3.0
         version: 4.4.2(graphql@16.14.2)
+      graphql:
+        specifier: ^16.9.0
+        version: 16.14.2
       typescript:
         specifier: ^5.4.0
         version: 5.9.3

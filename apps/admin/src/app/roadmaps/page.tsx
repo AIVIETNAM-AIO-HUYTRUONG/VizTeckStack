@@ -5,8 +5,8 @@ import { Button } from '@vizteck/ui';
 import { AdminLayout } from '@/components/AdminLayout';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { RoadmapModal } from '@/features/roadmaps/components/RoadmapModal';
-import { useRoadmaps } from '@/features/roadmaps/hooks/useRoadmaps';
-import { STATUS_CLASS, STATUS_LABEL } from '@/features/roadmaps/services/roadmap.service';
+import { useAdminRoadmaps } from '@/features/roadmaps/hooks/useRoadmaps';
+import { STATUS_CLASS, STATUS_LABEL } from '@vizteck/core';
 import { useAuthGuard } from '@/lib/useAuthGuard';
 
 export default function RoadmapsPage() {
@@ -21,7 +21,7 @@ export default function RoadmapsPage() {
     handleEdit,
     handleDelete,
     handleStatusChange,
-  } = useRoadmaps();
+  } = useAdminRoadmaps();
 
   return (
     <AdminLayout>

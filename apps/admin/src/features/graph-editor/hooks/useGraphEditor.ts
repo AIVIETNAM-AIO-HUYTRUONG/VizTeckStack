@@ -9,7 +9,8 @@ import {
   type EditorEdge,
   type RoadmapEntry,
 } from '../services/graph.service';
-import { updateRoadmap } from '@/features/roadmaps/services/roadmap.service';
+import { updateRoadmap } from '@vizteck/core';
+import { adminApolloClient } from '@/lib/apolloClient';
 
 export function useGraphEditor(id: string, slug: string | null) {
   const [loading, setLoading] = useState(true);
@@ -69,7 +70,7 @@ export function useGraphEditor(id: string, slug: string | null) {
     const prev = roadmapStatus;
     setRoadmapStatus(next);
     try {
-      await updateRoadmap(id, { status: next });
+      await updateRoadmap(adminApolloClient, id, { status: next });
     } catch {
       setRoadmapStatus(prev);
     }
