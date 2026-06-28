@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { SearchModal } from './SearchModal';
+import { SearchModal } from '@vizteck/core';
 import { MockedProvider } from '@apollo/client/testing';
 
 const defaultProps = {

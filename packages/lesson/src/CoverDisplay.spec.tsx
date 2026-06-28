@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { CoverDisplay } from "./CoverDisplay";
+import { CoverDisplay } from "@vizteck/core";
 
 it("renders img when coverImage provided", () => {
   render(

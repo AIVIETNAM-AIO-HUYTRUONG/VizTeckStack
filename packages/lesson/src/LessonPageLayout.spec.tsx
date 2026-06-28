@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { render, screen, fireEvent } from '@testing-library/react';
-import { LessonPageLayout } from './LessonPageLayout';
-import type { PageTree } from './types';
+import { LessonPageLayout } from '@vizteck/core';
+import type { PageTree } from '@vizteck/core';
 
 const tree: PageTree = {
   rootSlug: 'frontend',

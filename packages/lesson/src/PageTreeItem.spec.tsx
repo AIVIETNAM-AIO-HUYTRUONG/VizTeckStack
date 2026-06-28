@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { render, screen, fireEvent } from '@testing-library/react';
-import { PageTreeItem } from './PageTreeItem';
-import type { PageTreeNode } from './types';
+import { PageTreeItem } from '@vizteck/core';
+import type { PageTreeNode } from '@vizteck/core';
 
 const lessonNode: PageTreeNode = {
   id: 'n1', title: 'Box Model', type: 'LESSON',
