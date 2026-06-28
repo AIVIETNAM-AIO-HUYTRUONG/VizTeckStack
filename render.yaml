@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: vizteckstack-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm install -g pnpm@10.30.2 && pnpm install --frozen-lockfile && pnpm --filter @vizteck/api-gateway build
+    startCommand: node apps/api-gateway/dist/main.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
