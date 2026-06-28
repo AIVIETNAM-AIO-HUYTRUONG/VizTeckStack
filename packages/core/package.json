@@ -1,0 +1,23 @@
+{
+  "name": "@vizteck/core",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.11.0",
+    "@vizteck/graphql-client": "workspace:*",
+    "@vizteck/lesson": "workspace:*",
+    "@vizteck/graph": "workspace:*",
+    "@xyflow/react": "^12.0.0",
+    "graphql": "^16.9.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.4.0"
+  }
+}
