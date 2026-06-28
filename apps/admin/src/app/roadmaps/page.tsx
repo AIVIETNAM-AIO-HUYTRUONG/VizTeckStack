@@ -15,6 +15,8 @@ export default function RoadmapsPage() {
   const {
     roadmaps,
     loading,
+    loadError,
+    retry,
     modal,
     setModal,
     handleCreate,
@@ -34,7 +36,22 @@ export default function RoadmapsPage() {
           </Button>
         </div>
 
-        {!loading && roadmaps.length === 0 ? (
+        {loading ? (
+          <div className="bg-bg-1 border border-border rounded-md overflow-hidden animate-pulse">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className={`flex gap-4 px-4 py-3 ${i < 2 ? 'border-b border-border' : ''}`}>
+                <div className="h-4 bg-bg-2 rounded w-48" />
+                <div className="h-4 bg-bg-2 rounded w-32" />
+                <div className="h-4 bg-bg-2 rounded w-16" />
+              </div>
+            ))}
+          </div>
+        ) : loadError ? (
+          <div className="text-center py-16 bg-bg-1 border border-border rounded-md">
+            <p className="text-sm text-text-2 mb-4">Failed to load roadmaps.</p>
+            <Button variant="primary" onClick={retry}>Retry</Button>
+          </div>
+        ) : roadmaps.length === 0 ? (
           <div className="text-center py-16 bg-bg-1 border border-border rounded-md">
             <h2 className="text-[20px] font-semibold text-text-1 mb-2">No roadmaps yet</h2>
             <p className="text-sm text-text-2 mb-4">Create your first roadmap to get started.</p>

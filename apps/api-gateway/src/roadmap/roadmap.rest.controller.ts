@@ -43,7 +43,7 @@ export class RoadmapRestController {
 
   @Get('roadmaps')
   @ApiOperation({ summary: 'List all roadmaps' })
-  getRoadmaps() { return this.listRoadmapsUseCase.execute(); }
+  async getRoadmaps() { return { roadmaps: await this.listRoadmapsUseCase.execute() }; }
 
   @Get('roadmaps/:slug')
   @ApiOperation({ summary: 'Get roadmap by slug with nodes and edges' })

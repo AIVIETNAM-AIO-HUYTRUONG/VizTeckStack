@@ -2,5 +2,14 @@
   "enabledPlugins": {
     "ponytail@ponytail": true,
     "railway@claude-plugins-official": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm --filter @vizteck/e2e test:e2e*)",
+      "Bash(pnpm --filter @vizteck/e2e test:ui*)",
+      "Bash(pnpm --filter @vizteck/e2e test:headed*)",
+      "Bash(npx playwright *)",
+      "Bash(pnpm exec playwright *)"
+    ]
   }
 }

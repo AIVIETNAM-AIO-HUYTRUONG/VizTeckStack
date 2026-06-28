@@ -14,14 +14,24 @@ import type { ApolloLike, Roadmap, CreateRoadmapInput, UpdateRoadmapInput, Modal
 export function useRoadmaps(client: ApolloLike) {
   const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [modal, setModal] = useState<ModalState>({ type: 'none' });
 
   const fetchRoadmaps = useCallback(async () => {
+    setLoading(true);
+    setLoadError(false);
     try {
       const data = await getRoadmaps(client);
       setRoadmaps(data);
     } catch {
-      // client handles auth redirects; other errors silently ignored
+      // Auto-retry once after 500ms — covers gRPC cold-start on first request
+      try {
+        await new Promise<void>((r) => setTimeout(r, 500));
+        const data = await getRoadmaps(client);
+        setRoadmaps(data);
+      } catch {
+        setLoadError(true);
+      }
     } finally {
       setLoading(false);
     }
@@ -64,6 +74,8 @@ export function useRoadmaps(client: ApolloLike) {
   return {
     roadmaps,
     loading,
+    loadError,
+    retry: fetchRoadmaps,
     modal,
     setModal,
     handleCreate,

@@ -102,8 +102,12 @@ function GraphCanvas({
       onDragOver={!isView ? handleDragOver : undefined}
     >
       <ReactFlow
-        nodes={rfNodes}
-        edges={rfEdges}
+        // View mode: uncontrolled so fitView fires after React Flow measures nodes internally.
+        // Edit mode: controlled so the admin can manage node positions via onNodesChange.
+        {...(isView
+          ? { defaultNodes: rfNodes, defaultEdges: rfEdges }
+          : { nodes: rfNodes, edges: rfEdges, onNodesChange, onEdgesChange: onEdgesChange, onConnect, onNodesDelete }
+        )}
         nodeTypes={nodeTypes}
         nodesDraggable={!isView}
         nodesConnectable={!isView}
@@ -111,10 +115,6 @@ function GraphCanvas({
         edgesReconnectable={!isView}
         fitView
         onNodeClick={onNodeClick ? handleNodeClick : undefined}
-        onNodesChange={onNodesChange}
-        onEdgesChange={!isView ? onEdgesChange : undefined}
-        onConnect={!isView ? onConnect : undefined}
-        onNodesDelete={!isView ? onNodesDelete : undefined}
         onEdgeClick={!isView && onEdgeClick ? handleEdgeClick : undefined}
         onPaneContextMenu={!isView ? handlePaneContextMenu : undefined}
       >
