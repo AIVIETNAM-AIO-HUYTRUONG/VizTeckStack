@@ -1,0 +1,43 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "packages/graphql-client/src/queries/nodes/nodes.graphql", "language": "graphql", "sizeLines": 76, "fileCategory": "data"},
+    {"path": "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql", "language": "graphql", "sizeLines": 96, "fileCategory": "data"},
+    {"path": "packages/graphql-client/src/queries/search.graphql", "language": "graphql", "sizeLines": 14, "fileCategory": "data"},
+    {"path": "packages/graphql-client/tsconfig.json", "language": "json", "sizeLines": 9, "fileCategory": "config"},
+    {"path": "packages/lesson/package.json", "language": "json", "sizeLines": 34, "fileCategory": "config"},
+    {"path": "packages/lesson/src/index.ts", "language": "typescript", "sizeLines": 30, "fileCategory": "code"},
+    {"path": "packages/lesson/src/test-setup.ts", "language": "typescript", "sizeLines": 1, "fileCategory": "code"},
+    {"path": "packages/lesson/tsconfig.json", "language": "json", "sizeLines": 11, "fileCategory": "config"},
+    {"path": "packages/lesson/vitest.config.ts", "language": "typescript", "sizeLines": 11, "fileCategory": "code"},
+    {"path": "packages/ui/package.json", "language": "json", "sizeLines": 19, "fileCategory": "config"},
+    {"path": "packages/ui/src/Button.tsx", "language": "typescript", "sizeLines": 53, "fileCategory": "code"},
+    {"path": "packages/ui/src/Card.tsx", "language": "typescript", "sizeLines": 38, "fileCategory": "code"},
+    {"path": "packages/ui/src/index.ts", "language": "typescript", "sizeLines": 6, "fileCategory": "code"},
+    {"path": "packages/ui/src/NodeBadge.tsx", "language": "typescript", "sizeLines": 23, "fileCategory": "code"},
+    {"path": "packages/ui/tsconfig.json", "language": "json", "sizeLines": 9, "fileCategory": "config"},
+    {"path": "scripts/validate-yaml.cjs", "language": "javascript", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "services/svc-python/README.md", "language": "markdown", "sizeLines": 6, "fileCategory": "docs"},
+    {"path": "services/svc-rust/README.md", "language": "markdown", "sizeLines": 6, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    "packages/graphql-client/src/queries/nodes/nodes.graphql": [],
+    "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql": [],
+    "packages/graphql-client/src/queries/search.graphql": [],
+    "packages/graphql-client/tsconfig.json": [],
+    "packages/lesson/package.json": [],
+    "packages/lesson/src/index.ts": [],
+    "packages/lesson/src/test-setup.ts": [],
+    "packages/lesson/tsconfig.json": [],
+    "packages/lesson/vitest.config.ts": [],
+    "packages/ui/package.json": [],
+    "packages/ui/src/Button.tsx": [],
+    "packages/ui/src/Card.tsx": ["packages/ui/src/NodeBadge.tsx"],
+    "packages/ui/src/index.ts": [],
+    "packages/ui/src/NodeBadge.tsx": [],
+    "packages/ui/tsconfig.json": [],
+    "scripts/validate-yaml.cjs": [],
+    "services/svc-python/README.md": [],
+    "services/svc-rust/README.md": []
+  }
+}

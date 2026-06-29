@@ -1,0 +1,1195 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "files": [
+    {
+      "path": ".claude/settings.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": ".env.example",
+      "language": "config",
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/deploy-staging.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".husky/commit-msg",
+      "language": "unknown",
+      "fileCategory": "code"
+    },
+    {
+      "path": ".husky/pre-commit",
+      "language": "unknown",
+      "fileCategory": "code"
+    },
+    {
+      "path": ".husky/pre-push",
+      "language": "unknown",
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/admin/.env.example",
+      "language": "config",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/admin/next.config.js",
+      "language": "javascript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/admin/postcss.config.js",
+      "language": "javascript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/api/uploadthing/core.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/api/uploadthing/route.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/globals.css",
+      "language": "css",
+      "fileCategory": "markup"
+    },
+    {
+      "path": "apps/admin/src/app/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/login/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/roadmaps/[id]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/app/roadmaps/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/components/AdminLayout.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/components/ApolloProvider.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/components/ConfirmDialog.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/components/ThemeToggle.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/components/NodeInventory.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/CoverImage.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/CoverImage.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/CoverUploadModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/IconPicker.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/IconPicker.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/useLessonEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/usePageTree.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/usePageTree.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/features/search/SearchModalWrapper.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/lib/api.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/lib/apolloClient.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/lib/uploadthing.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/lib/useAuthGuard.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/src/lib/useRouteGuard.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/tailwind.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/admin/vercel.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/admin/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/admin/vitest.setup.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/.env.example",
+      "language": "config",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/api-gateway/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/api-gateway/src/app.module.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/use-cases.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/auth/admin.guard.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/health.controller.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/infrastructure/database/database.module.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/main.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/node.resolver.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.dto.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.module.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/api-gateway/src/schema.gql",
+      "language": "graphql",
+      "fileCategory": "data"
+    },
+    {
+      "path": "apps/api-gateway/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/e2e/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/e2e/playwright.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/e2e/tests/admin.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/e2e/tests/api.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/e2e/tests/web.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/.env.example",
+      "language": "config",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/web/next-env.d.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/next.config.js",
+      "language": "javascript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/web/postcss.config.js",
+      "language": "javascript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "language": "css",
+      "fileCategory": "markup"
+    },
+    {
+      "path": "apps/web/src/app/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/app/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/app/roadmap/[slug]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/components/ApolloProvider.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/components/Breadcrumb.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/components/ThemeToggle.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/features/lesson/components/LessonLayout.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/features/search/SearchModalWrapper.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/lib/gql.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/tailwind.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/web/tsconfig.tsbuildinfo",
+      "language": "tsbuildinfo",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/vercel.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "apps/web/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/vitest.setup.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "commitlint.config.cjs",
+      "language": "javascript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": "docs/clean-architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/mockup.html",
+      "language": "html",
+      "fileCategory": "markup"
+    },
+    {
+      "path": "docs/onboarding/architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/onboarding/cheatsheet.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/onboarding/cicd.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/onboarding/daily-workflow.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/onboarding/getting-started.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/onboarding/git-hooks.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/onboarding/testing.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-21-apply-gitflow.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-21-lesson-crud-feature.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-22-feature-loop.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-22-notion-lesson.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-23-notion-page-shell.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-24-notion-search-plan.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-28-core-package-refactor.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-18-vizteckstack-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-21-git-workflow-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-feature-loop-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-notion-lesson-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-turbo-tui-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-24-notion-search-design.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/core/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/core/src/graph/graph.service.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/graph/types.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/graph/ui/RoadmapGraph.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/graph/ui/RoadmapNode.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/graph/useGraphDraft.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/graph/useGraphEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/lesson.service.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/types.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/CoverDisplay.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/CoverDisplay.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonEditor.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageLayout.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageLayout.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageShell.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageShell.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonViewer.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeItem.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeItem.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeSidebar.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeSidebar.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchModal.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchPreview.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchResultItem.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/useSearch.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/useSearchModal.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/useSearchModal.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/ui/utils.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/useLessonEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/useLessonPageShell.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/lesson/usePageTree.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/roadmap/constants.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/roadmap/roadmap.service.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/roadmap/types.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/roadmap/useRoadmaps.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/src/test-setup.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/core/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/db/.env.example",
+      "language": "config",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/db/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/db/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql",
+      "language": "sql",
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql",
+      "language": "sql",
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/db/prisma/schema.prisma",
+      "language": "prisma",
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/db/prisma/seed.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/db/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/graph/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/graph/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/graph/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/graphql-client/codegen.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/graphql-client/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/graphql-client/src/generated/graphql.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/graphql-client/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/graphql-client/src/queries/nodes/nodes.graphql",
+      "language": "graphql",
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql",
+      "language": "graphql",
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/graphql-client/src/queries/search.graphql",
+      "language": "graphql",
+      "fileCategory": "data"
+    },
+    {
+      "path": "packages/graphql-client/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/lesson/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/lesson/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/lesson/src/test-setup.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/lesson/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/lesson/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ui/package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "packages/ui/src/Button.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ui/src/Card.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ui/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ui/src/NodeBadge.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "packages/ui/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "language": "yaml",
+      "fileCategory": "config"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "render.yaml",
+      "language": "yaml",
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/validate-yaml.cjs",
+      "language": "javascript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "services/svc-python/README.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "services/svc-rust/README.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "tsconfig.base.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "turbo.json",
+      "language": "json",
+      "fileCategory": "config"
+    }
+  ]
+}

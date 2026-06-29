@@ -1,0 +1,79 @@
+{
+  "batchIndex": 6,
+  "files": [
+    [
+      "packages/core/src/graph/graph.service.ts",
+      122,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/graph/types.ts",
+      50,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/graph/ui/RoadmapGraph.tsx",
+      186,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/graph/ui/RoadmapNode.tsx",
+      37,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/graph/useGraphDraft.ts",
+      21,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/graph/useGraphEditor.ts",
+      95,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "packages/core/src/graph/graph.service.ts": [
+      "packages/core/src/graph/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/graph/types.ts": [],
+    "packages/core/src/graph/ui/RoadmapGraph.tsx": [
+      "packages/core/src/graph/types.ts",
+      "packages/core/src/graph/ui/RoadmapNode.tsx"
+    ],
+    "packages/core/src/graph/ui/RoadmapNode.tsx": [
+      "packages/core/src/graph/types.ts"
+    ],
+    "packages/core/src/graph/useGraphDraft.ts": [
+      "packages/core/src/graph/types.ts"
+    ],
+    "packages/core/src/graph/useGraphEditor.ts": [
+      "packages/core/src/graph/graph.service.ts",
+      "packages/core/src/graph/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ]
+  },
+  "neighborMap": {
+    "packages/core/src/graph/graph.service.ts": [
+      {
+        "path": "packages/core/src/roadmap/types.ts",
+        "batchIndex": 3,
+        "symbols": []
+      }
+    ],
+    "packages/core/src/graph/useGraphEditor.ts": [
+      {
+        "path": "packages/core/src/roadmap/types.ts",
+        "batchIndex": 3,
+        "symbols": []
+      }
+    ]
+  }
+}

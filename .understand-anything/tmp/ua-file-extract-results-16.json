@@ -1,0 +1,924 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/onboarding/architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 673,
+      "nonEmptyLines": 516,
+      "sections": [
+        {
+          "heading": "Tổng quan kiến trúc",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Mục lục",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Bức tranh tổng thể",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "Tại sao dùng monorepo?",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "Vấn đề nếu không có monorepo",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "pnpm workspaces",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "Turborepo",
+          "level": 3,
+          "line": 110
+        },
+        {
+          "heading": "Hai frontend: web vs admin",
+          "level": 2,
+          "line": 122
+        },
+        {
+          "heading": "Tại sao lại tách thành hai app?",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "apps/web — Public viewer",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "apps/admin — CMS + Graph editor",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "API Gateway và gRPC",
+          "level": 2,
+          "line": 165
+        },
+        {
+          "heading": "Tại sao cần API Gateway?",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "Tại sao gRPC thay vì REST giữa services?",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "Protocol Buffers là gì?",
+          "level": 2,
+          "line": 199
+        },
+        {
+          "heading": "Cấu trúc feature-first trong admin",
+          "level": 2,
+          "line": 257
+        },
+        {
+          "heading": "Layer-first (phương án không được chọn)",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "Feature-first (hiện tại)",
+          "level": 3,
+          "line": 279
+        },
+        {
+          "heading": "Shared packages",
+          "level": 2,
+          "line": 321
+        },
+        {
+          "heading": "packages/proto — Hợp đồng gRPC",
+          "level": 3,
+          "line": 325
+        },
+        {
+          "heading": "packages/db — Prisma client",
+          "level": 3,
+          "line": 334
+        },
+        {
+          "heading": "packages/ui — React components cơ bản",
+          "level": 3,
+          "line": 343
+        },
+        {
+          "heading": "packages/graph — Graph viewer/editor",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "packages/lesson — Lesson editor/viewer",
+          "level": 3,
+          "line": 372
+        },
+        {
+          "heading": "Quy tắc phụ thuộc",
+          "level": 2,
+          "line": 386
+        },
+        {
+          "heading": "Data model",
+          "level": 2,
+          "line": 423
+        },
+        {
+          "heading": "Các điểm quan trọng",
+          "level": 3,
+          "line": 465
+        },
+        {
+          "heading": "Xác thực admin",
+          "level": 2,
+          "line": 479
+        },
+        {
+          "heading": "Dark mode",
+          "level": 2,
+          "line": 511
+        },
+        {
+          "heading": "E2E testing",
+          "level": 2,
+          "line": 540
+        },
+        {
+          "heading": "Luồng dữ liệu: xem roadmap",
+          "level": 2,
+          "line": 569
+        },
+        {
+          "heading": "Luồng dữ liệu: lưu nội dung lesson",
+          "level": 2,
+          "line": 619
+        },
+        {
+          "heading": "Tại sao dùng GitFlow?",
+          "level": 2,
+          "line": 660
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 33
+      }
+    },
+    {
+      "path": "docs/onboarding/cheatsheet.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 228,
+      "nonEmptyLines": 164,
+      "sections": [
+        {
+          "heading": "Cheat Sheet cho Developer",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Lệnh thường dùng",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Phát triển hàng ngày",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "Theo từng package",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "Database (cần chạy với DATABASE_URL)",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "gRPC / Proto codegen",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "Docker",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "2. Test theo từng package",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "3. Test watch mode",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "4. E2E tests (Playwright)",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "5. Ports",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "6. Biến môi trường",
+          "level": 2,
+          "line": 118
+        },
+        {
+          "heading": "7. Đặt tên nhánh",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "8. Commit types (Conventional Commits)",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "9. Packages dùng chung",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "10. Data model",
+          "level": 2,
+          "line": 177
+        },
+        {
+          "heading": "11. Admin auth",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "12. CI/CD triggers",
+          "level": 2,
+          "line": 204
+        },
+        {
+          "heading": "13. Xử lý lỗi nhanh",
+          "level": 2,
+          "line": 217
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "docs/onboarding/cicd.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 245,
+      "nonEmptyLines": 182,
+      "sections": [
+        {
+          "heading": "CI/CD Pipeline",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tổng quan: 3 pipeline, 3 mục đích",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Sơ đồ kết nối GitFlow ↔ CI/CD",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "Pipeline 1: CI (`ci.yml`)",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "Pipeline 2: Deploy Staging (`deploy-staging.yml`)",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "Pipeline 3: Release / Production (`release.yml`)",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "GitHub Secrets cần thiết",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "Môi trường Vercel",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "Tại sao E2E không chạy trên CI?",
+          "level": 2,
+          "line": 198
+        },
+        {
+          "heading": "Kiểm tra trạng thái CI/CD",
+          "level": 2,
+          "line": 211
+        },
+        {
+          "heading": "Xử lý lỗi thường gặp",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "Liên quan",
+          "level": 2,
+          "line": 242
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "docs/onboarding/daily-workflow.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 278,
+      "nonEmptyLines": 198,
+      "sections": [
+        {
+          "heading": "Quy trình làm việc hàng ngày",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tại sao dùng GitFlow?",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Hai nhánh tồn tại lâu dài",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Lifecycle của một tính năng thông thường",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "Bước 1 — Tạo nhánh mới từ `develop`",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "Bước 2 — Code và commit theo Conventional Commits",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "Bước 3 — Chạy tests trước khi push",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "Bước 4 — Push và mở Pull Request",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Bước 5 — CI chạy tự động",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "Bước 6 — Code review",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "Bước 7 — Merge vào `develop`",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Lifecycle của hotfix (lỗi khẩn cấp trên production)",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "Lifecycle của release (lead làm)",
+          "level": 2,
+          "line": 170
+        },
+        {
+          "heading": "Sơ đồ tổng quan GitFlow",
+          "level": 2,
+          "line": 205
+        },
+        {
+          "heading": "Những điều tuyệt đối không làm",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "Cập nhật database schema",
+          "level": 2,
+          "line": 232
+        },
+        {
+          "heading": "Thêm gRPC method mới",
+          "level": 2,
+          "line": 248
+        },
+        {
+          "heading": "Common mistakes của developer mới",
+          "level": 2,
+          "line": 261
+        },
+        {
+          "heading": "Liên quan",
+          "level": 2,
+          "line": 274
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "docs/onboarding/getting-started.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 484,
+      "nonEmptyLines": 326,
+      "sections": [
+        {
+          "heading": "Bắt đầu với VizTeckStack",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Mục lục",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "1. Yêu cầu trước khi bắt đầu",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "2. Clone repository",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "Cách A — SSH (khuyên dùng, cần SSH key đã thêm vào GitHub)",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "Cách B — HTTPS (dùng khi chưa có SSH key)",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "3. Cài đặt dependencies",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "4. Khởi động PostgreSQL",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "5. Thiết lập file môi trường",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "apps/api-gateway — tạo file `apps/api-gateway/.env`",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "apps/svc-roadmap — tạo file `apps/svc-roadmap/.env`",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "apps/web — tạo file `apps/web/.env.local`",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "apps/admin — tạo file `apps/admin/.env.local`",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "6. Khởi tạo database",
+          "level": 2,
+          "line": 167
+        },
+        {
+          "heading": "6a. Đẩy schema Prisma lên database",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "6b. Seed dữ liệu demo",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "7. Generate gRPC types",
+          "level": 2,
+          "line": 205
+        },
+        {
+          "heading": "8. Chạy tất cả service",
+          "level": 2,
+          "line": 232
+        },
+        {
+          "heading": "9. Xác minh và khám phá",
+          "level": 2,
+          "line": 257
+        },
+        {
+          "heading": "9a. Kiểm tra từng service",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "9b. Đăng nhập Admin Panel",
+          "level": 3,
+          "line": 270
+        },
+        {
+          "heading": "9c. Khám phá tính năng cơ bản",
+          "level": 3,
+          "line": 278
+        },
+        {
+          "heading": "10. Khởi động lại nhanh (các ngày sau)",
+          "level": 2,
+          "line": 304
+        },
+        {
+          "heading": "11. Xử lý lỗi thường gặp",
+          "level": 2,
+          "line": 329
+        },
+        {
+          "heading": "`docker compose up -d postgres` thất bại",
+          "level": 3,
+          "line": 331
+        },
+        {
+          "heading": "PostgreSQL container ở trạng thái `Restarting` hoặc `Exit`",
+          "level": 3,
+          "line": 339
+        },
+        {
+          "heading": "`pnpm install` lỗi peer dependency",
+          "level": 3,
+          "line": 360
+        },
+        {
+          "heading": "`db:push` lỗi \"Connection refused\" hoặc \"ECONNREFUSED\"",
+          "level": 3,
+          "line": 368
+        },
+        {
+          "heading": "`node generate.js` lỗi \"protoc: command not found\"",
+          "level": 3,
+          "line": 381
+        },
+        {
+          "heading": "Port đã bị chiếm (EADDRINUSE)",
+          "level": 3,
+          "line": 407
+        },
+        {
+          "heading": "Admin page trả về 404 dù file tồn tại (Turbopack cache cũ)",
+          "level": 3,
+          "line": 429
+        },
+        {
+          "heading": "`pnpm dev` chỉ thấy output của một số service, không phải tất cả",
+          "level": 3,
+          "line": 442
+        },
+        {
+          "heading": "Windows PowerShell: `KEY=value command` không chạy được",
+          "level": 3,
+          "line": 452
+        },
+        {
+          "heading": "Tiếp theo",
+          "level": 2,
+          "line": 477
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 34
+      }
+    },
+    {
+      "path": "docs/onboarding/git-hooks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 273,
+      "nonEmptyLines": 188,
+      "sections": [
+        {
+          "heading": "Git Hooks (Husky)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tại sao cần Git Hooks?",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "3 Hooks đang hoạt động",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "1. `commit-msg` — Kiểm tra định dạng commit message",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "2. `pre-commit` — Lint + Test trước khi commit",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "3. `pre-push` — Test trước khi push",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Setup cho developer mới",
+          "level": 2,
+          "line": 78
+        },
+        {
+          "heading": "Ví dụ thực tế",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "Commit hợp lệ ✅",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "Commit với message sai ❌",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "Commit khi có TypeScript error ❌",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "Commit khi test fail ❌",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "Bỏ qua hooks (trường hợp khẩn cấp)",
+          "level": 2,
+          "line": 163
+        },
+        {
+          "heading": "Tắt hooks tạm thời",
+          "level": 2,
+          "line": 179
+        },
+        {
+          "heading": "Xử lý lỗi thường gặp",
+          "level": 2,
+          "line": 190
+        },
+        {
+          "heading": "Cấu trúc files",
+          "level": 2,
+          "line": 226
+        },
+        {
+          "heading": "Thay đổi cấu hình hooks",
+          "level": 2,
+          "line": 244
+        },
+        {
+          "heading": "Liên quan",
+          "level": 2,
+          "line": 269
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "docs/onboarding/testing.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 392,
+      "nonEmptyLines": 291,
+      "sections": [
+        {
+          "heading": "Kiểm thử (Testing)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Tổng quan: 3 loại test, 3 framework",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "Unit tests: apps/admin (Vitest)",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Chạy tests",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "Đặt file test ở đâu?",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "Viết test cho hooks",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "Unit tests: apps/api-gateway (Jest)",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "Chạy tests",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "Pattern: Mock gRPC client",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "Unit tests: apps/svc-roadmap (Jest)",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "Chạy tests",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "Lưu ý quan trọng: Prisma mock",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "Tại sao cần `moduleNameMapper`?",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "E2E tests: apps/e2e (Playwright)",
+          "level": 2,
+          "line": 222
+        },
+        {
+          "heading": "Yêu cầu",
+          "level": 3,
+          "line": 226
+        },
+        {
+          "heading": "Chạy tests",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "Cấu trúc tests E2E",
+          "level": 3,
+          "line": 249
+        },
+        {
+          "heading": "Ví dụ từ codebase thực tế",
+          "level": 3,
+          "line": 258
+        },
+        {
+          "heading": "Chạy tất cả unit tests cùng lúc",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "Best practices khi viết test",
+          "level": 2,
+          "line": 311
+        },
+        {
+          "heading": "1. Đặt tên test rõ ràng",
+          "level": 3,
+          "line": 313
+        },
+        {
+          "heading": "2. Arrange / Act / Assert pattern",
+          "level": 3,
+          "line": 325
+        },
+        {
+          "heading": "3. Mock ở đúng level",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "4. `jest.clearAllMocks()` trong `beforeEach`",
+          "level": 3,
+          "line": 357
+        },
+        {
+          "heading": "Xử lý lỗi thường gặp",
+          "level": 2,
+          "line": 369
+        },
+        {
+          "heading": "Liên quan",
+          "level": 2,
+          "line": 388
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    }
+  ]
+}

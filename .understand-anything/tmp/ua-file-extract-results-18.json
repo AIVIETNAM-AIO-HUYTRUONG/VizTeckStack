@@ -1,0 +1,1242 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 10,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/superpowers/specs/2026-06-18-vizteckstack-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 346,
+      "nonEmptyLines": 286,
+      "sections": [
+        {
+          "heading": "VizTeckStack — Design Spec",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Overview",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "Architecture Overview",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Monorepo Structure",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Data Model (Prisma)",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "API Design",
+          "level": 2,
+          "line": 144
+        },
+        {
+          "heading": "GraphQL Schema (api-gateway)",
+          "level": 3,
+          "line": 146
+        },
+        {
+          "heading": "REST Endpoints (/api/*)",
+          "level": 3,
+          "line": 192
+        },
+        {
+          "heading": "gRPC Proto (packages/proto/roadmap.proto)",
+          "level": 3,
+          "line": 206
+        },
+        {
+          "heading": "Frontend Apps",
+          "level": 2,
+          "line": 230
+        },
+        {
+          "heading": "apps/web (Public Viewer)",
+          "level": 3,
+          "line": 232
+        },
+        {
+          "heading": "apps/admin (CMS)",
+          "level": 3,
+          "line": 252
+        },
+        {
+          "heading": "packages/graph (Shared React Flow)",
+          "level": 3,
+          "line": 275
+        },
+        {
+          "heading": "Tech Stack Summary",
+          "level": 2,
+          "line": 290
+        },
+        {
+          "heading": "Local Development Setup",
+          "level": 2,
+          "line": 308
+        },
+        {
+          "heading": "Out of Scope",
+          "level": 2,
+          "line": 340
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 204,
+      "nonEmptyLines": 166,
+      "sections": [
+        {
+          "heading": "Admin UI Refactor — Feature-First Architecture",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Folder Structure",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "2. Layer Rules",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "3. Service Contracts",
+          "level": 2,
+          "line": 70
+        },
+        {
+          "heading": "`features/roadmaps/services/roadmap.service.ts`",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "`features/graph-editor/services/graph.service.ts`",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "4. Hook Contracts",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "`useRoadmaps()`",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "`useGraphEditor(id: string, slug: string)`",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "`useNodeActions(params)`",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "`useGraphDraft(id, nodes, edges, dirty)`",
+          "level": 3,
+          "line": 140
+        },
+        {
+          "heading": "5. Data Flow",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "6. Testing Strategy",
+          "level": 2,
+          "line": 168
+        },
+        {
+          "heading": "Services — unit tests with mocked `apiFetch`",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "Pure functions — no mocks needed",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Hooks — React Testing Library renderHook",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "7. Migration Notes",
+          "level": 2,
+          "line": 198
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-21-git-workflow-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 168,
+      "nonEmptyLines": 120,
+      "sections": [
+        {
+          "heading": "Git Workflow Design",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Branch Structure",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Flow",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Branch naming convention",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "CI/CD Mapping",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "Tag-based release",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "GitHub Actions workflow files",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "Release Process",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "Semantic Versioning: `MAJOR.MINOR.PATCH`",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "Release lifecycle",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "Hotfix lifecycle",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "Commit Convention",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "Branch Protection Rules (GitHub)",
+          "level": 2,
+          "line": 150
+        },
+        {
+          "heading": "Dọn dẹp branches hiện tại",
+          "level": 2,
+          "line": 158
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-feature-loop-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 165,
+      "nonEmptyLines": 129,
+      "sections": [
+        {
+          "heading": "Feature Loop — Design Spec",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Overview",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "Trigger",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "Skill Mapping",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Output Artifacts",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Orchestration Flow",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "Checkpoint Format",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "Error Handling",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "State File",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "Resume",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "Constraints",
+          "level": 2,
+          "line": 160
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-notion-lesson-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 137,
+      "nonEmptyLines": 96,
+      "sections": [
+        {
+          "heading": "Notion Lesson — Completion Design",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "Piece 1: MiniGraph — Real Roadmap Data",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "Problem",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "Solution",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "Changes",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "Behaviour",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "Piece 2: Autosave in LessonEditor",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Problem",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "Solution",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "Changes",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "Edge cases",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "Piece 3: Progress Card Polish",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "Problem",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Solution",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "Changes",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "Files Modified (complete list)",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "Out of Scope",
+          "level": 2,
+          "line": 132
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-turbo-tui-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 86,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "Turbo Terminal UI (TUI) Upgrade",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Goal",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Approach",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "Changes",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "1. `turbo.json` — add `\"ui\": \"tui\"`",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "2. `.github/workflows/ci.yml` — override to stream in CI",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "Scope",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "Developer Experience",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "Requirements",
+          "level": 2,
+          "line": 83
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 581,
+      "nonEmptyLines": 437,
+      "sections": [
+        {
+          "heading": "VizTeckStack UI Redesign — Design Spec & Stitch Prompts",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "TABLE OF CONTENTS",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1. PROJECT CONTEXT",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Architecture Overview",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "Key Pages to Redesign",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "Non-Obvious Constraints (from CLAUDE.md)",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Current Design Tokens (globals.css)",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "2. NEW DESIGN SYSTEM",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "2.1 Extended Color Palette",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "2.2 Typography Scale",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "2.3 Card Elevation System",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "2.4 Animation Token Set",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "3. SURFACE SPECS",
+          "level": 2,
+          "line": 168
+        },
+        {
+          "heading": "3.1 Web Landing (`apps/web`)",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "Nav (`layout.tsx`)",
+          "level": 4,
+          "line": 172
+        },
+        {
+          "heading": "Hero Section (`page.tsx`)",
+          "level": 4,
+          "line": 179
+        },
+        {
+          "heading": "Roadmap Cards Grid",
+          "level": 4,
+          "line": 188
+        },
+        {
+          "heading": "3.2 Admin Dashboard (`apps/admin`)",
+          "level": 3,
+          "line": 198
+        },
+        {
+          "heading": "Admin Header (`AdminLayout.tsx`)",
+          "level": 4,
+          "line": 200
+        },
+        {
+          "heading": "Roadmap List (table → cards, `roadmaps/page.tsx`)",
+          "level": 4,
+          "line": 205
+        },
+        {
+          "heading": "Admin Login (`login/page.tsx`)",
+          "level": 4,
+          "line": 214
+        },
+        {
+          "heading": "3.3 Roadmap Graph View (`apps/web`)",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "3.4 Lesson Page (`apps/web`)",
+          "level": 3,
+          "line": 230
+        },
+        {
+          "heading": "4. COMPONENT LIBRARY & ANIMATION SPECS",
+          "level": 2,
+          "line": 238
+        },
+        {
+          "heading": "4.1 Updated Components",
+          "level": 3,
+          "line": 240
+        },
+        {
+          "heading": "`packages/ui/src/Button.tsx`",
+          "level": 4,
+          "line": 242
+        },
+        {
+          "heading": "`packages/ui/src/Card.tsx`",
+          "level": 4,
+          "line": 262
+        },
+        {
+          "heading": "`packages/ui/src/NodeBadge.tsx`",
+          "level": 4,
+          "line": 271
+        },
+        {
+          "heading": "4.2 Three.js Hero (`HeroCanvas.tsx`)",
+          "level": 3,
+          "line": 276
+        },
+        {
+          "heading": "4.3 Micro-Interaction Specs",
+          "level": 3,
+          "line": 331
+        },
+        {
+          "heading": "Page Enter Animations",
+          "level": 4,
+          "line": 333
+        },
+        {
+          "heading": "Interaction States",
+          "level": 4,
+          "line": 347
+        },
+        {
+          "heading": "Loading & Success States",
+          "level": 4,
+          "line": 356
+        },
+        {
+          "heading": "5. STITCH PROMPTS",
+          "level": 2,
+          "line": 365
+        },
+        {
+          "heading": "🎨 Design Tokens Reference (paste first in every Stitch session)",
+          "level": 3,
+          "line": 371
+        },
+        {
+          "heading": "PROMPT 1 — Web Landing Page",
+          "level": 3,
+          "line": 401
+        },
+        {
+          "heading": "PROMPT 2 — Admin Dashboard",
+          "level": 3,
+          "line": 437
+        },
+        {
+          "heading": "PROMPT 3 — Admin Login Page",
+          "level": 3,
+          "line": 465
+        },
+        {
+          "heading": "PROMPT 4 — Roadmap Graph View (Public)",
+          "level": 3,
+          "line": 493
+        },
+        {
+          "heading": "PROMPT 5 — Lesson Reading Page (Public)",
+          "level": 3,
+          "line": 527
+        },
+        {
+          "heading": "APPENDIX — Package Install Commands",
+          "level": 2,
+          "line": 565
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 41
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 444,
+      "nonEmptyLines": 340,
+      "sections": [
+        {
+          "heading": "Notion Page Shell — Design Spec",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Layout: Hero Cover (Option C)",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Database",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "Proto (`packages/proto/roadmap.proto`)",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "API (`apps/api-gateway`)",
+          "level": 2,
+          "line": 117
+        },
+        {
+          "heading": "REST (Swagger)",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "GraphQL (FE ↔ BE)",
+          "level": 3,
+          "line": 142
+        },
+        {
+          "heading": "Uploadthing Upload Flow",
+          "level": 3,
+          "line": 167
+        },
+        {
+          "heading": "svc-roadmap (`apps/svc-roadmap`)",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "Shared Components (`packages/lesson`)",
+          "level": 2,
+          "line": 215
+        },
+        {
+          "heading": "Admin UI (`apps/admin`)",
+          "level": 2,
+          "line": 238
+        },
+        {
+          "heading": "Admin-only components (`src/features/lessons/components/`)",
+          "level": 3,
+          "line": 240
+        },
+        {
+          "heading": "New hook (`src/features/lessons/hooks/`)",
+          "level": 3,
+          "line": 263
+        },
+        {
+          "heading": "No changes to:",
+          "level": 3,
+          "line": 270
+        },
+        {
+          "heading": "Web Viewer (`apps/web`)",
+          "level": 2,
+          "line": 277
+        },
+        {
+          "heading": "`LessonLayout.tsx` — full rewrite",
+          "level": 3,
+          "line": 279
+        },
+        {
+          "heading": "`LessonPage` server component (`app/roadmap/[slug]/node/[id]/page.tsx`)",
+          "level": 3,
+          "line": 294
+        },
+        {
+          "heading": "Responsive",
+          "level": 3,
+          "line": 305
+        },
+        {
+          "heading": "Error Handling",
+          "level": 2,
+          "line": 311
+        },
+        {
+          "heading": "Package Boundaries",
+          "level": 2,
+          "line": 323
+        },
+        {
+          "heading": "Files Modified / Created",
+          "level": 2,
+          "line": 341
+        },
+        {
+          "heading": "New files",
+          "level": 3,
+          "line": 343
+        },
+        {
+          "heading": "Modified files",
+          "level": 3,
+          "line": 356
+        },
+        {
+          "heading": "Quality Control / Testing",
+          "level": 2,
+          "line": 373
+        },
+        {
+          "heading": "svc-roadmap — Jest (`*.spec.ts`)",
+          "level": 3,
+          "line": 377
+        },
+        {
+          "heading": "api-gateway — Jest (`*.spec.ts`)",
+          "level": 3,
+          "line": 390
+        },
+        {
+          "heading": "admin — Vitest (`*.spec.tsx`)",
+          "level": 3,
+          "line": 401
+        },
+        {
+          "heading": "packages/lesson — Vitest (`*.spec.tsx`)",
+          "level": 3,
+          "line": 411
+        },
+        {
+          "heading": "E2E — Playwright (requires apps running)",
+          "level": 3,
+          "line": 424
+        },
+        {
+          "heading": "Out of Scope (deferred to later phases)",
+          "level": 2,
+          "line": 436
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 31
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 426,
+      "nonEmptyLines": 333,
+      "sections": [
+        {
+          "heading": "Notion Sidebar Page Tree — Design Spec",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Context",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Layout",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Sidebar Content (Option C)",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Data Model Changes",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Proto (`packages/proto/roadmap.proto`)",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "Backend: svc-roadmap",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "`getRoadmapTree({ slug })`",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "Tests (Jest, TDD)",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "Backend: api-gateway",
+          "level": 2,
+          "line": 161
+        },
+        {
+          "heading": "REST endpoint",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "GraphQL",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "DTOs",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "packages/lesson — New Components",
+          "level": 2,
+          "line": 206
+        },
+        {
+          "heading": "`src/PageTreeItem.tsx`",
+          "level": 3,
+          "line": 210
+        },
+        {
+          "heading": "`src/PageTreeSidebar.tsx`",
+          "level": 3,
+          "line": 231
+        },
+        {
+          "heading": "`src/LessonPageLayout.tsx`",
+          "level": 3,
+          "line": 248
+        },
+        {
+          "heading": "`src/index.ts` — add exports",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "Tests (Vitest + jsdom)",
+          "level": 3,
+          "line": 276
+        },
+        {
+          "heading": "apps/web",
+          "level": 2,
+          "line": 284
+        },
+        {
+          "heading": "New file: `src/features/lesson/services/tree.service.ts`",
+          "level": 3,
+          "line": 286
+        },
+        {
+          "heading": "`src/app/roadmap/[slug]/node/[id]/page.tsx`",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "`src/features/lesson/components/LessonLayout.tsx`",
+          "level": 3,
+          "line": 312
+        },
+        {
+          "heading": "apps/admin",
+          "level": 2,
+          "line": 336
+        },
+        {
+          "heading": "New file: `src/features/lessons/services/lesson.service.ts` (extend)",
+          "level": 3,
+          "line": 338
+        },
+        {
+          "heading": "New hook: `src/features/lessons/hooks/usePageTree.ts`",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "`src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx` (extend)",
+          "level": 3,
+          "line": 356
+        },
+        {
+          "heading": "Error Handling & Edge Cases",
+          "level": 2,
+          "line": 377
+        },
+        {
+          "heading": "Non-Goals (Phase B)",
+          "level": 2,
+          "line": 389
+        },
+        {
+          "heading": "File Summary",
+          "level": 2,
+          "line": 400
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 30
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-06-24-notion-search-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 486,
+      "nonEmptyLines": 391,
+      "sections": [
+        {
+          "heading": "Notion Search (Cmd+K) — Design Spec",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1. Package: `packages/graphql-client`",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "2. Backend: Proto",
+          "level": 2,
+          "line": 92
+        },
+        {
+          "heading": "3. Backend: svc-roadmap",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "4. Backend: api-gateway",
+          "level": 2,
+          "line": 173
+        },
+        {
+          "heading": "GraphQL DTO (`roadmap.dto.ts`)",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "GraphQL Resolver (`roadmap.resolver.ts`)",
+          "level": 3,
+          "line": 193
+        },
+        {
+          "heading": "REST Controller (`roadmap.rest.controller.ts`) — Swagger only",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "5. Apollo Client Setup",
+          "level": 2,
+          "line": 234
+        },
+        {
+          "heading": "`packages/graphql-client` exports",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "`apps/web` — `ApolloProvider.tsx`",
+          "level": 3,
+          "line": 247
+        },
+        {
+          "heading": "`apps/admin` — `ApolloProvider.tsx`",
+          "level": 3,
+          "line": 265
+        },
+        {
+          "heading": "6. Frontend: SearchModal (packages/lesson)",
+          "level": 2,
+          "line": 305
+        },
+        {
+          "heading": "New files in `packages/lesson/src/`",
+          "level": 3,
+          "line": 307
+        },
+        {
+          "heading": "`useSearchModal.ts`",
+          "level": 3,
+          "line": 318
+        },
+        {
+          "heading": "`useSearch.ts`",
+          "level": 3,
+          "line": 339
+        },
+        {
+          "heading": "Time grouping",
+          "level": 3,
+          "line": 372
+        },
+        {
+          "heading": "`SearchModal.tsx` layout",
+          "level": 3,
+          "line": 395
+        },
+        {
+          "heading": "Props interface",
+          "level": 3,
+          "line": 413
+        },
+        {
+          "heading": "7. Integration in Apps",
+          "level": 2,
+          "line": 428
+        },
+        {
+          "heading": "`apps/web/src/app/layout.tsx`",
+          "level": 3,
+          "line": 430
+        },
+        {
+          "heading": "`apps/admin/src/app/layout.tsx`",
+          "level": 3,
+          "line": 441
+        },
+        {
+          "heading": "8. Error Handling",
+          "level": 2,
+          "line": 454
+        },
+        {
+          "heading": "9. Testing",
+          "level": 2,
+          "line": 466
+        },
+        {
+          "heading": "10. Codegen Workflow",
+          "level": 2,
+          "line": 478
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    }
+  ]
+}

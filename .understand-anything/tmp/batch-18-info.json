@@ -1,0 +1,78 @@
+{
+  "batchIndex": 18,
+  "files": [
+    [
+      "docs/superpowers/specs/2026-06-18-vizteckstack-design.md",
+      346,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md",
+      204,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-21-git-workflow-design.md",
+      168,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-22-feature-loop-design.md",
+      165,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-22-notion-lesson-design.md",
+      137,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-22-turbo-tui-design.md",
+      86,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md",
+      581,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md",
+      444,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md",
+      426,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/specs/2026-06-24-notion-search-design.md",
+      486,
+      "markdown",
+      "docs"
+    ]
+  ],
+  "batchImportData": {
+    "docs/superpowers/specs/2026-06-18-vizteckstack-design.md": [],
+    "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md": [],
+    "docs/superpowers/specs/2026-06-21-git-workflow-design.md": [],
+    "docs/superpowers/specs/2026-06-22-feature-loop-design.md": [],
+    "docs/superpowers/specs/2026-06-22-notion-lesson-design.md": [],
+    "docs/superpowers/specs/2026-06-22-turbo-tui-design.md": [],
+    "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md": [],
+    "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md": [],
+    "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md": [],
+    "docs/superpowers/specs/2026-06-24-notion-search-design.md": []
+  },
+  "neighborMap": {}
+}

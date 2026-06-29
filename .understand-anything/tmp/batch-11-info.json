@@ -1,0 +1,29 @@
+{
+  "batchIndex": 11,
+  "files": [
+    [
+      ".github/workflows/ci.yml",
+      50,
+      "yaml",
+      "infra"
+    ],
+    [
+      ".github/workflows/deploy-staging.yml",
+      62,
+      "yaml",
+      "infra"
+    ],
+    [
+      ".github/workflows/release.yml",
+      77,
+      "yaml",
+      "infra"
+    ]
+  ],
+  "batchImportData": {
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/deploy-staging.yml": [],
+    ".github/workflows/release.yml": []
+  },
+  "neighborMap": {}
+}

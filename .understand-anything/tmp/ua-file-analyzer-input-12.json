@@ -1,0 +1,15 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": ".env.example", "language": "config", "sizeLines": 34, "fileCategory": "config"},
+    {"path": "CLAUDE.md", "language": "markdown", "sizeLines": 201, "fileCategory": "docs"},
+    {"path": "README.md", "language": "markdown", "sizeLines": 225, "fileCategory": "docs"},
+    {"path": "docker-compose.yml", "language": "yaml", "sizeLines": 15, "fileCategory": "infra"},
+    {"path": "package.json", "language": "json", "sizeLines": 25, "fileCategory": "config"},
+    {"path": "pnpm-workspace.yaml", "language": "yaml", "sizeLines": 3, "fileCategory": "config"},
+    {"path": "render.yaml", "language": "yaml", "sizeLines": 16, "fileCategory": "config"},
+    {"path": "tsconfig.base.json", "language": "json", "sizeLines": 15, "fileCategory": "config"},
+    {"path": "turbo.json", "language": "json", "sizeLines": 18, "fileCategory": "config"}
+  ],
+  "batchImportData": {".env.example": [], "CLAUDE.md": [], "README.md": [], "docker-compose.yml": [], "package.json": [], "pnpm-workspace.yaml": [], "render.yaml": [], "tsconfig.base.json": [], "turbo.json": []}
+}

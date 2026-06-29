@@ -1,0 +1,2194 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 30,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/admin/src/app/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "RootLayout",
+          "startLine": 31,
+          "endLine": 53,
+          "params": [
+            "{\r\n  children,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "metadata",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "RootLayout",
+          "line": 31,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 110,
+      "nonEmptyLines": 100,
+      "functions": [
+        {
+          "name": "LessonEditorPage",
+          "startLine": 19,
+          "endLine": 110,
+          "params": [
+            "{\r\n  params,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonEditorPage",
+          "line": 19,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LessonEditorPage",
+          "callee": "useAuthGuard",
+          "lineNumber": 24
+        },
+        {
+          "caller": "LessonEditorPage",
+          "callee": "use",
+          "lineNumber": 25
+        },
+        {
+          "caller": "LessonEditorPage",
+          "callee": "useAdminLessonEditor",
+          "lineNumber": 34
+        },
+        {
+          "caller": "LessonEditorPage",
+          "callee": "useAdminLessonPageShell",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LessonEditorPage",
+          "callee": "useAdminPageTree",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/app/roadmaps/[id]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 220,
+      "nonEmptyLines": 196,
+      "functions": [
+        {
+          "name": "GraphEditorPage",
+          "startLine": 26,
+          "endLine": 220,
+          "params": [
+            "{\r\n  params,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GraphEditorPage",
+          "line": 26,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useAuthGuard",
+          "lineNumber": 31
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "use",
+          "lineNumber": 33
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useSearchParams",
+          "lineNumber": 34
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "searchParams.get",
+          "lineNumber": 35
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useRouter",
+          "lineNumber": 36
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useAdminGraphEditor",
+          "lineNumber": 44
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useState",
+          "lineNumber": 46
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useState",
+          "lineNumber": 47
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useUnsavedGuard",
+          "lineNumber": 51
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useNodeActions",
+          "lineNumber": 57
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "useGraphDraft",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleAddNode",
+          "callee": "setPanel",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleEditNode",
+          "callee": "setPanel",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleDeleteNodeRequest",
+          "callee": "editorNodes.find",
+          "lineNumber": 70
+        },
+        {
+          "caller": "handleDeleteNodeRequest",
+          "callee": "setDeleteConfirm",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handleDeleteNodeConfirm",
+          "callee": "setDeleteConfirm",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleDeleteNodeConfirm",
+          "callee": "setEditorNodes",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handleDeleteNodeConfirm",
+          "callee": "prev.filter",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handleDeleteNodeConfirm",
+          "callee": "setEditorEdges",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handleDeleteNodeConfirm",
+          "callee": "prev.filter",
+          "lineNumber": 79
+        },
+        {
+          "caller": "handlePanelSubmit",
+          "callee": "crypto.randomUUID",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handlePanelSubmit",
+          "callee": "setEditorNodes",
+          "lineNumber": 94
+        },
+        {
+          "caller": "handlePanelSubmit",
+          "callee": "setEditorNodes",
+          "lineNumber": 97
+        },
+        {
+          "caller": "handlePanelSubmit",
+          "callee": "prev.map",
+          "lineNumber": 98
+        },
+        {
+          "caller": "handlePanelSubmit",
+          "callee": "setPanel",
+          "lineNumber": 105
+        },
+        {
+          "caller": "handleAddRoadmapLink",
+          "callee": "crypto.randomUUID",
+          "lineNumber": 110
+        },
+        {
+          "caller": "handleAddRoadmapLink",
+          "callee": "setEditorNodes",
+          "lineNumber": 119
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "(() => {\r\n          const n = editorNodes.find((x) => x.id === panel.nodeId);\r\n          return n ? { title: n.title, type: n.type as NodeType, targetRoadmapId: n.targetRoadmapId } : undefined;\r\n        })",
+          "lineNumber": 124
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "editorNodes.find",
+          "lineNumber": 125
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "setPanel",
+          "lineNumber": 187
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "setDeleteConfirm",
+          "lineNumber": 200
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "proceedNavigation",
+          "lineNumber": 211
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "router.push",
+          "lineNumber": 212
+        },
+        {
+          "caller": "GraphEditorPage",
+          "callee": "setPendingNavUrl",
+          "lineNumber": 213
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/app/roadmaps/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 148,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "RoadmapsPage",
+          "startLine": 12,
+          "endLine": 148,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapsPage",
+          "line": 12,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RoadmapsPage",
+          "callee": "useAuthGuard",
+          "lineNumber": 13
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "useAdminRoadmaps",
+          "lineNumber": 26
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 34
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "[...Array(3)].map",
+          "lineNumber": 41
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "Array",
+          "lineNumber": 41
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 58
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "roadmaps.map",
+          "lineNumber": 74
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "handleStatusChange",
+          "lineNumber": 90
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 100
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 106
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 125
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "handleEdit",
+          "lineNumber": 132
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 133
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "handleDelete",
+          "lineNumber": 142
+        },
+        {
+          "caller": "RoadmapsPage",
+          "callee": "setModal",
+          "lineNumber": 143
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/components/AdminLayout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "AdminLayout",
+          "startLine": 11,
+          "endLine": 35,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminLayout",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AdminLayout",
+          "callee": "useRouter",
+          "lineNumber": 12
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "localStorage.removeItem",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handleLogout",
+          "callee": "router.push",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/components/ApolloProvider.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "functions": [
+        {
+          "name": "AdminApolloProvider",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminApolloProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/components/ConfirmDialog.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 79,
+      "nonEmptyLines": 72,
+      "functions": [
+        {
+          "name": "ConfirmDialog",
+          "startLine": 14,
+          "endLine": 79,
+          "params": [
+            "{\r\n  heading,\r\n  body,\r\n  confirmLabel,\r\n  dismissLabel,\r\n  onConfirm,\r\n  onClose,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ConfirmDialog",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ConfirmDialog",
+          "callee": "useRef",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ConfirmDialog",
+          "callee": "useEffect",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ConfirmDialog",
+          "callee": "dismissRef.current?.focus",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ConfirmDialog",
+          "callee": "useEffect",
+          "lineNumber": 31
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "onClose",
+          "lineNumber": 33
+        },
+        {
+          "caller": "ConfirmDialog",
+          "callee": "document.addEventListener",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ConfirmDialog",
+          "callee": "document.removeEventListener",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/components/ThemeToggle.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 31,
+      "functions": [
+        {
+          "name": "ThemeToggle",
+          "startLine": 5,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ThemeToggle",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ThemeToggle",
+          "callee": "useState",
+          "lineNumber": 6
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "useEffect",
+          "lineNumber": 8
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "localStorage.getItem",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "window.matchMedia",
+          "lineNumber": 10
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "setIsDark",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "document.documentElement.classList.add",
+          "lineNumber": 12
+        },
+        {
+          "caller": "toggle",
+          "callee": "setIsDark",
+          "lineNumber": 17
+        },
+        {
+          "caller": "toggle",
+          "callee": "localStorage.setItem",
+          "lineNumber": 18
+        },
+        {
+          "caller": "toggle",
+          "callee": "document.documentElement.classList.add",
+          "lineNumber": 20
+        },
+        {
+          "caller": "toggle",
+          "callee": "document.documentElement.classList.remove",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 78,
+      "nonEmptyLines": 71,
+      "functions": [
+        {
+          "name": "GraphToolbar",
+          "startLine": 19,
+          "endLine": 78,
+          "params": [
+            "{\r\n  roadmapTitle,\r\n  dirty,\r\n  saving,\r\n  roadmapStatus,\r\n  onAddNode,\r\n  onSave,\r\n  onBack,\r\n  onChangeStatus,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GraphToolbar",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "handleStatusClick",
+          "callee": "onChangeStatus",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/components/NodeInventory.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 232,
+      "nonEmptyLines": 208,
+      "functions": [
+        {
+          "name": "NodeInventory",
+          "startLine": 21,
+          "endLine": 232,
+          "params": [
+            "{\r\n  nodes, allRoadmaps, onDeleteNode, onEditNode, onAddRoadmapLink,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapEntry",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "NodeInventory",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NodeInventory",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "useState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "useMemo",
+          "lineNumber": 28
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "nodes.filter((n) => n.type === 'ROADMAP' && n.targetRoadmapId).map",
+          "lineNumber": 30
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "nodes.filter",
+          "lineNumber": 30
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "allRoadmaps.filter",
+          "lineNumber": 32
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "linkedRoadmapIds.has",
+          "lineNumber": 32
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "dismissedIds.has",
+          "lineNumber": 32
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "nodes.filter",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handleNodeDrag",
+          "callee": "(e.dataTransfer as any).setData",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handleRoadmapDrag",
+          "callee": "(e.dataTransfer as any).setData",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handleRoadmapDrag",
+          "callee": "encodeURIComponent",
+          "lineNumber": 47
+        },
+        {
+          "caller": "dismiss",
+          "callee": "setDismissedIds",
+          "lineNumber": 52
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "setOpen",
+          "lineNumber": 63
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "setOpen",
+          "lineNumber": 87
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "(['ALL', 'ROADMAP', 'LESSON'] as FilterType[]).map",
+          "lineNumber": 98
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "setFilter",
+          "lineNumber": 101
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "filteredNodes.map",
+          "lineNumber": 125
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "handleNodeDrag",
+          "lineNumber": 135
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "onEditNode",
+          "lineNumber": 163
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "onDeleteNode",
+          "lineNumber": 169
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "availableRoadmaps.map",
+          "lineNumber": 187
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "handleRoadmapDrag",
+          "lineNumber": 195
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "onAddRoadmapLink",
+          "lineNumber": 213
+        },
+        {
+          "caller": "NodeInventory",
+          "callee": "dismiss",
+          "lineNumber": 220
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 138,
+      "nonEmptyLines": 127,
+      "functions": [
+        {
+          "name": "NodeSidePanel",
+          "startLine": 21,
+          "endLine": 138,
+          "params": [
+            "{ mode, initial, allRoadmaps, onSubmit, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NodeSidePanel",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NodeSidePanel",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "useEffect",
+          "lineNumber": 27
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "setTitle",
+          "lineNumber": 28
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "setType",
+          "lineNumber": 29
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "setTargetRoadmapId",
+          "lineNumber": 30
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "e.preventDefault",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "title.trim",
+          "lineNumber": 35
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "allRoadmaps.find",
+          "lineNumber": 36
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "onSubmit",
+          "lineNumber": 37
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "title.trim",
+          "lineNumber": 38
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "setTitle",
+          "lineNumber": 76
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "setType",
+          "lineNumber": 91
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "setTargetRoadmapId",
+          "lineNumber": 109
+        },
+        {
+          "caller": "NodeSidePanel",
+          "callee": "allRoadmaps.map",
+          "lineNumber": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 37,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "exports": [
+        {
+          "name": "useGraphDraft",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "EditorNode",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "EditorEdge",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 55,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "useAdminGraphEditor",
+          "startLine": 9,
+          "endLine": 11,
+          "params": [
+            "id",
+            "slug"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "EditorNode",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "EditorEdge",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapEntry",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useAdminGraphEditor",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAdminGraphEditor",
+          "callee": "useGraphEditor",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 356,
+      "nonEmptyLines": 283,
+      "functions": [
+        {
+          "name": "makeParams",
+          "startLine": 32,
+          "endLine": 43,
+          "params": [
+            "overrides"
+          ]
+        },
+        {
+          "name": "captureUpdater",
+          "startLine": 45,
+          "endLine": 48,
+          "params": [
+            "setter"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeParams",
+          "callee": "vi.fn",
+          "lineNumber": 36
+        },
+        {
+          "caller": "makeParams",
+          "callee": "vi.fn",
+          "lineNumber": 37
+        },
+        {
+          "caller": "makeParams",
+          "callee": "vi.fn",
+          "lineNumber": 38
+        },
+        {
+          "caller": "makeParams",
+          "callee": "vi.fn().mockReturnValue",
+          "lineNumber": 39
+        },
+        {
+          "caller": "makeParams",
+          "callee": "vi.fn",
+          "lineNumber": 39
+        },
+        {
+          "caller": "makeParams",
+          "callee": "vi.fn",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 178,
+      "functions": [
+        {
+          "name": "applyFlowChangesToEditorNodes",
+          "startLine": 25,
+          "endLine": 42,
+          "params": [
+            "rfChanges",
+            "editorNodes"
+          ]
+        },
+        {
+          "name": "useNodeActions",
+          "startLine": 44,
+          "endLine": 192,
+          "params": [
+            "{\r\n  id,\r\n  slug,\r\n  setEditorNodes,\r\n  setEditorEdges,\r\n  setPanel,\r\n  confirmNavigation,\r\n  setPendingNavUrl,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useNodeActions",
+          "line": 44,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyFlowChangesToEditorNodes",
+          "callee": "editorNodes.map",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useRouter",
+          "lineNumber": 53
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 55
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "changes.filter",
+          "lineNumber": 57
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorNodes",
+          "lineNumber": 65
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "applyFlowChangesToEditorNodes",
+          "lineNumber": 65
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 70
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorEdges",
+          "lineNumber": 72
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "prev.map",
+          "lineNumber": 73
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "applyEdgeChanges",
+          "lineNumber": 79
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "updated.map",
+          "lineNumber": 80
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "prev.filter",
+          "lineNumber": 81
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "remainingIds.has",
+          "lineNumber": 81
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 87
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "Date.now",
+          "lineNumber": 91
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "Math.random().toString(36).slice",
+          "lineNumber": 91
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "Math.random().toString",
+          "lineNumber": 91
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "Math.random",
+          "lineNumber": 91
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorEdges",
+          "lineNumber": 95
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 101
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "deleted.map",
+          "lineNumber": 103
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorNodes",
+          "lineNumber": 104
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "prev.map",
+          "lineNumber": 105
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "deletedIds.has",
+          "lineNumber": 106
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 113
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setPanel",
+          "lineNumber": 115
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 120
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorEdges",
+          "lineNumber": 122
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "prev.filter",
+          "lineNumber": 122
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 127
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "nodeId.startsWith",
+          "lineNumber": 129
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "nodeId.split",
+          "lineNumber": 131
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "decodeURIComponent",
+          "lineNumber": 134
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "parts.slice(3).join",
+          "lineNumber": 134
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "parts.slice",
+          "lineNumber": 134
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorNodes",
+          "lineNumber": 135
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "prev.some",
+          "lineNumber": 136
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "crypto.randomUUID",
+          "lineNumber": 139
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setEditorNodes",
+          "lineNumber": 151
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "prev.map",
+          "lineNumber": 152
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 161
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "router.push",
+          "lineNumber": 164
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "router.push",
+          "lineNumber": 166
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setPanel",
+          "lineNumber": 168
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "useCallback",
+          "lineNumber": 174
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "confirmNavigation",
+          "lineNumber": 176
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "router.push",
+          "lineNumber": 177
+        },
+        {
+          "caller": "useNodeActions",
+          "callee": "setPendingNavUrl",
+          "lineNumber": 178
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "LessonTitleEditor",
+          "startLine": 12,
+          "endLine": 59,
+          "params": [
+            "{ title, saveStatus, onSave }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonTitleEditor",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LessonTitleEditor",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "LessonTitleEditor",
+          "callee": "useRef",
+          "lineNumber": 14
+        },
+        {
+          "caller": "LessonTitleEditor",
+          "callee": "useEffect",
+          "lineNumber": 16
+        },
+        {
+          "caller": "LessonTitleEditor",
+          "callee": "setDraft",
+          "lineNumber": 16
+        },
+        {
+          "caller": "handleBlur",
+          "callee": "draft.trim",
+          "lineNumber": 19
+        },
+        {
+          "caller": "handleBlur",
+          "callee": "onSave",
+          "lineNumber": 21
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "inputRef.current?.blur",
+          "lineNumber": 25
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "setDraft",
+          "lineNumber": 27
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "inputRef.current?.blur",
+          "lineNumber": 28
+        },
+        {
+          "caller": "LessonTitleEditor",
+          "callee": "setDraft",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/useLessonEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "useAdminLessonEditor",
+          "startLine": 9,
+          "endLine": 11,
+          "params": [
+            "nodeId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SaveStatus",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "UseLessonEditorResult",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "LessonNode",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useAdminLessonEditor",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAdminLessonEditor",
+          "callee": "useLessonEditor",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 92,
+      "nonEmptyLines": 82,
+      "callGraph": [
+        {
+          "caller": "setCover",
+          "callee": "setCoverState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "setCover",
+          "callee": "mockUpdateCover",
+          "lineNumber": 21
+        },
+        {
+          "caller": "setCover",
+          "callee": "setCoverState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "setIcon",
+          "callee": "setIconState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "setIcon",
+          "callee": "mockUpdateIcon",
+          "lineNumber": 26
+        },
+        {
+          "caller": "setIcon",
+          "callee": "setIconState",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "useAdminLessonPageShell",
+          "startLine": 6,
+          "endLine": 12,
+          "params": [
+            "nodeId",
+            "initialCover",
+            "initialIcon"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAdminLessonPageShell",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAdminLessonPageShell",
+          "callee": "useLessonPageShell",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/usePageTree.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 47,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/lessons/hooks/usePageTree.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "functions": [
+        {
+          "name": "useAdminPageTree",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "nodeId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAdminPageTree",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAdminPageTree",
+          "callee": "usePageTree",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 167,
+      "nonEmptyLines": 150,
+      "functions": [
+        {
+          "name": "RoadmapModal",
+          "startLine": 14,
+          "endLine": 167,
+          "params": [
+            "{ mode, initial, onSubmit, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapModal",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RoadmapModal",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useRef",
+          "lineNumber": 21
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useRef",
+          "lineNumber": 22
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useEffect",
+          "lineNumber": 24
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "titleRef.current?.focus",
+          "lineNumber": 25
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useEffect",
+          "lineNumber": 28
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "onClose",
+          "lineNumber": 30
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "document.addEventListener",
+          "lineNumber": 32
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "document.removeEventListener",
+          "lineNumber": 33
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "useCallback",
+          "lineNumber": 36
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "setTitle",
+          "lineNumber": 39
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "clearTimeout",
+          "lineNumber": 43
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "setTimeout",
+          "lineNumber": 44
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "setSlug",
+          "lineNumber": 45
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "slugify",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handleSlugChange",
+          "callee": "setSlug",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleSlugChange",
+          "callee": "setSlugManuallyEdited",
+          "lineNumber": 54
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "e.preventDefault",
+          "lineNumber": 58
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "title.trim",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setLoading",
+          "lineNumber": 61
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "onSubmit",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "title.trim",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "slug.trim",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "description.trim",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setLoading",
+          "lineNumber": 65
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "setDescription",
+          "lineNumber": 138
+        },
+        {
+          "caller": "RoadmapModal",
+          "callee": "title.trim",
+          "lineNumber": 157
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "useAdminRoadmaps",
+          "startLine": 9,
+          "endLine": 11,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ModalState",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useAdminRoadmaps",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAdminRoadmaps",
+          "callee": "useRoadmaps",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/features/search/SearchModalWrapper.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "SearchModalWrapper",
+          "startLine": 5,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchModalWrapper",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SearchModalWrapper",
+          "callee": "useSearchModal",
+          "lineNumber": 6
+        },
+        {
+          "caller": "SearchModalWrapper",
+          "callee": "setOpen",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/lib/api.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "getToken",
+          "startLine": 1,
+          "endLine": 4,
+          "params": []
+        },
+        {
+          "name": "slugify",
+          "startLine": 6,
+          "endLine": 11,
+          "params": [
+            "title"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getToken",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "slugify",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getToken",
+          "callee": "localStorage.getItem",
+          "lineNumber": 3
+        },
+        {
+          "caller": "slugify",
+          "callee": "title\r\n    .toLowerCase()\r\n    .replace(/[^a-z0-9]+/g, '-')\r\n    .replace",
+          "lineNumber": 7
+        },
+        {
+          "caller": "slugify",
+          "callee": "title\r\n    .toLowerCase()\r\n    .replace",
+          "lineNumber": 7
+        },
+        {
+          "caller": "slugify",
+          "callee": "title\r\n    .toLowerCase",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/lib/apolloClient.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "exports": [
+        {
+          "name": "adminApolloClient",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/lib/useAuthGuard.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "useAuthGuard",
+          "startLine": 6,
+          "endLine": 15,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAuthGuard",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAuthGuard",
+          "callee": "useRouter",
+          "lineNumber": 7
+        },
+        {
+          "caller": "useAuthGuard",
+          "callee": "useEffect",
+          "lineNumber": 9
+        },
+        {
+          "caller": "useAuthGuard",
+          "callee": "localStorage.getItem",
+          "lineNumber": 10
+        },
+        {
+          "caller": "useAuthGuard",
+          "callee": "router.replace",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/lib/useRouteGuard.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 61,
+      "functions": [
+        {
+          "name": "useUnsavedGuard",
+          "startLine": 25,
+          "endLine": 72,
+          "params": [
+            "isDirty"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useUnsavedGuard",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useEffect",
+          "lineNumber": 30
+        },
+        {
+          "caller": "handleBeforeUnload",
+          "callee": "e.preventDefault",
+          "lineNumber": 34
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "window.addEventListener",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "window.removeEventListener",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useEffect",
+          "lineNumber": 44
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setShowConfirm",
+          "lineNumber": 46
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setPendingAction",
+          "lineNumber": 47
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useCallback",
+          "lineNumber": 51
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setShowConfirm",
+          "lineNumber": 54
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useCallback",
+          "lineNumber": 58
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setShowConfirm",
+          "lineNumber": 59
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setPendingAction",
+          "lineNumber": 60
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "useCallback",
+          "lineNumber": 63
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setShowConfirm",
+          "lineNumber": 64
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "pendingAction",
+          "lineNumber": 66
+        },
+        {
+          "caller": "useUnsavedGuard",
+          "callee": "setPendingAction",
+          "lineNumber": 67
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

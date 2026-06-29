@@ -1,0 +1,29 @@
+{
+  "batchIndex": 14,
+  "files": [
+    [
+      "apps/api-gateway/.env.example",
+      4,
+      "config",
+      "config"
+    ],
+    [
+      "apps/api-gateway/package.json",
+      46,
+      "json",
+      "config"
+    ],
+    [
+      "apps/api-gateway/tsconfig.json",
+      10,
+      "json",
+      "config"
+    ]
+  ],
+  "batchImportData": {
+    "apps/api-gateway/.env.example": [],
+    "apps/api-gateway/package.json": [],
+    "apps/api-gateway/tsconfig.json": []
+  },
+  "neighborMap": {}
+}

@@ -1,0 +1,294 @@
+{
+  "batchIndex": 1,
+  "files": [
+    [
+      "apps/admin/src/app/layout.tsx",
+      53,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx",
+      110,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/app/roadmaps/[id]/page.tsx",
+      220,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/app/roadmaps/page.tsx",
+      148,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/components/AdminLayout.tsx",
+      35,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/components/ApolloProvider.tsx",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/components/ConfirmDialog.tsx",
+      79,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/components/ThemeToggle.tsx",
+      36,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx",
+      78,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/components/NodeInventory.tsx",
+      232,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx",
+      138,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts",
+      44,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts",
+      4,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts",
+      63,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts",
+      356,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts",
+      192,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx",
+      59,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/hooks/useLessonEditor.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts",
+      92,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts",
+      12,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/hooks/usePageTree.spec.ts",
+      55,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/hooks/usePageTree.ts",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx",
+      167,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/search/SearchModalWrapper.tsx",
+      18,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/lib/api.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/lib/apolloClient.ts",
+      25,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/lib/useAuthGuard.ts",
+      15,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/lib/useRouteGuard.ts",
+      72,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/admin/src/app/layout.tsx": [
+      "apps/admin/src/app/globals.css",
+      "apps/admin/src/components/ApolloProvider.tsx",
+      "apps/admin/src/features/search/SearchModalWrapper.tsx"
+    ],
+    "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx": [
+      "apps/admin/src/features/lessons/components/CoverImage.tsx",
+      "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx",
+      "apps/admin/src/features/lessons/hooks/useLessonEditor.ts",
+      "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts",
+      "apps/admin/src/features/lessons/hooks/usePageTree.ts",
+      "apps/admin/src/lib/useAuthGuard.ts"
+    ],
+    "apps/admin/src/app/roadmaps/[id]/page.tsx": [
+      "apps/admin/src/components/ConfirmDialog.tsx",
+      "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx",
+      "apps/admin/src/features/graph-editor/components/NodeInventory.tsx",
+      "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx",
+      "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts",
+      "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts",
+      "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts",
+      "apps/admin/src/lib/useAuthGuard.ts",
+      "apps/admin/src/lib/useRouteGuard.ts"
+    ],
+    "apps/admin/src/app/roadmaps/page.tsx": [
+      "apps/admin/src/components/AdminLayout.tsx",
+      "apps/admin/src/components/ConfirmDialog.tsx",
+      "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx",
+      "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts",
+      "apps/admin/src/lib/useAuthGuard.ts"
+    ],
+    "apps/admin/src/components/AdminLayout.tsx": [
+      "apps/admin/src/components/ThemeToggle.tsx"
+    ],
+    "apps/admin/src/components/ApolloProvider.tsx": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/components/ConfirmDialog.tsx": [],
+    "apps/admin/src/components/ThemeToggle.tsx": [],
+    "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx": [
+      "apps/admin/src/components/ThemeToggle.tsx"
+    ],
+    "apps/admin/src/features/graph-editor/components/NodeInventory.tsx": [],
+    "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx": [],
+    "apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts": [
+      "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts": [],
+    "apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts": [
+      "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts": [
+      "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts": [],
+    "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx": [
+      "apps/admin/src/features/lessons/hooks/useLessonEditor.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/useLessonEditor.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts": [
+      "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/usePageTree.spec.ts": [
+      "apps/admin/src/features/lessons/hooks/usePageTree.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/usePageTree.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx": [
+      "apps/admin/src/lib/api.ts"
+    ],
+    "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/search/SearchModalWrapper.tsx": [],
+    "apps/admin/src/lib/api.ts": [],
+    "apps/admin/src/lib/apolloClient.ts": [
+      "apps/admin/src/lib/api.ts"
+    ],
+    "apps/admin/src/lib/useAuthGuard.ts": [],
+    "apps/admin/src/lib/useRouteGuard.ts": []
+  },
+  "neighborMap": {
+    "apps/admin/src/app/layout.tsx": [
+      {
+        "path": "apps/admin/src/app/globals.css",
+        "batchIndex": 20,
+        "symbols": []
+      }
+    ],
+    "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx": [
+      {
+        "path": "apps/admin/src/features/lessons/components/CoverImage.tsx",
+        "batchIndex": 4,
+        "symbols": [
+          "CoverImage"
+        ]
+      }
+    ]
+  }
+}

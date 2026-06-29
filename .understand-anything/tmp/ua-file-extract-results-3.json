@@ -1,0 +1,1253 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 21,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/lesson/lesson.service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 103,
+      "nonEmptyLines": 96,
+      "functions": [
+        {
+          "name": "fetchLesson",
+          "startLine": 17,
+          "endLine": 24,
+          "params": [
+            "client",
+            "nodeId"
+          ]
+        },
+        {
+          "name": "updateLessonContent",
+          "startLine": 26,
+          "endLine": 35,
+          "params": [
+            "client",
+            "nodeId",
+            "content"
+          ]
+        },
+        {
+          "name": "updateLessonTitle",
+          "startLine": 37,
+          "endLine": 46,
+          "params": [
+            "client",
+            "nodeId",
+            "title"
+          ]
+        },
+        {
+          "name": "updateNodeCover",
+          "startLine": 48,
+          "endLine": 57,
+          "params": [
+            "client",
+            "nodeId",
+            "coverImage"
+          ]
+        },
+        {
+          "name": "updateNodeIcon",
+          "startLine": 59,
+          "endLine": 68,
+          "params": [
+            "client",
+            "nodeId",
+            "icon"
+          ]
+        },
+        {
+          "name": "fetchBreadcrumb",
+          "startLine": 70,
+          "endLine": 83,
+          "params": [
+            "client",
+            "nodeId"
+          ]
+        },
+        {
+          "name": "fetchRoadmapTree",
+          "startLine": 85,
+          "endLine": 103,
+          "params": [
+            "client",
+            "nodeId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "fetchLesson",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "updateLessonContent",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "updateLessonTitle",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "updateNodeCover",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "updateNodeIcon",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "fetchBreadcrumb",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "fetchRoadmapTree",
+          "line": 85,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchLesson",
+          "callee": "await client.query",
+          "lineNumber": 18
+        },
+        {
+          "caller": "updateLessonContent",
+          "callee": "client.mutate",
+          "lineNumber": 31
+        },
+        {
+          "caller": "updateLessonTitle",
+          "callee": "client.mutate",
+          "lineNumber": 42
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "client.mutate",
+          "lineNumber": 53
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "client.mutate",
+          "lineNumber": 64
+        },
+        {
+          "caller": "fetchBreadcrumb",
+          "callee": "await client.query",
+          "lineNumber": 75
+        },
+        {
+          "caller": "fetchRoadmapTree",
+          "callee": "fetchBreadcrumb",
+          "lineNumber": 89
+        },
+        {
+          "caller": "fetchRoadmapTree",
+          "callee": "await client.query",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 7,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 48,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "BreadcrumbDisplay",
+          "startLine": 9,
+          "endLine": 45,
+          "params": [
+            "{\r\n  items,\r\n  variant = \"default\",\r\n  getLinkHref,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BreadcrumbDisplay",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "BreadcrumbDisplay",
+          "callee": "items.map",
+          "lineNumber": 25
+        },
+        {
+          "caller": "BreadcrumbDisplay",
+          "callee": "getLinkHref",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/CoverDisplay.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 44,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/CoverDisplay.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "CoverDisplay",
+          "startLine": 15,
+          "endLine": 53,
+          "params": [
+            "{\r\n  coverImage,\r\n  icon,\r\n  breadcrumb,\r\n  onIconClick,\r\n  getLinkHref,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CoverDisplay",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CoverDisplay",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "CoverDisplay",
+          "callee": "setImgError",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageLayout.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "getLessonHref",
+          "startLine": 14,
+          "endLine": 15,
+          "params": [
+            "n"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageLayout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "LessonPageLayout",
+          "startLine": 17,
+          "endLine": 63,
+          "params": [
+            "{\r\n  tree, currentNodeId, getLessonHref, getRoadmapHref, children,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonPageLayout",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LessonPageLayout",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "LessonPageLayout",
+          "callee": "localStorage.getItem",
+          "lineNumber": 22
+        },
+        {
+          "caller": "LessonPageLayout",
+          "callee": "useEffect",
+          "lineNumber": 25
+        },
+        {
+          "caller": "LessonPageLayout",
+          "callee": "localStorage.setItem",
+          "lineNumber": 26
+        },
+        {
+          "caller": "LessonPageLayout",
+          "callee": "String",
+          "lineNumber": 26
+        },
+        {
+          "caller": "LessonPageLayout",
+          "callee": "setIsCollapsed",
+          "lineNumber": 54
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageShell.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 48,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonPageShell.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 78,
+      "nonEmptyLines": 71,
+      "functions": [
+        {
+          "name": "LessonPageShell",
+          "startLine": 21,
+          "endLine": 78,
+          "params": [
+            "{\r\n  mode,\r\n  node,\r\n  breadcrumb,\r\n  coverSlot,\r\n  titleSlot,\r\n  contentSlot,\r\n  getLinkHref,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonPageShell",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeItem.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 82,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeItem.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 97,
+      "nonEmptyLines": 91,
+      "functions": [
+        {
+          "name": "PageTreeItem",
+          "startLine": 15,
+          "endLine": 97,
+          "params": [
+            "{\r\n  node,\r\n  depth,\r\n  currentNodeId,\r\n  isExpanded,\r\n  onToggle,\r\n  getLessonHref,\r\n  getRoadmapHref,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PageTreeItem",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PageTreeItem",
+          "callee": "getLessonHref",
+          "lineNumber": 28
+        },
+        {
+          "caller": "PageTreeItem",
+          "callee": "getRoadmapHref",
+          "lineNumber": 49
+        },
+        {
+          "caller": "PageTreeItem",
+          "callee": "onToggle",
+          "lineNumber": 57
+        },
+        {
+          "caller": "PageTreeItem",
+          "callee": "e.stopPropagation",
+          "lineNumber": 66
+        },
+        {
+          "caller": "PageTreeItem",
+          "callee": "node.children!.map",
+          "lineNumber": 78
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeSidebar.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "getLessonHref",
+          "startLine": 28,
+          "endLine": 29,
+          "params": [
+            "n"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/PageTreeSidebar.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "findPathToNode",
+          "startLine": 14,
+          "endLine": 26,
+          "params": [
+            "nodes",
+            "targetId"
+          ]
+        },
+        {
+          "name": "PageTreeSidebar",
+          "startLine": 28,
+          "endLine": 70,
+          "params": [
+            "{ tree, currentNodeId, getLessonHref, getRoadmapHref }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PageTreeSidebar",
+          "line": 28,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "findPathToNode",
+          "callee": "findPathToNode",
+          "lineNumber": 18
+        },
+        {
+          "caller": "findPathToNode",
+          "callee": "childPath.add",
+          "lineNumber": 20
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "useState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "findPathToNode",
+          "lineNumber": 31
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "useEffect",
+          "lineNumber": 34
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "findPathToNode",
+          "lineNumber": 36
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "setExpandedIds",
+          "lineNumber": 37
+        },
+        {
+          "caller": "onToggle",
+          "callee": "setExpandedIds",
+          "lineNumber": 41
+        },
+        {
+          "caller": "onToggle",
+          "callee": "next.has",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onToggle",
+          "callee": "next.delete",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onToggle",
+          "callee": "next.add",
+          "lineNumber": 44
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "tree.nodes.map",
+          "lineNumber": 56
+        },
+        {
+          "caller": "PageTreeSidebar",
+          "callee": "expandedIds.has",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/useLessonEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "useLessonEditor",
+          "startLine": 9,
+          "endLine": 46,
+          "params": [
+            "client",
+            "nodeId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useLessonEditor",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useLessonEditor",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "useEffect",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "fetchLesson(client, nodeId)\r\n      .then((l) => { if (!cancelled) setLesson(l); })\r\n      .catch(() => { if (!cancelled) setNotFound(true); })\r\n      .finally",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "fetchLesson(client, nodeId)\r\n      .then((l) => { if (!cancelled) setLesson(l); })\r\n      .catch",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "fetchLesson(client, nodeId)\r\n      .then",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "fetchLesson",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "setLesson",
+          "lineNumber": 21
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "setNotFound",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useLessonEditor",
+          "callee": "setLoading",
+          "lineNumber": 23
+        },
+        {
+          "caller": "handleSaveContent",
+          "callee": "updateLessonContent",
+          "lineNumber": 28
+        },
+        {
+          "caller": "handleSaveContent",
+          "callee": "setLesson",
+          "lineNumber": 29
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "setTitleSaveStatus",
+          "lineNumber": 34
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "updateLessonTitle",
+          "lineNumber": 36
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "setLesson",
+          "lineNumber": 37
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "setTitleSaveStatus",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "setTimeout",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "setTitleSaveStatus",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handleSaveTitle",
+          "callee": "setTitleSaveStatus",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/useLessonPageShell.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "useLessonPageShell",
+          "startLine": 8,
+          "endLine": 46,
+          "params": [
+            "client",
+            "nodeId",
+            "initialCover",
+            "initialIcon"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useLessonPageShell",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useLessonPageShell",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "useLessonPageShell",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useLessonPageShell",
+          "callee": "useEffect",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useLessonPageShell",
+          "callee": "setCoverState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useLessonPageShell",
+          "callee": "useEffect",
+          "lineNumber": 21
+        },
+        {
+          "caller": "useLessonPageShell",
+          "callee": "setIconState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "setCover",
+          "callee": "setCoverState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "setCover",
+          "callee": "updateNodeCover",
+          "lineNumber": 29
+        },
+        {
+          "caller": "setCover",
+          "callee": "setCoverState",
+          "lineNumber": 31
+        },
+        {
+          "caller": "setIcon",
+          "callee": "setIconState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "setIcon",
+          "callee": "updateNodeIcon",
+          "lineNumber": 39
+        },
+        {
+          "caller": "setIcon",
+          "callee": "setIconState",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/usePageTree.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "usePageTree",
+          "startLine": 9,
+          "endLine": 21,
+          "params": [
+            "client",
+            "nodeId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "usePageTree",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "usePageTree",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "usePageTree",
+          "callee": "useEffect",
+          "lineNumber": 12
+        },
+        {
+          "caller": "usePageTree",
+          "callee": "fetchRoadmapTree(client, nodeId)\r\n      .then((t) => { if (!cancelled) setTree(t); })\r\n      .catch",
+          "lineNumber": 14
+        },
+        {
+          "caller": "usePageTree",
+          "callee": "fetchRoadmapTree(client, nodeId)\r\n      .then",
+          "lineNumber": 14
+        },
+        {
+          "caller": "usePageTree",
+          "callee": "fetchRoadmapTree",
+          "lineNumber": 14
+        },
+        {
+          "caller": "usePageTree",
+          "callee": "setTree",
+          "lineNumber": 15
+        },
+        {
+          "caller": "usePageTree",
+          "callee": "setTree",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/roadmap/constants.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 17,
+      "exports": [
+        {
+          "name": "STATUS_CYCLE",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "STATUS_LABEL",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "STATUS_CLASS",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/roadmap/roadmap.service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 45,
+      "functions": [
+        {
+          "name": "getRoadmaps",
+          "startLine": 11,
+          "endLine": 16,
+          "params": [
+            "client"
+          ]
+        },
+        {
+          "name": "createRoadmap",
+          "startLine": 18,
+          "endLine": 26,
+          "params": [
+            "client",
+            "input"
+          ]
+        },
+        {
+          "name": "updateRoadmap",
+          "startLine": 28,
+          "endLine": 37,
+          "params": [
+            "client",
+            "id",
+            "input"
+          ]
+        },
+        {
+          "name": "deleteRoadmap",
+          "startLine": 39,
+          "endLine": 44,
+          "params": [
+            "client",
+            "id"
+          ]
+        },
+        {
+          "name": "cycleStatus",
+          "startLine": 46,
+          "endLine": 50,
+          "params": [
+            "client",
+            "roadmap"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getRoadmaps",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "createRoadmap",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "updateRoadmap",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "deleteRoadmap",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "cycleStatus",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getRoadmaps",
+          "callee": "await client.query",
+          "lineNumber": 12
+        },
+        {
+          "caller": "createRoadmap",
+          "callee": "client.mutate",
+          "lineNumber": 22
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "client.mutate",
+          "lineNumber": 33
+        },
+        {
+          "caller": "deleteRoadmap",
+          "callee": "client.mutate",
+          "lineNumber": 40
+        },
+        {
+          "caller": "cycleStatus",
+          "callee": "updateRoadmap",
+          "lineNumber": 48
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/roadmap/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/roadmap/useRoadmaps.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 86,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "useRoadmaps",
+          "startLine": 14,
+          "endLine": 86,
+          "params": [
+            "client"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useRoadmaps",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useRoadmaps",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "useCallback",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setLoading",
+          "lineNumber": 21
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setLoadError",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "getRoadmaps",
+          "lineNumber": 24
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setRoadmaps",
+          "lineNumber": 25
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setTimeout",
+          "lineNumber": 29
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "getRoadmaps",
+          "lineNumber": 30
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setRoadmaps",
+          "lineNumber": 31
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setLoadError",
+          "lineNumber": 33
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "setLoading",
+          "lineNumber": 36
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "useEffect",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useRoadmaps",
+          "callee": "fetchRoadmaps",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handleCreate",
+          "callee": "createRoadmap",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handleCreate",
+          "callee": "setModal",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handleCreate",
+          "callee": "fetchRoadmaps",
+          "lineNumber": 47
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "updateRoadmap",
+          "lineNumber": 51
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "setModal",
+          "lineNumber": 52
+        },
+        {
+          "caller": "handleEdit",
+          "callee": "fetchRoadmaps",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "deleteRoadmap",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "setModal",
+          "lineNumber": 58
+        },
+        {
+          "caller": "handleDelete",
+          "callee": "fetchRoadmaps",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleStatusChange",
+          "callee": "setRoadmaps",
+          "lineNumber": 64
+        },
+        {
+          "caller": "handleStatusChange",
+          "callee": "prev.map",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handleStatusChange",
+          "callee": "cycleStatus",
+          "lineNumber": 68
+        },
+        {
+          "caller": "handleStatusChange",
+          "callee": "fetchRoadmaps",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

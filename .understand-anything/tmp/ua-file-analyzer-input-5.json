@@ -1,0 +1,21 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "apps/web/src/app/page.tsx", "language": "typescript", "sizeLines": 40, "fileCategory": "code"},
+    {"path": "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx", "language": "typescript", "sizeLines": 44, "fileCategory": "code"},
+    {"path": "apps/web/src/app/roadmap/[slug]/page.tsx", "language": "typescript", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "apps/web/src/components/Breadcrumb.tsx", "language": "typescript", "sizeLines": 67, "fileCategory": "code"},
+    {"path": "apps/web/src/features/lesson/components/LessonLayout.tsx", "language": "typescript", "sizeLines": 40, "fileCategory": "code"},
+    {"path": "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx", "language": "typescript", "sizeLines": 43, "fileCategory": "code"},
+    {"path": "apps/web/src/lib/gql.ts", "language": "typescript", "sizeLines": 119, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "apps/web/src/app/page.tsx": ["apps/web/src/lib/gql.ts"],
+    "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx": ["apps/web/src/features/lesson/components/LessonLayout.tsx", "apps/web/src/lib/gql.ts"],
+    "apps/web/src/app/roadmap/[slug]/page.tsx": ["apps/web/src/features/roadmap/components/RoadmapGraphView.tsx", "apps/web/src/lib/gql.ts"],
+    "apps/web/src/components/Breadcrumb.tsx": [],
+    "apps/web/src/features/lesson/components/LessonLayout.tsx": ["apps/web/src/lib/gql.ts"],
+    "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx": ["apps/web/src/components/Breadcrumb.tsx", "apps/web/src/lib/gql.ts"],
+    "apps/web/src/lib/gql.ts": []
+  }
+}

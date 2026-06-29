@@ -1,0 +1,29 @@
+{
+  "batchIndex": 19,
+  "files": [
+    [
+      "packages/db/.env.example",
+      1,
+      "config",
+      "config"
+    ],
+    [
+      "packages/db/package.json",
+      25,
+      "json",
+      "config"
+    ],
+    [
+      "packages/db/tsconfig.json",
+      8,
+      "json",
+      "config"
+    ]
+  ],
+  "batchImportData": {
+    "packages/db/.env.example": [],
+    "packages/db/package.json": [],
+    "packages/db/tsconfig.json": []
+  },
+  "neighborMap": {}
+}

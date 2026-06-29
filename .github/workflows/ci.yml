@@ -5,10 +5,10 @@ on:
     branches:
       - main
       - develop
-      - 'release/**'
+      - "release/**"
   pull_request:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   ci:
@@ -36,9 +36,6 @@ jobs:
 
       - name: Install protoc
         run: sudo apt-get install -y protobuf-compiler
-
-      - name: Generate proto types
-        run: cd packages/proto && node generate.js
 
       - name: Build
         run: pnpm build

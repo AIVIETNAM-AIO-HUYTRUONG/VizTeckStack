@@ -1,0 +1,71 @@
+{
+  "batchIndex": 12,
+  "files": [
+    [
+      ".env.example",
+      34,
+      "config",
+      "config"
+    ],
+    [
+      "CLAUDE.md",
+      201,
+      "markdown",
+      "docs"
+    ],
+    [
+      "README.md",
+      225,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docker-compose.yml",
+      15,
+      "yaml",
+      "infra"
+    ],
+    [
+      "package.json",
+      25,
+      "json",
+      "config"
+    ],
+    [
+      "pnpm-workspace.yaml",
+      3,
+      "yaml",
+      "config"
+    ],
+    [
+      "render.yaml",
+      16,
+      "yaml",
+      "config"
+    ],
+    [
+      "tsconfig.base.json",
+      15,
+      "json",
+      "config"
+    ],
+    [
+      "turbo.json",
+      18,
+      "json",
+      "config"
+    ]
+  ],
+  "batchImportData": {
+    ".env.example": [],
+    "CLAUDE.md": [],
+    "README.md": [],
+    "docker-compose.yml": [],
+    "package.json": [],
+    "pnpm-workspace.yaml": [],
+    "render.yaml": [],
+    "tsconfig.base.json": [],
+    "turbo.json": []
+  },
+  "neighborMap": {}
+}

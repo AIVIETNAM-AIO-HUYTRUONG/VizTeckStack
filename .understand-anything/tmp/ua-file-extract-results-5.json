@@ -1,0 +1,424 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/web/src/app/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "HomePage",
+          "startLine": 6,
+          "endLine": 40,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "revalidate",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "HomePage",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HomePage",
+          "callee": "fetchRoadmaps",
+          "lineNumber": 9
+        },
+        {
+          "caller": "HomePage",
+          "callee": "roadmaps.map",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "generateStaticParams",
+          "startLine": 7,
+          "endLine": 9,
+          "params": []
+        },
+        {
+          "name": "LessonPage",
+          "startLine": 11,
+          "endLine": 44,
+          "params": [
+            "{\r\n  params,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "revalidate",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "dynamicParams",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "generateStaticParams",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPage",
+          "line": 11,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LessonPage",
+          "callee": "Promise.allSettled",
+          "lineNumber": 18
+        },
+        {
+          "caller": "LessonPage",
+          "callee": "fetchNode",
+          "lineNumber": 19
+        },
+        {
+          "caller": "LessonPage",
+          "callee": "fetchBreadcrumb",
+          "lineNumber": 20
+        },
+        {
+          "caller": "LessonPage",
+          "callee": "fetchRoadmapTree",
+          "lineNumber": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/app/roadmap/[slug]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "generateStaticParams",
+          "startLine": 8,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "RoadmapPage",
+          "startLine": 12,
+          "endLine": 31,
+          "params": [
+            "{\r\n  params,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "revalidate",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "dynamicParams",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "generateStaticParams",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapPage",
+          "line": 12,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RoadmapPage",
+          "callee": "fetchRoadmap",
+          "lineNumber": 21
+        },
+        {
+          "caller": "RoadmapPage",
+          "callee": "notFound",
+          "lineNumber": 23
+        },
+        {
+          "caller": "RoadmapPage",
+          "callee": "notFound",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/components/Breadcrumb.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "Breadcrumb",
+          "startLine": 33,
+          "endLine": 67,
+          "params": [
+            "{ items }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Breadcrumb",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Breadcrumb",
+          "callee": "items.map",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/features/lesson/components/LessonLayout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "LessonLayout",
+          "startLine": 13,
+          "endLine": 40,
+          "params": [
+            "{ node, breadcrumb, tree }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonLayout",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "RoadmapGraphView",
+          "startLine": 14,
+          "endLine": 43,
+          "params": [
+            "{ detail, slug }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapGraphView",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RoadmapGraphView",
+          "callee": "useRouter",
+          "lineNumber": 15
+        },
+        {
+          "caller": "handleNodeClick",
+          "callee": "router.push",
+          "lineNumber": 24
+        },
+        {
+          "caller": "handleNodeClick",
+          "callee": "router.push",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/lib/gql.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "fetchRoadmaps",
+          "startLine": 59,
+          "endLine": 62,
+          "params": []
+        },
+        {
+          "name": "fetchRoadmap",
+          "startLine": 64,
+          "endLine": 81,
+          "params": [
+            "slug"
+          ]
+        },
+        {
+          "name": "fetchNode",
+          "startLine": 83,
+          "endLine": 97,
+          "params": [
+            "id"
+          ]
+        },
+        {
+          "name": "fetchBreadcrumb",
+          "startLine": 99,
+          "endLine": 108,
+          "params": [
+            "nodeId"
+          ]
+        },
+        {
+          "name": "fetchRoadmapTree",
+          "startLine": 110,
+          "endLine": 119,
+          "params": [
+            "slug"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "fetchRoadmaps",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "fetchRoadmap",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "fetchNode",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "fetchBreadcrumb",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "fetchRoadmapTree",
+          "line": 110,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchRoadmaps",
+          "callee": "await gqlClient.request",
+          "lineNumber": 60
+        },
+        {
+          "caller": "fetchRoadmaps",
+          "callee": "((data.roadmaps ?? []) as RoadmapItem[]).filter",
+          "lineNumber": 61
+        },
+        {
+          "caller": "fetchRoadmap",
+          "callee": "await gqlClient.request",
+          "lineNumber": 65
+        },
+        {
+          "caller": "fetchRoadmap",
+          "callee": "(detail?.nodes ?? []).map",
+          "lineNumber": 69
+        },
+        {
+          "caller": "fetchNode",
+          "callee": "await gqlClient.request",
+          "lineNumber": 84
+        },
+        {
+          "caller": "fetchBreadcrumb",
+          "callee": "await gqlClient.request",
+          "lineNumber": 101
+        },
+        {
+          "caller": "fetchRoadmapTree",
+          "callee": "await gqlClient.request",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    }
+  ]
+}

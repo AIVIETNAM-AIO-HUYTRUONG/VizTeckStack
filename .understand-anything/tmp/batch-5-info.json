@@ -1,0 +1,70 @@
+{
+  "batchIndex": 5,
+  "files": [
+    [
+      "apps/web/src/app/page.tsx",
+      40,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx",
+      44,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/app/roadmap/[slug]/page.tsx",
+      31,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/components/Breadcrumb.tsx",
+      67,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/features/lesson/components/LessonLayout.tsx",
+      40,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx",
+      43,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/lib/gql.ts",
+      119,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/web/src/app/page.tsx": [
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx": [
+      "apps/web/src/features/lesson/components/LessonLayout.tsx",
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/app/roadmap/[slug]/page.tsx": [
+      "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx",
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/components/Breadcrumb.tsx": [],
+    "apps/web/src/features/lesson/components/LessonLayout.tsx": [
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx": [
+      "apps/web/src/components/Breadcrumb.tsx",
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/lib/gql.ts": []
+  },
+  "neighborMap": {}
+}

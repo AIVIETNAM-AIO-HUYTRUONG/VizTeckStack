@@ -1,0 +1,49 @@
+{
+  "batchIndex": 8,
+  "files": [
+    [
+      "apps/web/src/app/layout.tsx",
+      59,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/components/ApolloProvider.tsx",
+      17,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/components/ThemeToggle.tsx",
+      36,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/src/features/search/SearchModalWrapper.tsx",
+      18,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/web/src/app/layout.tsx": [
+      "apps/web/src/app/globals.css",
+      "apps/web/src/components/ApolloProvider.tsx",
+      "apps/web/src/components/ThemeToggle.tsx",
+      "apps/web/src/features/search/SearchModalWrapper.tsx"
+    ],
+    "apps/web/src/components/ApolloProvider.tsx": [],
+    "apps/web/src/components/ThemeToggle.tsx": [],
+    "apps/web/src/features/search/SearchModalWrapper.tsx": []
+  },
+  "neighborMap": {
+    "apps/web/src/app/layout.tsx": [
+      {
+        "path": "apps/web/src/app/globals.css",
+        "batchIndex": 20,
+        "symbols": []
+      }
+    ]
+  }
+}

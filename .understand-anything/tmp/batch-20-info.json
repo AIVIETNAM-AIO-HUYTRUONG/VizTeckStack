@@ -1,0 +1,204 @@
+{
+  "batchIndex": 20,
+  "files": [
+    [
+      ".claude/settings.json",
+      15,
+      "json",
+      "config"
+    ],
+    [
+      ".husky/commit-msg",
+      1,
+      "unknown",
+      "code"
+    ],
+    [
+      ".husky/pre-commit",
+      1,
+      "unknown",
+      "code"
+    ],
+    [
+      ".husky/pre-push",
+      1,
+      "unknown",
+      "code"
+    ],
+    [
+      ".understand-anything/.understandignore",
+      48,
+      "unknown",
+      "code"
+    ],
+    [
+      ".understand-anything/config.json",
+      1,
+      "json",
+      "config"
+    ],
+    [
+      "apps/admin/next.config.js",
+      17,
+      "javascript",
+      "code"
+    ],
+    [
+      "apps/admin/postcss.config.js",
+      6,
+      "javascript",
+      "code"
+    ],
+    [
+      "apps/admin/src/app/globals.css",
+      69,
+      "css",
+      "markup"
+    ],
+    [
+      "apps/admin/src/app/login/page.tsx",
+      108,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/app/page.tsx",
+      19,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/tailwind.config.ts",
+      32,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/vitest.config.ts",
+      17,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/vitest.setup.ts",
+      1,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/schema.gql",
+      129,
+      "graphql",
+      "data"
+    ],
+    [
+      "apps/e2e/package.json",
+      16,
+      "json",
+      "config"
+    ],
+    [
+      "apps/e2e/playwright.config.ts",
+      32,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/e2e/tests/admin.spec.ts",
+      105,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/e2e/tests/api.spec.ts",
+      111,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/e2e/tests/web.spec.ts",
+      111,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/next-env.d.ts",
+      6,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/next.config.js",
+      17,
+      "javascript",
+      "code"
+    ],
+    [
+      "apps/web/postcss.config.js",
+      6,
+      "javascript",
+      "code"
+    ],
+    [
+      "apps/web/src/app/globals.css",
+      69,
+      "css",
+      "markup"
+    ],
+    [
+      "apps/web/tailwind.config.ts",
+      33,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    ".claude/settings.json": [],
+    ".husky/commit-msg": [],
+    ".husky/pre-commit": [],
+    ".husky/pre-push": [],
+    ".understand-anything/.understandignore": [],
+    ".understand-anything/config.json": [],
+    "apps/admin/next.config.js": [],
+    "apps/admin/postcss.config.js": [],
+    "apps/admin/src/app/globals.css": [],
+    "apps/admin/src/app/login/page.tsx": [],
+    "apps/admin/src/app/page.tsx": [],
+    "apps/admin/tailwind.config.ts": [],
+    "apps/admin/vitest.config.ts": [],
+    "apps/admin/vitest.setup.ts": [],
+    "apps/api-gateway/src/schema.gql": [],
+    "apps/e2e/package.json": [],
+    "apps/e2e/playwright.config.ts": [],
+    "apps/e2e/tests/admin.spec.ts": [],
+    "apps/e2e/tests/api.spec.ts": [],
+    "apps/e2e/tests/web.spec.ts": [],
+    "apps/web/next-env.d.ts": [],
+    "apps/web/next.config.js": [],
+    "apps/web/postcss.config.js": [],
+    "apps/web/src/app/globals.css": [],
+    "apps/web/tailwind.config.ts": []
+  },
+  "neighborMap": {
+    "apps/admin/src/app/globals.css": [
+      {
+        "path": "apps/admin/src/app/layout.tsx",
+        "batchIndex": 1,
+        "symbols": [
+          "metadata",
+          "RootLayout"
+        ]
+      }
+    ],
+    "apps/web/src/app/globals.css": [
+      {
+        "path": "apps/web/src/app/layout.tsx",
+        "batchIndex": 8,
+        "symbols": [
+          "metadata",
+          "RootLayout"
+        ]
+      }
+    ]
+  }
+}

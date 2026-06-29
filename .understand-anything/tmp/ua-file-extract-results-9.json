@@ -1,0 +1,155 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/api-gateway/src/app.module.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 27,
+      "classes": [
+        {
+          "name": "AppModule",
+          "startLine": 29,
+          "endLine": 29,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppModule",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/health.controller.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 13,
+      "classes": [
+        {
+          "name": "HealthController",
+          "startLine": 4,
+          "endLine": 14,
+          "methods": [
+            "health"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "HealthController",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/main.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "bootstrap",
+          "startLine": 6,
+          "endLine": 28,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "bootstrap",
+          "callee": "NestFactory.create",
+          "lineNumber": 7
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "app.enableCors",
+          "lineNumber": 8
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "new DocumentBuilder()\r\n    .setTitle('VizTeckStack API')\r\n    .setDescription(\r\n      `Roadmap visualization REST API\\n\\n` +\r\n      `**Admin token (Bearer):** \\`${adminToken}\\`\\n\\n` +\r\n      `Click **Authorize** → paste the token above → write endpoints unlock.`,\r\n    )\r\n    .setVersion('1.0')\r\n    .addBearerAuth()\r\n    .build",
+          "lineNumber": 11
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "new DocumentBuilder()\r\n    .setTitle('VizTeckStack API')\r\n    .setDescription(\r\n      `Roadmap visualization REST API\\n\\n` +\r\n      `**Admin token (Bearer):** \\`${adminToken}\\`\\n\\n` +\r\n      `Click **Authorize** → paste the token above → write endpoints unlock.`,\r\n    )\r\n    .setVersion('1.0')\r\n    .addBearerAuth",
+          "lineNumber": 11
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "new DocumentBuilder()\r\n    .setTitle('VizTeckStack API')\r\n    .setDescription(\r\n      `Roadmap visualization REST API\\n\\n` +\r\n      `**Admin token (Bearer):** \\`${adminToken}\\`\\n\\n` +\r\n      `Click **Authorize** → paste the token above → write endpoints unlock.`,\r\n    )\r\n    .setVersion",
+          "lineNumber": 11
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "new DocumentBuilder()\r\n    .setTitle('VizTeckStack API')\r\n    .setDescription",
+          "lineNumber": 11
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "new DocumentBuilder()\r\n    .setTitle",
+          "lineNumber": 11
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "SwaggerModule.setup",
+          "lineNumber": 21
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "SwaggerModule.createDocument",
+          "lineNumber": 21
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "app.listen",
+          "lineNumber": 24
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "console.log",
+          "lineNumber": 25
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "console.log",
+          "lineNumber": 26
+        },
+        {
+          "caller": "bootstrap",
+          "callee": "console.log",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "packages/core/src/lesson/ui/LessonEditor.tsx", "language": "typescript", "sizeLines": 101, "fileCategory": "code"},
+    {"path": "packages/core/src/lesson/ui/LessonViewer.tsx", "language": "typescript", "sizeLines": 46, "fileCategory": "code"},
+    {"path": "packages/core/src/lesson/ui/utils.ts", "language": "typescript", "sizeLines": 9, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "packages/core/src/lesson/ui/LessonEditor.tsx": ["packages/core/src/lesson/ui/utils.ts"],
+    "packages/core/src/lesson/ui/LessonViewer.tsx": ["packages/core/src/lesson/ui/utils.ts"],
+    "packages/core/src/lesson/ui/utils.ts": []
+  }
+}

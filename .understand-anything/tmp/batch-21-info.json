@@ -1,0 +1,185 @@
+{
+  "batchIndex": 21,
+  "files": [
+    [
+      "apps/web/tsconfig.tsbuildinfo",
+      0,
+      "tsbuildinfo",
+      "code"
+    ],
+    [
+      "apps/web/vitest.config.ts",
+      15,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/web/vitest.setup.ts",
+      4,
+      "typescript",
+      "code"
+    ],
+    [
+      "commitlint.config.cjs",
+      14,
+      "javascript",
+      "code"
+    ],
+    [
+      "docs/clean-architecture.md",
+      298,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/design/mockup.html",
+      855,
+      "html",
+      "markup"
+    ],
+    [
+      "packages/core/package.json",
+      36,
+      "json",
+      "config"
+    ],
+    [
+      "packages/core/src/index.ts",
+      56,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/useSearchModal.spec.ts",
+      48,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/useSearchModal.ts",
+      18,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/test-setup.ts",
+      1,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/tsconfig.json",
+      10,
+      "json",
+      "config"
+    ],
+    [
+      "packages/core/vitest.config.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/db/index.ts",
+      13,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql",
+      3,
+      "sql",
+      "data"
+    ],
+    [
+      "packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql",
+      3,
+      "sql",
+      "data"
+    ],
+    [
+      "packages/db/prisma/schema.prisma",
+      63,
+      "prisma",
+      "data"
+    ],
+    [
+      "packages/db/prisma/seed.ts",
+      60,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/graph/package.json",
+      18,
+      "json",
+      "config"
+    ],
+    [
+      "packages/graph/src/index.ts",
+      21,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/graph/tsconfig.json",
+      10,
+      "json",
+      "config"
+    ],
+    [
+      "packages/graphql-client/codegen.ts",
+      22,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/graphql-client/package.json",
+      26,
+      "json",
+      "config"
+    ],
+    [
+      "packages/graphql-client/src/generated/graphql.ts",
+      970,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/graphql-client/src/index.ts",
+      72,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/web/tsconfig.tsbuildinfo": [],
+    "apps/web/vitest.config.ts": [],
+    "apps/web/vitest.setup.ts": [],
+    "commitlint.config.cjs": [],
+    "docs/clean-architecture.md": [],
+    "docs/design/mockup.html": [],
+    "packages/core/package.json": [],
+    "packages/core/src/index.ts": [],
+    "packages/core/src/lesson/ui/useSearchModal.spec.ts": [
+      "packages/core/src/lesson/ui/useSearchModal.ts"
+    ],
+    "packages/core/src/lesson/ui/useSearchModal.ts": [],
+    "packages/core/src/test-setup.ts": [],
+    "packages/core/tsconfig.json": [],
+    "packages/core/vitest.config.ts": [],
+    "packages/db/index.ts": [],
+    "packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql": [],
+    "packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql": [],
+    "packages/db/prisma/schema.prisma": [],
+    "packages/db/prisma/seed.ts": [],
+    "packages/graph/package.json": [],
+    "packages/graph/src/index.ts": [],
+    "packages/graph/tsconfig.json": [],
+    "packages/graphql-client/codegen.ts": [],
+    "packages/graphql-client/package.json": [],
+    "packages/graphql-client/src/generated/graphql.ts": [],
+    "packages/graphql-client/src/index.ts": []
+  },
+  "neighborMap": {}
+}

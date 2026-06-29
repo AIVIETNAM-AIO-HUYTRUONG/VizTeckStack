@@ -1,0 +1,621 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/graph/graph.service.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 114,
+      "functions": [
+        {
+          "name": "normalizeNodeType",
+          "startLine": 15,
+          "endLine": 18,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "makeSnapshot",
+          "startLine": 20,
+          "endLine": 38,
+          "params": [
+            "nodes",
+            "edges"
+          ]
+        },
+        {
+          "name": "loadGraph",
+          "startLine": 40,
+          "endLine": 92,
+          "params": [
+            "client",
+            "slug",
+            "roadmapId"
+          ]
+        },
+        {
+          "name": "saveGraph",
+          "startLine": 94,
+          "endLine": 122,
+          "params": [
+            "client",
+            "roadmapId",
+            "nodes",
+            "edges"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "normalizeNodeType",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "makeSnapshot",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "loadGraph",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "saveGraph",
+          "line": 94,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeSnapshot",
+          "callee": "JSON.stringify",
+          "lineNumber": 21
+        },
+        {
+          "caller": "makeSnapshot",
+          "callee": "nodes.map",
+          "lineNumber": 22
+        },
+        {
+          "caller": "makeSnapshot",
+          "callee": "edges.map",
+          "lineNumber": 31
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "Promise.all",
+          "lineNumber": 45
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "client.query",
+          "lineNumber": 46
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "client.query",
+          "lineNumber": 50
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "(detail.nodes ?? []).map",
+          "lineNumber": 58
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "normalizeNodeType",
+          "lineNumber": 60
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "(detail.edges ?? []).map",
+          "lineNumber": 62
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "makeSnapshot",
+          "lineNumber": 65
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "sessionStorage.getItem",
+          "lineNumber": 70
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "JSON.parse",
+          "lineNumber": 73
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "makeSnapshot",
+          "lineNumber": 74
+        },
+        {
+          "caller": "loadGraph",
+          "callee": "sessionStorage.removeItem",
+          "lineNumber": 79
+        },
+        {
+          "caller": "saveGraph",
+          "callee": "client.mutate",
+          "lineNumber": 100
+        },
+        {
+          "caller": "saveGraph",
+          "callee": "nodes.map",
+          "lineNumber": 104
+        },
+        {
+          "caller": "saveGraph",
+          "callee": "edges.map",
+          "lineNumber": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/graph/types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 43,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/graph/ui/RoadmapGraph.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 186,
+      "nonEmptyLines": 169,
+      "functions": [
+        {
+          "name": "mapEdges",
+          "startLine": 42,
+          "endLine": 49,
+          "params": [
+            "edges"
+          ]
+        },
+        {
+          "name": "GraphCanvas",
+          "startLine": 52,
+          "endLine": 131,
+          "params": [
+            "{\r\n  nodes, rfNodes, rfEdges, isView, onNodeClick,\r\n  onNodesChange, onEdgesChange, onConnect, onNodesDelete,\r\n  onPaneContextMenu, onDropNode, onEdgeClick,\r\n}"
+          ]
+        },
+        {
+          "name": "RoadmapGraph",
+          "startLine": 133,
+          "endLine": 186,
+          "params": [
+            "props"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapGraph",
+          "line": 133,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mapEdges",
+          "callee": "edges.map",
+          "lineNumber": 43
+        },
+        {
+          "caller": "GraphCanvas",
+          "callee": "useReactFlow",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleNodeClick",
+          "callee": "nodes.find",
+          "lineNumber": 61
+        },
+        {
+          "caller": "handleNodeClick",
+          "callee": "onNodeClick",
+          "lineNumber": 63
+        },
+        {
+          "caller": "handleEdgeClick",
+          "callee": "onEdgeClick",
+          "lineNumber": 69
+        },
+        {
+          "caller": "handlePaneContextMenu",
+          "callee": "event.preventDefault",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handlePaneContextMenu",
+          "callee": "screenToFlowPosition",
+          "lineNumber": 76
+        },
+        {
+          "caller": "handlePaneContextMenu",
+          "callee": "onPaneContextMenu",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleDrop",
+          "callee": "event.preventDefault",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handleDrop",
+          "callee": "dt.getData",
+          "lineNumber": 86
+        },
+        {
+          "caller": "handleDrop",
+          "callee": "dt.getData",
+          "lineNumber": 86
+        },
+        {
+          "caller": "handleDrop",
+          "callee": "screenToFlowPosition",
+          "lineNumber": 88
+        },
+        {
+          "caller": "handleDrop",
+          "callee": "onDropNode",
+          "lineNumber": 89
+        },
+        {
+          "caller": "handleDragOver",
+          "callee": "event.preventDefault",
+          "lineNumber": 93
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "useRef",
+          "lineNumber": 141
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "useCallback",
+          "lineNumber": 144
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "measuredRef.current.set",
+          "lineNumber": 149
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "onNodesChange",
+          "lineNumber": 152
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "useMemo",
+          "lineNumber": 157
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "nodes\r\n        .filter((n) => n.positionX != null && n.positionY != null)\r\n        .map",
+          "lineNumber": 159
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "nodes\r\n        .filter",
+          "lineNumber": 159
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "measuredRef.current.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "useMemo",
+          "lineNumber": 172
+        },
+        {
+          "caller": "RoadmapGraph",
+          "callee": "mapEdges",
+          "lineNumber": 172
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/graph/ui/RoadmapNode.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "RoadmapNode",
+          "startLine": 19,
+          "endLine": 37,
+          "params": [
+            "{ data }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapNode",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/graph/useGraphDraft.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "useGraphDraft",
+          "startLine": 6,
+          "endLine": 21,
+          "params": [
+            "id",
+            "nodes",
+            "edges",
+            "dirty",
+            "loading"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useGraphDraft",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useGraphDraft",
+          "callee": "useEffect",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useGraphDraft",
+          "callee": "sessionStorage.setItem",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useGraphDraft",
+          "callee": "JSON.stringify",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useGraphDraft",
+          "callee": "sessionStorage.removeItem",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/graph/useGraphEditor.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 86,
+      "functions": [
+        {
+          "name": "useGraphEditor",
+          "startLine": 9,
+          "endLine": 95,
+          "params": [
+            "client",
+            "updateRoadmapFn",
+            "id",
+            "slug"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useGraphEditor",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useRef",
+          "lineNumber": 23
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useMemo",
+          "lineNumber": 25
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "makeSnapshot",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "useEffect",
+          "lineNumber": 31
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "loadGraph(client, slug, id)\r\n      .then((data) => {\r\n        if (cancelled) return;\r\n        setRoadmapTitle(data.roadmapTitle);\r\n        setRoadmapStatus(data.roadmapStatus);\r\n        setEditorNodes(data.nodes);\r\n        setEditorEdges(data.edges);\r\n        setAllRoadmaps(data.allRoadmaps);\r\n        savedSnapshotRef.current = data.savedSnapshot;\r\n      })\r\n      .finally",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "loadGraph(client, slug, id)\r\n      .then",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "loadGraph",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "setRoadmapTitle",
+          "lineNumber": 38
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "setRoadmapStatus",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "setEditorNodes",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "setEditorEdges",
+          "lineNumber": 41
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "setAllRoadmaps",
+          "lineNumber": 42
+        },
+        {
+          "caller": "useGraphEditor",
+          "callee": "setLoading",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaving",
+          "lineNumber": 56
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaveError",
+          "lineNumber": 57
+        },
+        {
+          "caller": "handleSave",
+          "callee": "saveGraph",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleSave",
+          "callee": "makeSnapshot",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaveError",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleSave",
+          "callee": "setSaving",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleChangeStatus",
+          "callee": "setRoadmapStatus",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handleChangeStatus",
+          "callee": "updateRoadmapFn",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handleChangeStatus",
+          "callee": "setRoadmapStatus",
+          "lineNumber": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

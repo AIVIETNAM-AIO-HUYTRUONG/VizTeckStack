@@ -1,0 +1,633 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 18,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/graphql-client/src/queries/nodes/nodes.graphql",
+      "language": "graphql",
+      "fileCategory": "data",
+      "totalLines": 76,
+      "nonEmptyLines": 70,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0,
+        "endpointCount": 0
+      }
+    },
+    {
+      "path": "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql",
+      "language": "graphql",
+      "fileCategory": "data",
+      "totalLines": 96,
+      "nonEmptyLines": 91,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0,
+        "endpointCount": 0
+      }
+    },
+    {
+      "path": "packages/graphql-client/src/queries/search.graphql",
+      "language": "graphql",
+      "fileCategory": "data",
+      "totalLines": 14,
+      "nonEmptyLines": 14,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0,
+        "endpointCount": 0
+      }
+    },
+    {
+      "path": "packages/graphql-client/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "packages/lesson/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 34,
+      "nonEmptyLines": 34,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "packages/lesson/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 30,
+      "exports": [
+        {
+          "name": "LessonEditor",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "LessonViewer",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageShell",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageLayout",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "CoverDisplay",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "BreadcrumbDisplay",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeSidebar",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeItem",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SearchModal",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "useSearchModal",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "useSearch",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "LessonEditorProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "LessonViewerProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageShellProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageLayoutProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "CoverDisplayProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "BreadcrumbDisplayProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeSidebarProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeItemProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "SearchModalProps",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "TimeGroup",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "BreadcrumbItem",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "LessonShellNode",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeNode",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "PageTree",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 25,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/lesson/src/test-setup.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/lesson/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "packages/lesson/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ui/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 19,
+      "nonEmptyLines": 19,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "packages/ui/src/Button.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "Button",
+          "startLine": 39,
+          "endLine": 53,
+          "params": [
+            "{\r\n  variant = 'primary',\r\n  children,\r\n  style,\r\n  ...props\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Button",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ui/src/Card.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 34,
+      "functions": [
+        {
+          "name": "Card",
+          "startLine": 12,
+          "endLine": 38,
+          "params": [
+            "{ type, title, description, miniGraph, onClick }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Card",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ui/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "exports": [
+        {
+          "name": "Button",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "ButtonProps",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "ButtonVariant",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "Card",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "CardProps",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "NodeBadge",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "NodeBadgeProps",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "NodeType",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ui/src/NodeBadge.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "NodeBadge",
+          "startLine": 14,
+          "endLine": 23,
+          "params": [
+            "{ type }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NodeBadge",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/ui/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "scripts/validate-yaml.cjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 27,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "services/svc-python/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 6,
+      "nonEmptyLines": 4,
+      "sections": [
+        {
+          "heading": "svc-python (Future Service)",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "services/svc-rust/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 6,
+      "nonEmptyLines": 4,
+      "sections": [
+        {
+          "heading": "svc-rust (Future Service)",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}

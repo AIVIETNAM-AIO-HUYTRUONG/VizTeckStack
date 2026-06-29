@@ -1,0 +1,229 @@
+{
+  "batchIndex": 3,
+  "files": [
+    [
+      "packages/core/src/lesson/lesson.service.ts",
+      103,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/types.ts",
+      55,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx",
+      38,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx",
+      45,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/CoverDisplay.spec.tsx",
+      49,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/CoverDisplay.tsx",
+      53,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/LessonPageLayout.spec.tsx",
+      62,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/LessonPageLayout.tsx",
+      63,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/LessonPageShell.spec.tsx",
+      55,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/LessonPageShell.tsx",
+      78,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/PageTreeItem.spec.tsx",
+      90,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/PageTreeItem.tsx",
+      97,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/PageTreeSidebar.spec.tsx",
+      52,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/PageTreeSidebar.tsx",
+      70,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/useLessonEditor.ts",
+      46,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/useLessonPageShell.ts",
+      46,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/usePageTree.ts",
+      21,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/roadmap/constants.ts",
+      19,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/roadmap/roadmap.service.ts",
+      50,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/roadmap/types.ts",
+      34,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/roadmap/useRoadmaps.ts",
+      86,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "packages/core/src/lesson/lesson.service.ts": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/lesson/types.ts": [],
+    "packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx": [
+      "packages/core/src/lesson/types.ts"
+    ],
+    "packages/core/src/lesson/ui/CoverDisplay.spec.tsx": [
+      "packages/core/src/lesson/ui/CoverDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/CoverDisplay.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageLayout.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/LessonPageLayout.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageLayout.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeSidebar.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageShell.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/LessonPageShell.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageShell.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/CoverDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/PageTreeItem.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeItem.tsx"
+    ],
+    "packages/core/src/lesson/ui/PageTreeItem.tsx": [
+      "packages/core/src/lesson/types.ts"
+    ],
+    "packages/core/src/lesson/ui/PageTreeSidebar.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeSidebar.tsx"
+    ],
+    "packages/core/src/lesson/ui/PageTreeSidebar.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeItem.tsx"
+    ],
+    "packages/core/src/lesson/useLessonEditor.ts": [
+      "packages/core/src/lesson/lesson.service.ts",
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/lesson/useLessonPageShell.ts": [
+      "packages/core/src/lesson/lesson.service.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/lesson/usePageTree.ts": [
+      "packages/core/src/lesson/lesson.service.ts",
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/roadmap/constants.ts": [],
+    "packages/core/src/roadmap/roadmap.service.ts": [
+      "packages/core/src/roadmap/constants.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/roadmap/types.ts": [],
+    "packages/core/src/roadmap/useRoadmaps.ts": [
+      "packages/core/src/roadmap/constants.ts",
+      "packages/core/src/roadmap/roadmap.service.ts",
+      "packages/core/src/roadmap/types.ts"
+    ]
+  },
+  "neighborMap": {
+    "packages/core/src/roadmap/types.ts": [
+      {
+        "path": "packages/core/src/graph/graph.service.ts",
+        "batchIndex": 6,
+        "symbols": [
+          "normalizeNodeType",
+          "makeSnapshot",
+          "loadGraph",
+          "saveGraph"
+        ]
+      },
+      {
+        "path": "packages/core/src/graph/useGraphEditor.ts",
+        "batchIndex": 6,
+        "symbols": [
+          "useGraphEditor"
+        ]
+      }
+    ]
+  }
+}

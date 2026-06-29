@@ -1,0 +1,474 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/lesson/ui/SearchModal.spec.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "Wrapper",
+          "startLine": 12,
+          "endLine": 14,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 139,
+      "nonEmptyLines": 126,
+      "functions": [
+        {
+          "name": "SearchModal",
+          "startLine": 18,
+          "endLine": 139,
+          "params": [
+            "{ open, onClose, getLessonHref, getRoadmapHref }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchModal",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SearchModal",
+          "callee": "useSearch",
+          "lineNumber": 19
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "useRef",
+          "lineNumber": 21
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "useEffect",
+          "lineNumber": 23
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "setTimeout",
+          "lineNumber": 25
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "inputRef.current?.focus",
+          "lineNumber": 25
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "setQuery",
+          "lineNumber": 27
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "setSelectedItem",
+          "lineNumber": 28
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "useEffect",
+          "lineNumber": 32
+        },
+        {
+          "caller": "handler",
+          "callee": "onClose",
+          "lineNumber": 34
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "window.addEventListener",
+          "lineNumber": 36
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "window.removeEventListener",
+          "lineNumber": 37
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "grouped.flatMap",
+          "lineNumber": 42
+        },
+        {
+          "caller": "handleItemClick",
+          "callee": "getLessonHref",
+          "lineNumber": 48
+        },
+        {
+          "caller": "handleItemClick",
+          "callee": "getRoadmapHref",
+          "lineNumber": 49
+        },
+        {
+          "caller": "handleItemClick",
+          "callee": "getLessonHref",
+          "lineNumber": 49
+        },
+        {
+          "caller": "handleItemClick",
+          "callee": "onClose",
+          "lineNumber": 51
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "e.stopPropagation",
+          "lineNumber": 63
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "setQuery",
+          "lineNumber": 73
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "setTitleOnly",
+          "lineNumber": 82
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "[1, 2, 3].map",
+          "lineNumber": 100
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "grouped.map",
+          "lineNumber": 113
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "items.map",
+          "lineNumber": 116
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "setSelectedItem",
+          "lineNumber": 122
+        },
+        {
+          "caller": "SearchModal",
+          "callee": "handleItemClick",
+          "lineNumber": 123
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchPreview.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "SearchPreview",
+          "startLine": 9,
+          "endLine": 37,
+          "params": [
+            "{ item }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchPreview",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SearchPreview",
+          "callee": "item.breadcrumb.join",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/SearchResultItem.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "SearchResultItem",
+          "startLine": 12,
+          "endLine": 36,
+          "params": [
+            "{ item, isSelected, onMouseEnter, onClick }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchResultItem",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SearchResultItem",
+          "callee": "item.breadcrumb.join",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/useSearch.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 66,
+      "functions": [
+        {
+          "name": "groupByTime",
+          "startLine": 12,
+          "endLine": 36,
+          "params": [
+            "results"
+          ]
+        },
+        {
+          "name": "groupByRoadmap",
+          "startLine": 38,
+          "endLine": 47,
+          "params": [
+            "results"
+          ]
+        },
+        {
+          "name": "useSearch",
+          "startLine": 49,
+          "endLine": 76,
+          "params": [
+            "initialTrigger"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useSearch",
+          "line": 49,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "groupByTime",
+          "callee": "now.getFullYear",
+          "lineNumber": 24
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "now.getMonth",
+          "lineNumber": 24
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "now.getDate",
+          "lineNumber": 24
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "updated.getFullYear",
+          "lineNumber": 25
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "updated.getMonth",
+          "lineNumber": 25
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "updated.getDate",
+          "lineNumber": 25
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "Math.round",
+          "lineNumber": 26
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "nowDate.getTime",
+          "lineNumber": 26
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "updatedDate.getTime",
+          "lineNumber": 26
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "buckets['Today'].push",
+          "lineNumber": 27
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "buckets['Yesterday'].push",
+          "lineNumber": 28
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "buckets['Past week'].push",
+          "lineNumber": 29
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "buckets['Older'].push",
+          "lineNumber": 30
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "Object.entries(buckets)\r\n    .filter(([, items]) => items.length > 0)\r\n    .map",
+          "lineNumber": 33
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "Object.entries(buckets)\r\n    .filter",
+          "lineNumber": 33
+        },
+        {
+          "caller": "groupByTime",
+          "callee": "Object.entries",
+          "lineNumber": 33
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "map.has",
+          "lineNumber": 43
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "map.set",
+          "lineNumber": 43
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "map.get(key)!.push",
+          "lineNumber": 44
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "map.get",
+          "lineNumber": 44
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "Array.from(map.entries()).map",
+          "lineNumber": 46
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "Array.from",
+          "lineNumber": 46
+        },
+        {
+          "caller": "groupByRoadmap",
+          "callee": "map.entries",
+          "lineNumber": 46
+        },
+        {
+          "caller": "useSearch",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "useSearch",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "useSearch",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "useSearch",
+          "callee": "useSearchLazyQuery",
+          "lineNumber": 53
+        },
+        {
+          "caller": "useSearch",
+          "callee": "useEffect",
+          "lineNumber": 55
+        },
+        {
+          "caller": "useSearch",
+          "callee": "setTimeout",
+          "lineNumber": 59
+        },
+        {
+          "caller": "useSearch",
+          "callee": "search",
+          "lineNumber": 60
+        },
+        {
+          "caller": "useSearch",
+          "callee": "clearTimeout",
+          "lineNumber": 62
+        },
+        {
+          "caller": "useSearch",
+          "callee": "groupByRoadmap",
+          "lineNumber": 67
+        },
+        {
+          "caller": "useSearch",
+          "callee": "groupByTime",
+          "lineNumber": 68
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    }
+  ]
+}

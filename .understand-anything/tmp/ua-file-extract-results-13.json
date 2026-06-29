@@ -1,0 +1,150 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/admin/.env.example",
+      "language": "config",
+      "fileCategory": "config",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "definitions": [
+        {
+          "name": "NEXT_PUBLIC_API_URL",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 1,
+          "endLine": 1
+        },
+        {
+          "name": "UPLOADTHING_TOKEN",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "apps/admin/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 45,
+      "nonEmptyLines": 45,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "apps/admin/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 31,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 22
+        },
+        {
+          "heading": "exclude",
+          "level": 1,
+          "line": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "apps/admin/vercel.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 5,
+      "nonEmptyLines": 5,
+      "sections": [
+        {
+          "heading": "framework",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "installCommand",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "buildCommand",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    }
+  ]
+}

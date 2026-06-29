@@ -1,0 +1,340 @@
+{
+  "batchIndex": 2,
+  "files": [
+    [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      9,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      9,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      8,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      9,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      16,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      9,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      10,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/application/use-cases/use-cases.spec.ts",
+      154,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      17,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      6,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      22,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      100,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/infrastructure/database/database.module.ts",
+      10,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts",
+      255,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+      222,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/roadmap/node.resolver.ts",
+      64,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts",
+      201,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/roadmap/roadmap.module.ts",
+      35,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts",
+      68,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      127,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts",
+      178,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/use-cases.spec.ts": [
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts"
+    ],
+    "apps/api-gateway/src/auth/admin.guard.ts": [],
+    "apps/api-gateway/src/domain/entities/edge.entity.ts": [],
+    "apps/api-gateway/src/domain/entities/node.entity.ts": [],
+    "apps/api-gateway/src/domain/entities/roadmap.entity.ts": [],
+    "apps/api-gateway/src/domain/repositories/roadmap.repository.ts": [
+      "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts"
+    ],
+    "apps/api-gateway/src/infrastructure/database/database.module.ts": [
+      "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts": [
+      "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts": [
+      "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/roadmap/node.resolver.ts": [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.dto.ts": [],
+    "apps/api-gateway/src/roadmap/roadmap.module.ts": [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/infrastructure/database/database.module.ts",
+      "apps/api-gateway/src/roadmap/node.resolver.ts",
+      "apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts": [
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/roadmap/roadmap.resolver.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.resolver.ts": [
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts": [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ]
+  },
+  "neighborMap": {
+    "apps/api-gateway/src/roadmap/roadmap.module.ts": [
+      {
+        "path": "apps/api-gateway/src/app.module.ts",
+        "batchIndex": 9,
+        "symbols": [
+          "AppModule"
+        ]
+      }
+    ]
+  }
+}

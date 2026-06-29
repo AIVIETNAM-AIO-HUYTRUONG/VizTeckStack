@@ -1,0 +1,36 @@
+{
+  "batchIndex": 15,
+  "files": [
+    [
+      "apps/web/.env.example",
+      1,
+      "config",
+      "config"
+    ],
+    [
+      "apps/web/package.json",
+      37,
+      "json",
+      "config"
+    ],
+    [
+      "apps/web/tsconfig.json",
+      32,
+      "json",
+      "config"
+    ],
+    [
+      "apps/web/vercel.json",
+      5,
+      "json",
+      "config"
+    ]
+  ],
+  "batchImportData": {
+    "apps/web/.env.example": [],
+    "apps/web/package.json": [],
+    "apps/web/tsconfig.json": [],
+    "apps/web/vercel.json": []
+  },
+  "neighborMap": {}
+}

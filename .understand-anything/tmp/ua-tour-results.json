@@ -1,0 +1,2072 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "document:README.md",
+      "score": 5,
+      "name": "README.md",
+      "summary": "Tài liệu tổng quan dự án VizTeckStack với 13 mục bao gồm kiến trúc hệ thống, cấu trúc thư mục, hướng dẫn quick start, biến môi trường, tech stack và tài liệu cho developer mới."
+    },
+    {
+      "id": "file:apps/api-gateway/src/main.ts",
+      "score": 4,
+      "name": "main.ts",
+      "summary": "Điểm khởi động của NestJS API Gateway: kích hoạt CORS, cấu hình Swagger UI với Bearer auth, và lắng nghe trên cổng 3000."
+    },
+    {
+      "id": "file:packages/ui/src/index.ts",
+      "score": 4,
+      "name": "index.ts",
+      "summary": "Barrel file của @vizteck/ui, tái xuất Button, Card, NodeBadge cùng các type tương ứng để ứng dụng có thể import từ một đầu mối."
+    },
+    {
+      "id": "file:packages/core/src/index.ts",
+      "score": 3,
+      "name": "index.ts",
+      "summary": "Barrel export chính của package @vizteck/core, re-export tất cả hooks, components và types từ các feature roadmap, graph và lesson — đây là điểm vào duy nhất cho mọi consumer của package."
+    },
+    {
+      "id": "file:packages/db/index.ts",
+      "score": 3,
+      "name": "index.ts",
+      "summary": "Entry point của package @vizteck/db, export singleton PrismaClient (`db`), kiểu PrismaClientType và tất cả types từ @prisma/client để các package khác sử dụng."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      "name": "roadmap.repository.ts",
+      "fanIn": 15
+    },
+    {
+      "id": "file:packages/core/src/lesson/types.ts",
+      "name": "types.ts",
+      "fanIn": 14
+    },
+    {
+      "id": "file:packages/core/src/roadmap/types.ts",
+      "name": "types.ts",
+      "fanIn": 8
+    },
+    {
+      "id": "file:apps/admin/src/lib/apolloClient.ts",
+      "name": "apolloClient.ts",
+      "fanIn": 6
+    },
+    {
+      "id": "file:apps/api-gateway/src/domain/entities/node.entity.ts",
+      "name": "node.entity.ts",
+      "fanIn": 6
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "name": "search-nodes.use-case.ts",
+      "fanIn": 5
+    },
+    {
+      "id": "file:apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "name": "roadmap.entity.ts",
+      "fanIn": 5
+    },
+    {
+      "id": "file:apps/web/src/lib/gql.ts",
+      "name": "gql.ts",
+      "fanIn": 5
+    },
+    {
+      "id": "file:packages/core/src/graph/types.ts",
+      "name": "types.ts",
+      "fanIn": 5
+    },
+    {
+      "id": "file:packages/core/src/index.ts",
+      "name": "index.ts",
+      "fanIn": 5
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "name": "update-node-content.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "name": "update-node-cover.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "name": "update-node-icon.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "name": "create-roadmap.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "name": "delete-roadmap.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "name": "get-roadmap-tree.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "name": "get-roadmap.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "name": "list-roadmaps.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "name": "update-roadmap.use-case.ts",
+      "fanIn": 4
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "name": "upsert-graph.use-case.ts",
+      "fanIn": 4
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "file:apps/api-gateway/src/roadmap/roadmap.module.ts",
+      "name": "roadmap.module.ts",
+      "fanOut": 19
+    },
+    {
+      "id": "file:apps/api-gateway/src/roadmap/roadmap.rest.controller.ts",
+      "name": "roadmap.rest.controller.ts",
+      "fanOut": 16
+    },
+    {
+      "id": "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "name": "roadmap.resolver.ts",
+      "fanOut": 11
+    },
+    {
+      "id": "file:apps/admin/src/app/roadmaps/[id]/page.tsx",
+      "name": "page.tsx",
+      "fanOut": 9
+    },
+    {
+      "id": "file:apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts",
+      "name": "roadmap.resolver.spec.ts",
+      "fanOut": 9
+    },
+    {
+      "id": "file:apps/api-gateway/src/roadmap/node.resolver.ts",
+      "name": "node.resolver.ts",
+      "fanOut": 8
+    },
+    {
+      "id": "file:apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx",
+      "name": "page.tsx",
+      "fanOut": 6
+    },
+    {
+      "id": "file:apps/admin/src/app/roadmaps/page.tsx",
+      "name": "page.tsx",
+      "fanOut": 5
+    },
+    {
+      "id": "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+      "name": "prisma-roadmap.repository.ts",
+      "fanOut": 5
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/use-cases.spec.ts",
+      "name": "use-cases.spec.ts",
+      "fanOut": 4
+    },
+    {
+      "id": "file:packages/core/src/lesson/ui/SearchModal.tsx",
+      "name": "SearchModal.tsx",
+      "fanOut": 4
+    },
+    {
+      "id": "file:apps/web/src/app/layout.tsx",
+      "name": "layout.tsx",
+      "fanOut": 4
+    },
+    {
+      "id": "file:apps/admin/src/app/layout.tsx",
+      "name": "layout.tsx",
+      "fanOut": 3
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "name": "update-node-content.use-case.ts",
+      "fanOut": 3
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "name": "update-node-cover.use-case.ts",
+      "fanOut": 3
+    },
+    {
+      "id": "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "name": "update-node-icon.use-case.ts",
+      "fanOut": 3
+    },
+    {
+      "id": "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      "name": "roadmap.repository.ts",
+      "fanOut": 3
+    },
+    {
+      "id": "file:packages/core/src/lesson/ui/CoverDisplay.tsx",
+      "name": "CoverDisplay.tsx",
+      "fanOut": 3
+    },
+    {
+      "id": "file:packages/core/src/lesson/ui/LessonPageLayout.tsx",
+      "name": "LessonPageLayout.tsx",
+      "fanOut": 3
+    },
+    {
+      "id": "file:packages/core/src/lesson/ui/LessonPageShell.tsx",
+      "name": "LessonPageShell.tsx",
+      "fanOut": 3
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:apps/api-gateway/src/main.ts",
+    "order": [
+      "file:apps/api-gateway/src/main.ts",
+      "file:apps/api-gateway/src/app.module.ts",
+      "file:apps/api-gateway/src/health.controller.ts",
+      "file:apps/api-gateway/src/roadmap/roadmap.module.ts",
+      "file:apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "file:apps/api-gateway/src/infrastructure/database/database.module.ts",
+      "file:apps/api-gateway/src/roadmap/node.resolver.ts",
+      "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "file:apps/api-gateway/src/roadmap/roadmap.rest.controller.ts",
+      "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      "file:apps/api-gateway/src/domain/entities/node.entity.ts",
+      "file:apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+      "file:apps/api-gateway/src/auth/admin.guard.ts",
+      "file:apps/api-gateway/src/roadmap/roadmap.dto.ts",
+      "file:apps/api-gateway/src/domain/entities/edge.entity.ts"
+    ],
+    "depthMap": {
+      "file:apps/api-gateway/src/main.ts": 0,
+      "file:apps/api-gateway/src/app.module.ts": 1,
+      "file:apps/api-gateway/src/health.controller.ts": 2,
+      "file:apps/api-gateway/src/roadmap/roadmap.module.ts": 2,
+      "file:apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts": 3,
+      "file:apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts": 3,
+      "file:apps/api-gateway/src/infrastructure/database/database.module.ts": 3,
+      "file:apps/api-gateway/src/roadmap/node.resolver.ts": 3,
+      "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts": 3,
+      "file:apps/api-gateway/src/roadmap/roadmap.rest.controller.ts": 3,
+      "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts": 4,
+      "file:apps/api-gateway/src/domain/entities/node.entity.ts": 4,
+      "file:apps/api-gateway/src/domain/entities/roadmap.entity.ts": 4,
+      "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts": 4,
+      "file:apps/api-gateway/src/auth/admin.guard.ts": 4,
+      "file:apps/api-gateway/src/roadmap/roadmap.dto.ts": 4,
+      "file:apps/api-gateway/src/domain/entities/edge.entity.ts": 5
+    },
+    "byDepth": {
+      "0": [
+        "file:apps/api-gateway/src/main.ts"
+      ],
+      "1": [
+        "file:apps/api-gateway/src/app.module.ts"
+      ],
+      "2": [
+        "file:apps/api-gateway/src/health.controller.ts",
+        "file:apps/api-gateway/src/roadmap/roadmap.module.ts"
+      ],
+      "3": [
+        "file:apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+        "file:apps/api-gateway/src/infrastructure/database/database.module.ts",
+        "file:apps/api-gateway/src/roadmap/node.resolver.ts",
+        "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+        "file:apps/api-gateway/src/roadmap/roadmap.rest.controller.ts"
+      ],
+      "4": [
+        "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+        "file:apps/api-gateway/src/domain/entities/node.entity.ts",
+        "file:apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+        "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+        "file:apps/api-gateway/src/auth/admin.guard.ts",
+        "file:apps/api-gateway/src/roadmap/roadmap.dto.ts"
+      ],
+      "5": [
+        "file:apps/api-gateway/src/domain/entities/edge.entity.ts"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:CLAUDE.md",
+        "name": "CLAUDE.md",
+        "summary": "Tài liệu hướng dẫn toàn diện cho Claude Code với 13 mục bao gồm lệnh phát triển, quy trình Git, kiến trúc hệ thống, cấu trúc package, mô hình dữ liệu và các pattern không hiển nhiên của dự án."
+      },
+      {
+        "id": "document:README.md",
+        "name": "README.md",
+        "summary": "Tài liệu tổng quan dự án VizTeckStack với 13 mục bao gồm kiến trúc hệ thống, cấu trúc thư mục, hướng dẫn quick start, biến môi trường, tech stack và tài liệu cho developer mới."
+      },
+      {
+        "id": "document:docs/onboarding/architecture.md",
+        "name": "architecture.md",
+        "summary": "Tài liệu mô tả toàn bộ kiến trúc hệ thống VizTeckStack: cấu trúc monorepo, lý do chọn pnpm workspaces và Turborepo, phân tách hai frontend (web/admin), vai trò của API Gateway, giao thức gRPC, quy tắc phụ thuộc giữa các package, data model, xác thực admin, dark mode, và các luồng dữ liệu chính."
+      },
+      {
+        "id": "document:docs/onboarding/cheatsheet.md",
+        "name": "cheatsheet.md",
+        "summary": "Tờ cheat sheet nhanh dành cho developer, tổng hợp các lệnh thường dùng hàng ngày, cách chạy test từng package, cổng dịch vụ, biến môi trường, quy tắc đặt tên nhánh, Conventional Commits, data model và CI/CD triggers trong một tài liệu dễ tra cứu."
+      },
+      {
+        "id": "document:docs/onboarding/cicd.md",
+        "name": "cicd.md",
+        "summary": "Giải thích ba CI/CD pipeline của dự án (ci.yml, deploy-staging.yml, release.yml), sơ đồ kết nối GitFlow với CI/CD, danh sách GitHub Secrets cần thiết, cấu hình môi trường Vercel, lý do E2E không chạy trên CI, và hướng dẫn xử lý lỗi pipeline thường gặp."
+      },
+      {
+        "id": "document:docs/onboarding/daily-workflow.md",
+        "name": "daily-workflow.md",
+        "summary": "Hướng dẫn quy trình làm việc hàng ngày theo GitFlow: lifecycle của feature branch, hotfix và release, các bước tạo nhánh, commit theo Conventional Commits, mở Pull Request, CI tự động, code review và merge; kèm những lỗi phổ biến của developer mới cần tránh."
+      },
+      {
+        "id": "document:docs/onboarding/getting-started.md",
+        "name": "getting-started.md",
+        "summary": "Hướng dẫn setup môi trường phát triển từ đầu cho developer mới: yêu cầu hệ thống, clone repo, cài dependencies, khởi động PostgreSQL bằng Docker, cấu hình file môi trường cho từng app, khởi tạo database, generate gRPC types, chạy toàn bộ service, và xử lý các lỗi thường gặp trên Windows/Mac."
+      },
+      {
+        "id": "document:docs/onboarding/git-hooks.md",
+        "name": "git-hooks.md",
+        "summary": "Mô tả ba Git hook được cấu hình qua Husky (commit-msg, pre-commit, pre-push), lý do tồn tại của từng hook, hướng dẫn setup cho developer mới, ví dụ thực tế về commit hợp lệ và không hợp lệ, cách bỏ qua hook khi khẩn cấp và cách thay đổi cấu hình."
+      },
+      {
+        "id": "document:docs/onboarding/testing.md",
+        "name": "testing.md",
+        "summary": "Hướng dẫn toàn diện về kiểm thử trong monorepo: unit test với Vitest cho apps/admin, Jest cho apps/api-gateway và apps/svc-roadmap (bao gồm mock gRPC client và Prisma), E2E test với Playwright, best practices viết test theo pattern Arrange/Act/Assert, và cách xử lý lỗi thường gặp khi chạy test."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md",
+        "name": "2026-06-18-vizteckstack-implementation.md",
+        "summary": "Kế hoạch triển khai toàn bộ dự án VizTeckStack từ đầu, bao gồm 4 giai đoạn: thiết lập monorepo, xây dựng core services (NestJS gRPC + API Gateway), shared packages (UI, graph), và frontend apps (web viewer + admin CMS với graph editor và lesson editor)."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md",
+        "name": "2026-06-20-admin-ui-feature-first-refactor.md",
+        "summary": "Kế hoạch refactor Admin UI theo kiến trúc feature-first, bao gồm 12 task: thêm Vitest, viết service và hook theo TDD (roadmap, graph, node actions, draft), dọn dẹp component, và chuẩn hóa GraphEditor/LessonEditor page."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-21-apply-gitflow.md",
+        "name": "2026-06-21-apply-gitflow.md",
+        "summary": "Kế hoạch áp dụng GitFlow cho monorepo VizTeckStack gồm 7 task: tạo branch develop, dọn stale branches, thiết lập CI workflow, staging deploy, production release workflow, đẩy lên develop, và cấu hình branch protection rules thủ công."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-21-lesson-crud-feature.md",
+        "name": "2026-06-21-lesson-crud-feature.md",
+        "summary": "Kế hoạch triển khai tính năng Lesson CRUD xuyên suốt toàn bộ stack, bao gồm cập nhật Proto/gRPC, implement service NestJS, thêm PATCH endpoints vào API Gateway, và tạo features/lessons/ trong admin app với debounce autosave."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md",
+        "name": "2026-06-21-web-feature-first-refactor.md",
+        "summary": "Kế hoạch refactor apps/web theo kiến trúc feature-first, bao gồm thêm Vitest, viết node.service.ts và roadmap.service.ts theo TDD, di chuyển components vào features/, tạo LessonLayout, và xóa các file lib/api.ts cũ."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-22-feature-loop.md",
+        "name": "2026-06-22-feature-loop.md",
+        "summary": "Kế hoạch triển khai Feature Loop — một Claude Code skill tự động hóa vòng lặp phát triển tính năng, bao gồm thêm loop-state.json vào .gitignore và tạo file skill với logic điều phối các bước lặp."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-22-notion-lesson.md",
+        "name": "2026-06-22-notion-lesson.md",
+        "summary": "Kế hoạch hoàn thiện giao diện Notion-style cho trang lesson, gồm highlight node hiện tại trong MiniGraph, kết nối dữ liệu roadmap vào LessonLayout, parallel fetch dữ liệu, và thay button lưu thủ công bằng debounce autosave trong LessonEditor."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-23-notion-page-shell.md",
+        "name": "2026-06-23-notion-page-shell.md",
+        "summary": "Kế hoạch triển khai Notion Page Shell xuyên toàn stack: migration DB thêm coverImage/icon, cập nhật Proto/gRPC, implement service NestJS, PATCH endpoints, uploadthing setup, tạo shared components (BreadcrumbDisplay, CoverDisplay, LessonPageShell) và slot pattern cho admin/web."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md",
+        "name": "2026-06-23-notion-sidebar-tree.md",
+        "summary": "Kế hoạch triển khai Notion-style sidebar page tree: thêm RoadmapTree messages và RPC vào Proto, implement getRoadmapTree TDD, tạo GraphQL query và REST endpoint, và xây dựng PageTreeItem/PageTreeSidebar components dùng chung cho cả admin và web."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-24-notion-search-plan.md",
+        "name": "2026-06-24-notion-search-plan.md",
+        "summary": "Kế hoạch triển khai Notion-style search (Cmd+K) toàn stack: thêm SearchNodes RPC vào Proto, implement và test service, tạo GraphQL query và REST endpoint, setup Apollo Client cho cả web và admin, xây dựng useSearchModal/useSearch hooks và SearchModal UI components."
+      },
+      {
+        "id": "document:docs/superpowers/plans/2026-06-28-core-package-refactor.md",
+        "name": "2026-06-28-core-package-refactor.md",
+        "summary": "Kế hoạch refactor toàn diện packages/core: scaffold package mới, migrate roadmap/graph/lesson domain (services + hooks), di chuyển UI components từ packages/graph và packages/lesson vào packages/core, và convert packages/graph + packages/lesson thành shim-only packages."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-18-vizteckstack-design.md",
+        "name": "2026-06-18-vizteckstack-design.md",
+        "summary": "Tài liệu thiết kế ban đầu cho toàn bộ dự án VizTeckStack, mô tả kiến trúc monorepo, data model Prisma, API design (GraphQL, REST, gRPC), cấu trúc frontend và quy trình phát triển cục bộ."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md",
+        "name": "2026-06-20-admin-ui-refactor-design.md",
+        "summary": "Đặc tả refactor Admin UI theo kiến trúc feature-first, định nghĩa cấu trúc thư mục, layer rules, service contract, hook contract, luồng dữ liệu và chiến lược kiểm thử cho apps/admin."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-21-git-workflow-design.md",
+        "name": "2026-06-21-git-workflow-design.md",
+        "summary": "Đặc tả quy trình Git theo GitFlow đầy đủ: cấu trúc nhánh, CI/CD mapping, quy trình release, hotfix lifecycle, Conventional Commits và branch protection rules trên GitHub."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-22-feature-loop-design.md",
+        "name": "2026-06-22-feature-loop-design.md",
+        "summary": "Đặc tả cơ chế Feature Loop: orchestration flow tự động theo chu kỳ, trigger conditions, skill mapping, checkpoint format, error handling và state file để resume khi gián đoạn."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-22-notion-lesson-design.md",
+        "name": "2026-06-22-notion-lesson-design.md",
+        "summary": "Đặc tả hoàn thiện tính năng Notion Lesson gồm 3 phần: tích hợp MiniGraph với dữ liệu roadmap thực, autosave trong LessonEditor, và cải thiện Progress Card — kèm danh sách file thay đổi."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-22-turbo-tui-design.md",
+        "name": "2026-06-22-turbo-tui-design.md",
+        "summary": "Đặc tả nâng cấp Turborepo lên Terminal UI (TUI) mode để cải thiện developer experience, mô tả thay đổi turbo.json và cấu hình CI workflow để stream output trong môi trường CI."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md",
+        "name": "2026-06-22-vizteckstack-ui-redesign-design.md",
+        "summary": "Tài liệu thiết kế UI Redesign toàn diện cho VizTeckStack, bao gồm design system mở rộng (màu sắc, typography, card elevation, animation), surface specs cho tất cả các trang, component specs và Stitch prompts sẵn sàng để generate UI."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-23-notion-page-shell-design.md",
+        "name": "2026-06-23-notion-page-shell-design.md",
+        "summary": "Đặc tả thiết kế Notion Page Shell với hero cover layout, chi tiết đầy đủ về database changes, Proto contract, GraphQL/REST API, Uploadthing flow, shared components trong packages/lesson, admin UI hooks và web viewer — kèm test strategy cho tất cả layer."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md",
+        "name": "2026-06-23-notion-sidebar-tree-design.md",
+        "summary": "Đặc tả Notion Sidebar Page Tree: layout sidebar, data model changes, Proto/gRPC contract, backend svc-roadmap service, api-gateway REST/GraphQL endpoints, các component mới trong packages/lesson (PageTreeItem, PageTreeSidebar, LessonPageLayout) và tích hợp vào apps/web và apps/admin."
+      },
+      {
+        "id": "document:docs/superpowers/specs/2026-06-24-notion-search-design.md",
+        "name": "2026-06-24-notion-search-design.md",
+        "summary": "Đặc tả tính năng Notion Search (Cmd+K): thiết lập Apollo Client trong packages/graphql-client, Proto và svc-roadmap search endpoint, GraphQL resolver/DTO, SearchModal component với useSearch hook, time grouping và tích hợp vào cả apps/web lẫn apps/admin."
+      },
+      {
+        "id": "document:docs/clean-architecture.md",
+        "name": "clean-architecture.md",
+        "summary": "Tài liệu kiến trúc backend chi tiết bằng tiếng Việt, mô tả 4 layer Clean Architecture (Domain, Application, Interfaces, Infrastructure) với ví dụ cụ thể, luồng request thực tế và kế hoạch refactor từ kiến trúc gRPC sang kiến trúc sạch."
+      },
+      {
+        "id": "document:services/svc-python/README.md",
+        "name": "README.md",
+        "summary": "Tài liệu placeholder cho microservice Python (FastAPI + gRPC) dự kiến trong tương lai, chưa được triển khai."
+      },
+      {
+        "id": "document:services/svc-rust/README.md",
+        "name": "README.md",
+        "summary": "Tài liệu placeholder cho microservice Rust (Axum + gRPC) dự kiến trong tương lai, chưa được triển khai."
+      }
+    ],
+    "infrastructure": [
+      {
+        "id": "pipeline:.github/workflows/ci.yml",
+        "name": "ci.yml",
+        "type": "pipeline",
+        "summary": "Pipeline CI chạy một job duy nhất (Lint, Test & Build) theo thứ tự build → lint → test trên mọi PR và mọi push lên nhánh main, develop, hoặc release/*. Bao gồm bước tạo proto types từ packages/proto trước khi build."
+      },
+      {
+        "id": "pipeline:.github/workflows/deploy-staging.yml",
+        "name": "deploy-staging.yml",
+        "type": "pipeline",
+        "summary": "Pipeline triển khai môi trường staging lên Vercel khi có push vào nhánh develop hoặc release/*. Chạy song song hai job độc lập: deploy apps/web và deploy apps/admin, mỗi job dùng Vercel CLI với token bí mật từ GitHub Secrets."
+      },
+      {
+        "id": "pipeline:.github/workflows/release.yml",
+        "name": "release.yml",
+        "type": "pipeline",
+        "summary": "Pipeline triển khai production lên Vercel khi có push tag v*. Chạy song song deploy apps/web và apps/admin lên production, sau đó job github-release tạo GitHub Release tự động với release notes được sinh từ commit history."
+      },
+      {
+        "id": "service:docker-compose.yml",
+        "name": "docker-compose.yml",
+        "type": "service",
+        "summary": "Cấu hình Docker Compose khởi chạy service PostgreSQL cho môi trường phát triển local, sử dụng volume để lưu trữ dữ liệu bền vững."
+      }
+    ],
+    "data": [
+      {
+        "id": "schema:apps/api-gateway/src/schema.gql",
+        "name": "schema.gql",
+        "type": "schema",
+        "summary": "Schema GraphQL đầy đủ của API gateway định nghĩa tất cả các type (Roadmap, Node, Edge, Search), enum, input type, Query và Mutation cho hệ thống quản lý roadmap."
+      },
+      {
+        "id": "table:packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql:Node",
+        "name": "Node",
+        "type": "table",
+        "summary": "Migration SQL cho phép các trường positionX và positionY của bảng Node nhận giá trị NULL, hỗ trợ tính năng node 'off-canvas' (chưa được đặt trên canvas)."
+      },
+      {
+        "id": "table:packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql:Node",
+        "name": "Node",
+        "type": "table",
+        "summary": "Migration SQL thêm hai cột `coverImage` (TEXT nullable) và `icon` (TEXT nullable) vào bảng Node để hỗ trợ ảnh bìa và biểu tượng emoji cho node bài học."
+      },
+      {
+        "id": "schema:packages/db/prisma/schema.prisma",
+        "name": "schema.prisma",
+        "type": "schema",
+        "summary": "Schema Prisma định nghĩa các model cốt lõi của hệ thống: Roadmap (với trạng thái DRAFT/PUBLIC/PRIVATE), Node (loại LESSON/ROADMAP, có coverImage, icon, positionX/Y nullable) và Edge (kết nối các node trong cùng roadmap)."
+      },
+      {
+        "id": "schema:packages/graphql-client/src/queries/nodes/nodes.graphql",
+        "name": "nodes.graphql",
+        "type": "schema",
+        "summary": "Định nghĩa các GraphQL query và mutation cho node: lấy thông tin node, breadcrumb, cây roadmap, cũng như cập nhật nội dung, tiêu đề, ảnh bìa và icon của node."
+      },
+      {
+        "id": "schema:packages/graphql-client/src/queries/roadmaps/roadmaps.graphql",
+        "name": "roadmaps.graphql",
+        "type": "schema",
+        "summary": "Định nghĩa các GraphQL query và mutation cho roadmap: liệt kê, lấy chi tiết, tạo mới, cập nhật, xoá roadmap, và upsert toàn bộ graph (nodes + edges) trong một lần gọi."
+      },
+      {
+        "id": "schema:packages/graphql-client/src/queries/search.graphql",
+        "name": "search.graphql",
+        "type": "schema",
+        "summary": "Định nghĩa GraphQL query Search cho phép tìm kiếm node theo từ khoá, hỗ trợ lọc theo roadmap và chế độ chỉ tìm tiêu đề."
+      }
+    ],
+    "config": [
+      {
+        "id": "config:.env.example",
+        "name": ".env.example",
+        "summary": "Mẫu biến môi trường cho toàn bộ monorepo, định nghĩa 7 biến quan trọng bao gồm DATABASE_URL, ADMIN_TOKEN, NEXT_PUBLIC_API_URL và UPLOADTHING_TOKEN cần thiết để khởi chạy các service."
+      },
+      {
+        "id": "config:package.json",
+        "name": "package.json",
+        "summary": "Package manifest gốc của monorepo định nghĩa các script workspace-level (dev, build, test, lint) chạy qua Turborepo, cùng với devDependencies và packageManager là pnpm."
+      },
+      {
+        "id": "config:pnpm-workspace.yaml",
+        "name": "pnpm-workspace.yaml",
+        "summary": "Định nghĩa workspace của pnpm bao gồm ba nhóm thư mục: apps/*, packages/* và services/*, cho phép chia sẻ dependency và chạy lệnh xuyên suốt monorepo."
+      },
+      {
+        "id": "config:render.yaml",
+        "name": "render.yaml",
+        "summary": "Cấu hình deployment lên Render.com cho môi trường staging, định nghĩa các service cần triển khai cùng với biến môi trường và lệnh build/start."
+      },
+      {
+        "id": "config:tsconfig.base.json",
+        "name": "tsconfig.base.json",
+        "summary": "Cấu hình TypeScript cơ sở mà mọi package trong monorepo đều kế thừa, bật strict mode, target ES2022 và module commonjs."
+      },
+      {
+        "id": "config:turbo.json",
+        "name": "turbo.json",
+        "summary": "Cấu hình Turborepo pipeline với dependency ordering cho 4 task: dev, build, test và lint, đảm bảo build thực thi theo đúng thứ tự dependency giữa các package."
+      },
+      {
+        "id": "config:apps/admin/.env.example",
+        "name": ".env.example",
+        "summary": "Mẫu biến môi trường cho ứng dụng admin, khai báo các biến bắt buộc gồm URL API công khai, token xác thực admin và token UploadThing để upload ảnh bìa."
+      },
+      {
+        "id": "config:apps/admin/package.json",
+        "name": "package.json",
+        "summary": "Khai báo phụ thuộc và script cho ứng dụng admin Next.js 15, bao gồm các gói nội bộ @vizteck/core, @vizteck/ui, apollo client, uploadthing và các công cụ dev như Vitest."
+      },
+      {
+        "id": "config:apps/admin/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho ứng dụng admin, kế thừa tsconfig.base.json của monorepo và bổ sung các thiết lập dành riêng cho Next.js như path alias, plugin next và các thư viện DOM."
+      },
+      {
+        "id": "config:apps/admin/vercel.json",
+        "name": "vercel.json",
+        "summary": "Cấu hình triển khai Vercel cho ứng dụng admin, chỉ định framework Next.js và lệnh build tùy chỉnh thông qua Turborepo để đảm bảo build đúng thứ tự phụ thuộc trong monorepo."
+      },
+      {
+        "id": "config:apps/api-gateway/.env.example",
+        "name": ".env.example",
+        "summary": "Mẫu biến môi trường cho NestJS API Gateway, khai báo ba biến cần thiết: DATABASE_URL (kết nối PostgreSQL), ADMIN_TOKEN (xác thực bearer token cho AdminGuard), và PORT (cổng lắng nghe mặc định 3000)."
+      },
+      {
+        "id": "config:apps/api-gateway/package.json",
+        "name": "package.json",
+        "summary": "Manifest của NestJS API Gateway (@vizteck/api-gateway), khai báo toàn bộ dependencies (NestJS, Apollo Server, Prisma, class-validator, class-transformer, Swagger) và cấu hình Jest để chạy unit test với ts-jest."
+      },
+      {
+        "id": "config:apps/api-gateway/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho NestJS API Gateway, kế thừa tsconfig.base.json và bật experimentalDecorators cùng emitDecoratorMetadata — hai flag bắt buộc để NestJS dependency injection và decorator (Controller, Injectable, Module) hoạt động đúng."
+      },
+      {
+        "id": "config:apps/web/.env.example",
+        "name": ".env.example",
+        "summary": "Mẫu biến môi trường cho ứng dụng web công khai, khai báo duy nhất biến NEXT_PUBLIC_API_URL trỏ đến API gateway."
+      },
+      {
+        "id": "config:apps/web/package.json",
+        "name": "package.json",
+        "summary": "Khai báo dependencies và scripts cho ứng dụng Next.js 15 public viewer, bao gồm các thư viện như React, @vizteck/core, @vizteck/ui và Tailwind CSS."
+      },
+      {
+        "id": "config:apps/web/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho ứng dụng web công khai, mở rộng từ tsconfig.base.json với các tùy chọn compiler dành riêng cho Next.js 15."
+      },
+      {
+        "id": "config:apps/web/vercel.json",
+        "name": "vercel.json",
+        "summary": "Cấu hình triển khai Vercel cho ứng dụng web công khai, chỉ định framework Next.js, lệnh cài đặt pnpm và lệnh build trong monorepo Turborepo."
+      },
+      {
+        "id": "config:packages/db/.env.example",
+        "name": ".env.example",
+        "summary": "Mẫu biến môi trường cho package `@vizteck/db`, khai báo `DATABASE_URL` dùng để kết nối PostgreSQL qua Prisma."
+      },
+      {
+        "id": "config:packages/db/package.json",
+        "name": "package.json",
+        "summary": "Cấu hình package `@vizteck/db` — khai báo entry point, scripts Prisma (`db:push`, `db:migrate`, `db:seed`, `db:studio`), và dependencies (`@prisma/client`, `prisma`)."
+      },
+      {
+        "id": "config:packages/db/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho package `@vizteck/db`, kế thừa từ `tsconfig.base.json` với strict mode và bao gồm toàn bộ source files trong package."
+      },
+      {
+        "id": "config:.claude/settings.json",
+        "name": "settings.json",
+        "summary": "Cấu hình Claude Code cho dự án, định nghĩa các plugin được bật và danh sách quyền (permissions) cho phép hoặc từ chối các lệnh cụ thể."
+      },
+      {
+        "id": "config:.understand-anything/config.json",
+        "name": "config.json",
+        "summary": "Cấu hình ngôn ngữ đầu ra cho plugin Understand-Anything, đặt ngôn ngữ mặc định là tiếng Việt (vi)."
+      },
+      {
+        "id": "config:apps/e2e/package.json",
+        "name": "package.json",
+        "summary": "Package manifest cho workspace E2E test, khai báo scripts Playwright (headless, UI mode, headed) và các devDependencies cần thiết."
+      },
+      {
+        "id": "config:packages/core/package.json",
+        "name": "package.json",
+        "summary": "Cấu hình package cho @vizteck/core — nguồn thật duy nhất của toàn bộ logic tính năng, khai báo các peer dependencies (React, @xyflow/react), dependencies (@blocknote, @apollo/client) và devDependencies cho việc build và test."
+      },
+      {
+        "id": "config:packages/core/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho package @vizteck/core, kế thừa từ tsconfig.base.json ở root với các tuỳ chọn compiler bổ sung phù hợp cho React library."
+      },
+      {
+        "id": "config:packages/graph/package.json",
+        "name": "package.json",
+        "summary": "Cấu hình package cho @vizteck/graph — một shim package chỉ re-export từ @vizteck/core, khai báo @vizteck/core là dependency chính."
+      },
+      {
+        "id": "config:packages/graph/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho package @vizteck/graph, kế thừa từ tsconfig.base.json ở root và chỉ include thư mục src."
+      },
+      {
+        "id": "config:packages/graphql-client/package.json",
+        "name": "package.json",
+        "summary": "Cấu hình package cho @vizteck/graphql-client, khai báo @apollo/client là dependency và graphql-code-generator là devDependency để tự động sinh code."
+      },
+      {
+        "id": "config:packages/graphql-client/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho package graphql-client, kế thừa từ tsconfig.base.json của monorepo và chỉ định các file cần biên dịch."
+      },
+      {
+        "id": "config:packages/lesson/package.json",
+        "name": "package.json",
+        "summary": "Cấu hình package @vizteck/lesson — shim layer tái xuất các component và type từ @vizteck/core, khai báo dependencies và script kiểm thử bằng Vitest."
+      },
+      {
+        "id": "config:packages/lesson/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho package @vizteck/lesson, kế thừa tsconfig.base.json với JSX preserve để hỗ trợ React component."
+      },
+      {
+        "id": "config:packages/ui/package.json",
+        "name": "package.json",
+        "summary": "Cấu hình package @vizteck/ui — thư viện shared React component nguyên thủy (Button, Card, NodeBadge), khai báo entry point và peer dependencies."
+      },
+      {
+        "id": "config:packages/ui/tsconfig.json",
+        "name": "tsconfig.json",
+        "summary": "Cấu hình TypeScript cho package @vizteck/ui, kế thừa tsconfig.base.json và bao gồm toàn bộ file trong src/."
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "nodes": [
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/use-cases.spec.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+        "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts"
+      ],
+      "edgeCount": 4
+    },
+    {
+      "nodes": [
+        "file:apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts",
+        "file:apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts",
+        "file:apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts",
+        "file:apps/admin/src/features/graph-editor/hooks/useNodeActions.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts",
+        "file:apps/admin/src/features/lessons/hooks/useLessonPageShell.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:apps/admin/src/features/lessons/hooks/usePageTree.spec.ts",
+        "file:apps/admin/src/features/lessons/hooks/usePageTree.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts",
+        "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts",
+        "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx",
+        "file:packages/core/src/lesson/ui/BreadcrumbDisplay.tsx"
+      ],
+      "edgeCount": 1
+    },
+    {
+      "nodes": [
+        "file:packages/core/src/lesson/ui/CoverDisplay.spec.tsx",
+        "file:packages/core/src/lesson/ui/CoverDisplay.tsx"
+      ],
+      "edgeCount": 1
+    }
+  ],
+  "layers": {
+    "count": 9,
+    "list": [
+      {
+        "id": "layer:admin-frontend",
+        "name": "Giao Diện Quản Trị (Admin CMS)",
+        "description": "Ứng dụng Next.js 15 (port 3002) dành cho quản trị viên — bao gồm graph editor toàn màn hình, lesson editor, quản lý roadmap, xác thực token, và các tính năng UI nội bộ chỉ dành cho admin."
+      },
+      {
+        "id": "layer:public-frontend",
+        "name": "Giao Diện Công Khai (Web Viewer)",
+        "description": "Ứng dụng Next.js 15 (port 3001) phục vụ người dùng cuối — render tĩnh danh sách roadmap và trang chi tiết node công khai, không yêu cầu xác thực."
+      },
+      {
+        "id": "layer:api-gateway",
+        "name": "API Gateway (NestJS)",
+        "description": "Dịch vụ backend NestJS (port 3000) triển khai Clean Architecture — cung cấp REST controllers, GraphQL resolvers, domain entities, use-cases, và bảo vệ AdminGuard cho toàn bộ hệ thống."
+      },
+      {
+        "id": "layer:shared-feature-logic",
+        "name": "Lõi Logic Nghiệp Vụ Dùng Chung (Core)",
+        "description": "Package @vizteck/core — nguồn sự thật duy nhất cho toàn bộ logic tính năng: hooks, services, types và UI components cho roadmap, graph editor và lesson editor, được chia sẻ giữa admin và web."
+      },
+      {
+        "id": "layer:database",
+        "name": "Tầng Dữ Liệu (Database & Prisma)",
+        "description": "Package @vizteck/db — chứa Prisma schema, migrations, seed script và PrismaClient singleton kết nối PostgreSQL; là nguồn duy nhất thao tác trực tiếp với cơ sở dữ liệu."
+      },
+      {
+        "id": "layer:shared-libraries",
+        "name": "Thư Viện Chia Sẻ (UI, Graph, Lesson, GraphQL)",
+        "description": "Tập hợp các package dùng chung: @vizteck/ui (primitive components), @vizteck/graphql-client (Apollo operations được generate), @vizteck/graph và @vizteck/lesson (shim re-export từ core) — cung cấp hợp đồng API ổn định cho các app."
+      },
+      {
+        "id": "layer:infrastructure-config",
+        "name": "Hạ Tầng & Cấu Hình",
+        "description": "Cấu hình monorepo gốc (Turborepo, pnpm workspace, tsconfig), CI/CD pipelines GitHub Actions, git hooks Husky, render.yaml và docker-compose — điều phối toàn bộ vòng đời build, deploy và kiểm soát commit."
+      },
+      {
+        "id": "layer:documentation",
+        "name": "Tài Liệu & Kế Hoạch",
+        "description": "Tài liệu onboarding, design specs, implementation plans (docs/), hướng dẫn clean architecture, và README của các microservice placeholder (svc-python, svc-rust) dự kiến trong tương lai."
+      },
+      {
+        "id": "layer:testing",
+        "name": "Kiểm Thử End-to-End",
+        "description": "Bộ test Playwright (apps/e2e) chạy kiểm thử tích hợp toàn luồng browser — yêu cầu tất cả ứng dụng đang chạy, tách biệt khỏi unit/integration tests của từng package."
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "file:apps/admin/src/app/layout.tsx": {
+      "name": "layout.tsx",
+      "type": "file",
+      "summary": "Layout gốc của ứng dụng admin Next.js 15 — thiết lập font, metadata, cấu hình chủ đề dark mode (blocking script chống FOUC), và bọc toàn bộ cây component bằng ApolloProvider và SearchModalWrapper."
+    },
+    "file:apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang soạn thảo bài học (Lesson Editor) của admin — kết hợp `useAdminLessonEditor`, `useAdminLessonPageShell`, `useAdminPageTree` và render `LessonPageShell` từ `@vizteck/core` với các slot chỉnh sửa (CoverImage, LessonTitleEditor)."
+    },
+    "file:apps/admin/src/app/roadmaps/[id]/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang graph editor toàn màn hình của admin — quản lý trạng thái node/edge, panel thêm/sửa node, xác nhận xóa, và điều hướng an toàn khi có thay đổi chưa lưu; không dùng AdminLayout."
+    },
+    "file:apps/admin/src/app/roadmaps/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang danh sách roadmap của admin CMS — hiển thị danh sách roadmap, cho phép tạo mới, chỉnh sửa, xóa, và thay đổi trạng thái (DRAFT/PUBLIC/PRIVATE) thông qua `useAdminRoadmaps`."
+    },
+    "file:apps/admin/src/components/AdminLayout.tsx": {
+      "name": "AdminLayout.tsx",
+      "type": "file",
+      "summary": "Layout wrapper chung cho các trang admin — cung cấp sidebar điều hướng, nút logout (xóa token khỏi localStorage và redirect về /login), và tích hợp ThemeToggle."
+    },
+    "file:apps/admin/src/components/ApolloProvider.tsx": {
+      "name": "ApolloProvider.tsx",
+      "type": "file",
+      "summary": "Thin wrapper cung cấp Apollo Client (`adminApolloClient`) cho toàn bộ cây component admin thông qua React context của `@apollo/client`."
+    },
+    "file:apps/admin/src/components/ConfirmDialog.tsx": {
+      "name": "ConfirmDialog.tsx",
+      "type": "file",
+      "summary": "Modal hộp thoại xác nhận có thể tái sử dụng — hỗ trợ tiêu đề, nội dung, nhãn nút tuỳ chỉnh, tự động focus vào nút huỷ và đóng bằng phím Escape."
+    },
+    "file:apps/admin/src/components/ThemeToggle.tsx": {
+      "name": "ThemeToggle.tsx",
+      "type": "file",
+      "summary": "Nút chuyển đổi dark/light mode — đọc giá trị từ `localStorage` khi mount, ghi lại khi toggle, và cập nhật class `.dark` trên `document.documentElement` để kích hoạt Tailwind dark mode."
+    },
+    "file:apps/admin/src/features/graph-editor/components/GraphToolbar.tsx": {
+      "name": "GraphToolbar.tsx",
+      "type": "file",
+      "summary": "Thanh công cụ của graph editor — hiển thị tiêu đề roadmap, trạng thái lưu, dropdown thay đổi trạng thái (DRAFT/PUBLIC/PRIVATE), nút thêm node, lưu, và quay lại; tích hợp ThemeToggle."
+    },
+    "file:apps/admin/src/features/graph-editor/components/NodeInventory.tsx": {
+      "name": "NodeInventory.tsx",
+      "type": "file",
+      "summary": "Panel danh sách node trong graph editor — hiển thị các node chưa đặt lên canvas, hỗ trợ drag-and-drop để thêm node, lọc theo loại (ALL/ROADMAP/LESSON), và đề xuất liên kết roadmap chưa được kết nối."
+    },
+    "file:apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx": {
+      "name": "NodeSidePanel.tsx",
+      "type": "file",
+      "summary": "Panel bên cạnh để tạo hoặc chỉnh sửa node trong graph editor — form nhập tiêu đề, chọn loại node (LESSON/ROADMAP), và chọn roadmap đích khi loại là ROADMAP."
+    },
+    "file:apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts": {
+      "name": "useGraphDraft.test.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử Vitest cho hook `useGraphDraft` — kiểm tra việc khởi tạo state node/edge và cập nhật thông qua `setEditorNodes`/`setEditorEdges`."
+    },
+    "file:apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts": {
+      "name": "useGraphDraft.ts",
+      "type": "file",
+      "summary": "Shim re-export `useGraphDraft`, `EditorNode` và `EditorEdge` từ `@vizteck/core` — không chứa logic nguồn."
+    },
+    "file:apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts": {
+      "name": "useGraphEditor.test.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử Vitest cho `useAdminGraphEditor` — kiểm tra việc truyền `adminApolloClient` vào hook core và xác minh dữ liệu roadmap được tải đúng cách."
+    },
+    "file:apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts": {
+      "name": "useGraphEditor.ts",
+      "type": "file",
+      "summary": "Thin wrapper hook `useAdminGraphEditor` — inject `adminApolloClient` vào `useGraphEditor` từ `@vizteck/core`; re-export các kiểu `EditorNode`, `EditorEdge`, `RoadmapEntry`."
+    },
+    "file:apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts": {
+      "name": "useNodeActions.test.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử Vitest toàn diện cho `useNodeActions` — bao gồm các kịch bản node changes, edge changes, drop từ inventory, kết nối, xóa, điều hướng với guard thay đổi chưa lưu."
+    },
+    "file:apps/admin/src/features/graph-editor/hooks/useNodeActions.ts": {
+      "name": "useNodeActions.ts",
+      "type": "file",
+      "summary": "Hook xử lý toàn bộ tương tác canvas graph editor — áp dụng React Flow changes, xử lý kết nối edge, drop node từ inventory (phân tích cú pháp payload 'newRoadmap:...'), điều hướng an toàn với guard."
+    },
+    "file:apps/admin/src/features/lessons/components/LessonTitleEditor.tsx": {
+      "name": "LessonTitleEditor.tsx",
+      "type": "file",
+      "summary": "Component chỉnh sửa tiêu đề bài học inline — lưu khi blur hoặc nhấn Enter, huỷ khi nhấn Escape, hiển thị trạng thái lưu (saving/saved/error)."
+    },
+    "file:apps/admin/src/features/lessons/hooks/useLessonEditor.ts": {
+      "name": "useLessonEditor.ts",
+      "type": "file",
+      "summary": "Thin wrapper hook `useAdminLessonEditor` — inject `adminApolloClient` vào `useLessonEditor` từ `@vizteck/core`; re-export `SaveStatus`, `UseLessonEditorResult`, `LessonNode`."
+    },
+    "file:apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts": {
+      "name": "useLessonPageShell.spec.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử Vitest cho `useAdminLessonPageShell` — kiểm tra cập nhật lạc quan cho cover và icon (cập nhật state ngay lập tức, khôi phục khi API lỗi)."
+    },
+    "file:apps/admin/src/features/lessons/hooks/useLessonPageShell.ts": {
+      "name": "useLessonPageShell.ts",
+      "type": "file",
+      "summary": "Thin wrapper hook `useAdminLessonPageShell` — inject `adminApolloClient` vào `useLessonPageShell` từ `@vizteck/core` để quản lý cover và icon của bài học."
+    },
+    "file:apps/admin/src/features/lessons/hooks/usePageTree.spec.ts": {
+      "name": "usePageTree.spec.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử Vitest cho `useAdminPageTree` — xác minh việc tải cây trang bài học và truyền đúng Apollo client."
+    },
+    "file:apps/admin/src/features/lessons/hooks/usePageTree.ts": {
+      "name": "usePageTree.ts",
+      "type": "file",
+      "summary": "Thin wrapper hook `useAdminPageTree` — inject `adminApolloClient` vào `usePageTree` từ `@vizteck/core` để lấy cây trang của node bài học."
+    },
+    "file:apps/admin/src/features/roadmaps/components/RoadmapModal.tsx": {
+      "name": "RoadmapModal.tsx",
+      "type": "file",
+      "summary": "Modal tạo và chỉnh sửa roadmap — tự động tạo slug từ tiêu đề (với debounce), hỗ trợ chỉnh sửa slug thủ công, validate và gọi callback onSubmit với tiêu đề, slug, mô tả."
+    },
+    "file:apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts": {
+      "name": "useRoadmaps.ts",
+      "type": "file",
+      "summary": "Thin wrapper hook `useAdminRoadmaps` — inject `adminApolloClient` vào `useRoadmaps` từ `@vizteck/core`; re-export `ModalState`."
+    },
+    "file:apps/admin/src/features/search/SearchModalWrapper.tsx": {
+      "name": "SearchModalWrapper.tsx",
+      "type": "file",
+      "summary": "Wrapper component cho modal tìm kiếm — lắng nghe phím tắt Ctrl+K (hoặc Cmd+K) qua `useSearchModal` và render modal tìm kiếm khi được kích hoạt."
+    },
+    "file:apps/admin/src/lib/api.ts": {
+      "name": "api.ts",
+      "type": "file",
+      "summary": "Thư viện tiện ích cốt lõi của admin — cung cấp `getToken` (đọc admin token từ localStorage) và `slugify` (chuyển tiêu đề thành URL-safe slug)."
+    },
+    "file:apps/admin/src/lib/apolloClient.ts": {
+      "name": "apolloClient.ts",
+      "type": "file",
+      "summary": "Khởi tạo và export singleton `adminApolloClient` — cấu hình HttpLink trỏ đến API gateway GraphQL endpoint, InMemoryCache, và tự động đính kèm Bearer token từ `getToken` vào mỗi request."
+    },
+    "file:apps/admin/src/lib/useAuthGuard.ts": {
+      "name": "useAuthGuard.ts",
+      "type": "file",
+      "summary": "Hook bảo vệ xác thực — kiểm tra `admin_token` trong localStorage khi mount và tự động redirect đến `/login` nếu không có token."
+    },
+    "file:apps/admin/src/lib/useRouteGuard.ts": {
+      "name": "useRouteGuard.ts",
+      "type": "file",
+      "summary": "Hook `useUnsavedGuard` — ngăn mất dữ liệu khi điều hướng rời khỏi trang có thay đổi chưa lưu: lắng nghe `beforeunload`, chặn điều hướng Next.js và cung cấp API xác nhận (`confirmNavigation`, `proceedNavigation`, `cancelNavigation`)."
+    },
+    "file:apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts": {
+      "name": "get-node-breadcrumb.use-case.ts",
+      "type": "file",
+      "summary": "Use case lấy breadcrumb (đường dẫn điều hướng) của một node bằng cách ủy quyền trực tiếp cho RoadmapRepository."
+    },
+    "file:apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts": {
+      "name": "get-node.use-case.ts",
+      "type": "file",
+      "summary": "Use case truy xuất một node theo id, ủy quyền cho RoadmapRepository.findNodeById."
+    },
+    "file:apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts": {
+      "name": "update-node-content.use-case.ts",
+      "type": "file",
+      "summary": "Use case cập nhật nội dung BlockNote JSON của node LESSON, xác thực kiểu NodeFieldKey trước khi ghi."
+    },
+    "file:apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts": {
+      "name": "update-node-cover.use-case.ts",
+      "type": "file",
+      "summary": "Use case cập nhật ảnh bìa (coverImage URL) của node thông qua repo.updateNodeField."
+    },
+    "file:apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts": {
+      "name": "update-node-icon.use-case.ts",
+      "type": "file",
+      "summary": "Use case cập nhật biểu tượng emoji của node thông qua repo.updateNodeField."
+    },
+    "file:apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts": {
+      "name": "update-node-title.use-case.ts",
+      "type": "file",
+      "summary": "Use case cập nhật tiêu đề của node thông qua repo.updateNodeField."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts": {
+      "name": "create-roadmap.use-case.ts",
+      "type": "file",
+      "summary": "Use case tạo mới một roadmap, nhận input và ủy quyền cho repo.create."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts": {
+      "name": "delete-roadmap.use-case.ts",
+      "type": "file",
+      "summary": "Use case xóa một roadmap theo id thông qua repo.delete."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts": {
+      "name": "get-roadmap-tree.use-case.ts",
+      "type": "file",
+      "summary": "Use case lấy cây phân cấp node của roadmap thông qua repo.getRoadmapTree."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts": {
+      "name": "get-roadmap.use-case.ts",
+      "type": "file",
+      "summary": "Use case tìm kiếm roadmap theo slug và trả về chi tiết đầy đủ gồm nodes và edges."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts": {
+      "name": "list-roadmaps.use-case.ts",
+      "type": "file",
+      "summary": "Use case liệt kê tất cả roadmap với bộ lọc trạng thái tùy chọn (PUBLIC/DRAFT/PRIVATE)."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts": {
+      "name": "search-nodes.use-case.ts",
+      "type": "file",
+      "summary": "Use case tìm kiếm node theo từ khóa, giới hạn kết quả chỉ trong các roadmap PUBLIC khi người dùng chưa xác thực."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts": {
+      "name": "update-roadmap.use-case.ts",
+      "type": "file",
+      "summary": "Use case cập nhật metadata của roadmap (title, description, status, coverImage) thông qua repo.update."
+    },
+    "file:apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts": {
+      "name": "upsert-graph.use-case.ts",
+      "type": "file",
+      "summary": "Use case ghi toàn bộ đồ thị (nodes + edges) của roadmap bằng thao tác DELETE+INSERT trong transaction."
+    },
+    "file:apps/api-gateway/src/application/use-cases/use-cases.spec.ts": {
+      "name": "use-cases.spec.ts",
+      "type": "file",
+      "summary": "Bộ test đơn vị cho các use-case node (updateNodeContent, updateNodeCover, updateNodeIcon) và SearchNodesUseCase, sử dụng mock repository Jest."
+    },
+    "file:apps/api-gateway/src/auth/admin.guard.ts": {
+      "name": "admin.guard.ts",
+      "type": "file",
+      "summary": "NestJS guard xác thực Bearer token từ header Authorization, hỗ trợ cả HTTP context và GraphQL context."
+    },
+    "file:apps/api-gateway/src/domain/entities/edge.entity.ts": {
+      "name": "edge.entity.ts",
+      "type": "file",
+      "summary": "Định nghĩa kiểu Edge trong domain — liên kết giữa hai node trong cùng một roadmap với thuộc tính label tùy chọn."
+    },
+    "file:apps/api-gateway/src/domain/entities/node.entity.ts": {
+      "name": "node.entity.ts",
+      "type": "file",
+      "summary": "Định nghĩa entity Node trong domain với đầy đủ các trường: type, position, content, coverImage, icon, targetRoadmapId."
+    },
+    "file:apps/api-gateway/src/domain/entities/roadmap.entity.ts": {
+      "name": "roadmap.entity.ts",
+      "type": "file",
+      "summary": "Định nghĩa entity Roadmap trong domain với các trường slug, title, status (DRAFT/PUBLIC/PRIVATE) và danh sách nodes/edges."
+    },
+    "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts": {
+      "name": "roadmap.repository.ts",
+      "type": "file",
+      "summary": "Định nghĩa abstract class RoadmapRepository — cổng (port) Clean Architecture chứa toàn bộ hợp đồng truy cập dữ liệu cho roadmap, node và tìm kiếm."
+    },
+    "file:apps/api-gateway/src/infrastructure/database/database.module.ts": {
+      "name": "database.module.ts",
+      "type": "file",
+      "summary": "NestJS module đăng ký PrismaRoadmapRepository làm provider và export nó để các module khác có thể inject."
+    },
+    "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts": {
+      "name": "prisma-roadmap.repository.spec.ts",
+      "type": "file",
+      "summary": "Bộ test tích hợp cho PrismaRoadmapRepository, bao phủ tất cả các phương thức CRUD và tìm kiếm bằng mock PrismaClient."
+    },
+    "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts": {
+      "name": "prisma-roadmap.repository.ts",
+      "type": "file",
+      "summary": "Triển khai PrismaRoadmapRepository — concrete adapter của Clean Architecture, thực thi tất cả phương thức truy cập dữ liệu bằng Prisma Client bao gồm full-text search và breadcrumb traversal."
+    },
+    "file:apps/api-gateway/src/roadmap/node.resolver.ts": {
+      "name": "node.resolver.ts",
+      "type": "file",
+      "summary": "GraphQL resolver xử lý các truy vấn và mutation cho Node: lấy node, breadcrumb, cập nhật content/title/cover/icon."
+    },
+    "file:apps/api-gateway/src/roadmap/roadmap.dto.ts": {
+      "name": "roadmap.dto.ts",
+      "type": "file",
+      "summary": "Định nghĩa toàn bộ DTO và Input type cho GraphQL schema: RoadmapDto, NodeDto, EdgeDto, các Input type và SearchResultDto."
+    },
+    "file:apps/api-gateway/src/roadmap/roadmap.module.ts": {
+      "name": "roadmap.module.ts",
+      "type": "file",
+      "summary": "NestJS module trung tâm của feature roadmap, đăng ký tất cả use-case, resolver, controller và import DatabaseModule."
+    },
+    "file:apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts": {
+      "name": "roadmap.resolver.spec.ts",
+      "type": "file",
+      "summary": "Bộ test đơn vị cho RoadmapResolver, kiểm tra các query và mutation với mock use-cases sử dụng NestJS Testing module."
+    },
+    "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts": {
+      "name": "roadmap.resolver.ts",
+      "type": "file",
+      "summary": "GraphQL resolver chính cho Roadmap: liệt kê, lấy chi tiết, CRUD roadmap, upsertGraph, lấy cây phân cấp và tìm kiếm node."
+    },
+    "file:apps/api-gateway/src/roadmap/roadmap.rest.controller.ts": {
+      "name": "roadmap.rest.controller.ts",
+      "type": "file",
+      "summary": "REST controller cho toàn bộ API roadmap tại /api/* — tương đương chức năng với GraphQL resolver, phục vụ cả web frontend và admin CMS."
+    },
+    "file:packages/core/src/lesson/lesson.service.ts": {
+      "name": "lesson.service.ts",
+      "type": "file",
+      "summary": "Cung cấp toàn bộ các hàm dịch vụ cho tính năng bài học: tải nội dung, cập nhật tiêu đề, nội dung, ảnh bìa, icon và lấy breadcrumb/cây bài học qua ApolloLike client."
+    },
+    "file:packages/core/src/lesson/types.ts": {
+      "name": "types.ts",
+      "type": "file",
+      "summary": "Định nghĩa toàn bộ kiểu TypeScript cho tính năng bài học: LessonNode, BreadcrumbItem, PageTreeNode và các interface liên quan."
+    },
+    "file:packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx": {
+      "name": "BreadcrumbDisplay.spec.tsx",
+      "type": "file",
+      "summary": "Kiểm thử đơn vị cho component BreadcrumbDisplay, xác minh render danh sách breadcrumb và hành vi link."
+    },
+    "file:packages/core/src/lesson/ui/BreadcrumbDisplay.tsx": {
+      "name": "BreadcrumbDisplay.tsx",
+      "type": "file",
+      "summary": "Component hiển thị breadcrumb điều hướng cho trang bài học, hỗ trợ variant và callback tạo href linh hoạt."
+    },
+    "file:packages/core/src/lesson/ui/CoverDisplay.spec.tsx": {
+      "name": "CoverDisplay.spec.tsx",
+      "type": "file",
+      "summary": "Kiểm thử đơn vị cho component CoverDisplay, bao gồm các trường hợp ảnh bìa, icon và xử lý lỗi ảnh."
+    },
+    "file:packages/core/src/lesson/ui/CoverDisplay.tsx": {
+      "name": "CoverDisplay.tsx",
+      "type": "file",
+      "summary": "Component hiển thị ảnh bìa và icon của bài học, tích hợp BreadcrumbDisplay và xử lý lỗi tải ảnh."
+    },
+    "file:packages/core/src/lesson/ui/LessonPageLayout.spec.tsx": {
+      "name": "LessonPageLayout.spec.tsx",
+      "type": "file",
+      "summary": "Kiểm thử đơn vị cho LessonPageLayout, xác minh hiển thị sidebar, nội dung và trạng thái thu gọn sidebar."
+    },
+    "file:packages/core/src/lesson/ui/LessonPageLayout.tsx": {
+      "name": "LessonPageLayout.tsx",
+      "type": "file",
+      "summary": "Component layout trang bài học với sidebar cây trang có thể thu gọn, lưu trạng thái vào localStorage."
+    },
+    "file:packages/core/src/lesson/ui/LessonPageShell.spec.tsx": {
+      "name": "LessonPageShell.spec.tsx",
+      "type": "file",
+      "summary": "Kiểm thử đơn vị cho LessonPageShell, bao gồm kiểm tra slot pattern (coverSlot, titleSlot, contentSlot) và phân biệt chế độ view/edit."
+    },
+    "file:packages/core/src/lesson/ui/LessonPageShell.tsx": {
+      "name": "LessonPageShell.tsx",
+      "type": "file",
+      "summary": "Component vỏ bọc trang bài học triển khai slot pattern (coverSlot, titleSlot, contentSlot) cho phép admin inject UI chỉnh sửa trong khi web dùng chế độ view mặc định."
+    },
+    "file:packages/core/src/lesson/ui/PageTreeItem.spec.tsx": {
+      "name": "PageTreeItem.spec.tsx",
+      "type": "file",
+      "summary": "Kiểm thử đơn vị cho PageTreeItem, bao gồm render node thường/roadmap, expand/collapse và các trạng thái active."
+    },
+    "file:packages/core/src/lesson/ui/PageTreeItem.tsx": {
+      "name": "PageTreeItem.tsx",
+      "type": "file",
+      "summary": "Component hiển thị một mục trong cây trang bài học, hỗ trợ loại node lesson/roadmap, trạng thái active, và expand/collapse đệ quy."
+    },
+    "file:packages/core/src/lesson/ui/PageTreeSidebar.spec.tsx": {
+      "name": "PageTreeSidebar.spec.tsx",
+      "type": "file",
+      "summary": "Kiểm thử đơn vị cho PageTreeSidebar, xác minh hiển thị danh sách node và tự động mở rộng đường dẫn đến node hiện tại."
+    },
+    "file:packages/core/src/lesson/ui/PageTreeSidebar.tsx": {
+      "name": "PageTreeSidebar.tsx",
+      "type": "file",
+      "summary": "Component sidebar cây trang bài học: tự động tính và mở rộng đường dẫn đến node hiện tại, quản lý trạng thái expand/collapse."
+    },
+    "file:packages/core/src/lesson/useLessonEditor.ts": {
+      "name": "useLessonEditor.ts",
+      "type": "file",
+      "summary": "React hook quản lý trạng thái soạn thảo bài học: tải dữ liệu, xử lý lưu nội dung và tiêu đề, theo dõi trạng thái loading/notFound."
+    },
+    "file:packages/core/src/lesson/useLessonPageShell.ts": {
+      "name": "useLessonPageShell.ts",
+      "type": "file",
+      "summary": "React hook quản lý trạng thái cover và icon cho LessonPageShell với optimistic update và rollback khi API lỗi."
+    },
+    "file:packages/core/src/lesson/usePageTree.ts": {
+      "name": "usePageTree.ts",
+      "type": "file",
+      "summary": "React hook đơn giản tải cây trang bài học (RoadmapTree) từ API và trả về state cho sidebar điều hướng."
+    },
+    "file:packages/core/src/roadmap/constants.ts": {
+      "name": "constants.ts",
+      "type": "file",
+      "summary": "Xuất các hằng số cho roadmap: STATUS_CYCLE (thứ tự vòng lặp trạng thái), STATUS_LABEL và STATUS_CLASS (nhãn và CSS class cho mỗi trạng thái)."
+    },
+    "file:packages/core/src/roadmap/roadmap.service.ts": {
+      "name": "roadmap.service.ts",
+      "type": "file",
+      "summary": "Cung cấp các hàm dịch vụ CRUD cho roadmap qua ApolloLike client: lấy danh sách, tạo, cập nhật, xóa và xoay vòng trạng thái."
+    },
+    "file:packages/core/src/roadmap/types.ts": {
+      "name": "types.ts",
+      "type": "file",
+      "summary": "Định nghĩa các kiểu TypeScript cốt lõi cho roadmap: Roadmap, RoadmapStatus, ApolloLike và các input type cho mutation."
+    },
+    "file:packages/core/src/roadmap/useRoadmaps.ts": {
+      "name": "useRoadmaps.ts",
+      "type": "file",
+      "summary": "React hook quản lý toàn bộ vòng đời danh sách roadmap: tải, tạo, sửa, xóa và xoay vòng trạng thái với state modal tích hợp."
+    },
+    "file:apps/admin/src/app/api/uploadthing/core.ts": {
+      "name": "core.ts",
+      "type": "file",
+      "summary": "Định nghĩa `ourFileRouter` — cấu hình UploadThing router cho phép upload ảnh bìa với xác thực và giới hạn kích thước file."
+    },
+    "file:apps/admin/src/app/api/uploadthing/route.ts": {
+      "name": "route.ts",
+      "type": "file",
+      "summary": "Route handler Next.js App Router cho UploadThing, xuất ra các handler GET và POST bằng cách kết nối `ourFileRouter` với UploadThing."
+    },
+    "file:apps/admin/src/features/lessons/components/CoverImage.spec.tsx": {
+      "name": "CoverImage.spec.tsx",
+      "type": "file",
+      "summary": "Bộ kiểm thử cho component `CoverImage`, xác minh các tương tác hover, mở modal upload, nhập URL và xóa ảnh bìa."
+    },
+    "file:apps/admin/src/features/lessons/components/CoverImage.tsx": {
+      "name": "CoverImage.tsx",
+      "type": "file",
+      "summary": "Component quản lý hiển thị ảnh bìa cho bài học, tích hợp điều khiển hover (upload file, dán URL, xóa ảnh) và `IconPicker` để chọn icon node."
+    },
+    "file:apps/admin/src/features/lessons/components/CoverUploadModal.tsx": {
+      "name": "CoverUploadModal.tsx",
+      "type": "file",
+      "summary": "Modal upload ảnh bìa hỗ trợ hai chế độ: upload file qua UploadThing (`useUploadThing`) và nhập URL trực tiếp, với hiển thị trạng thái tiến trình và xử lý lỗi."
+    },
+    "file:apps/admin/src/features/lessons/components/IconPicker.spec.tsx": {
+      "name": "IconPicker.spec.tsx",
+      "type": "file",
+      "summary": "Bộ kiểm thử cho component `IconPicker`, kiểm tra việc render, chọn emoji, nhập text, chọn Lucide icon và đóng picker."
+    },
+    "file:apps/admin/src/features/lessons/components/IconPicker.tsx": {
+      "name": "IconPicker.tsx",
+      "type": "file",
+      "summary": "Component chọn icon cho node bài học với ba tab: emoji, text tùy chỉnh và Lucide icons; hiển thị dạng popover điều khiển qua `isOpen`/`onToggle`."
+    },
+    "file:apps/admin/src/lib/uploadthing.ts": {
+      "name": "uploadthing.ts",
+      "type": "file",
+      "summary": "Tạo và xuất hook `useUploadThing` được type-safe dựa trên `OurFileRouter` từ `core.ts`, dùng làm điểm truy cập UploadThing duy nhất trong admin."
+    },
+    "file:apps/web/src/app/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang chủ công khai của ứng dụng web, hiển thị danh sách tất cả các roadmap có trạng thái PUBLIC dưới dạng lưới thẻ điều hướng."
+    },
+    "file:apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang bài học (lesson) động của Next.js 15, tải song song dữ liệu node, breadcrumb và cây roadmap rồi render qua LessonLayout."
+    },
+    "file:apps/web/src/app/roadmap/[slug]/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang chi tiết roadmap theo slug, tải dữ liệu graph và render RoadmapGraphView ở chế độ xem chỉ đọc."
+    },
+    "file:apps/web/src/components/Breadcrumb.tsx": {
+      "name": "Breadcrumb.tsx",
+      "type": "file",
+      "summary": "Component điều hướng breadcrumb dùng chung, hiển thị chuỗi các liên kết phân cấp với icon và nhãn văn bản."
+    },
+    "file:apps/web/src/features/lesson/components/LessonLayout.tsx": {
+      "name": "LessonLayout.tsx",
+      "type": "file",
+      "summary": "Layout hiển thị bài học cho web công khai, sử dụng LessonPageShell từ @vizteck/core ở chế độ view với breadcrumb và cây trang."
+    },
+    "file:apps/web/src/features/roadmap/components/RoadmapGraphView.tsx": {
+      "name": "RoadmapGraphView.tsx",
+      "type": "file",
+      "summary": "Component hiển thị đồ thị roadmap ở chế độ chỉ đọc, xử lý điều hướng khi người dùng click vào node (roadmap-type hoặc lesson-type)."
+    },
+    "file:apps/web/src/lib/gql.ts": {
+      "name": "gql.ts",
+      "type": "file",
+      "summary": "Thư viện fetch dữ liệu GraphQL cho web công khai: định nghĩa GraphQL client với cache: 'no-store' và xuất năm hàm fetch (roadmaps, roadmap, node, breadcrumb, tree)."
+    },
+    "file:packages/core/src/graph/graph.service.ts": {
+      "name": "graph.service.ts",
+      "type": "file",
+      "summary": "Cung cấp các hàm dịch vụ cốt lõi cho đồ thị roadmap: tải dữ liệu đồ thị từ GraphQL (loadGraph), lưu đồ thị qua mutation (saveGraph), chuẩn hóa loại node (normalizeNodeType), và tạo snapshot để theo dõi thay đổi (makeSnapshot)."
+    },
+    "file:packages/core/src/graph/types.ts": {
+      "name": "types.ts",
+      "type": "file",
+      "summary": "Định nghĩa toàn bộ kiểu TypeScript cho module đồ thị: GraphNode, GraphEdge, GraphEditorState, RoadmapGraphProps và các kiểu liên quan dùng trong toàn bộ tính năng graph."
+    },
+    "file:packages/core/src/graph/ui/RoadmapGraph.tsx": {
+      "name": "RoadmapGraph.tsx",
+      "type": "file",
+      "summary": "Component React Flow chính hiển thị đồ thị roadmap, hỗ trợ hai chế độ view và edit. Quản lý measuredRef cache để tránh nodes bị ẩn sau khi cập nhật vị trí, và xử lý drag-drop, kết nối, xóa node trên canvas."
+    },
+    "file:packages/core/src/graph/ui/RoadmapNode.tsx": {
+      "name": "RoadmapNode.tsx",
+      "type": "file",
+      "summary": "Custom node renderer cho React Flow, hiển thị từng node trong đồ thị với icon, nhãn, badge loại node và handle kết nối."
+    },
+    "file:packages/core/src/graph/useGraphDraft.ts": {
+      "name": "useGraphDraft.ts",
+      "type": "file",
+      "summary": "Hook lưu trữ draft đồ thị vào sessionStorage khi có thay đổi chưa lưu, cho phép khôi phục trạng thái nếu người dùng tải lại trang."
+    },
+    "file:packages/core/src/graph/useGraphEditor.ts": {
+      "name": "useGraphEditor.ts",
+      "type": "file",
+      "summary": "Hook chính điều phối toàn bộ trạng thái của trình chỉnh sửa đồ thị: tải dữ liệu, theo dõi thay đổi (dirty tracking), lưu đồ thị và cập nhật trạng thái roadmap."
+    },
+    "file:packages/core/src/lesson/ui/SearchModal.spec.tsx": {
+      "name": "SearchModal.spec.tsx",
+      "type": "file",
+      "summary": "File kiểm thử đơn vị cho component SearchModal, xác minh hành vi render và tương tác của modal tìm kiếm."
+    },
+    "file:packages/core/src/lesson/ui/SearchModal.tsx": {
+      "name": "SearchModal.tsx",
+      "type": "file",
+      "summary": "Modal tìm kiếm toàn cục trong lesson page shell, được kích hoạt bằng Ctrl+K, hỗ trợ điều hướng bàn phím, lọc theo tiêu đề, và hiển thị kết quả nhóm theo roadmap."
+    },
+    "file:packages/core/src/lesson/ui/SearchPreview.tsx": {
+      "name": "SearchPreview.tsx",
+      "type": "file",
+      "summary": "Component hiển thị panel preview chi tiết cho một kết quả tìm kiếm được chọn, bao gồm breadcrumb, icon, tiêu đề và đoạn trích nội dung."
+    },
+    "file:packages/core/src/lesson/ui/SearchResultItem.tsx": {
+      "name": "SearchResultItem.tsx",
+      "type": "file",
+      "summary": "Component hiển thị một hàng kết quả tìm kiếm trong danh sách, hỗ trợ trạng thái được chọn, sự kiện hover và click để điều hướng."
+    },
+    "file:packages/core/src/lesson/ui/useSearch.ts": {
+      "name": "useSearch.ts",
+      "type": "file",
+      "summary": "Custom hook thực hiện tìm kiếm nodes/lessons qua GraphQL lazy query với debounce, trả về kết quả đã được nhóm theo roadmap hoặc theo thời gian cập nhật."
+    },
+    "file:apps/web/src/app/layout.tsx": {
+      "name": "layout.tsx",
+      "type": "file",
+      "summary": "Root layout của ứng dụng web công khai (Next.js 15), bọc toàn bộ cây component với ApolloProvider, ThemeToggle, và script chặn FOUC cho dark mode. Định nghĩa metadata SEO và cấu trúc HTML gốc."
+    },
+    "file:apps/web/src/components/ApolloProvider.tsx": {
+      "name": "ApolloProvider.tsx",
+      "type": "file",
+      "summary": "Client Component bọc cây ứng dụng web công khai bằng Apollo Client, khởi tạo ApolloClient một lần bằng useMemo để tránh tạo lại instance khi re-render."
+    },
+    "file:apps/web/src/components/ThemeToggle.tsx": {
+      "name": "ThemeToggle.tsx",
+      "type": "file",
+      "summary": "Component nút bật/tắt dark mode cho ứng dụng web công khai, đọc trạng thái từ localStorage và system preference khi mount, sau đó ghi lại vào localStorage và toggle class 'dark' trên thẻ html khi người dùng bấm."
+    },
+    "file:apps/web/src/features/search/SearchModalWrapper.tsx": {
+      "name": "SearchModalWrapper.tsx",
+      "type": "file",
+      "summary": "Wrapper component bao bọc SearchModal từ @vizteck/core, kết nối hook useSearchModal để điều khiển trạng thái mở/đóng của modal tìm kiếm trên ứng dụng web công khai."
+    },
+    "file:apps/api-gateway/src/app.module.ts": {
+      "name": "app.module.ts",
+      "type": "file",
+      "summary": "Module gốc của NestJS API Gateway, đăng ký ApolloDriver cho GraphQL schema-first và nhập RoadmapModule cùng HealthController vào ứng dụng."
+    },
+    "file:apps/api-gateway/src/health.controller.ts": {
+      "name": "health.controller.ts",
+      "type": "file",
+      "summary": "Controller kiểm tra trạng thái hoạt động (health check) của API Gateway, trả về phản hồi đơn giản tại endpoint GET /health."
+    },
+    "file:apps/api-gateway/src/main.ts": {
+      "name": "main.ts",
+      "type": "file",
+      "summary": "Điểm khởi động của NestJS API Gateway: kích hoạt CORS, cấu hình Swagger UI với Bearer auth, và lắng nghe trên cổng 3000."
+    },
+    "file:packages/core/src/lesson/ui/LessonEditor.tsx": {
+      "name": "LessonEditor.tsx",
+      "type": "file",
+      "summary": "Component React có thể chỉnh sửa dựa trên BlockNote, dùng để soạn thảo nội dung bài học với tính năng tự động lưu debounce, theo dõi dark mode, và hiển thị trạng thái lưu."
+    },
+    "file:packages/core/src/lesson/ui/LessonViewer.tsx": {
+      "name": "LessonViewer.tsx",
+      "type": "file",
+      "summary": "Component React chỉ đọc dựa trên BlockNote để hiển thị nội dung bài học; tách thành LessonViewerInner và wrapper LessonViewer để tránh render phía server."
+    },
+    "file:packages/core/src/lesson/ui/utils.ts": {
+      "name": "utils.ts",
+      "type": "file",
+      "summary": "Hàm tiện ích duy nhất parseBlocks để chuyển đổi chuỗi JSON BlockNote thành mảng block, trả về mảng rỗng khi dữ liệu không hợp lệ."
+    },
+    "pipeline:.github/workflows/ci.yml": {
+      "name": "ci.yml",
+      "type": "pipeline",
+      "summary": "Pipeline CI chạy một job duy nhất (Lint, Test & Build) theo thứ tự build → lint → test trên mọi PR và mọi push lên nhánh main, develop, hoặc release/*. Bao gồm bước tạo proto types từ packages/proto trước khi build."
+    },
+    "pipeline:.github/workflows/deploy-staging.yml": {
+      "name": "deploy-staging.yml",
+      "type": "pipeline",
+      "summary": "Pipeline triển khai môi trường staging lên Vercel khi có push vào nhánh develop hoặc release/*. Chạy song song hai job độc lập: deploy apps/web và deploy apps/admin, mỗi job dùng Vercel CLI với token bí mật từ GitHub Secrets."
+    },
+    "pipeline:.github/workflows/release.yml": {
+      "name": "release.yml",
+      "type": "pipeline",
+      "summary": "Pipeline triển khai production lên Vercel khi có push tag v*. Chạy song song deploy apps/web và apps/admin lên production, sau đó job github-release tạo GitHub Release tự động với release notes được sinh từ commit history."
+    },
+    "config:.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Mẫu biến môi trường cho toàn bộ monorepo, định nghĩa 7 biến quan trọng bao gồm DATABASE_URL, ADMIN_TOKEN, NEXT_PUBLIC_API_URL và UPLOADTHING_TOKEN cần thiết để khởi chạy các service."
+    },
+    "document:CLAUDE.md": {
+      "name": "CLAUDE.md",
+      "type": "document",
+      "summary": "Tài liệu hướng dẫn toàn diện cho Claude Code với 13 mục bao gồm lệnh phát triển, quy trình Git, kiến trúc hệ thống, cấu trúc package, mô hình dữ liệu và các pattern không hiển nhiên của dự án."
+    },
+    "document:README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Tài liệu tổng quan dự án VizTeckStack với 13 mục bao gồm kiến trúc hệ thống, cấu trúc thư mục, hướng dẫn quick start, biến môi trường, tech stack và tài liệu cho developer mới."
+    },
+    "service:docker-compose.yml": {
+      "name": "docker-compose.yml",
+      "type": "service",
+      "summary": "Cấu hình Docker Compose khởi chạy service PostgreSQL cho môi trường phát triển local, sử dụng volume để lưu trữ dữ liệu bền vững."
+    },
+    "config:package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package manifest gốc của monorepo định nghĩa các script workspace-level (dev, build, test, lint) chạy qua Turborepo, cùng với devDependencies và packageManager là pnpm."
+    },
+    "config:pnpm-workspace.yaml": {
+      "name": "pnpm-workspace.yaml",
+      "type": "config",
+      "summary": "Định nghĩa workspace của pnpm bao gồm ba nhóm thư mục: apps/*, packages/* và services/*, cho phép chia sẻ dependency và chạy lệnh xuyên suốt monorepo."
+    },
+    "config:render.yaml": {
+      "name": "render.yaml",
+      "type": "config",
+      "summary": "Cấu hình deployment lên Render.com cho môi trường staging, định nghĩa các service cần triển khai cùng với biến môi trường và lệnh build/start."
+    },
+    "config:tsconfig.base.json": {
+      "name": "tsconfig.base.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cơ sở mà mọi package trong monorepo đều kế thừa, bật strict mode, target ES2022 và module commonjs."
+    },
+    "config:turbo.json": {
+      "name": "turbo.json",
+      "type": "config",
+      "summary": "Cấu hình Turborepo pipeline với dependency ordering cho 4 task: dev, build, test và lint, đảm bảo build thực thi theo đúng thứ tự dependency giữa các package."
+    },
+    "config:apps/admin/.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Mẫu biến môi trường cho ứng dụng admin, khai báo các biến bắt buộc gồm URL API công khai, token xác thực admin và token UploadThing để upload ảnh bìa."
+    },
+    "config:apps/admin/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Khai báo phụ thuộc và script cho ứng dụng admin Next.js 15, bao gồm các gói nội bộ @vizteck/core, @vizteck/ui, apollo client, uploadthing và các công cụ dev như Vitest."
+    },
+    "config:apps/admin/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho ứng dụng admin, kế thừa tsconfig.base.json của monorepo và bổ sung các thiết lập dành riêng cho Next.js như path alias, plugin next và các thư viện DOM."
+    },
+    "config:apps/admin/vercel.json": {
+      "name": "vercel.json",
+      "type": "config",
+      "summary": "Cấu hình triển khai Vercel cho ứng dụng admin, chỉ định framework Next.js và lệnh build tùy chỉnh thông qua Turborepo để đảm bảo build đúng thứ tự phụ thuộc trong monorepo."
+    },
+    "config:apps/api-gateway/.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Mẫu biến môi trường cho NestJS API Gateway, khai báo ba biến cần thiết: DATABASE_URL (kết nối PostgreSQL), ADMIN_TOKEN (xác thực bearer token cho AdminGuard), và PORT (cổng lắng nghe mặc định 3000)."
+    },
+    "config:apps/api-gateway/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Manifest của NestJS API Gateway (@vizteck/api-gateway), khai báo toàn bộ dependencies (NestJS, Apollo Server, Prisma, class-validator, class-transformer, Swagger) và cấu hình Jest để chạy unit test với ts-jest."
+    },
+    "config:apps/api-gateway/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho NestJS API Gateway, kế thừa tsconfig.base.json và bật experimentalDecorators cùng emitDecoratorMetadata — hai flag bắt buộc để NestJS dependency injection và decorator (Controller, Injectable, Module) hoạt động đúng."
+    },
+    "config:apps/web/.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Mẫu biến môi trường cho ứng dụng web công khai, khai báo duy nhất biến NEXT_PUBLIC_API_URL trỏ đến API gateway."
+    },
+    "config:apps/web/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Khai báo dependencies và scripts cho ứng dụng Next.js 15 public viewer, bao gồm các thư viện như React, @vizteck/core, @vizteck/ui và Tailwind CSS."
+    },
+    "config:apps/web/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho ứng dụng web công khai, mở rộng từ tsconfig.base.json với các tùy chọn compiler dành riêng cho Next.js 15."
+    },
+    "config:apps/web/vercel.json": {
+      "name": "vercel.json",
+      "type": "config",
+      "summary": "Cấu hình triển khai Vercel cho ứng dụng web công khai, chỉ định framework Next.js, lệnh cài đặt pnpm và lệnh build trong monorepo Turborepo."
+    },
+    "document:docs/onboarding/architecture.md": {
+      "name": "architecture.md",
+      "type": "document",
+      "summary": "Tài liệu mô tả toàn bộ kiến trúc hệ thống VizTeckStack: cấu trúc monorepo, lý do chọn pnpm workspaces và Turborepo, phân tách hai frontend (web/admin), vai trò của API Gateway, giao thức gRPC, quy tắc phụ thuộc giữa các package, data model, xác thực admin, dark mode, và các luồng dữ liệu chính."
+    },
+    "document:docs/onboarding/cheatsheet.md": {
+      "name": "cheatsheet.md",
+      "type": "document",
+      "summary": "Tờ cheat sheet nhanh dành cho developer, tổng hợp các lệnh thường dùng hàng ngày, cách chạy test từng package, cổng dịch vụ, biến môi trường, quy tắc đặt tên nhánh, Conventional Commits, data model và CI/CD triggers trong một tài liệu dễ tra cứu."
+    },
+    "document:docs/onboarding/cicd.md": {
+      "name": "cicd.md",
+      "type": "document",
+      "summary": "Giải thích ba CI/CD pipeline của dự án (ci.yml, deploy-staging.yml, release.yml), sơ đồ kết nối GitFlow với CI/CD, danh sách GitHub Secrets cần thiết, cấu hình môi trường Vercel, lý do E2E không chạy trên CI, và hướng dẫn xử lý lỗi pipeline thường gặp."
+    },
+    "document:docs/onboarding/daily-workflow.md": {
+      "name": "daily-workflow.md",
+      "type": "document",
+      "summary": "Hướng dẫn quy trình làm việc hàng ngày theo GitFlow: lifecycle của feature branch, hotfix và release, các bước tạo nhánh, commit theo Conventional Commits, mở Pull Request, CI tự động, code review và merge; kèm những lỗi phổ biến của developer mới cần tránh."
+    },
+    "document:docs/onboarding/getting-started.md": {
+      "name": "getting-started.md",
+      "type": "document",
+      "summary": "Hướng dẫn setup môi trường phát triển từ đầu cho developer mới: yêu cầu hệ thống, clone repo, cài dependencies, khởi động PostgreSQL bằng Docker, cấu hình file môi trường cho từng app, khởi tạo database, generate gRPC types, chạy toàn bộ service, và xử lý các lỗi thường gặp trên Windows/Mac."
+    },
+    "document:docs/onboarding/git-hooks.md": {
+      "name": "git-hooks.md",
+      "type": "document",
+      "summary": "Mô tả ba Git hook được cấu hình qua Husky (commit-msg, pre-commit, pre-push), lý do tồn tại của từng hook, hướng dẫn setup cho developer mới, ví dụ thực tế về commit hợp lệ và không hợp lệ, cách bỏ qua hook khi khẩn cấp và cách thay đổi cấu hình."
+    },
+    "document:docs/onboarding/testing.md": {
+      "name": "testing.md",
+      "type": "document",
+      "summary": "Hướng dẫn toàn diện về kiểm thử trong monorepo: unit test với Vitest cho apps/admin, Jest cho apps/api-gateway và apps/svc-roadmap (bao gồm mock gRPC client và Prisma), E2E test với Playwright, best practices viết test theo pattern Arrange/Act/Assert, và cách xử lý lỗi thường gặp khi chạy test."
+    },
+    "document:docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md": {
+      "name": "2026-06-18-vizteckstack-implementation.md",
+      "type": "document",
+      "summary": "Kế hoạch triển khai toàn bộ dự án VizTeckStack từ đầu, bao gồm 4 giai đoạn: thiết lập monorepo, xây dựng core services (NestJS gRPC + API Gateway), shared packages (UI, graph), và frontend apps (web viewer + admin CMS với graph editor và lesson editor)."
+    },
+    "document:docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md": {
+      "name": "2026-06-20-admin-ui-feature-first-refactor.md",
+      "type": "document",
+      "summary": "Kế hoạch refactor Admin UI theo kiến trúc feature-first, bao gồm 12 task: thêm Vitest, viết service và hook theo TDD (roadmap, graph, node actions, draft), dọn dẹp component, và chuẩn hóa GraphEditor/LessonEditor page."
+    },
+    "document:docs/superpowers/plans/2026-06-21-apply-gitflow.md": {
+      "name": "2026-06-21-apply-gitflow.md",
+      "type": "document",
+      "summary": "Kế hoạch áp dụng GitFlow cho monorepo VizTeckStack gồm 7 task: tạo branch develop, dọn stale branches, thiết lập CI workflow, staging deploy, production release workflow, đẩy lên develop, và cấu hình branch protection rules thủ công."
+    },
+    "document:docs/superpowers/plans/2026-06-21-lesson-crud-feature.md": {
+      "name": "2026-06-21-lesson-crud-feature.md",
+      "type": "document",
+      "summary": "Kế hoạch triển khai tính năng Lesson CRUD xuyên suốt toàn bộ stack, bao gồm cập nhật Proto/gRPC, implement service NestJS, thêm PATCH endpoints vào API Gateway, và tạo features/lessons/ trong admin app với debounce autosave."
+    },
+    "document:docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md": {
+      "name": "2026-06-21-web-feature-first-refactor.md",
+      "type": "document",
+      "summary": "Kế hoạch refactor apps/web theo kiến trúc feature-first, bao gồm thêm Vitest, viết node.service.ts và roadmap.service.ts theo TDD, di chuyển components vào features/, tạo LessonLayout, và xóa các file lib/api.ts cũ."
+    },
+    "document:docs/superpowers/plans/2026-06-22-feature-loop.md": {
+      "name": "2026-06-22-feature-loop.md",
+      "type": "document",
+      "summary": "Kế hoạch triển khai Feature Loop — một Claude Code skill tự động hóa vòng lặp phát triển tính năng, bao gồm thêm loop-state.json vào .gitignore và tạo file skill với logic điều phối các bước lặp."
+    },
+    "document:docs/superpowers/plans/2026-06-22-notion-lesson.md": {
+      "name": "2026-06-22-notion-lesson.md",
+      "type": "document",
+      "summary": "Kế hoạch hoàn thiện giao diện Notion-style cho trang lesson, gồm highlight node hiện tại trong MiniGraph, kết nối dữ liệu roadmap vào LessonLayout, parallel fetch dữ liệu, và thay button lưu thủ công bằng debounce autosave trong LessonEditor."
+    },
+    "document:docs/superpowers/plans/2026-06-23-notion-page-shell.md": {
+      "name": "2026-06-23-notion-page-shell.md",
+      "type": "document",
+      "summary": "Kế hoạch triển khai Notion Page Shell xuyên toàn stack: migration DB thêm coverImage/icon, cập nhật Proto/gRPC, implement service NestJS, PATCH endpoints, uploadthing setup, tạo shared components (BreadcrumbDisplay, CoverDisplay, LessonPageShell) và slot pattern cho admin/web."
+    },
+    "document:docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md": {
+      "name": "2026-06-23-notion-sidebar-tree.md",
+      "type": "document",
+      "summary": "Kế hoạch triển khai Notion-style sidebar page tree: thêm RoadmapTree messages và RPC vào Proto, implement getRoadmapTree TDD, tạo GraphQL query và REST endpoint, và xây dựng PageTreeItem/PageTreeSidebar components dùng chung cho cả admin và web."
+    },
+    "document:docs/superpowers/plans/2026-06-24-notion-search-plan.md": {
+      "name": "2026-06-24-notion-search-plan.md",
+      "type": "document",
+      "summary": "Kế hoạch triển khai Notion-style search (Cmd+K) toàn stack: thêm SearchNodes RPC vào Proto, implement và test service, tạo GraphQL query và REST endpoint, setup Apollo Client cho cả web và admin, xây dựng useSearchModal/useSearch hooks và SearchModal UI components."
+    },
+    "document:docs/superpowers/plans/2026-06-28-core-package-refactor.md": {
+      "name": "2026-06-28-core-package-refactor.md",
+      "type": "document",
+      "summary": "Kế hoạch refactor toàn diện packages/core: scaffold package mới, migrate roadmap/graph/lesson domain (services + hooks), di chuyển UI components từ packages/graph và packages/lesson vào packages/core, và convert packages/graph + packages/lesson thành shim-only packages."
+    },
+    "document:docs/superpowers/specs/2026-06-18-vizteckstack-design.md": {
+      "name": "2026-06-18-vizteckstack-design.md",
+      "type": "document",
+      "summary": "Tài liệu thiết kế ban đầu cho toàn bộ dự án VizTeckStack, mô tả kiến trúc monorepo, data model Prisma, API design (GraphQL, REST, gRPC), cấu trúc frontend và quy trình phát triển cục bộ."
+    },
+    "document:docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md": {
+      "name": "2026-06-20-admin-ui-refactor-design.md",
+      "type": "document",
+      "summary": "Đặc tả refactor Admin UI theo kiến trúc feature-first, định nghĩa cấu trúc thư mục, layer rules, service contract, hook contract, luồng dữ liệu và chiến lược kiểm thử cho apps/admin."
+    },
+    "document:docs/superpowers/specs/2026-06-21-git-workflow-design.md": {
+      "name": "2026-06-21-git-workflow-design.md",
+      "type": "document",
+      "summary": "Đặc tả quy trình Git theo GitFlow đầy đủ: cấu trúc nhánh, CI/CD mapping, quy trình release, hotfix lifecycle, Conventional Commits và branch protection rules trên GitHub."
+    },
+    "document:docs/superpowers/specs/2026-06-22-feature-loop-design.md": {
+      "name": "2026-06-22-feature-loop-design.md",
+      "type": "document",
+      "summary": "Đặc tả cơ chế Feature Loop: orchestration flow tự động theo chu kỳ, trigger conditions, skill mapping, checkpoint format, error handling và state file để resume khi gián đoạn."
+    },
+    "document:docs/superpowers/specs/2026-06-22-notion-lesson-design.md": {
+      "name": "2026-06-22-notion-lesson-design.md",
+      "type": "document",
+      "summary": "Đặc tả hoàn thiện tính năng Notion Lesson gồm 3 phần: tích hợp MiniGraph với dữ liệu roadmap thực, autosave trong LessonEditor, và cải thiện Progress Card — kèm danh sách file thay đổi."
+    },
+    "document:docs/superpowers/specs/2026-06-22-turbo-tui-design.md": {
+      "name": "2026-06-22-turbo-tui-design.md",
+      "type": "document",
+      "summary": "Đặc tả nâng cấp Turborepo lên Terminal UI (TUI) mode để cải thiện developer experience, mô tả thay đổi turbo.json và cấu hình CI workflow để stream output trong môi trường CI."
+    },
+    "document:docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md": {
+      "name": "2026-06-22-vizteckstack-ui-redesign-design.md",
+      "type": "document",
+      "summary": "Tài liệu thiết kế UI Redesign toàn diện cho VizTeckStack, bao gồm design system mở rộng (màu sắc, typography, card elevation, animation), surface specs cho tất cả các trang, component specs và Stitch prompts sẵn sàng để generate UI."
+    },
+    "document:docs/superpowers/specs/2026-06-23-notion-page-shell-design.md": {
+      "name": "2026-06-23-notion-page-shell-design.md",
+      "type": "document",
+      "summary": "Đặc tả thiết kế Notion Page Shell với hero cover layout, chi tiết đầy đủ về database changes, Proto contract, GraphQL/REST API, Uploadthing flow, shared components trong packages/lesson, admin UI hooks và web viewer — kèm test strategy cho tất cả layer."
+    },
+    "document:docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md": {
+      "name": "2026-06-23-notion-sidebar-tree-design.md",
+      "type": "document",
+      "summary": "Đặc tả Notion Sidebar Page Tree: layout sidebar, data model changes, Proto/gRPC contract, backend svc-roadmap service, api-gateway REST/GraphQL endpoints, các component mới trong packages/lesson (PageTreeItem, PageTreeSidebar, LessonPageLayout) và tích hợp vào apps/web và apps/admin."
+    },
+    "document:docs/superpowers/specs/2026-06-24-notion-search-design.md": {
+      "name": "2026-06-24-notion-search-design.md",
+      "type": "document",
+      "summary": "Đặc tả tính năng Notion Search (Cmd+K): thiết lập Apollo Client trong packages/graphql-client, Proto và svc-roadmap search endpoint, GraphQL resolver/DTO, SearchModal component với useSearch hook, time grouping và tích hợp vào cả apps/web lẫn apps/admin."
+    },
+    "config:packages/db/.env.example": {
+      "name": ".env.example",
+      "type": "config",
+      "summary": "Mẫu biến môi trường cho package `@vizteck/db`, khai báo `DATABASE_URL` dùng để kết nối PostgreSQL qua Prisma."
+    },
+    "config:packages/db/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Cấu hình package `@vizteck/db` — khai báo entry point, scripts Prisma (`db:push`, `db:migrate`, `db:seed`, `db:studio`), và dependencies (`@prisma/client`, `prisma`)."
+    },
+    "config:packages/db/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho package `@vizteck/db`, kế thừa từ `tsconfig.base.json` với strict mode và bao gồm toàn bộ source files trong package."
+    },
+    "config:.claude/settings.json": {
+      "name": "settings.json",
+      "type": "config",
+      "summary": "Cấu hình Claude Code cho dự án, định nghĩa các plugin được bật và danh sách quyền (permissions) cho phép hoặc từ chối các lệnh cụ thể."
+    },
+    "file:.husky/commit-msg": {
+      "name": "commit-msg",
+      "type": "file",
+      "summary": "Git hook chạy commitlint để kiểm tra định dạng commit message theo chuẩn Conventional Commits trước khi commit được lưu."
+    },
+    "file:.husky/pre-commit": {
+      "name": "pre-commit",
+      "type": "file",
+      "summary": "Git hook chạy validate-yaml, lint và toàn bộ test suite trước mỗi commit để đảm bảo code quality."
+    },
+    "file:.husky/pre-push": {
+      "name": "pre-push",
+      "type": "file",
+      "summary": "Git hook chạy toàn bộ test suite trước khi push lên remote để ngăn code lỗi được đẩy lên."
+    },
+    "file:.understand-anything/.understandignore": {
+      "name": ".understandignore",
+      "type": "file",
+      "summary": "File cấu hình danh sách các pattern để loại trừ file/thư mục khỏi quá trình phân tích của Understand-Anything, tương tự cú pháp .gitignore."
+    },
+    "config:.understand-anything/config.json": {
+      "name": "config.json",
+      "type": "config",
+      "summary": "Cấu hình ngôn ngữ đầu ra cho plugin Understand-Anything, đặt ngôn ngữ mặc định là tiếng Việt (vi)."
+    },
+    "file:apps/admin/next.config.js": {
+      "name": "next.config.js",
+      "type": "file",
+      "summary": "Cấu hình Next.js cho ứng dụng admin CMS, bao gồm các thiết lập transpile package, image domains, và tùy chỉnh build."
+    },
+    "file:apps/admin/postcss.config.js": {
+      "name": "postcss.config.js",
+      "type": "file",
+      "summary": "Cấu hình PostCSS cho ứng dụng admin, kích hoạt plugin Tailwind CSS để xử lý các utility class."
+    },
+    "file:apps/admin/src/app/globals.css": {
+      "name": "globals.css",
+      "type": "file",
+      "summary": "File CSS toàn cục cho admin app, định nghĩa Tailwind directives và các CSS variable semantic token (màu nền, màu chữ, border) hỗ trợ dark mode theo chiến lược class."
+    },
+    "file:apps/admin/src/app/login/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang đăng nhập admin xác thực qua Bearer token: gọi API validate, lưu token vào localStorage, tự động chuyển hướng nếu đã có token."
+    },
+    "file:apps/admin/src/app/page.tsx": {
+      "name": "page.tsx",
+      "type": "file",
+      "summary": "Trang gốc (root) của admin app, kiểm tra token trong localStorage rồi chuyển hướng tới /roadmaps nếu đã đăng nhập hoặc /login nếu chưa."
+    },
+    "file:apps/admin/tailwind.config.ts": {
+      "name": "tailwind.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Tailwind CSS cho admin app với dark mode theo class, định nghĩa các custom color token mapping tới CSS variables, và cấu hình content scan bao gồm các packages chia sẻ."
+    },
+    "file:apps/admin/vitest.config.ts": {
+      "name": "vitest.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Vitest cho test suite của admin app, thiết lập môi trường jsdom, path alias và file setup."
+    },
+    "file:apps/admin/vitest.setup.ts": {
+      "name": "vitest.setup.ts",
+      "type": "file",
+      "summary": "File khởi tạo Vitest cho admin app, import các setup cần thiết (ví dụ: @testing-library/jest-dom matchers) trước khi chạy test."
+    },
+    "schema:apps/api-gateway/src/schema.gql": {
+      "name": "schema.gql",
+      "type": "schema",
+      "summary": "Schema GraphQL đầy đủ của API gateway định nghĩa tất cả các type (Roadmap, Node, Edge, Search), enum, input type, Query và Mutation cho hệ thống quản lý roadmap."
+    },
+    "config:apps/e2e/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Package manifest cho workspace E2E test, khai báo scripts Playwright (headless, UI mode, headed) và các devDependencies cần thiết."
+    },
+    "file:apps/e2e/playwright.config.ts": {
+      "name": "playwright.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Playwright E2E, định nghĩa base URL cho 3 app (admin, API, web), thiết lập browser projects và timeout."
+    },
+    "file:apps/e2e/tests/admin.spec.ts": {
+      "name": "admin.spec.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử E2E cho giao diện admin: kiểm tra luồng đăng nhập, tạo/xóa roadmap, điều hướng và các tính năng CMS."
+    },
+    "file:apps/e2e/tests/api.spec.ts": {
+      "name": "api.spec.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử E2E cho NestJS API gateway: kiểm tra REST endpoints và GraphQL operations bao gồm CRUD roadmap và graph."
+    },
+    "file:apps/e2e/tests/web.spec.ts": {
+      "name": "web.spec.ts",
+      "type": "file",
+      "summary": "Bộ kiểm thử E2E cho public web viewer: kiểm tra hiển thị danh sách roadmap PUBLIC, điều hướng, và trang lesson."
+    },
+    "file:apps/web/next-env.d.ts": {
+      "name": "next-env.d.ts",
+      "type": "file",
+      "summary": "File khai báo type tự động sinh bởi Next.js cho ứng dụng web, bao gồm các type definition cần thiết cho TypeScript."
+    },
+    "file:apps/web/next.config.js": {
+      "name": "next.config.js",
+      "type": "file",
+      "summary": "Cấu hình Next.js cho ứng dụng web công khai, bao gồm các thiết lập transpile package, image domains, và các tùy chỉnh build."
+    },
+    "file:apps/web/postcss.config.js": {
+      "name": "postcss.config.js",
+      "type": "file",
+      "summary": "Cấu hình PostCSS cho ứng dụng web công khai, kích hoạt Tailwind CSS plugin."
+    },
+    "file:apps/web/src/app/globals.css": {
+      "name": "globals.css",
+      "type": "file",
+      "summary": "File CSS toàn cục cho web app công khai, định nghĩa Tailwind directives và các CSS variable semantic token tương tự admin app để duy trì thiết kế nhất quán."
+    },
+    "file:apps/web/tailwind.config.ts": {
+      "name": "tailwind.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Tailwind CSS cho web app công khai với dark mode theo class, custom color token và content scan bao gồm packages chia sẻ."
+    },
+    "file:apps/web/tsconfig.tsbuildinfo": {
+      "name": "tsconfig.tsbuildinfo",
+      "type": "file",
+      "summary": "File cache được tạo tự động bởi TypeScript compiler để tăng tốc quá trình build incremental cho ứng dụng web công khai."
+    },
+    "file:apps/web/vitest.config.ts": {
+      "name": "vitest.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Vitest cho ứng dụng web Next.js công khai, thiết lập môi trường jsdom và các alias đường dẫn cho việc chạy test."
+    },
+    "file:apps/web/vitest.setup.ts": {
+      "name": "vitest.setup.ts",
+      "type": "file",
+      "summary": "File khởi tạo cho Vitest trong ứng dụng web, import các matchers của @testing-library/jest-dom để mở rộng khả năng assertion."
+    },
+    "file:commitlint.config.cjs": {
+      "name": "commitlint.config.cjs",
+      "type": "file",
+      "summary": "Cấu hình commitlint ở cấp root monorepo, bắt buộc tuân thủ chuẩn Conventional Commits với các type được phép như feat, fix, chore, refactor, test, docs, ci."
+    },
+    "document:docs/clean-architecture.md": {
+      "name": "clean-architecture.md",
+      "type": "document",
+      "summary": "Tài liệu kiến trúc backend chi tiết bằng tiếng Việt, mô tả 4 layer Clean Architecture (Domain, Application, Interfaces, Infrastructure) với ví dụ cụ thể, luồng request thực tế và kế hoạch refactor từ kiến trúc gRPC sang kiến trúc sạch."
+    },
+    "file:docs/design/mockup.html": {
+      "name": "mockup.html",
+      "type": "file",
+      "summary": "File mockup HTML tĩnh thể hiện thiết kế UI/UX của ứng dụng VizTeckStack, dùng để minh họa giao diện trước khi triển khai thực tế."
+    },
+    "config:packages/core/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Cấu hình package cho @vizteck/core — nguồn thật duy nhất của toàn bộ logic tính năng, khai báo các peer dependencies (React, @xyflow/react), dependencies (@blocknote, @apollo/client) và devDependencies cho việc build và test."
+    },
+    "file:packages/core/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel export chính của package @vizteck/core, re-export tất cả hooks, components và types từ các feature roadmap, graph và lesson — đây là điểm vào duy nhất cho mọi consumer của package."
+    },
+    "file:packages/core/src/lesson/ui/useSearchModal.spec.ts": {
+      "name": "useSearchModal.spec.ts",
+      "type": "file",
+      "summary": "File test unit cho hook useSearchModal, kiểm tra trạng thái mở/đóng modal tìm kiếm và phím tắt Ctrl+K."
+    },
+    "file:packages/core/src/lesson/ui/useSearchModal.ts": {
+      "name": "useSearchModal.ts",
+      "type": "file",
+      "summary": "Custom React hook quản lý trạng thái mở/đóng của SearchModal, lắng nghe phím tắt Ctrl+K (hoặc Cmd+K) trên toàn cửa sổ để kích hoạt."
+    },
+    "file:packages/core/src/test-setup.ts": {
+      "name": "test-setup.ts",
+      "type": "file",
+      "summary": "File khởi tạo test tối giản cho package @vizteck/core, thực hiện import cần thiết cho môi trường test Vitest."
+    },
+    "config:packages/core/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho package @vizteck/core, kế thừa từ tsconfig.base.json ở root với các tuỳ chọn compiler bổ sung phù hợp cho React library."
+    },
+    "file:packages/core/vitest.config.ts": {
+      "name": "vitest.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Vitest cho package @vizteck/core, chỉ định môi trường jsdom và file setup để hỗ trợ kiểm thử React components và hooks."
+    },
+    "file:packages/db/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Entry point của package @vizteck/db, export singleton PrismaClient (`db`), kiểu PrismaClientType và tất cả types từ @prisma/client để các package khác sử dụng."
+    },
+    "table:packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql:Node": {
+      "name": "Node",
+      "type": "table",
+      "summary": "Migration SQL cho phép các trường positionX và positionY của bảng Node nhận giá trị NULL, hỗ trợ tính năng node 'off-canvas' (chưa được đặt trên canvas)."
+    },
+    "table:packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql:Node": {
+      "name": "Node",
+      "type": "table",
+      "summary": "Migration SQL thêm hai cột `coverImage` (TEXT nullable) và `icon` (TEXT nullable) vào bảng Node để hỗ trợ ảnh bìa và biểu tượng emoji cho node bài học."
+    },
+    "schema:packages/db/prisma/schema.prisma": {
+      "name": "schema.prisma",
+      "type": "schema",
+      "summary": "Schema Prisma định nghĩa các model cốt lõi của hệ thống: Roadmap (với trạng thái DRAFT/PUBLIC/PRIVATE), Node (loại LESSON/ROADMAP, có coverImage, icon, positionX/Y nullable) và Edge (kết nối các node trong cùng roadmap)."
+    },
+    "file:packages/db/prisma/seed.ts": {
+      "name": "seed.ts",
+      "type": "file",
+      "summary": "Script seed dữ liệu demo cho database, tạo 3 roadmap mẫu (Web Development, Data Science, DevOps) bằng Prisma upsert để có thể chạy lại nhiều lần mà không bị trùng lặp."
+    },
+    "config:packages/graph/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Cấu hình package cho @vizteck/graph — một shim package chỉ re-export từ @vizteck/core, khai báo @vizteck/core là dependency chính."
+    },
+    "file:packages/graph/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel shim của @vizteck/graph, chỉ re-export RoadmapGraph, RoadmapNode, các graph utilities và types từ @vizteck/core — không chứa source code riêng."
+    },
+    "config:packages/graph/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho package @vizteck/graph, kế thừa từ tsconfig.base.json ở root và chỉ include thư mục src."
+    },
+    "file:packages/graphql-client/codegen.ts": {
+      "name": "codegen.ts",
+      "type": "file",
+      "summary": "Cấu hình GraphQL Code Generator, chỉ định schema từ api-gateway và tạo ra file generated/graphql.ts với đầy đủ TypeScript types và Apollo React hooks."
+    },
+    "config:packages/graphql-client/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Cấu hình package cho @vizteck/graphql-client, khai báo @apollo/client là dependency và graphql-code-generator là devDependency để tự động sinh code."
+    },
+    "file:packages/graphql-client/src/generated/graphql.ts": {
+      "name": "graphql.ts",
+      "type": "file",
+      "summary": "File được tạo tự động bởi GraphQL Code Generator, chứa đầy đủ TypeScript types cho schema GraphQL và các Apollo hooks typed cho mọi query/mutation: Node, Roadmap, Graph, Search."
+    },
+    "file:packages/graphql-client/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel export của package @vizteck/graphql-client, re-export các Apollo hooks, document nodes và TypeScript types được sinh tự động từ GraphQL schema theo nhóm chức năng (Search, Roadmap, Node, Graph)."
+    },
+    "schema:packages/graphql-client/src/queries/nodes/nodes.graphql": {
+      "name": "nodes.graphql",
+      "type": "schema",
+      "summary": "Định nghĩa các GraphQL query và mutation cho node: lấy thông tin node, breadcrumb, cây roadmap, cũng như cập nhật nội dung, tiêu đề, ảnh bìa và icon của node."
+    },
+    "schema:packages/graphql-client/src/queries/roadmaps/roadmaps.graphql": {
+      "name": "roadmaps.graphql",
+      "type": "schema",
+      "summary": "Định nghĩa các GraphQL query và mutation cho roadmap: liệt kê, lấy chi tiết, tạo mới, cập nhật, xoá roadmap, và upsert toàn bộ graph (nodes + edges) trong một lần gọi."
+    },
+    "schema:packages/graphql-client/src/queries/search.graphql": {
+      "name": "search.graphql",
+      "type": "schema",
+      "summary": "Định nghĩa GraphQL query Search cho phép tìm kiếm node theo từ khoá, hỗ trợ lọc theo roadmap và chế độ chỉ tìm tiêu đề."
+    },
+    "config:packages/graphql-client/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho package graphql-client, kế thừa từ tsconfig.base.json của monorepo và chỉ định các file cần biên dịch."
+    },
+    "config:packages/lesson/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Cấu hình package @vizteck/lesson — shim layer tái xuất các component và type từ @vizteck/core, khai báo dependencies và script kiểm thử bằng Vitest."
+    },
+    "file:packages/lesson/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Entry point của package @vizteck/lesson, chỉ tái xuất toàn bộ component UI (LessonEditor, LessonViewer, LessonPageShell, ...) và type từ @vizteck/core — không chứa logic nguồn."
+    },
+    "file:packages/lesson/src/test-setup.ts": {
+      "name": "test-setup.ts",
+      "type": "file",
+      "summary": "File thiết lập môi trường kiểm thử cho package lesson, hiện chỉ có 1 dòng (placeholder)."
+    },
+    "config:packages/lesson/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho package @vizteck/lesson, kế thừa tsconfig.base.json với JSX preserve để hỗ trợ React component."
+    },
+    "file:packages/lesson/vitest.config.ts": {
+      "name": "vitest.config.ts",
+      "type": "file",
+      "summary": "Cấu hình Vitest cho package lesson, chỉ định môi trường jsdom và file test-setup."
+    },
+    "config:packages/ui/package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "Cấu hình package @vizteck/ui — thư viện shared React component nguyên thủy (Button, Card, NodeBadge), khai báo entry point và peer dependencies."
+    },
+    "file:packages/ui/src/Button.tsx": {
+      "name": "Button.tsx",
+      "type": "file",
+      "summary": "Component Button dùng chung với hai biến thể primary và secondary, hỗ trợ tất cả thuộc tính HTML button thông qua spread props."
+    },
+    "file:packages/ui/src/Card.tsx": {
+      "name": "Card.tsx",
+      "type": "file",
+      "summary": "Component Card hiển thị một roadmap node với type badge (NodeBadge), tiêu đề, mô tả ngắn và miniGraph tuỳ chọn; hỗ trợ onClick."
+    },
+    "file:packages/ui/src/index.ts": {
+      "name": "index.ts",
+      "type": "file",
+      "summary": "Barrel file của @vizteck/ui, tái xuất Button, Card, NodeBadge cùng các type tương ứng để ứng dụng có thể import từ một đầu mối."
+    },
+    "file:packages/ui/src/NodeBadge.tsx": {
+      "name": "NodeBadge.tsx",
+      "type": "file",
+      "summary": "Component NodeBadge hiển thị badge nhỏ phân loại kiểu node (LESSON, ROADMAP, ...) dùng trong Card và các nơi khác."
+    },
+    "config:packages/ui/tsconfig.json": {
+      "name": "tsconfig.json",
+      "type": "config",
+      "summary": "Cấu hình TypeScript cho package @vizteck/ui, kế thừa tsconfig.base.json và bao gồm toàn bộ file trong src/."
+    },
+    "file:scripts/validate-yaml.cjs": {
+      "name": "validate-yaml.cjs",
+      "type": "file",
+      "summary": "Script Node.js kiểm tra cú pháp YAML của các file CI workflow (.github/workflows/*.yml), docker-compose.yml và pnpm-workspace.yaml; thoát với mã lỗi 1 nếu có file không hợp lệ."
+    },
+    "document:services/svc-python/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Tài liệu placeholder cho microservice Python (FastAPI + gRPC) dự kiến trong tương lai, chưa được triển khai."
+    },
+    "document:services/svc-rust/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Tài liệu placeholder cho microservice Rust (Axum + gRPC) dự kiến trong tương lai, chưa được triển khai."
+    }
+  },
+  "totalNodes": 238,
+  "totalEdges": 293
+}

@@ -1,0 +1,57 @@
+{
+  "batchIndex": 16,
+  "files": [
+    [
+      "docs/onboarding/architecture.md",
+      673,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/onboarding/cheatsheet.md",
+      228,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/onboarding/cicd.md",
+      245,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/onboarding/daily-workflow.md",
+      278,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/onboarding/getting-started.md",
+      484,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/onboarding/git-hooks.md",
+      273,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/onboarding/testing.md",
+      392,
+      "markdown",
+      "docs"
+    ]
+  ],
+  "batchImportData": {
+    "docs/onboarding/architecture.md": [],
+    "docs/onboarding/cheatsheet.md": [],
+    "docs/onboarding/cicd.md": [],
+    "docs/onboarding/daily-workflow.md": [],
+    "docs/onboarding/getting-started.md": [],
+    "docs/onboarding/git-hooks.md": [],
+    "docs/onboarding/testing.md": []
+  },
+  "neighborMap": {}
+}
