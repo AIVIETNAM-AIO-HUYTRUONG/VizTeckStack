@@ -61,6 +61,7 @@ export default function RoadmapsPage() {
           </div>
         ) : (
           <div className="bg-bg-1 border border-border rounded-md overflow-hidden">
+            <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="bg-bg-2 border-b border-border">
@@ -89,7 +90,7 @@ export default function RoadmapsPage() {
                       <button
                         onClick={() => handleStatusChange(roadmap)}
                         title="Click to cycle status"
-                        className={`px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full cursor-pointer focus:outline-none transition-colors ${STATUS_CLASS[roadmap.status ?? 'DRAFT'] ?? STATUS_CLASS.DRAFT}`}
+                        className={`px-2 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1 transition-colors motion-reduce:transition-none ${STATUS_CLASS[roadmap.status ?? 'DRAFT'] ?? STATUS_CLASS.DRAFT}`}
                       >
                         {STATUS_LABEL[roadmap.status ?? 'DRAFT'] ?? 'Draft'}
                       </button>
@@ -114,6 +115,7 @@ export default function RoadmapsPage() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         )}
       </div>

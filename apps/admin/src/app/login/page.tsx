@@ -16,13 +16,12 @@ export default function LoginPage() {
   useEffect(() => {
     setHydrated(true);
     const stored = localStorage.getItem('admin_token');
-    if (stored) {
-      router.replace('/roadmaps');
-    }
+    if (stored) router.replace('/roadmaps');
   }, [router]);
 
-  async function handleSubmit(e: React.SyntheticEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (loading) return;
     const tokenValue = inputRef.current?.value ?? '';
     if (!tokenValue.trim()) return;
 
@@ -42,18 +41,12 @@ export default function LoginPage() {
         if (inputRef.current) inputRef.current.value = '';
         inputRef.current?.focus();
       } else {
-        setError('Could not reach server. Check your connection.');
+        setError('Could not reach server. Check your connection and try again.');
       }
     } catch {
-      setError('Could not reach server. Check your connection.');
+      setError('Could not reach server. Check your connection and try again.');
     } finally {
       setLoading(false);
-    }
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'Enter') {
-      handleSubmit(e);
     }
   }
 
@@ -78,28 +71,34 @@ export default function LoginPage() {
               ref={inputRef}
               id="admin-token"
               type="password"
-              onKeyDown={handleKeyDown}
               placeholder="Enter your token"
               autoFocus
-              className="w-full h-10 px-3 text-sm text-text-1 bg-bg-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo focus:border-indigo"
+              autoComplete="current-password"
+              aria-invalid={!!error || undefined}
+              aria-describedby={error ? 'login-error' : undefined}
+              onChange={() => error && setError('')}
+              className={`w-full h-10 px-3 text-sm text-text-1 bg-bg-2 border rounded-sm focus:outline-none focus:ring-2 transition-colors ${
+                error
+                  ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+                  : 'border-border focus:ring-indigo focus:border-indigo'
+              }`}
             />
           </div>
 
           {error && (
-            <p className="text-sm text-red-500" role="alert">
+            <p id="login-error" className="text-sm text-red-500" role="alert">
               {error}
             </p>
           )}
 
           <Button
-            type="button"
+            type="submit"
             variant="primary"
-            disabled={loading}
-            onClick={handleSubmit}
-            data-ready={hydrated ? 'true' : undefined}
-            style={{ width: '100%', height: 40, opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+            isLoading={loading}
+            disabled={loading || !hydrated}
+            className="w-full"
           >
-            {loading ? 'Signing in…' : 'Sign In'}
+            Sign In
           </Button>
         </form>
       </div>

@@ -44,6 +44,8 @@ export function LessonTitleEditor({ title, saveStatus, onSave }: LessonTitleEdit
         onChange={(e) => setDraft(e.target.value)}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
+        aria-label="Lesson title"
+        maxLength={300}
         className="w-full text-2xl font-bold text-text-1 bg-transparent border-none outline-none focus:ring-0 placeholder:text-text-3"
         placeholder="Untitled"
       />

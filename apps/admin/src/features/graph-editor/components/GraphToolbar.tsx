@@ -31,8 +31,8 @@ export function GraphToolbar({
   const saveButtonClass = saving
     ? 'px-4 py-2 text-sm font-semibold text-white bg-indigo rounded-sm opacity-60 cursor-not-allowed'
     : dirty
-      ? 'px-4 py-2 text-sm font-semibold text-white rounded-sm cursor-pointer bg-[#F59E0B] hover:bg-[#D97706] focus:outline-none focus:ring-2 focus:ring-[#F59E0B] focus:ring-offset-1'
-      : 'px-4 py-2 text-sm font-semibold text-white bg-indigo rounded-sm cursor-pointer hover:bg-indigo-mid focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1';
+      ? 'px-4 py-2 text-sm font-semibold text-white rounded-sm cursor-pointer bg-warning hover:bg-warning/90 focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-1 transition-colors motion-reduce:transition-none'
+      : 'px-4 py-2 text-sm font-semibold text-white bg-indigo rounded-sm cursor-pointer hover:bg-indigo-mid focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1 transition-colors motion-reduce:transition-none';
 
   function handleStatusClick() {
     if (!roadmapStatus || !onChangeStatus) return;
@@ -51,7 +51,7 @@ export function GraphToolbar({
           <button
             onClick={handleStatusClick}
             title="Click to cycle status"
-            className={`px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full cursor-pointer focus:outline-none transition-colors ${STATUS_CLASS[roadmapStatus] ?? STATUS_CLASS.DRAFT}`}
+            className={`px-2 py-1 text-[10px] font-semibold uppercase tracking-wider rounded-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1 transition-colors motion-reduce:transition-none ${STATUS_CLASS[roadmapStatus] ?? STATUS_CLASS.DRAFT}`}
           >
             {STATUS_LABEL[roadmapStatus] ?? roadmapStatus}
           </button>
