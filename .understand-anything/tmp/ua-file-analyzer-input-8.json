@@ -1,0 +1,15 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "apps/web/src/app/layout.tsx", "language": "typescript", "sizeLines": 59, "fileCategory": "code"},
+    {"path": "apps/web/src/components/ApolloProvider.tsx", "language": "typescript", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "apps/web/src/components/ThemeToggle.tsx", "language": "typescript", "sizeLines": 36, "fileCategory": "code"},
+    {"path": "apps/web/src/features/search/SearchModalWrapper.tsx", "language": "typescript", "sizeLines": 18, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "apps/web/src/app/layout.tsx": ["apps/web/src/app/globals.css", "apps/web/src/components/ApolloProvider.tsx", "apps/web/src/components/ThemeToggle.tsx", "apps/web/src/features/search/SearchModalWrapper.tsx"],
+    "apps/web/src/components/ApolloProvider.tsx": [],
+    "apps/web/src/components/ThemeToggle.tsx": [],
+    "apps/web/src/features/search/SearchModalWrapper.tsx": []
+  }
+}

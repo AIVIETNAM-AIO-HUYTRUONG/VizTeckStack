@@ -1,0 +1,136 @@
+{
+  "batchIndex": 22,
+  "files": [
+    [
+      "packages/graphql-client/src/queries/nodes/nodes.graphql",
+      76,
+      "graphql",
+      "data"
+    ],
+    [
+      "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql",
+      96,
+      "graphql",
+      "data"
+    ],
+    [
+      "packages/graphql-client/src/queries/search.graphql",
+      14,
+      "graphql",
+      "data"
+    ],
+    [
+      "packages/graphql-client/tsconfig.json",
+      9,
+      "json",
+      "config"
+    ],
+    [
+      "packages/lesson/package.json",
+      34,
+      "json",
+      "config"
+    ],
+    [
+      "packages/lesson/src/index.ts",
+      30,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/lesson/src/test-setup.ts",
+      1,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/lesson/tsconfig.json",
+      11,
+      "json",
+      "config"
+    ],
+    [
+      "packages/lesson/vitest.config.ts",
+      11,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/ui/package.json",
+      19,
+      "json",
+      "config"
+    ],
+    [
+      "packages/ui/src/Button.tsx",
+      53,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/ui/src/Card.tsx",
+      38,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/ui/src/index.ts",
+      6,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/ui/src/NodeBadge.tsx",
+      23,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/ui/tsconfig.json",
+      9,
+      "json",
+      "config"
+    ],
+    [
+      "scripts/validate-yaml.cjs",
+      31,
+      "javascript",
+      "code"
+    ],
+    [
+      "services/svc-python/README.md",
+      6,
+      "markdown",
+      "docs"
+    ],
+    [
+      "services/svc-rust/README.md",
+      6,
+      "markdown",
+      "docs"
+    ]
+  ],
+  "batchImportData": {
+    "packages/graphql-client/src/queries/nodes/nodes.graphql": [],
+    "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql": [],
+    "packages/graphql-client/src/queries/search.graphql": [],
+    "packages/graphql-client/tsconfig.json": [],
+    "packages/lesson/package.json": [],
+    "packages/lesson/src/index.ts": [],
+    "packages/lesson/src/test-setup.ts": [],
+    "packages/lesson/tsconfig.json": [],
+    "packages/lesson/vitest.config.ts": [],
+    "packages/ui/package.json": [],
+    "packages/ui/src/Button.tsx": [],
+    "packages/ui/src/Card.tsx": [
+      "packages/ui/src/NodeBadge.tsx"
+    ],
+    "packages/ui/src/index.ts": [],
+    "packages/ui/src/NodeBadge.tsx": [],
+    "packages/ui/tsconfig.json": [],
+    "scripts/validate-yaml.cjs": [],
+    "services/svc-python/README.md": [],
+    "services/svc-rust/README.md": []
+  },
+  "neighborMap": {}
+}

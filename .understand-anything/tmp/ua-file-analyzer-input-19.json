@@ -1,0 +1,9 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "packages/db/.env.example", "language": "config", "sizeLines": 1, "fileCategory": "config"},
+    {"path": "packages/db/package.json", "language": "json", "sizeLines": 25, "fileCategory": "config"},
+    {"path": "packages/db/tsconfig.json", "language": "json", "sizeLines": 8, "fileCategory": "config"}
+  ],
+  "batchImportData": {"packages/db/.env.example": [], "packages/db/package.json": [], "packages/db/tsconfig.json": []}
+}

@@ -1,0 +1,1776 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/web/tsconfig.tsbuildinfo",
+      "language": "tsbuildinfo",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": "apps/web/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/vitest.setup.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "commitlint.config.cjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 14,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "docs/clean-architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 298,
+      "nonEmptyLines": 243,
+      "sections": [
+        {
+          "heading": "Clean Architecture — VizTeckStack Backend",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Tổng quan 4 layer",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2. Folder structure",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "3. Luồng request thực tế — \"Lấy danh sách roadmaps\"",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "Hiện tại (có gRPC)",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "Sau khi refactor (Clean Architecture, không gRPC)",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "4. Mỗi layer làm gì — ví dụ cụ thể",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "Layer 1: DOMAIN",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "Layer 2: APPLICATION",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "Layer 3: INTERFACES",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "Layer 4: INFRASTRUCTURE",
+          "level": 3,
+          "line": 214
+        },
+        {
+          "heading": "5. Dependency injection — cách NestJS nối các layer",
+          "level": 2,
+          "line": 256
+        },
+        {
+          "heading": "6. So sánh trước / sau",
+          "level": 2,
+          "line": 279
+        },
+        {
+          "heading": "7. Thứ tự implement",
+          "level": 2,
+          "line": 292
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "docs/design/mockup.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 855,
+      "nonEmptyLines": 802,
+      "metrics": {}
+    },
+    {
+      "path": "packages/core/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 36,
+      "nonEmptyLines": 36,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "peerDependencies",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "packages/core/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 54,
+      "exports": [
+        {
+          "name": "useRoadmaps",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "useGraphEditor",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "useGraphDraft",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapGraph",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapGraphProps",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapNode",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "NodeChange",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "EdgeChange",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "Connection",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "RFNode",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "OnNodesChange",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "OnEdgesChange",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "OnConnect",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "OnNodesDelete",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "applyNodeChanges",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "applyEdgeChanges",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "useLessonEditor",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "useLessonPageShell",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "usePageTree",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "LessonEditor",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "LessonEditorProps",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "LessonViewer",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "LessonViewerProps",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageShell",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageShellProps",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageLayout",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "LessonPageLayoutProps",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "CoverDisplay",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "CoverDisplayProps",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "BreadcrumbDisplay",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "BreadcrumbDisplayProps",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeSidebar",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeSidebarProps",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeItem",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "PageTreeItemProps",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "SearchModal",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "SearchModalProps",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "useSearchModal",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "useSearch",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "TimeGroup",
+          "line": 56,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 40,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/useSearchModal.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 43,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/useSearchModal.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "useSearchModal",
+          "startLine": 3,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useSearchModal",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useSearchModal",
+          "callee": "useState",
+          "lineNumber": 4
+        },
+        {
+          "caller": "useSearchModal",
+          "callee": "useEffect",
+          "lineNumber": 6
+        },
+        {
+          "caller": "handler",
+          "callee": "e.preventDefault",
+          "lineNumber": 9
+        },
+        {
+          "caller": "handler",
+          "callee": "setOpen",
+          "lineNumber": 10
+        },
+        {
+          "caller": "useSearchModal",
+          "callee": "window.addEventListener",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useSearchModal",
+          "callee": "window.removeEventListener",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/test-setup.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/core/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/db/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 8,
+      "exports": [
+        {
+          "name": "PrismaClient",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "Prisma",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "PrismaClientType",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "db",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 3,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "packages/db/prisma/schema.prisma",
+      "language": "prisma",
+      "fileCategory": "data",
+      "totalLines": 63,
+      "nonEmptyLines": 56,
+      "metrics": {}
+    },
+    {
+      "path": "packages/db/prisma/seed.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 5,
+          "endLine": 58,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "main",
+          "callee": "prisma.roadmap.upsert",
+          "lineNumber": 6
+        },
+        {
+          "caller": "main",
+          "callee": "prisma.roadmap.upsert",
+          "lineNumber": 17
+        },
+        {
+          "caller": "main",
+          "callee": "prisma.roadmap.upsert",
+          "lineNumber": 28
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/graph/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 18,
+      "nonEmptyLines": 18,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "packages/graph/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 21,
+      "exports": [
+        {
+          "name": "RoadmapGraph",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapNode",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "applyNodeChanges",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "applyEdgeChanges",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapGraphProps",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "NodeItem",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "EdgeItem",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "GraphNodeType",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "NodeChange",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "EdgeChange",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "Connection",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "RFNode",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "OnNodesChange",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "OnEdgesChange",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "OnConnect",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "OnNodesDelete",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 16,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/graph/tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 10,
+      "nonEmptyLines": 10,
+      "sections": [
+        {
+          "heading": "extends",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "packages/graphql-client/codegen.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/graphql-client/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 26,
+      "nonEmptyLines": 26,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "main",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "types",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "peerDependencies",
+          "level": 1,
+          "line": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "packages/graphql-client/src/generated/graphql.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 971,
+      "nonEmptyLines": 872,
+      "functions": [
+        {
+          "name": "useGetNodeQuery",
+          "startLine": 371,
+          "endLine": 374,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetNodeLazyQuery",
+          "startLine": 375,
+          "endLine": 378,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetNodeSuspenseQuery",
+          "startLine": 382,
+          "endLine": 385,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetNodeBreadcrumbQuery",
+          "startLine": 416,
+          "endLine": 419,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetNodeBreadcrumbLazyQuery",
+          "startLine": 420,
+          "endLine": 423,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetNodeBreadcrumbSuspenseQuery",
+          "startLine": 427,
+          "endLine": 430,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetRoadmapTreeQuery",
+          "startLine": 478,
+          "endLine": 481,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetRoadmapTreeLazyQuery",
+          "startLine": 482,
+          "endLine": 485,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetRoadmapTreeSuspenseQuery",
+          "startLine": 489,
+          "endLine": 492,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useUpdateNodeContentMutation",
+          "startLine": 525,
+          "endLine": 528,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useUpdateNodeTitleMutation",
+          "startLine": 560,
+          "endLine": 563,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useUpdateNodeCoverMutation",
+          "startLine": 595,
+          "endLine": 598,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useUpdateNodeIconMutation",
+          "startLine": 630,
+          "endLine": 633,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useListRoadmapsQuery",
+          "startLine": 665,
+          "endLine": 668,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useListRoadmapsLazyQuery",
+          "startLine": 669,
+          "endLine": 672,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useListRoadmapsSuspenseQuery",
+          "startLine": 676,
+          "endLine": 679,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetRoadmapQuery",
+          "startLine": 734,
+          "endLine": 737,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetRoadmapLazyQuery",
+          "startLine": 738,
+          "endLine": 741,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useGetRoadmapSuspenseQuery",
+          "startLine": 745,
+          "endLine": 748,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useCreateRoadmapMutation",
+          "startLine": 783,
+          "endLine": 786,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useUpdateRoadmapMutation",
+          "startLine": 821,
+          "endLine": 824,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useDeleteRoadmapMutation",
+          "startLine": 852,
+          "endLine": 855,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useUpsertGraphMutation",
+          "startLine": 911,
+          "endLine": 914,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useSearchQuery",
+          "startLine": 953,
+          "endLine": 956,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useSearchLazyQuery",
+          "startLine": 957,
+          "endLine": 960,
+          "params": [
+            "baseOptions"
+          ]
+        },
+        {
+          "name": "useSearchSuspenseQuery",
+          "startLine": 964,
+          "endLine": 967,
+          "params": [
+            "baseOptions"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetNodeDocument",
+          "line": 337,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeQuery",
+          "line": 371,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeLazyQuery",
+          "line": 375,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeSuspenseQuery",
+          "line": 382,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeBreadcrumbDocument",
+          "line": 390,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeBreadcrumbQuery",
+          "line": 416,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeBreadcrumbLazyQuery",
+          "line": 420,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeBreadcrumbSuspenseQuery",
+          "line": 427,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapTreeDocument",
+          "line": 435,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapTreeQuery",
+          "line": 478,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapTreeLazyQuery",
+          "line": 482,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapTreeSuspenseQuery",
+          "line": 489,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeContentDocument",
+          "line": 497,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeContentMutation",
+          "line": 525,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeTitleDocument",
+          "line": 532,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeTitleMutation",
+          "line": 560,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeCoverDocument",
+          "line": 567,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeCoverMutation",
+          "line": 595,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeIconDocument",
+          "line": 602,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeIconMutation",
+          "line": 630,
+          "isDefault": false
+        },
+        {
+          "name": "ListRoadmapsDocument",
+          "line": 637,
+          "isDefault": false
+        },
+        {
+          "name": "useListRoadmapsQuery",
+          "line": 665,
+          "isDefault": false
+        },
+        {
+          "name": "useListRoadmapsLazyQuery",
+          "line": 669,
+          "isDefault": false
+        },
+        {
+          "name": "useListRoadmapsSuspenseQuery",
+          "line": 676,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapDocument",
+          "line": 684,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapQuery",
+          "line": 734,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapLazyQuery",
+          "line": 738,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapSuspenseQuery",
+          "line": 745,
+          "isDefault": false
+        },
+        {
+          "name": "CreateRoadmapDocument",
+          "line": 753,
+          "isDefault": false
+        },
+        {
+          "name": "useCreateRoadmapMutation",
+          "line": 783,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateRoadmapDocument",
+          "line": 790,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateRoadmapMutation",
+          "line": 821,
+          "isDefault": false
+        },
+        {
+          "name": "DeleteRoadmapDocument",
+          "line": 828,
+          "isDefault": false
+        },
+        {
+          "name": "useDeleteRoadmapMutation",
+          "line": 852,
+          "isDefault": false
+        },
+        {
+          "name": "UpsertGraphDocument",
+          "line": 859,
+          "isDefault": false
+        },
+        {
+          "name": "useUpsertGraphMutation",
+          "line": 911,
+          "isDefault": false
+        },
+        {
+          "name": "SearchDocument",
+          "line": 918,
+          "isDefault": false
+        },
+        {
+          "name": "useSearchQuery",
+          "line": 953,
+          "isDefault": false
+        },
+        {
+          "name": "useSearchLazyQuery",
+          "line": 957,
+          "isDefault": false
+        },
+        {
+          "name": "useSearchSuspenseQuery",
+          "line": 964,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useGetNodeQuery",
+          "callee": "Apollo.useQuery",
+          "lineNumber": 373
+        },
+        {
+          "caller": "useGetNodeLazyQuery",
+          "callee": "Apollo.useLazyQuery",
+          "lineNumber": 377
+        },
+        {
+          "caller": "useGetNodeSuspenseQuery",
+          "callee": "Apollo.useSuspenseQuery",
+          "lineNumber": 384
+        },
+        {
+          "caller": "useGetNodeBreadcrumbQuery",
+          "callee": "Apollo.useQuery",
+          "lineNumber": 418
+        },
+        {
+          "caller": "useGetNodeBreadcrumbLazyQuery",
+          "callee": "Apollo.useLazyQuery",
+          "lineNumber": 422
+        },
+        {
+          "caller": "useGetNodeBreadcrumbSuspenseQuery",
+          "callee": "Apollo.useSuspenseQuery",
+          "lineNumber": 429
+        },
+        {
+          "caller": "useGetRoadmapTreeQuery",
+          "callee": "Apollo.useQuery",
+          "lineNumber": 480
+        },
+        {
+          "caller": "useGetRoadmapTreeLazyQuery",
+          "callee": "Apollo.useLazyQuery",
+          "lineNumber": 484
+        },
+        {
+          "caller": "useGetRoadmapTreeSuspenseQuery",
+          "callee": "Apollo.useSuspenseQuery",
+          "lineNumber": 491
+        },
+        {
+          "caller": "useUpdateNodeContentMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 527
+        },
+        {
+          "caller": "useUpdateNodeTitleMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 562
+        },
+        {
+          "caller": "useUpdateNodeCoverMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 597
+        },
+        {
+          "caller": "useUpdateNodeIconMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 632
+        },
+        {
+          "caller": "useListRoadmapsQuery",
+          "callee": "Apollo.useQuery",
+          "lineNumber": 667
+        },
+        {
+          "caller": "useListRoadmapsLazyQuery",
+          "callee": "Apollo.useLazyQuery",
+          "lineNumber": 671
+        },
+        {
+          "caller": "useListRoadmapsSuspenseQuery",
+          "callee": "Apollo.useSuspenseQuery",
+          "lineNumber": 678
+        },
+        {
+          "caller": "useGetRoadmapQuery",
+          "callee": "Apollo.useQuery",
+          "lineNumber": 736
+        },
+        {
+          "caller": "useGetRoadmapLazyQuery",
+          "callee": "Apollo.useLazyQuery",
+          "lineNumber": 740
+        },
+        {
+          "caller": "useGetRoadmapSuspenseQuery",
+          "callee": "Apollo.useSuspenseQuery",
+          "lineNumber": 747
+        },
+        {
+          "caller": "useCreateRoadmapMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 785
+        },
+        {
+          "caller": "useUpdateRoadmapMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 823
+        },
+        {
+          "caller": "useDeleteRoadmapMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 854
+        },
+        {
+          "caller": "useUpsertGraphMutation",
+          "callee": "Apollo.useMutation",
+          "lineNumber": 913
+        },
+        {
+          "caller": "useSearchQuery",
+          "callee": "Apollo.useQuery",
+          "lineNumber": 955
+        },
+        {
+          "caller": "useSearchLazyQuery",
+          "callee": "Apollo.useLazyQuery",
+          "lineNumber": 959
+        },
+        {
+          "caller": "useSearchSuspenseQuery",
+          "callee": "Apollo.useSuspenseQuery",
+          "lineNumber": 966
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 40,
+        "functionCount": 26,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/graphql-client/src/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 69,
+      "exports": [
+        {
+          "name": "useSearchLazyQuery",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SearchQuery",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "SearchQueryVariables",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "NodeType",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useListRoadmapsQuery",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapQuery",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "useCreateRoadmapMutation",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateRoadmapMutation",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "useDeleteRoadmapMutation",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "useUpsertGraphMutation",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "ListRoadmapsDocument",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapDocument",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "CreateRoadmapDocument",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateRoadmapDocument",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "DeleteRoadmapDocument",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "UpsertGraphDocument",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "ListRoadmapsQuery",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "ListRoadmapsQueryVariables",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapQuery",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapQueryVariables",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "CreateRoadmapMutation",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "CreateRoadmapMutationVariables",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateRoadmapMutation",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateRoadmapMutationVariables",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "DeleteRoadmapMutation",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "DeleteRoadmapMutationVariables",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "UpsertGraphMutation",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "UpsertGraphMutationVariables",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeQuery",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "useGetNodeBreadcrumbQuery",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "useGetRoadmapTreeQuery",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeContentMutation",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeTitleMutation",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeCoverMutation",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "useUpdateNodeIconMutation",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeBreadcrumbDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapTreeDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeContentDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeTitleDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeCoverDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeIconDocument",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeQuery",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeQueryVariables",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeBreadcrumbQuery",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "GetNodeBreadcrumbQueryVariables",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapTreeQuery",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "GetRoadmapTreeQueryVariables",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeContentMutation",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeContentMutationVariables",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeTitleMutation",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeTitleMutationVariables",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeCoverMutation",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeCoverMutationVariables",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeIconMutation",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeIconMutationVariables",
+          "line": 57,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 56,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/web/src/app/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "RootLayout",
+          "startLine": 32,
+          "endLine": 59,
+          "params": [
+            "{\r\n  children,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "metadata",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "RootLayout",
+          "line": 32,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/components/ApolloProvider.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "WebApolloProvider",
+          "startLine": 6,
+          "endLine": 17,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "WebApolloProvider",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "WebApolloProvider",
+          "callee": "useMemo",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/components/ThemeToggle.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 31,
+      "functions": [
+        {
+          "name": "ThemeToggle",
+          "startLine": 5,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ThemeToggle",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ThemeToggle",
+          "callee": "useState",
+          "lineNumber": 6
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "useEffect",
+          "lineNumber": 8
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "localStorage.getItem",
+          "lineNumber": 9
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "window.matchMedia",
+          "lineNumber": 10
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "setIsDark",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ThemeToggle",
+          "callee": "document.documentElement.classList.add",
+          "lineNumber": 12
+        },
+        {
+          "caller": "toggle",
+          "callee": "setIsDark",
+          "lineNumber": 17
+        },
+        {
+          "caller": "toggle",
+          "callee": "localStorage.setItem",
+          "lineNumber": 18
+        },
+        {
+          "caller": "toggle",
+          "callee": "document.documentElement.classList.add",
+          "lineNumber": 20
+        },
+        {
+          "caller": "toggle",
+          "callee": "document.documentElement.classList.remove",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/features/search/SearchModalWrapper.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "SearchModalWrapper",
+          "startLine": 5,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchModalWrapper",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SearchModalWrapper",
+          "callee": "useSearchModal",
+          "lineNumber": 6
+        },
+        {
+          "caller": "SearchModalWrapper",
+          "callee": "setOpen",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

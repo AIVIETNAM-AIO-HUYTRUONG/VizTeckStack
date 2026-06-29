@@ -1,0 +1,544 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 238,
+    "filesWithImports": 87,
+    "totalEdges": 209
+  },
+  "importMap": {
+    ".claude/settings.json": [],
+    ".env.example": [],
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/deploy-staging.yml": [],
+    ".github/workflows/release.yml": [],
+    ".husky/commit-msg": [],
+    ".husky/pre-commit": [],
+    ".husky/pre-push": [],
+    ".understand-anything/.understandignore": [],
+    ".understand-anything/config.json": [],
+    "apps/admin/.env.example": [],
+    "apps/admin/next.config.js": [],
+    "apps/admin/package.json": [],
+    "apps/admin/postcss.config.js": [],
+    "apps/admin/src/app/api/uploadthing/core.ts": [],
+    "apps/admin/src/app/api/uploadthing/route.ts": [
+      "apps/admin/src/app/api/uploadthing/core.ts"
+    ],
+    "apps/admin/src/app/globals.css": [],
+    "apps/admin/src/app/layout.tsx": [
+      "apps/admin/src/app/globals.css",
+      "apps/admin/src/components/ApolloProvider.tsx",
+      "apps/admin/src/features/search/SearchModalWrapper.tsx"
+    ],
+    "apps/admin/src/app/login/page.tsx": [],
+    "apps/admin/src/app/page.tsx": [],
+    "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx": [
+      "apps/admin/src/features/lessons/components/CoverImage.tsx",
+      "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx",
+      "apps/admin/src/features/lessons/hooks/useLessonEditor.ts",
+      "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts",
+      "apps/admin/src/features/lessons/hooks/usePageTree.ts",
+      "apps/admin/src/lib/useAuthGuard.ts"
+    ],
+    "apps/admin/src/app/roadmaps/[id]/page.tsx": [
+      "apps/admin/src/components/ConfirmDialog.tsx",
+      "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx",
+      "apps/admin/src/features/graph-editor/components/NodeInventory.tsx",
+      "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx",
+      "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts",
+      "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts",
+      "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts",
+      "apps/admin/src/lib/useAuthGuard.ts",
+      "apps/admin/src/lib/useRouteGuard.ts"
+    ],
+    "apps/admin/src/app/roadmaps/page.tsx": [
+      "apps/admin/src/components/AdminLayout.tsx",
+      "apps/admin/src/components/ConfirmDialog.tsx",
+      "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx",
+      "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts",
+      "apps/admin/src/lib/useAuthGuard.ts"
+    ],
+    "apps/admin/src/components/AdminLayout.tsx": [
+      "apps/admin/src/components/ThemeToggle.tsx"
+    ],
+    "apps/admin/src/components/ApolloProvider.tsx": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/components/ConfirmDialog.tsx": [],
+    "apps/admin/src/components/ThemeToggle.tsx": [],
+    "apps/admin/src/features/graph-editor/components/GraphToolbar.tsx": [
+      "apps/admin/src/components/ThemeToggle.tsx"
+    ],
+    "apps/admin/src/features/graph-editor/components/NodeInventory.tsx": [],
+    "apps/admin/src/features/graph-editor/components/NodeSidePanel.tsx": [],
+    "apps/admin/src/features/graph-editor/hooks/useGraphDraft.test.ts": [
+      "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useGraphDraft.ts": [],
+    "apps/admin/src/features/graph-editor/hooks/useGraphEditor.test.ts": [
+      "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useNodeActions.test.ts": [
+      "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts"
+    ],
+    "apps/admin/src/features/graph-editor/hooks/useNodeActions.ts": [],
+    "apps/admin/src/features/lessons/components/CoverImage.spec.tsx": [
+      "apps/admin/src/features/lessons/components/CoverImage.tsx"
+    ],
+    "apps/admin/src/features/lessons/components/CoverImage.tsx": [
+      "apps/admin/src/features/lessons/components/CoverUploadModal.tsx",
+      "apps/admin/src/features/lessons/components/IconPicker.tsx"
+    ],
+    "apps/admin/src/features/lessons/components/CoverUploadModal.tsx": [
+      "apps/admin/src/lib/uploadthing.ts"
+    ],
+    "apps/admin/src/features/lessons/components/IconPicker.spec.tsx": [
+      "apps/admin/src/features/lessons/components/IconPicker.tsx"
+    ],
+    "apps/admin/src/features/lessons/components/IconPicker.tsx": [],
+    "apps/admin/src/features/lessons/components/LessonTitleEditor.tsx": [
+      "apps/admin/src/features/lessons/hooks/useLessonEditor.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/useLessonEditor.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/useLessonPageShell.spec.ts": [
+      "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/useLessonPageShell.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/usePageTree.spec.ts": [
+      "apps/admin/src/features/lessons/hooks/usePageTree.ts"
+    ],
+    "apps/admin/src/features/lessons/hooks/usePageTree.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/roadmaps/components/RoadmapModal.tsx": [
+      "apps/admin/src/lib/api.ts"
+    ],
+    "apps/admin/src/features/roadmaps/hooks/useRoadmaps.ts": [
+      "apps/admin/src/lib/apolloClient.ts"
+    ],
+    "apps/admin/src/features/search/SearchModalWrapper.tsx": [],
+    "apps/admin/src/lib/api.ts": [],
+    "apps/admin/src/lib/apolloClient.ts": [
+      "apps/admin/src/lib/api.ts"
+    ],
+    "apps/admin/src/lib/uploadthing.ts": [
+      "apps/admin/src/app/api/uploadthing/core.ts"
+    ],
+    "apps/admin/src/lib/useAuthGuard.ts": [],
+    "apps/admin/src/lib/useRouteGuard.ts": [],
+    "apps/admin/tailwind.config.ts": [],
+    "apps/admin/tsconfig.json": [],
+    "apps/admin/vercel.json": [],
+    "apps/admin/vitest.config.ts": [],
+    "apps/admin/vitest.setup.ts": [],
+    "apps/api-gateway/.env.example": [],
+    "apps/api-gateway/package.json": [],
+    "apps/api-gateway/src/app.module.ts": [
+      "apps/api-gateway/src/health.controller.ts",
+      "apps/api-gateway/src/roadmap/roadmap.module.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts": [
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts": [
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/application/use-cases/use-cases.spec.ts": [
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts"
+    ],
+    "apps/api-gateway/src/auth/admin.guard.ts": [],
+    "apps/api-gateway/src/domain/entities/edge.entity.ts": [],
+    "apps/api-gateway/src/domain/entities/node.entity.ts": [],
+    "apps/api-gateway/src/domain/entities/roadmap.entity.ts": [],
+    "apps/api-gateway/src/domain/repositories/roadmap.repository.ts": [
+      "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts"
+    ],
+    "apps/api-gateway/src/health.controller.ts": [],
+    "apps/api-gateway/src/infrastructure/database/database.module.ts": [
+      "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts": [
+      "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts": [
+      "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "apps/api-gateway/src/domain/repositories/roadmap.repository.ts"
+    ],
+    "apps/api-gateway/src/main.ts": [
+      "apps/api-gateway/src/app.module.ts"
+    ],
+    "apps/api-gateway/src/roadmap/node.resolver.ts": [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.dto.ts": [],
+    "apps/api-gateway/src/roadmap/roadmap.module.ts": [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/infrastructure/database/database.module.ts",
+      "apps/api-gateway/src/roadmap/node.resolver.ts",
+      "apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts": [
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/roadmap/roadmap.resolver.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.resolver.ts": [
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ],
+    "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts": [
+      "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "apps/api-gateway/src/auth/admin.guard.ts",
+      "apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ],
+    "apps/api-gateway/src/schema.gql": [],
+    "apps/api-gateway/tsconfig.json": [],
+    "apps/e2e/package.json": [],
+    "apps/e2e/playwright.config.ts": [],
+    "apps/e2e/tests/admin.spec.ts": [],
+    "apps/e2e/tests/api.spec.ts": [],
+    "apps/e2e/tests/web.spec.ts": [],
+    "apps/web/.env.example": [],
+    "apps/web/next-env.d.ts": [],
+    "apps/web/next.config.js": [],
+    "apps/web/package.json": [],
+    "apps/web/postcss.config.js": [],
+    "apps/web/src/app/globals.css": [],
+    "apps/web/src/app/layout.tsx": [
+      "apps/web/src/app/globals.css",
+      "apps/web/src/components/ApolloProvider.tsx",
+      "apps/web/src/components/ThemeToggle.tsx",
+      "apps/web/src/features/search/SearchModalWrapper.tsx"
+    ],
+    "apps/web/src/app/page.tsx": [
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx": [
+      "apps/web/src/features/lesson/components/LessonLayout.tsx",
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/app/roadmap/[slug]/page.tsx": [
+      "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx",
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/components/ApolloProvider.tsx": [],
+    "apps/web/src/components/Breadcrumb.tsx": [],
+    "apps/web/src/components/ThemeToggle.tsx": [],
+    "apps/web/src/features/lesson/components/LessonLayout.tsx": [
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/features/roadmap/components/RoadmapGraphView.tsx": [
+      "apps/web/src/components/Breadcrumb.tsx",
+      "apps/web/src/lib/gql.ts"
+    ],
+    "apps/web/src/features/search/SearchModalWrapper.tsx": [],
+    "apps/web/src/lib/gql.ts": [],
+    "apps/web/tailwind.config.ts": [],
+    "apps/web/tsconfig.json": [],
+    "apps/web/tsconfig.tsbuildinfo": [],
+    "apps/web/vercel.json": [],
+    "apps/web/vitest.config.ts": [],
+    "apps/web/vitest.setup.ts": [],
+    "CLAUDE.md": [],
+    "commitlint.config.cjs": [],
+    "docker-compose.yml": [],
+    "docs/clean-architecture.md": [],
+    "docs/design/mockup.html": [],
+    "docs/onboarding/architecture.md": [],
+    "docs/onboarding/cheatsheet.md": [],
+    "docs/onboarding/cicd.md": [],
+    "docs/onboarding/daily-workflow.md": [],
+    "docs/onboarding/getting-started.md": [],
+    "docs/onboarding/git-hooks.md": [],
+    "docs/onboarding/testing.md": [],
+    "docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md": [],
+    "docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md": [],
+    "docs/superpowers/plans/2026-06-21-apply-gitflow.md": [],
+    "docs/superpowers/plans/2026-06-21-lesson-crud-feature.md": [],
+    "docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md": [],
+    "docs/superpowers/plans/2026-06-22-feature-loop.md": [],
+    "docs/superpowers/plans/2026-06-22-notion-lesson.md": [],
+    "docs/superpowers/plans/2026-06-23-notion-page-shell.md": [],
+    "docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md": [],
+    "docs/superpowers/plans/2026-06-24-notion-search-plan.md": [],
+    "docs/superpowers/plans/2026-06-28-core-package-refactor.md": [],
+    "docs/superpowers/specs/2026-06-18-vizteckstack-design.md": [],
+    "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md": [],
+    "docs/superpowers/specs/2026-06-21-git-workflow-design.md": [],
+    "docs/superpowers/specs/2026-06-22-feature-loop-design.md": [],
+    "docs/superpowers/specs/2026-06-22-notion-lesson-design.md": [],
+    "docs/superpowers/specs/2026-06-22-turbo-tui-design.md": [],
+    "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md": [],
+    "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md": [],
+    "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md": [],
+    "docs/superpowers/specs/2026-06-24-notion-search-design.md": [],
+    "package.json": [],
+    "packages/core/package.json": [],
+    "packages/core/src/graph/graph.service.ts": [
+      "packages/core/src/graph/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/graph/types.ts": [],
+    "packages/core/src/graph/ui/RoadmapGraph.tsx": [
+      "packages/core/src/graph/types.ts",
+      "packages/core/src/graph/ui/RoadmapNode.tsx"
+    ],
+    "packages/core/src/graph/ui/RoadmapNode.tsx": [
+      "packages/core/src/graph/types.ts"
+    ],
+    "packages/core/src/graph/useGraphDraft.ts": [
+      "packages/core/src/graph/types.ts"
+    ],
+    "packages/core/src/graph/useGraphEditor.ts": [
+      "packages/core/src/graph/graph.service.ts",
+      "packages/core/src/graph/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/index.ts": [],
+    "packages/core/src/lesson/lesson.service.ts": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/lesson/types.ts": [],
+    "packages/core/src/lesson/ui/BreadcrumbDisplay.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx": [
+      "packages/core/src/lesson/types.ts"
+    ],
+    "packages/core/src/lesson/ui/CoverDisplay.spec.tsx": [
+      "packages/core/src/lesson/ui/CoverDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/CoverDisplay.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/BreadcrumbDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonEditor.tsx": [
+      "packages/core/src/lesson/ui/utils.ts"
+    ],
+    "packages/core/src/lesson/ui/LessonPageLayout.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/LessonPageLayout.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageLayout.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeSidebar.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageShell.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/LessonPageShell.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonPageShell.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/CoverDisplay.tsx"
+    ],
+    "packages/core/src/lesson/ui/LessonViewer.tsx": [
+      "packages/core/src/lesson/ui/utils.ts"
+    ],
+    "packages/core/src/lesson/ui/PageTreeItem.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeItem.tsx"
+    ],
+    "packages/core/src/lesson/ui/PageTreeItem.tsx": [
+      "packages/core/src/lesson/types.ts"
+    ],
+    "packages/core/src/lesson/ui/PageTreeSidebar.spec.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeSidebar.tsx"
+    ],
+    "packages/core/src/lesson/ui/PageTreeSidebar.tsx": [
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/lesson/ui/PageTreeItem.tsx"
+    ],
+    "packages/core/src/lesson/ui/SearchModal.spec.tsx": [
+      "packages/core/src/lesson/ui/SearchModal.tsx"
+    ],
+    "packages/core/src/lesson/ui/SearchModal.tsx": [
+      "packages/core/src/lesson/ui/SearchPreview.tsx",
+      "packages/core/src/lesson/ui/SearchResultItem.tsx",
+      "packages/core/src/lesson/ui/useSearch.ts"
+    ],
+    "packages/core/src/lesson/ui/SearchPreview.tsx": [],
+    "packages/core/src/lesson/ui/SearchResultItem.tsx": [],
+    "packages/core/src/lesson/ui/useSearch.ts": [],
+    "packages/core/src/lesson/ui/useSearchModal.spec.ts": [
+      "packages/core/src/lesson/ui/useSearchModal.ts"
+    ],
+    "packages/core/src/lesson/ui/useSearchModal.ts": [],
+    "packages/core/src/lesson/ui/utils.ts": [],
+    "packages/core/src/lesson/useLessonEditor.ts": [
+      "packages/core/src/lesson/lesson.service.ts",
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/lesson/useLessonPageShell.ts": [
+      "packages/core/src/lesson/lesson.service.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/lesson/usePageTree.ts": [
+      "packages/core/src/lesson/lesson.service.ts",
+      "packages/core/src/lesson/types.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/roadmap/constants.ts": [],
+    "packages/core/src/roadmap/roadmap.service.ts": [
+      "packages/core/src/roadmap/constants.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/roadmap/types.ts": [],
+    "packages/core/src/roadmap/useRoadmaps.ts": [
+      "packages/core/src/roadmap/constants.ts",
+      "packages/core/src/roadmap/roadmap.service.ts",
+      "packages/core/src/roadmap/types.ts"
+    ],
+    "packages/core/src/test-setup.ts": [],
+    "packages/core/tsconfig.json": [],
+    "packages/core/vitest.config.ts": [],
+    "packages/db/.env.example": [],
+    "packages/db/index.ts": [],
+    "packages/db/package.json": [],
+    "packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql": [],
+    "packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql": [],
+    "packages/db/prisma/schema.prisma": [],
+    "packages/db/prisma/seed.ts": [],
+    "packages/db/tsconfig.json": [],
+    "packages/graph/package.json": [],
+    "packages/graph/src/index.ts": [],
+    "packages/graph/tsconfig.json": [],
+    "packages/graphql-client/codegen.ts": [],
+    "packages/graphql-client/package.json": [],
+    "packages/graphql-client/src/generated/graphql.ts": [],
+    "packages/graphql-client/src/index.ts": [],
+    "packages/graphql-client/src/queries/nodes/nodes.graphql": [],
+    "packages/graphql-client/src/queries/roadmaps/roadmaps.graphql": [],
+    "packages/graphql-client/src/queries/search.graphql": [],
+    "packages/graphql-client/tsconfig.json": [],
+    "packages/lesson/package.json": [],
+    "packages/lesson/src/index.ts": [],
+    "packages/lesson/src/test-setup.ts": [],
+    "packages/lesson/tsconfig.json": [],
+    "packages/lesson/vitest.config.ts": [],
+    "packages/ui/package.json": [],
+    "packages/ui/src/Button.tsx": [],
+    "packages/ui/src/Card.tsx": [
+      "packages/ui/src/NodeBadge.tsx"
+    ],
+    "packages/ui/src/index.ts": [],
+    "packages/ui/src/NodeBadge.tsx": [],
+    "packages/ui/tsconfig.json": [],
+    "pnpm-workspace.yaml": [],
+    "README.md": [],
+    "render.yaml": [],
+    "scripts/validate-yaml.cjs": [],
+    "services/svc-python/README.md": [],
+    "services/svc-rust/README.md": [],
+    "tsconfig.base.json": [],
+    "turbo.json": []
+  }
+}

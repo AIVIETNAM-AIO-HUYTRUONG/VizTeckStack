@@ -1,0 +1,87 @@
+{
+  "batchIndex": 4,
+  "files": [
+    [
+      "apps/admin/src/app/api/uploadthing/core.ts",
+      17,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/app/api/uploadthing/route.ts",
+      4,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/components/CoverImage.spec.tsx",
+      55,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/components/CoverImage.tsx",
+      124,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/components/CoverUploadModal.tsx",
+      127,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/components/IconPicker.spec.tsx",
+      45,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/features/lessons/components/IconPicker.tsx",
+      139,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/admin/src/lib/uploadthing.ts",
+      4,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/admin/src/app/api/uploadthing/core.ts": [],
+    "apps/admin/src/app/api/uploadthing/route.ts": [
+      "apps/admin/src/app/api/uploadthing/core.ts"
+    ],
+    "apps/admin/src/features/lessons/components/CoverImage.spec.tsx": [
+      "apps/admin/src/features/lessons/components/CoverImage.tsx"
+    ],
+    "apps/admin/src/features/lessons/components/CoverImage.tsx": [
+      "apps/admin/src/features/lessons/components/CoverUploadModal.tsx",
+      "apps/admin/src/features/lessons/components/IconPicker.tsx"
+    ],
+    "apps/admin/src/features/lessons/components/CoverUploadModal.tsx": [
+      "apps/admin/src/lib/uploadthing.ts"
+    ],
+    "apps/admin/src/features/lessons/components/IconPicker.spec.tsx": [
+      "apps/admin/src/features/lessons/components/IconPicker.tsx"
+    ],
+    "apps/admin/src/features/lessons/components/IconPicker.tsx": [],
+    "apps/admin/src/lib/uploadthing.ts": [
+      "apps/admin/src/app/api/uploadthing/core.ts"
+    ]
+  },
+  "neighborMap": {
+    "apps/admin/src/features/lessons/components/CoverImage.tsx": [
+      {
+        "path": "apps/admin/src/app/roadmaps/[id]/nodes/[nodeId]/page.tsx",
+        "batchIndex": 1,
+        "symbols": [
+          "LessonEditorPage"
+        ]
+      }
+    ]
+  }
+}

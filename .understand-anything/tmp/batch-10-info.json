@@ -1,0 +1,33 @@
+{
+  "batchIndex": 10,
+  "files": [
+    [
+      "packages/core/src/lesson/ui/LessonEditor.tsx",
+      101,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/LessonViewer.tsx",
+      46,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/utils.ts",
+      9,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "packages/core/src/lesson/ui/LessonEditor.tsx": [
+      "packages/core/src/lesson/ui/utils.ts"
+    ],
+    "packages/core/src/lesson/ui/LessonViewer.tsx": [
+      "packages/core/src/lesson/ui/utils.ts"
+    ],
+    "packages/core/src/lesson/ui/utils.ts": []
+  },
+  "neighborMap": {}
+}

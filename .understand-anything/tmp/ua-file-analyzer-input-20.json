@@ -1,0 +1,31 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": ".claude/settings.json", "language": "json", "sizeLines": 15, "fileCategory": "config"},
+    {"path": ".husky/commit-msg", "language": "unknown", "sizeLines": 1, "fileCategory": "code"},
+    {"path": ".husky/pre-commit", "language": "unknown", "sizeLines": 1, "fileCategory": "code"},
+    {"path": ".husky/pre-push", "language": "unknown", "sizeLines": 1, "fileCategory": "code"},
+    {"path": ".understand-anything/.understandignore", "language": "unknown", "sizeLines": 48, "fileCategory": "code"},
+    {"path": ".understand-anything/config.json", "language": "json", "sizeLines": 1, "fileCategory": "config"},
+    {"path": "apps/admin/next.config.js", "language": "javascript", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "apps/admin/postcss.config.js", "language": "javascript", "sizeLines": 6, "fileCategory": "code"},
+    {"path": "apps/admin/src/app/globals.css", "language": "css", "sizeLines": 69, "fileCategory": "markup"},
+    {"path": "apps/admin/src/app/login/page.tsx", "language": "typescript", "sizeLines": 108, "fileCategory": "code"},
+    {"path": "apps/admin/src/app/page.tsx", "language": "typescript", "sizeLines": 19, "fileCategory": "code"},
+    {"path": "apps/admin/tailwind.config.ts", "language": "typescript", "sizeLines": 32, "fileCategory": "code"},
+    {"path": "apps/admin/vitest.config.ts", "language": "typescript", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "apps/admin/vitest.setup.ts", "language": "typescript", "sizeLines": 1, "fileCategory": "code"},
+    {"path": "apps/api-gateway/src/schema.gql", "language": "graphql", "sizeLines": 129, "fileCategory": "data"},
+    {"path": "apps/e2e/package.json", "language": "json", "sizeLines": 16, "fileCategory": "config"},
+    {"path": "apps/e2e/playwright.config.ts", "language": "typescript", "sizeLines": 32, "fileCategory": "code"},
+    {"path": "apps/e2e/tests/admin.spec.ts", "language": "typescript", "sizeLines": 105, "fileCategory": "code"},
+    {"path": "apps/e2e/tests/api.spec.ts", "language": "typescript", "sizeLines": 111, "fileCategory": "code"},
+    {"path": "apps/e2e/tests/web.spec.ts", "language": "typescript", "sizeLines": 111, "fileCategory": "code"},
+    {"path": "apps/web/next-env.d.ts", "language": "typescript", "sizeLines": 6, "fileCategory": "code"},
+    {"path": "apps/web/next.config.js", "language": "javascript", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "apps/web/postcss.config.js", "language": "javascript", "sizeLines": 6, "fileCategory": "code"},
+    {"path": "apps/web/src/app/globals.css", "language": "css", "sizeLines": 69, "fileCategory": "markup"},
+    {"path": "apps/web/tailwind.config.ts", "language": "typescript", "sizeLines": 33, "fileCategory": "code"}
+  ],
+  "batchImportData": {".claude/settings.json": [], ".husky/commit-msg": [], ".husky/pre-commit": [], ".husky/pre-push": [], ".understand-anything/.understandignore": [], ".understand-anything/config.json": [], "apps/admin/next.config.js": [], "apps/admin/postcss.config.js": [], "apps/admin/src/app/globals.css": [], "apps/admin/src/app/login/page.tsx": [], "apps/admin/src/app/page.tsx": [], "apps/admin/tailwind.config.ts": [], "apps/admin/vitest.config.ts": [], "apps/admin/vitest.setup.ts": [], "apps/api-gateway/src/schema.gql": [], "apps/e2e/package.json": [], "apps/e2e/playwright.config.ts": [], "apps/e2e/tests/admin.spec.ts": [], "apps/e2e/tests/api.spec.ts": [], "apps/e2e/tests/web.spec.ts": [], "apps/web/next-env.d.ts": [], "apps/web/next.config.js": [], "apps/web/postcss.config.js": [], "apps/web/src/app/globals.css": [], "apps/web/tailwind.config.ts": []}
+}

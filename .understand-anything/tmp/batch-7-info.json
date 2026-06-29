@@ -1,0 +1,49 @@
+{
+  "batchIndex": 7,
+  "files": [
+    [
+      "packages/core/src/lesson/ui/SearchModal.spec.tsx",
+      41,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/SearchModal.tsx",
+      139,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/SearchPreview.tsx",
+      37,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/SearchResultItem.tsx",
+      36,
+      "typescript",
+      "code"
+    ],
+    [
+      "packages/core/src/lesson/ui/useSearch.ts",
+      76,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "packages/core/src/lesson/ui/SearchModal.spec.tsx": [
+      "packages/core/src/lesson/ui/SearchModal.tsx"
+    ],
+    "packages/core/src/lesson/ui/SearchModal.tsx": [
+      "packages/core/src/lesson/ui/SearchPreview.tsx",
+      "packages/core/src/lesson/ui/SearchResultItem.tsx",
+      "packages/core/src/lesson/ui/useSearch.ts"
+    ],
+    "packages/core/src/lesson/ui/SearchPreview.tsx": [],
+    "packages/core/src/lesson/ui/SearchResultItem.tsx": [],
+    "packages/core/src/lesson/ui/useSearch.ts": []
+  },
+  "neighborMap": {}
+}

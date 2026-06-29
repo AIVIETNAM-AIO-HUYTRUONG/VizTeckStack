@@ -1,0 +1,2161 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 29,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/get-node-breadcrumb.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "classes": [
+        {
+          "name": "GetNodeBreadcrumbUseCase",
+          "startLine": 5,
+          "endLine": 8,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetNodeBreadcrumbUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.getNodeBreadcrumb",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/get-node.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "classes": [
+        {
+          "name": "GetNodeUseCase",
+          "startLine": 5,
+          "endLine": 8,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetNodeUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.findNodeById",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-content.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "classes": [
+        {
+          "name": "UpdateNodeContentUseCase",
+          "startLine": 6,
+          "endLine": 11,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpdateNodeContentUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.updateNodeField",
+          "lineNumber": 9
+        },
+        {
+          "caller": "execute",
+          "callee": "JSON.parse",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-cover.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "classes": [
+        {
+          "name": "UpdateNodeCoverUseCase",
+          "startLine": 6,
+          "endLine": 11,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpdateNodeCoverUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.updateNodeField",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-icon.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "classes": [
+        {
+          "name": "UpdateNodeIconUseCase",
+          "startLine": 6,
+          "endLine": 11,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpdateNodeIconUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.updateNodeField",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/node/update-node-title.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "classes": [
+        {
+          "name": "UpdateNodeTitleUseCase",
+          "startLine": 6,
+          "endLine": 9,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpdateNodeTitleUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.updateNodeField",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/create-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "classes": [
+        {
+          "name": "CreateRoadmapUseCase",
+          "startLine": 6,
+          "endLine": 9,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CreateRoadmapUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.create",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/delete-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "classes": [
+        {
+          "name": "DeleteRoadmapUseCase",
+          "startLine": 5,
+          "endLine": 8,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "DeleteRoadmapUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.delete",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap-tree.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "classes": [
+        {
+          "name": "GetRoadmapTreeUseCase",
+          "startLine": 5,
+          "endLine": 8,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetRoadmapTreeUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.getRoadmapTree",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/get-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "classes": [
+        {
+          "name": "GetRoadmapUseCase",
+          "startLine": 5,
+          "endLine": 8,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetRoadmapUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.findBySlug",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/list-roadmaps.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "classes": [
+        {
+          "name": "ListRoadmapsUseCase",
+          "startLine": 6,
+          "endLine": 9,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ListRoadmapsUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.findAll",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 13,
+      "classes": [
+        {
+          "name": "SearchNodesUseCase",
+          "startLine": 5,
+          "endLine": 16,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchNodesUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.searchNodes",
+          "lineNumber": 9
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.findAll",
+          "lineNumber": 12
+        },
+        {
+          "caller": "execute",
+          "callee": "roadmaps.filter(r => r.status === 'PUBLIC').map",
+          "lineNumber": 13
+        },
+        {
+          "caller": "execute",
+          "callee": "roadmaps.filter",
+          "lineNumber": 13
+        },
+        {
+          "caller": "execute",
+          "callee": "results.filter",
+          "lineNumber": 14
+        },
+        {
+          "caller": "execute",
+          "callee": "publicIds.has",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/update-roadmap.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "classes": [
+        {
+          "name": "UpdateRoadmapUseCase",
+          "startLine": 6,
+          "endLine": 9,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpdateRoadmapUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 7
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.update",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "classes": [
+        {
+          "name": "UpsertGraphUseCase",
+          "startLine": 5,
+          "endLine": 10,
+          "methods": [
+            "constructor",
+            "execute"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpsertGraphUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Inject",
+          "lineNumber": 6
+        },
+        {
+          "caller": "execute",
+          "callee": "this.repo.upsertGraph",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/application/use-cases/use-cases.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 154,
+      "nonEmptyLines": 120,
+      "functions": [
+        {
+          "name": "makeNode",
+          "startLine": 6,
+          "endLine": 11,
+          "params": [
+            "overrides"
+          ]
+        },
+        {
+          "name": "makeRepo",
+          "startLine": 13,
+          "endLine": 26,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 14
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 15
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 16
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 17
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 18
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 19
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 20
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 21
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 22
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 23
+        },
+        {
+          "caller": "makeRepo",
+          "callee": "jest.fn",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/auth/admin.guard.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 15,
+      "classes": [
+        {
+          "name": "AdminGuard",
+          "startLine": 5,
+          "endLine": 17,
+          "methods": [
+            "canActivate"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminGuard",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "canActivate",
+          "callee": "context.getType",
+          "lineNumber": 7
+        },
+        {
+          "caller": "canActivate",
+          "callee": "context.switchToHttp().getRequest",
+          "lineNumber": 8
+        },
+        {
+          "caller": "canActivate",
+          "callee": "context.switchToHttp",
+          "lineNumber": 8
+        },
+        {
+          "caller": "canActivate",
+          "callee": "GqlExecutionContext.create(context).getContext",
+          "lineNumber": 9
+        },
+        {
+          "caller": "canActivate",
+          "callee": "GqlExecutionContext.create",
+          "lineNumber": 9
+        },
+        {
+          "caller": "canActivate",
+          "callee": "(req.headers['authorization'] as string | undefined)?.replace",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/domain/entities/edge.entity.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/domain/entities/node.entity.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 100,
+      "nonEmptyLines": 88,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/infrastructure/database/database.module.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "classes": [
+        {
+          "name": "DatabaseModule",
+          "startLine": 10,
+          "endLine": 10,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "DatabaseModule",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 255,
+      "nonEmptyLines": 217,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 222,
+      "nonEmptyLines": 195,
+      "classes": [
+        {
+          "name": "PrismaRoadmapRepository",
+          "startLine": 9,
+          "endLine": 222,
+          "methods": [
+            "findAll",
+            "findBySlug",
+            "findNodeById",
+            "create",
+            "update",
+            "delete",
+            "upsertGraph",
+            "updateNodeField",
+            "getNodeBreadcrumb",
+            "getRoadmapTree",
+            "searchNodes"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PrismaRoadmapRepository",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "findAll",
+          "callee": "db.roadmap.findMany",
+          "lineNumber": 11
+        },
+        {
+          "caller": "findBySlug",
+          "callee": "db.roadmap.findUnique",
+          "lineNumber": 15
+        },
+        {
+          "caller": "findBySlug",
+          "callee": "r.nodes.flatMap",
+          "lineNumber": 20
+        },
+        {
+          "caller": "findNodeById",
+          "callee": "db.node.findUnique",
+          "lineNumber": 25
+        },
+        {
+          "caller": "create",
+          "callee": "db.roadmap.create",
+          "lineNumber": 38
+        },
+        {
+          "caller": "update",
+          "callee": "db.roadmap.update",
+          "lineNumber": 54
+        },
+        {
+          "caller": "delete",
+          "callee": "db.roadmap.delete",
+          "lineNumber": 65
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "db.$transaction",
+          "lineNumber": 76
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "tx.node.findMany",
+          "lineNumber": 77
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "existingNodes.map",
+          "lineNumber": 78
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "tx.edge.deleteMany",
+          "lineNumber": 79
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "tx.node.deleteMany",
+          "lineNumber": 80
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "tx.node.create",
+          "lineNumber": 83
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "tx.edge.create",
+          "lineNumber": 98
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "db.roadmap.findUnique",
+          "lineNumber": 105
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "this.findBySlug",
+          "lineNumber": 106
+        },
+        {
+          "caller": "updateNodeField",
+          "callee": "db.node.update",
+          "lineNumber": 112
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "db.node.findUnique",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "chain.unshift",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "visited.has",
+          "lineNumber": 132
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "visited.add",
+          "lineNumber": 133
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "db.node.findFirst",
+          "lineNumber": 135
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "chain.unshift",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "db.roadmap.findUnique",
+          "lineNumber": 144
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "chain.unshift",
+          "lineNumber": 145
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "db.roadmap.findUnique",
+          "lineNumber": 154
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "db.node.findMany",
+          "lineNumber": 157
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "Promise.all",
+          "lineNumber": 160
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "rootNodes.map",
+          "lineNumber": 161
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "db.roadmap.findUnique",
+          "lineNumber": 168
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "db.node.findMany",
+          "lineNumber": 172
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "subNodes.map",
+          "lineNumber": 173
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "Prisma.sql",
+          "lineNumber": 198
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "await db.$queryRaw<Row[]>",
+          "lineNumber": 199
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "rows.map",
+          "lineNumber": 206
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "Prisma.sql",
+          "lineNumber": 210
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "Prisma.sql",
+          "lineNumber": 211
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "await db.$queryRaw<Row[]>",
+          "lineNumber": 213
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "rows.map",
+          "lineNumber": 220
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/node.resolver.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "toNodeDto",
+          "startLine": 12,
+          "endLine": 15,
+          "params": [
+            "node"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "NodeResolver",
+          "startLine": 18,
+          "endLine": 64,
+          "methods": [
+            "constructor",
+            "node",
+            "nodeBreadcrumb",
+            "updateNodeContent",
+            "updateNodeTitle",
+            "updateNodeCover",
+            "updateNodeIcon"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "NodeResolver",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "toNodeDto",
+          "callee": "JSON.stringify",
+          "lineNumber": 14
+        },
+        {
+          "caller": "node",
+          "callee": "Args",
+          "lineNumber": 29
+        },
+        {
+          "caller": "node",
+          "callee": "this.getNodeUseCase.execute",
+          "lineNumber": 30
+        },
+        {
+          "caller": "node",
+          "callee": "toNodeDto",
+          "lineNumber": 32
+        },
+        {
+          "caller": "nodeBreadcrumb",
+          "callee": "Args",
+          "lineNumber": 36
+        },
+        {
+          "caller": "nodeBreadcrumb",
+          "callee": "this.getNodeBreadcrumbUseCase.execute",
+          "lineNumber": 37
+        },
+        {
+          "caller": "nodeBreadcrumb",
+          "callee": "items.map",
+          "lineNumber": 38
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "Args",
+          "lineNumber": 43
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "Args",
+          "lineNumber": 43
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "toNodeDto",
+          "lineNumber": 44
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "this.updateNodeContentUseCase.execute",
+          "lineNumber": 44
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "Args",
+          "lineNumber": 49
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "Args",
+          "lineNumber": 49
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "toNodeDto",
+          "lineNumber": 50
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "this.updateNodeTitleUseCase.execute",
+          "lineNumber": 50
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "Args",
+          "lineNumber": 55
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "Args",
+          "lineNumber": 55
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "toNodeDto",
+          "lineNumber": 56
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "this.updateNodeCoverUseCase.execute",
+          "lineNumber": 56
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "Args",
+          "lineNumber": 61
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "Args",
+          "lineNumber": 61
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "toNodeDto",
+          "lineNumber": 62
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "this.updateNodeIconUseCase.execute",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.dto.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 201,
+      "nonEmptyLines": 182,
+      "classes": [
+        {
+          "name": "RoadmapDto",
+          "startLine": 18,
+          "endLine": 31,
+          "methods": [],
+          "properties": [
+            "id",
+            "slug",
+            "title",
+            "description",
+            "coverImage",
+            "status"
+          ]
+        },
+        {
+          "name": "NodeDto",
+          "startLine": 34,
+          "endLine": 60,
+          "methods": [],
+          "properties": [
+            "id",
+            "roadmapId",
+            "type",
+            "title",
+            "positionX",
+            "positionY",
+            "targetRoadmapId",
+            "targetRoadmapSlug",
+            "content",
+            "coverImage",
+            "icon"
+          ]
+        },
+        {
+          "name": "EdgeDto",
+          "startLine": 63,
+          "endLine": 70,
+          "methods": [],
+          "properties": [
+            "id",
+            "sourceId",
+            "targetId",
+            "label"
+          ]
+        },
+        {
+          "name": "RoadmapDetailDto",
+          "startLine": 73,
+          "endLine": 77,
+          "methods": [],
+          "properties": [
+            "roadmap",
+            "nodes",
+            "edges"
+          ]
+        },
+        {
+          "name": "CreateRoadmapInput",
+          "startLine": 80,
+          "endLine": 89,
+          "methods": [],
+          "properties": [
+            "slug",
+            "title",
+            "description",
+            "coverImage"
+          ]
+        },
+        {
+          "name": "UpdateRoadmapInput",
+          "startLine": 92,
+          "endLine": 105,
+          "methods": [],
+          "properties": [
+            "title",
+            "description",
+            "coverImage",
+            "status"
+          ]
+        },
+        {
+          "name": "NodeInput",
+          "startLine": 108,
+          "endLine": 122,
+          "methods": [],
+          "properties": [
+            "id",
+            "type",
+            "title",
+            "positionX",
+            "positionY",
+            "targetRoadmapId",
+            "content"
+          ]
+        },
+        {
+          "name": "EdgeInput",
+          "startLine": 125,
+          "endLine": 131,
+          "methods": [],
+          "properties": [
+            "sourceId",
+            "targetId",
+            "label"
+          ]
+        },
+        {
+          "name": "UpdateNodeContentInput",
+          "startLine": 134,
+          "endLine": 138,
+          "methods": [],
+          "properties": [
+            "content"
+          ]
+        },
+        {
+          "name": "UpdateNodeTitleInput",
+          "startLine": 141,
+          "endLine": 145,
+          "methods": [],
+          "properties": [
+            "title"
+          ]
+        },
+        {
+          "name": "BreadcrumbItemDto",
+          "startLine": 148,
+          "endLine": 152,
+          "methods": [],
+          "properties": [
+            "title",
+            "slug",
+            "nodeId"
+          ]
+        },
+        {
+          "name": "UpdateNodeCoverInput",
+          "startLine": 155,
+          "endLine": 159,
+          "methods": [],
+          "properties": [
+            "coverImage"
+          ]
+        },
+        {
+          "name": "UpdateNodeIconInput",
+          "startLine": 162,
+          "endLine": 166,
+          "methods": [],
+          "properties": [
+            "icon"
+          ]
+        },
+        {
+          "name": "RoadmapTreeNodeDto",
+          "startLine": 169,
+          "endLine": 180,
+          "methods": [],
+          "properties": [
+            "id",
+            "title",
+            "type",
+            "slug",
+            "targetRoadmapId",
+            "roadmapSlug",
+            "roadmapId",
+            "children"
+          ]
+        },
+        {
+          "name": "RoadmapTreeDto",
+          "startLine": 183,
+          "endLine": 187,
+          "methods": [],
+          "properties": [
+            "rootSlug",
+            "rootTitle",
+            "nodes"
+          ]
+        },
+        {
+          "name": "SearchResultDto",
+          "startLine": 190,
+          "endLine": 201,
+          "methods": [],
+          "properties": [
+            "id",
+            "type",
+            "title",
+            "icon",
+            "coverImage",
+            "roadmapSlug",
+            "roadmapTitle",
+            "roadmapId",
+            "updatedAt",
+            "breadcrumb"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapDto",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "NodeDto",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "EdgeDto",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapDetailDto",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "CreateRoadmapInput",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateRoadmapInput",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "NodeInput",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "EdgeInput",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeContentInput",
+          "line": 133,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeTitleInput",
+          "line": 140,
+          "isDefault": false
+        },
+        {
+          "name": "BreadcrumbItemDto",
+          "line": 147,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeCoverInput",
+          "line": 154,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateNodeIconInput",
+          "line": 161,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapTreeNodeDto",
+          "line": 168,
+          "isDefault": false
+        },
+        {
+          "name": "RoadmapTreeDto",
+          "line": 182,
+          "isDefault": false
+        },
+        {
+          "name": "SearchResultDto",
+          "line": 189,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 16,
+        "functionCount": 0,
+        "classCount": 16
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.module.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "classes": [
+        {
+          "name": "RoadmapModule",
+          "startLine": 35,
+          "endLine": 35,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapModule",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 18,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.resolver.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 61,
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 127,
+      "nonEmptyLines": 117,
+      "functions": [
+        {
+          "name": "normalizeNodeType",
+          "startLine": 18,
+          "endLine": 20,
+          "params": [
+            "type"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "RoadmapResolver",
+          "startLine": 23,
+          "endLine": 127,
+          "methods": [
+            "constructor",
+            "roadmaps",
+            "roadmap",
+            "createRoadmap",
+            "updateRoadmap",
+            "deleteRoadmap",
+            "upsertGraph",
+            "roadmapTree",
+            "search"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapResolver",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "roadmaps",
+          "callee": "this.listRoadmapsUseCase.execute",
+          "lineNumber": 37
+        },
+        {
+          "caller": "roadmap",
+          "callee": "Args",
+          "lineNumber": 41
+        },
+        {
+          "caller": "roadmap",
+          "callee": "Promise.all",
+          "lineNumber": 42
+        },
+        {
+          "caller": "roadmap",
+          "callee": "this.getRoadmapUseCase.execute",
+          "lineNumber": 43
+        },
+        {
+          "caller": "roadmap",
+          "callee": "this.listRoadmapsUseCase.execute",
+          "lineNumber": 44
+        },
+        {
+          "caller": "roadmap",
+          "callee": "allRoadmaps.map",
+          "lineNumber": 47
+        },
+        {
+          "caller": "roadmap",
+          "callee": "detail.nodes.map",
+          "lineNumber": 50
+        },
+        {
+          "caller": "roadmap",
+          "callee": "normalizeNodeType",
+          "lineNumber": 52
+        },
+        {
+          "caller": "roadmap",
+          "callee": "JSON.stringify",
+          "lineNumber": 53
+        },
+        {
+          "caller": "roadmap",
+          "callee": "idToSlug.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "createRoadmap",
+          "callee": "Args",
+          "lineNumber": 62
+        },
+        {
+          "caller": "createRoadmap",
+          "callee": "this.createRoadmapUseCase.execute",
+          "lineNumber": 63
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "Args",
+          "lineNumber": 69
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "Args",
+          "lineNumber": 70
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "this.updateRoadmapUseCase.execute",
+          "lineNumber": 72
+        },
+        {
+          "caller": "deleteRoadmap",
+          "callee": "Args",
+          "lineNumber": 77
+        },
+        {
+          "caller": "deleteRoadmap",
+          "callee": "this.deleteRoadmapUseCase.execute",
+          "lineNumber": 78
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "Args",
+          "lineNumber": 85
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "Args",
+          "lineNumber": 86
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "Args",
+          "lineNumber": 87
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "nodes.map",
+          "lineNumber": 89
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "JSON.parse",
+          "lineNumber": 92
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "this.upsertGraphUseCase.execute",
+          "lineNumber": 94
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "detail.nodes.map",
+          "lineNumber": 97
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "normalizeNodeType",
+          "lineNumber": 99
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "JSON.stringify",
+          "lineNumber": 100
+        },
+        {
+          "caller": "roadmapTree",
+          "callee": "Args",
+          "lineNumber": 107
+        },
+        {
+          "caller": "roadmapTree",
+          "callee": "this.getRoadmapTreeUseCase.execute",
+          "lineNumber": 108
+        },
+        {
+          "caller": "search",
+          "callee": "Args",
+          "lineNumber": 113
+        },
+        {
+          "caller": "search",
+          "callee": "Args",
+          "lineNumber": 114
+        },
+        {
+          "caller": "search",
+          "callee": "Args",
+          "lineNumber": 115
+        },
+        {
+          "caller": "search",
+          "callee": "Context",
+          "lineNumber": 116
+        },
+        {
+          "caller": "search",
+          "callee": "ctx?.req?.headers?.authorization?.replace",
+          "lineNumber": 118
+        },
+        {
+          "caller": "search",
+          "callee": "Boolean",
+          "lineNumber": 119
+        },
+        {
+          "caller": "search",
+          "callee": "this.searchNodesUseCase.execute",
+          "lineNumber": 120
+        },
+        {
+          "caller": "search",
+          "callee": "results.map",
+          "lineNumber": 121
+        },
+        {
+          "caller": "search",
+          "callee": "normalizeNodeType",
+          "lineNumber": 123
+        },
+        {
+          "caller": "search",
+          "callee": "r.updatedAt.toISOString",
+          "lineNumber": 124
+        }
+      ],
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/roadmap/roadmap.rest.controller.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 178,
+      "nonEmptyLines": 162,
+      "classes": [
+        {
+          "name": "RoadmapRestController",
+          "startLine": 26,
+          "endLine": 178,
+          "methods": [
+            "constructor",
+            "getRoadmaps",
+            "getRoadmap",
+            "getRoadmapTree",
+            "getNode",
+            "validateToken",
+            "createRoadmap",
+            "updateRoadmap",
+            "deleteRoadmap",
+            "upsertGraph",
+            "updateNodeContent",
+            "updateNodeTitle",
+            "updateNodeCover",
+            "updateNodeIcon",
+            "searchNodes",
+            "getNodeBreadcrumb"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RoadmapRestController",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getRoadmaps",
+          "callee": "this.listRoadmapsUseCase.execute",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "Param",
+          "lineNumber": 51
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "Promise.all",
+          "lineNumber": 52
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "this.getRoadmapUseCase.execute",
+          "lineNumber": 53
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "this.listRoadmapsUseCase.execute",
+          "lineNumber": 54
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "allRoadmaps.map",
+          "lineNumber": 57
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "detail.nodes.map",
+          "lineNumber": 60
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "JSON.stringify",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getRoadmap",
+          "callee": "idToSlug.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "Param",
+          "lineNumber": 71
+        },
+        {
+          "caller": "getRoadmapTree",
+          "callee": "this.getRoadmapTreeUseCase.execute",
+          "lineNumber": 72
+        },
+        {
+          "caller": "getNode",
+          "callee": "Param",
+          "lineNumber": 78
+        },
+        {
+          "caller": "getNode",
+          "callee": "this.getNodeUseCase.execute",
+          "lineNumber": 79
+        },
+        {
+          "caller": "getNode",
+          "callee": "JSON.stringify",
+          "lineNumber": 81
+        },
+        {
+          "caller": "createRoadmap",
+          "callee": "Body",
+          "lineNumber": 94
+        },
+        {
+          "caller": "createRoadmap",
+          "callee": "this.createRoadmapUseCase.execute",
+          "lineNumber": 94
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "Param",
+          "lineNumber": 101
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "Body",
+          "lineNumber": 101
+        },
+        {
+          "caller": "updateRoadmap",
+          "callee": "this.updateRoadmapUseCase.execute",
+          "lineNumber": 102
+        },
+        {
+          "caller": "deleteRoadmap",
+          "callee": "Param",
+          "lineNumber": 110
+        },
+        {
+          "caller": "deleteRoadmap",
+          "callee": "this.deleteRoadmapUseCase.execute",
+          "lineNumber": 110
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "Param",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "Body",
+          "lineNumber": 117
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "body.nodes.map",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "JSON.parse",
+          "lineNumber": 118
+        },
+        {
+          "caller": "upsertGraph",
+          "callee": "this.upsertGraphUseCase.execute",
+          "lineNumber": 119
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "Param",
+          "lineNumber": 127
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "Body",
+          "lineNumber": 127
+        },
+        {
+          "caller": "updateNodeContent",
+          "callee": "this.updateNodeContentUseCase.execute",
+          "lineNumber": 128
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "Param",
+          "lineNumber": 136
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "Body",
+          "lineNumber": 136
+        },
+        {
+          "caller": "updateNodeTitle",
+          "callee": "this.updateNodeTitleUseCase.execute",
+          "lineNumber": 137
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "Param",
+          "lineNumber": 145
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "Body",
+          "lineNumber": 145
+        },
+        {
+          "caller": "updateNodeCover",
+          "callee": "this.updateNodeCoverUseCase.execute",
+          "lineNumber": 146
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "Param",
+          "lineNumber": 154
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "Body",
+          "lineNumber": 154
+        },
+        {
+          "caller": "updateNodeIcon",
+          "callee": "this.updateNodeIconUseCase.execute",
+          "lineNumber": 155
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "Query",
+          "lineNumber": 163
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "Query",
+          "lineNumber": 164
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "Query",
+          "lineNumber": 165
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "this.searchNodesUseCase.execute",
+          "lineNumber": 167
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "results.map",
+          "lineNumber": 168
+        },
+        {
+          "caller": "searchNodes",
+          "callee": "r.updatedAt.toISOString",
+          "lineNumber": 168
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "Param",
+          "lineNumber": 174
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "this.getNodeBreadcrumbUseCase.execute",
+          "lineNumber": 175
+        },
+        {
+          "caller": "getNodeBreadcrumb",
+          "callee": "items.map",
+          "lineNumber": 176
+        }
+      ],
+      "metrics": {
+        "importCount": 16,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

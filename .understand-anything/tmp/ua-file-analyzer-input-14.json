@@ -1,0 +1,9 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "apps/api-gateway/.env.example", "language": "config", "sizeLines": 4, "fileCategory": "config"},
+    {"path": "apps/api-gateway/package.json", "language": "json", "sizeLines": 46, "fileCategory": "config"},
+    {"path": "apps/api-gateway/tsconfig.json", "language": "json", "sizeLines": 10, "fileCategory": "config"}
+  ],
+  "batchImportData": {"apps/api-gateway/.env.example": [], "apps/api-gateway/package.json": [], "apps/api-gateway/tsconfig.json": []}
+}

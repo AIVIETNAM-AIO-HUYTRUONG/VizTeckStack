@@ -1,0 +1,44 @@
+{
+  "batchIndex": 9,
+  "files": [
+    [
+      "apps/api-gateway/src/app.module.ts",
+      29,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/health.controller.ts",
+      14,
+      "typescript",
+      "code"
+    ],
+    [
+      "apps/api-gateway/src/main.ts",
+      29,
+      "typescript",
+      "code"
+    ]
+  ],
+  "batchImportData": {
+    "apps/api-gateway/src/app.module.ts": [
+      "apps/api-gateway/src/health.controller.ts",
+      "apps/api-gateway/src/roadmap/roadmap.module.ts"
+    ],
+    "apps/api-gateway/src/health.controller.ts": [],
+    "apps/api-gateway/src/main.ts": [
+      "apps/api-gateway/src/app.module.ts"
+    ]
+  },
+  "neighborMap": {
+    "apps/api-gateway/src/app.module.ts": [
+      {
+        "path": "apps/api-gateway/src/roadmap/roadmap.module.ts",
+        "batchIndex": 2,
+        "symbols": [
+          "RoadmapModule"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,341 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "packages/core/src/lesson/ui/LessonEditor.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 90,
+      "functions": [
+        {
+          "name": "LessonEditor",
+          "startLine": 17,
+          "endLine": 101,
+          "params": [
+            "{ initialContentJson, onSave }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonEditor",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LessonEditor",
+          "callee": "parseBlocks",
+          "lineNumber": 18
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useCreateBlockNote",
+          "lineNumber": 20
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useRef",
+          "lineNumber": 24
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useRef",
+          "lineNumber": 25
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useRef",
+          "lineNumber": 26
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useRef",
+          "lineNumber": 27
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useEffect",
+          "lineNumber": 28
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useEffect",
+          "lineNumber": 30
+        },
+        {
+          "caller": "update",
+          "callee": "setTheme",
+          "lineNumber": 32
+        },
+        {
+          "caller": "update",
+          "callee": "document.documentElement.classList.contains",
+          "lineNumber": 32
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "update",
+          "lineNumber": 33
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "obs.observe",
+          "lineNumber": 35
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "obs.disconnect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useEffect",
+          "lineNumber": 39
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "clearTimeout",
+          "lineNumber": 41
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "clearTimeout",
+          "lineNumber": 42
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useCallback",
+          "lineNumber": 46
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "setSaveStatus",
+          "lineNumber": 49
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "onSaveRef.current",
+          "lineNumber": 51
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "JSON.stringify",
+          "lineNumber": 51
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "setSaveStatus",
+          "lineNumber": 53
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "clearTimeout",
+          "lineNumber": 54
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "setTimeout",
+          "lineNumber": 55
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "setSaveStatus",
+          "lineNumber": 56
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "setSaveStatus",
+          "lineNumber": 61
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "useCallback",
+          "lineNumber": 65
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "clearTimeout",
+          "lineNumber": 66
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "setTimeout",
+          "lineNumber": 67
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "executeSave",
+          "lineNumber": 69
+        },
+        {
+          "caller": "LessonEditor",
+          "callee": "executeSave",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/LessonViewer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "LessonViewerInner",
+          "startLine": 18,
+          "endLine": 38,
+          "params": [
+            "{ contentJson }"
+          ]
+        },
+        {
+          "name": "LessonViewer",
+          "startLine": 40,
+          "endLine": 46,
+          "params": [
+            "{ contentJson }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LessonViewer",
+          "line": 40,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LessonViewerInner",
+          "callee": "parseBlocks",
+          "lineNumber": 19
+        },
+        {
+          "caller": "LessonViewerInner",
+          "callee": "useCreateBlockNote",
+          "lineNumber": 21
+        },
+        {
+          "caller": "LessonViewerInner",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "LessonViewerInner",
+          "callee": "useEffect",
+          "lineNumber": 24
+        },
+        {
+          "caller": "update",
+          "callee": "setTheme",
+          "lineNumber": 26
+        },
+        {
+          "caller": "update",
+          "callee": "document.documentElement.classList.contains",
+          "lineNumber": 26
+        },
+        {
+          "caller": "LessonViewerInner",
+          "callee": "update",
+          "lineNumber": 27
+        },
+        {
+          "caller": "LessonViewerInner",
+          "callee": "obs.observe",
+          "lineNumber": 29
+        },
+        {
+          "caller": "LessonViewerInner",
+          "callee": "obs.disconnect",
+          "lineNumber": 30
+        },
+        {
+          "caller": "LessonViewer",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "LessonViewer",
+          "callee": "useEffect",
+          "lineNumber": 42
+        },
+        {
+          "caller": "LessonViewer",
+          "callee": "setMounted",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "packages/core/src/lesson/ui/utils.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "parseBlocks",
+          "startLine": 1,
+          "endLine": 9,
+          "params": [
+            "json"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "parseBlocks",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseBlocks",
+          "callee": "JSON.parse",
+          "lineNumber": 3
+        },
+        {
+          "caller": "parseBlocks",
+          "callee": "Array.isArray",
+          "lineNumber": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

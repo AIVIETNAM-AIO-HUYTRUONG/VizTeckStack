@@ -1,0 +1,859 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".claude/settings.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 15,
+      "nonEmptyLines": 15,
+      "sections": [
+        {
+          "heading": "enabledPlugins",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "permissions",
+          "level": 1,
+          "line": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": ".husky/commit-msg",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": ".husky/pre-commit",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": ".husky/pre-push",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 42,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "outputLanguage",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "apps/admin/next.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 16,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/postcss.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/app/globals.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 69,
+      "nonEmptyLines": 60,
+      "metrics": {}
+    },
+    {
+      "path": "apps/admin/src/app/login/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 95,
+      "functions": [
+        {
+          "name": "LoginPage",
+          "startLine": 9,
+          "endLine": 108,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LoginPage",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LoginPage",
+          "callee": "useRouter",
+          "lineNumber": 10
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 12
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useRef",
+          "lineNumber": 14
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "useEffect",
+          "lineNumber": 16
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "setHydrated",
+          "lineNumber": 17
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "localStorage.getItem",
+          "lineNumber": 18
+        },
+        {
+          "caller": "LoginPage",
+          "callee": "router.replace",
+          "lineNumber": 20
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "e.preventDefault",
+          "lineNumber": 25
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "tokenValue.trim",
+          "lineNumber": 27
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setLoading",
+          "lineNumber": 29
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 30
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "fetch",
+          "lineNumber": 33
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "localStorage.setItem",
+          "lineNumber": 38
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "router.push",
+          "lineNumber": 39
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 41
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "inputRef.current?.focus",
+          "lineNumber": 43
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 45
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 48
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setLoading",
+          "lineNumber": 50
+        },
+        {
+          "caller": "handleKeyDown",
+          "callee": "handleSubmit",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/src/app/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "RootPage",
+          "startLine": 6,
+          "endLine": 19,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RootPage",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RootPage",
+          "callee": "useRouter",
+          "lineNumber": 7
+        },
+        {
+          "caller": "RootPage",
+          "callee": "useEffect",
+          "lineNumber": 9
+        },
+        {
+          "caller": "RootPage",
+          "callee": "localStorage.getItem",
+          "lineNumber": 10
+        },
+        {
+          "caller": "RootPage",
+          "callee": "router.replace",
+          "lineNumber": 12
+        },
+        {
+          "caller": "RootPage",
+          "callee": "router.replace",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/tailwind.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/vitest.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 16,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/admin/vitest.setup.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/api-gateway/src/schema.gql",
+      "language": "graphql",
+      "fileCategory": "data",
+      "totalLines": 130,
+      "nonEmptyLines": 115,
+      "definitions": [
+        {
+          "name": "RoadmapDto",
+          "kind": "type",
+          "fields": [
+            "id",
+            "slug",
+            "title",
+            "description",
+            "coverImage",
+            "status"
+          ],
+          "startLine": 5,
+          "endLine": 12
+        },
+        {
+          "name": "NodeDto",
+          "kind": "type",
+          "fields": [
+            "id",
+            "roadmapId",
+            "type",
+            "title",
+            "positionX",
+            "positionY",
+            "targetRoadmapId",
+            "targetRoadmapSlug",
+            "content",
+            "coverImage",
+            "icon"
+          ],
+          "startLine": 14,
+          "endLine": 26
+        },
+        {
+          "name": "NodeType",
+          "kind": "enum",
+          "fields": [
+            "ROADMAP",
+            "LESSON"
+          ],
+          "startLine": 28,
+          "endLine": 31
+        },
+        {
+          "name": "EdgeDto",
+          "kind": "type",
+          "fields": [
+            "id",
+            "sourceId",
+            "targetId",
+            "label"
+          ],
+          "startLine": 33,
+          "endLine": 38
+        },
+        {
+          "name": "RoadmapDetailDto",
+          "kind": "type",
+          "fields": [
+            "roadmap",
+            "nodes",
+            "edges"
+          ],
+          "startLine": 40,
+          "endLine": 44
+        },
+        {
+          "name": "BreadcrumbItemDto",
+          "kind": "type",
+          "fields": [
+            "title",
+            "slug",
+            "nodeId"
+          ],
+          "startLine": 46,
+          "endLine": 50
+        },
+        {
+          "name": "RoadmapTreeNodeDto",
+          "kind": "type",
+          "fields": [
+            "id",
+            "title",
+            "type",
+            "slug",
+            "targetRoadmapId",
+            "roadmapSlug",
+            "roadmapId",
+            "children"
+          ],
+          "startLine": 52,
+          "endLine": 61
+        },
+        {
+          "name": "RoadmapTreeDto",
+          "kind": "type",
+          "fields": [
+            "rootSlug",
+            "rootTitle",
+            "nodes"
+          ],
+          "startLine": 63,
+          "endLine": 67
+        },
+        {
+          "name": "SearchResultDto",
+          "kind": "type",
+          "fields": [
+            "id",
+            "type",
+            "title",
+            "icon",
+            "coverImage",
+            "roadmapSlug",
+            "roadmapTitle",
+            "roadmapId",
+            "updatedAt",
+            "breadcrumb"
+          ],
+          "startLine": 69,
+          "endLine": 80
+        },
+        {
+          "name": "CreateRoadmapInput",
+          "kind": "input",
+          "fields": [
+            "slug",
+            "title",
+            "description",
+            "coverImage"
+          ],
+          "startLine": 102,
+          "endLine": 107
+        },
+        {
+          "name": "UpdateRoadmapInput",
+          "kind": "input",
+          "fields": [
+            "title",
+            "description",
+            "coverImage",
+            "status"
+          ],
+          "startLine": 109,
+          "endLine": 114
+        },
+        {
+          "name": "NodeInput",
+          "kind": "input",
+          "fields": [
+            "id",
+            "type",
+            "title",
+            "positionX",
+            "positionY",
+            "targetRoadmapId",
+            "content"
+          ],
+          "startLine": 116,
+          "endLine": 124
+        },
+        {
+          "name": "EdgeInput",
+          "kind": "input",
+          "fields": [
+            "sourceId",
+            "targetId",
+            "label"
+          ],
+          "startLine": 126,
+          "endLine": 130
+        }
+      ],
+      "endpoints": [
+        {
+          "method": "Query",
+          "path": "roadmaps",
+          "startLine": 83,
+          "endLine": 83
+        },
+        {
+          "method": "Query",
+          "path": "roadmap",
+          "startLine": 84,
+          "endLine": 84
+        },
+        {
+          "method": "Query",
+          "path": "roadmapTree",
+          "startLine": 85,
+          "endLine": 85
+        },
+        {
+          "method": "Query",
+          "path": "search",
+          "startLine": 86,
+          "endLine": 86
+        },
+        {
+          "method": "Query",
+          "path": "node",
+          "startLine": 87,
+          "endLine": 87
+        },
+        {
+          "method": "Query",
+          "path": "nodeBreadcrumb",
+          "startLine": 88,
+          "endLine": 88
+        },
+        {
+          "method": "Mutation",
+          "path": "createRoadmap",
+          "startLine": 92,
+          "endLine": 92
+        },
+        {
+          "method": "Mutation",
+          "path": "updateRoadmap",
+          "startLine": 93,
+          "endLine": 93
+        },
+        {
+          "method": "Mutation",
+          "path": "deleteRoadmap",
+          "startLine": 94,
+          "endLine": 94
+        },
+        {
+          "method": "Mutation",
+          "path": "upsertGraph",
+          "startLine": 95,
+          "endLine": 95
+        },
+        {
+          "method": "Mutation",
+          "path": "updateNodeContent",
+          "startLine": 96,
+          "endLine": 96
+        },
+        {
+          "method": "Mutation",
+          "path": "updateNodeTitle",
+          "startLine": 97,
+          "endLine": 97
+        },
+        {
+          "method": "Mutation",
+          "path": "updateNodeCover",
+          "startLine": 98,
+          "endLine": 98
+        },
+        {
+          "method": "Mutation",
+          "path": "updateNodeIcon",
+          "startLine": 99,
+          "endLine": 99
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 13,
+        "endpointCount": 14
+      }
+    },
+    {
+      "path": "apps/e2e/package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 16,
+      "nonEmptyLines": 16,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "apps/e2e/playwright.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 31,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/e2e/tests/admin.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "waitForLoginReady",
+          "startLine": 7,
+          "endLine": 10,
+          "params": [
+            "page"
+          ]
+        },
+        {
+          "name": "loginAsAdmin",
+          "startLine": 12,
+          "endLine": 18,
+          "params": [
+            "page"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "waitForLoginReady",
+          "callee": "page.locator('button[data-ready=\"true\"]').waitFor",
+          "lineNumber": 9
+        },
+        {
+          "caller": "waitForLoginReady",
+          "callee": "page.locator",
+          "lineNumber": 9
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "page.goto",
+          "lineNumber": 13
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "waitForLoginReady",
+          "lineNumber": 14
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "page.locator('#admin-token').fill",
+          "lineNumber": 15
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "page.locator",
+          "lineNumber": 15
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "page.getByRole('button', { name: /sign in/i }).click",
+          "lineNumber": 16
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "page.getByRole",
+          "lineNumber": 16
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "expect(page).toHaveURL",
+          "lineNumber": 17
+        },
+        {
+          "caller": "loginAsAdmin",
+          "callee": "expect",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/e2e/tests/api.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 99,
+      "callGraph": [
+        {
+          "caller": "gql",
+          "callee": "JSON.stringify",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/e2e/tests/web.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 94,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/next-env.d.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/next.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 16,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/postcss.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 69,
+      "nonEmptyLines": 60,
+      "metrics": {}
+    },
+    {
+      "path": "apps/web/tailwind.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 31,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

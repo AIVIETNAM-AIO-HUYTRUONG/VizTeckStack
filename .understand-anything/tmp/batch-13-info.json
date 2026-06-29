@@ -1,0 +1,36 @@
+{
+  "batchIndex": 13,
+  "files": [
+    [
+      "apps/admin/.env.example",
+      6,
+      "config",
+      "config"
+    ],
+    [
+      "apps/admin/package.json",
+      45,
+      "json",
+      "config"
+    ],
+    [
+      "apps/admin/tsconfig.json",
+      31,
+      "json",
+      "config"
+    ],
+    [
+      "apps/admin/vercel.json",
+      5,
+      "json",
+      "config"
+    ]
+  ],
+  "batchImportData": {
+    "apps/admin/.env.example": [],
+    "apps/admin/package.json": [],
+    "apps/admin/tsconfig.json": [],
+    "apps/admin/vercel.json": []
+  },
+  "neighborMap": {}
+}

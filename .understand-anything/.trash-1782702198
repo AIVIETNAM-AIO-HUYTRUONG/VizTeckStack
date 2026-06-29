@@ -1,0 +1,168 @@
+[
+  {
+    "order": 1,
+    "title": "Tổng Quan Dự Án",
+    "description": "Bắt đầu với README.md để nắm bức tranh toàn cảnh: VizTeckStack là một monorepo gồm public viewer (apps/web), admin CMS (apps/admin), và NestJS API Gateway — tất cả được điều phối bằng Turborepo và pnpm workspaces. Tài liệu giải thích kiến trúc ba tầng, hướng dẫn quick start, và các biến môi trường cần thiết để chạy toàn bộ hệ thống.",
+    "nodeIds": ["document:README.md"],
+    "languageLesson": "Monorepo dùng pnpm workspaces để chia sẻ dependency giữa các package. Turborepo thêm lớp caching và dependency ordering cho các task build/test/lint — lệnh `pnpm build` ở root sẽ build đúng thứ tự từ packages/db → packages/core → apps/*."
+  },
+  {
+    "order": 2,
+    "title": "Khởi Động API Gateway",
+    "description": "apps/api-gateway/src/main.ts là điểm khởi động của toàn bộ backend: kích hoạt CORS, mount Swagger UI với Bearer auth, và lắng nghe trên cổng 3000. Tiếp theo, app.module.ts đăng ký ApolloDriver cho GraphQL schema-first và nạp RoadmapModule — đây là module duy nhất chứa toàn bộ logic nghiệp vụ. Hai file này cùng nhau vẽ ra kiến trúc NestJS: bootstrap → root module → feature modules.",
+    "nodeIds": [
+      "file:apps/api-gateway/src/main.ts",
+      "file:apps/api-gateway/src/app.module.ts"
+    ],
+    "languageLesson": "NestJS dùng decorator `@Module`, `@Controller`, `@Injectable` để định nghĩa dependency injection container. `experimentalDecorators: true` trong tsconfig.json là bắt buộc để các decorator này hoạt động — đây là lý do tsconfig của api-gateway khác với các package khác trong monorepo."
+  },
+  {
+    "order": 3,
+    "title": "Kiến Trúc Domain (Clean Architecture)",
+    "description": "Ba entity file trong domain/ định nghĩa ngôn ngữ chung của toàn bộ hệ thống: Roadmap (với status DRAFT/PUBLIC/PRIVATE), Node (với type, position, content, coverImage, icon), và Edge (liên kết giữa hai node). Đây là tầng innermost của Clean Architecture — không phụ thuộc vào framework hay database, chỉ là pure TypeScript types. Mọi tầng khác (use-cases, resolvers, repository) đều nhập từ đây.",
+    "nodeIds": [
+      "file:apps/api-gateway/src/domain/entities/roadmap.entity.ts",
+      "file:apps/api-gateway/src/domain/entities/node.entity.ts",
+      "file:apps/api-gateway/src/domain/entities/edge.entity.ts"
+    ],
+    "languageLesson": "Clean Architecture tổ chức code thành các vòng tròn đồng tâm: Domain (entities) ở trung tâm, Application (use-cases) bên ngoài, Infrastructure (database, HTTP) ở ngoài cùng. Dependency chỉ hướng vào trong — Infrastructure phụ thuộc Domain, không bao giờ ngược lại."
+  },
+  {
+    "order": 4,
+    "title": "Repository Port & Adapter",
+    "description": "RoadmapRepository là abstract class định nghĩa toàn bộ 'hợp đồng' truy cập dữ liệu — đây là 'port' trong kiến trúc Ports & Adapters. File này được import bởi 15 file khác, đứng đầu bảng fan-in. PrismaRoadmapRepository là 'adapter' triển khai hợp đồng đó bằng Prisma Client, bao gồm full-text search và breadcrumb traversal. DatabaseModule đăng ký PrismaRoadmapRepository làm provider để NestJS DI inject nó vào use-cases.",
+    "nodeIds": [
+      "file:apps/api-gateway/src/domain/repositories/roadmap.repository.ts",
+      "file:apps/api-gateway/src/infrastructure/database/prisma-roadmap.repository.ts",
+      "file:apps/api-gateway/src/infrastructure/database/database.module.ts"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "Database Schema (Prisma)",
+    "description": "packages/db là package duy nhất tương tác trực tiếp với PostgreSQL. schema.prisma định nghĩa ba model chính: Roadmap, Node (với các trường coverImage và icon được thêm qua migration), và Edge. Các migration file ghi lại lịch sử schema — nullable positionX/Y (cho phép node 'off-canvas') và thêm coverImage/icon là hai thay đổi quan trọng nhất. packages/db/index.ts export singleton PrismaClient để toàn bộ monorepo dùng chung.",
+    "nodeIds": [
+      "schema:packages/db/prisma/schema.prisma",
+      "table:packages/db/prisma/migrations/20260619000000_nullable_node_positions/migration.sql:Node",
+      "table:packages/db/prisma/migrations/20260623000000_add_node_cover_image_and_icon/migration.sql:Node",
+      "file:packages/db/index.ts"
+    ],
+    "languageLesson": "Prisma dùng schema.prisma làm nguồn sự thật duy nhất cho database schema. `db:push` áp dụng schema trực tiếp (không tạo migration file — dùng khi dev nhanh), còn `db:migrate` tạo file migration SQL versioned (dùng khi cần audit trail hoặc deploy production)."
+  },
+  {
+    "order": 6,
+    "title": "Feature Module & Use-Cases",
+    "description": "RoadmapModule là trái tim của API Gateway — module này import DatabaseModule, đăng ký tất cả 13 use-case, 2 resolver, và 1 REST controller. Mỗi use-case là một class nhỏ thực hiện đúng một việc: CreateRoadmapUseCase, UpsertGraphUseCase (DELETE+INSERT toàn bộ graph trong transaction), SearchNodesUseCase (giới hạn PUBLIC roadmaps cho unauthenticated requests). Pattern này giúp mỗi use-case dễ test độc lập với mock repository.",
+    "nodeIds": [
+      "file:apps/api-gateway/src/roadmap/roadmap.module.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/upsert-graph.use-case.ts",
+      "file:apps/api-gateway/src/application/use-cases/roadmap/search-nodes.use-case.ts"
+    ]
+  },
+  {
+    "order": 7,
+    "title": "GraphQL & REST API Layer",
+    "description": "Hệ thống cung cấp cả hai interface: RoadmapResolver + NodeResolver cho GraphQL (Apollo Server với schema-first), và RoadmapRestController cho REST tại /api/*. Cả ba đều gọi cùng một tập use-cases — đây là điểm mạnh của Clean Architecture. AdminGuard bảo vệ các mutation bằng cách đọc Bearer token từ header HTTP và GraphQL context, so sánh với biến môi trường ADMIN_TOKEN.",
+    "nodeIds": [
+      "file:apps/api-gateway/src/roadmap/roadmap.resolver.ts",
+      "file:apps/api-gateway/src/roadmap/roadmap.rest.controller.ts",
+      "file:apps/api-gateway/src/auth/admin.guard.ts",
+      "file:apps/api-gateway/src/roadmap/roadmap.dto.ts"
+    ],
+    "languageLesson": "NestJS hỗ trợ dual-protocol: cùng một use-case có thể được gọi từ GraphQL resolver lẫn REST controller. GraphQL dùng `@Query`/`@Mutation` decorator, REST dùng `@Get`/`@Post`. DTO classes khai báo với `@ObjectType()` (GraphQL) và `@ApiProperty()` (Swagger) — một class phục vụ cả hai documentation."
+  },
+  {
+    "order": 8,
+    "title": "GraphQL Schema & Client Queries",
+    "description": "schema.gql là GraphQL schema được generate tự động bởi NestJS code-first (hoặc khai báo schema-first). packages/graphql-client chứa các GraphQL operations (queries, mutations) được viết tay và codegen tạo ra TypeScript types tương ứng trong generated/graphql.ts. Đây là 'hợp đồng API' giữa backend và frontend — admin và web đều import types từ đây để có type-safety đầy đủ.",
+    "nodeIds": [
+      "schema:apps/api-gateway/src/schema.gql",
+      "schema:packages/graphql-client/src/queries/roadmaps/roadmaps.graphql",
+      "schema:packages/graphql-client/src/queries/nodes/nodes.graphql",
+      "file:packages/graphql-client/src/generated/graphql.ts"
+    ],
+    "languageLesson": "GraphQL codegen đọc schema từ server và operations (.graphql files) từ client, sinh ra TypeScript types và React hooks (nếu dùng Apollo codegen plugin). Khi backend thay đổi schema, chạy lại codegen để cập nhật types — compiler sẽ báo lỗi ở mọi chỗ đang dùng field đã xóa."
+  },
+  {
+    "order": 9,
+    "title": "Lõi Logic Dùng Chung (packages/core)",
+    "description": "packages/core là 'nguồn sự thật duy nhất' cho toàn bộ logic nghiệp vụ phía client — được import bởi cả admin và web. Package được tổ chức theo feature: roadmap/types.ts và lesson/types.ts định nghĩa các kiểu TypeScript (LessonNode, BreadcrumbItem, ApolloLike), trong khi roadmap.service.ts và lesson.service.ts cung cấp các hàm service nhận ApolloLike client thay vì import trực tiếp singleton. Pattern ApolloLike này tránh xung đột graphql version giữa packages.",
+    "nodeIds": [
+      "file:packages/core/src/index.ts",
+      "file:packages/core/src/roadmap/types.ts",
+      "file:packages/core/src/lesson/types.ts",
+      "file:packages/core/src/roadmap/roadmap.service.ts",
+      "file:packages/core/src/lesson/lesson.service.ts"
+    ],
+    "languageLesson": "Pattern ApolloLike là structural duck-typing: `interface ApolloLike { query, mutate }` cho phép inject bất kỳ Apollo Client instance nào mà không cần import một singleton cụ thể. Điều này giải quyết vấn đề 'dual graphql instance' khi hai packages cùng cài graphql ở các version khác nhau trong monorepo."
+  },
+  {
+    "order": 10,
+    "title": "Graph Editor (React Flow)",
+    "description": "packages/core/src/graph/ chứa toàn bộ logic cho canvas đồ thị roadmap. graph/types.ts định nghĩa GraphNode, GraphEdge, GraphEditorState. useGraphEditor.ts là hook trung tâm điều phối: tải dữ liệu, dirty tracking, lưu graph. RoadmapGraph.tsx là React Flow component duy trì measuredRef cache để tránh nodes bị ẩn sau khi cập nhật vị trí — một pattern quan trọng được ghi rõ trong CLAUDE.md.",
+    "nodeIds": [
+      "file:packages/core/src/graph/types.ts",
+      "file:packages/core/src/graph/useGraphEditor.ts",
+      "file:packages/core/src/graph/ui/RoadmapGraph.tsx",
+      "file:packages/core/src/graph/ui/RoadmapNode.tsx"
+    ],
+    "languageLesson": "React Flow's `adoptUserNodes` reset trường `measured` mỗi lần re-render. Để tránh nodes đột ngột bị `visibility: hidden`, RoadmapGraph.tsx dùng một Map (measuredRef) lưu dimensions bên ngoài React state — đây là ví dụ về việc dùng ref thay vì state cho dữ liệu không ảnh hưởng rendering nhưng cần persist qua renders."
+  },
+  {
+    "order": 11,
+    "title": "Lesson Editor & LessonPageShell",
+    "description": "packages/core/src/lesson/ui/ chứa toàn bộ UI components cho bài học. LessonPageShell.tsx triển khai 'slot pattern': nhận coverSlot, titleSlot, contentSlot làm props — khi admin truyền các slot này, chúng thay thế defaults; khi web không truyền, shell hiển thị chế độ view mặc định. LessonEditor.tsx dùng BlockNote để soạn thảo nội dung với debounce autosave, LessonViewer.tsx là phiên bản read-only.",
+    "nodeIds": [
+      "file:packages/core/src/lesson/ui/LessonPageShell.tsx",
+      "file:packages/core/src/lesson/ui/LessonEditor.tsx",
+      "file:packages/core/src/lesson/ui/LessonViewer.tsx",
+      "file:packages/core/src/lesson/useLessonEditor.ts"
+    ],
+    "languageLesson": "Slot pattern trong React dùng optional props có kiểu ReactNode để cho phép consumer inject UI tùy chỉnh vào component library. So với render props, slot props dễ đọc hơn (declarative). Khi slot không được truyền (`undefined`), component render UI mặc định — đây là cách shared library hỗ trợ nhiều use-case mà không cần fork."
+  },
+  {
+    "order": 12,
+    "title": "Admin CMS — Thin Wrapper Pattern",
+    "description": "Toàn bộ hooks trong apps/admin/src/features/ đều là 'thin wrappers': chúng chỉ inject adminApolloClient vào hooks từ packages/core rồi re-export. Ví dụ useAdminGraphEditor gọi useGraphEditor(adminApolloClient, ...), useAdminLessonEditor gọi useLessonEditor(adminApolloClient, ...). apolloClient.ts tạo singleton adminApolloClient với Bearer token từ localStorage. Kiến trúc này đảm bảo logic nghiệp vụ không bao giờ bị lặp lại giữa admin và web.",
+    "nodeIds": [
+      "file:apps/admin/src/lib/apolloClient.ts",
+      "file:apps/admin/src/features/graph-editor/hooks/useGraphEditor.ts",
+      "file:apps/admin/src/features/lessons/hooks/useLessonEditor.ts",
+      "file:apps/admin/src/app/roadmaps/[id]/page.tsx"
+    ]
+  },
+  {
+    "order": 13,
+    "title": "Web Viewer Công Khai",
+    "description": "apps/web là Next.js 15 SSG viewer — tất cả fetches dùng cache: 'no-store' (intentional!) để phản ánh thay đổi admin ngay lập tức. gql.ts định nghĩa GraphQL client và năm hàm fetch (roadmaps, roadmap, node, breadcrumb, tree). Trang lesson tải song song dữ liệu node, breadcrumb và cây roadmap, sau đó render qua LessonLayout — component này dùng LessonPageShell từ packages/core ở chế độ view, không truyền slot nào.",
+    "nodeIds": [
+      "file:apps/web/src/lib/gql.ts",
+      "file:apps/web/src/app/page.tsx",
+      "file:apps/web/src/app/roadmap/[slug]/node/[id]/page.tsx",
+      "file:apps/web/src/features/lesson/components/LessonLayout.tsx"
+    ],
+    "languageLesson": "Next.js 15 App Router cho phép fetch dữ liệu trực tiếp trong Server Components bằng async/await — không cần useEffect hay SWR cho server-side data. `Promise.all([fetchNode(), fetchBreadcrumb(), fetchTree()])` fetch song song ba nguồn dữ liệu, giảm total latency xuống bằng thời gian của request chậm nhất thay vì tổng cộng."
+  },
+  {
+    "order": 14,
+    "title": "CI/CD & Hạ Tầng Triển Khai",
+    "description": "Ba GitHub Actions pipeline điều phối toàn bộ vòng đời deploy: ci.yml chạy build → lint → test trên mọi PR; deploy-staging.yml deploy song song apps/web và apps/admin lên Vercel khi push vào develop; release.yml deploy production khi tag v* được tạo rồi generate GitHub Release tự động. docker-compose.yml đơn giản chỉ chạy PostgreSQL local cho development — không containerize ứng dụng.",
+    "nodeIds": [
+      "pipeline:.github/workflows/ci.yml",
+      "pipeline:.github/workflows/deploy-staging.yml",
+      "pipeline:.github/workflows/release.yml",
+      "service:docker-compose.yml"
+    ],
+    "languageLesson": "GitHub Actions jobs chạy song song mặc định — deploy-staging.yml tận dụng điều này để deploy web và admin cùng lúc. `needs:` keyword thêm dependency giữa các jobs (job B chờ job A). Matrix strategy cho phép test trên nhiều OS/Node version trong một workflow file."
+  },
+  {
+    "order": 15,
+    "title": "Hướng Dẫn Onboarding & Kiến Trúc",
+    "description": "docs/onboarding/ là bộ tài liệu đầy đủ cho developer mới: architecture.md giải thích lý do chọn từng technology và các quyết định kiến trúc quan trọng; getting-started.md hướng dẫn setup môi trường từng bước; testing.md mô tả chiến lược test theo từng package (Vitest cho admin/core, Jest cho api-gateway, Playwright cho E2E). Đây là điểm dừng cuối để hiểu 'tại sao' đằng sau các quyết định kỹ thuật.",
+    "nodeIds": [
+      "document:docs/onboarding/architecture.md",
+      "document:docs/onboarding/getting-started.md",
+      "document:docs/onboarding/testing.md"
+    ]
+  }
+]

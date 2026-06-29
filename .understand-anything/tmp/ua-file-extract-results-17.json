@@ -1,0 +1,793 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 2693,
+      "nonEmptyLines": 2254,
+      "sections": [
+        {
+          "heading": "VizTeckStack Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Phase 1: Foundation",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "Task 1: Monorepo Scaffold",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Task 2: packages/proto — gRPC Contract",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "Task 3: packages/db — Prisma Schema & Client",
+          "level": 3,
+          "line": 402
+        },
+        {
+          "heading": "Phase 2: Core Services",
+          "level": 2,
+          "line": 627
+        },
+        {
+          "heading": "Task 4: apps/svc-roadmap — NestJS gRPC Service",
+          "level": 3,
+          "line": 629
+        },
+        {
+          "heading": "Task 5: apps/api-gateway — GraphQL + REST + Swagger",
+          "level": 3,
+          "line": 1001
+        },
+        {
+          "heading": "Phase 3: Shared Packages",
+          "level": 2,
+          "line": 1500
+        },
+        {
+          "heading": "Task 6: packages/ui — Shared React Components",
+          "level": 3,
+          "line": 1502
+        },
+        {
+          "heading": "Task 7: packages/graph — Shared React Flow Component",
+          "level": 3,
+          "line": 1622
+        },
+        {
+          "heading": "Phase 4: Frontend Apps",
+          "level": 2,
+          "line": 1852
+        },
+        {
+          "heading": "Task 8: apps/web — Public Viewer (Next.js)",
+          "level": 3,
+          "line": 1854
+        },
+        {
+          "heading": "Task 9: apps/admin — CMS với Graph Editor và Lesson Editor",
+          "level": 3,
+          "line": 2154
+        },
+        {
+          "heading": "Verification Checklist",
+          "level": 2,
+          "line": 2663
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 2099,
+      "nonEmptyLines": 1746,
+      "sections": [
+        {
+          "heading": "Admin UI Feature-First Refactor Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Task 1: Create branch + add Vitest test runner",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "Task 2: `roadmap.service.ts` — TDD",
+          "level": 3,
+          "line": 154
+        },
+        {
+          "heading": "Task 3: `useRoadmaps` hook",
+          "level": 3,
+          "line": 387
+        },
+        {
+          "heading": "Task 4: Move `RoadmapModal` + refactor roadmaps list page",
+          "level": 3,
+          "line": 513
+        },
+        {
+          "heading": "Task 5: `graph.service.ts` — TDD for pure functions",
+          "level": 3,
+          "line": 696
+        },
+        {
+          "heading": "Task 6: `useGraphEditor` hook + tests",
+          "level": 3,
+          "line": 1022
+        },
+        {
+          "heading": "Task 7: `useNodeActions` hook",
+          "level": 3,
+          "line": 1248
+        },
+        {
+          "heading": "Task 8: `useGraphDraft` hook",
+          "level": 3,
+          "line": 1485
+        },
+        {
+          "heading": "Task 9: Fix `NodeSidePanel` — remove direct `apiFetch`, accept `allRoadmaps` prop",
+          "level": 3,
+          "line": 1529
+        },
+        {
+          "heading": "Task 10: Move remaining graph-editor components + `LessonEditor`",
+          "level": 3,
+          "line": 1692
+        },
+        {
+          "heading": "Task 11: Refactor `roadmaps/[id]/page.tsx` (Graph Editor page)",
+          "level": 3,
+          "line": 1765
+        },
+        {
+          "heading": "Task 12: Move `LessonEditor` + update lesson page import",
+          "level": 3,
+          "line": 2042
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-21-apply-gitflow.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 449,
+      "nonEmptyLines": 325,
+      "sections": [
+        {
+          "heading": "Apply GitFlow Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Task 1: Tạo develop branch",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Task 2: Dọn stale branches",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "Task 3: CI Workflow",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "Task 4: Staging Deploy Workflow",
+          "level": 2,
+          "line": 171
+        },
+        {
+          "heading": "Task 5: Production Release Workflow",
+          "level": 2,
+          "line": 261
+        },
+        {
+          "heading": "Task 6: Push workflows lên develop + tạo PR",
+          "level": 2,
+          "line": 362
+        },
+        {
+          "heading": "Task 7: Branch Protection Rules (Manual)",
+          "level": 2,
+          "line": 408
+        },
+        {
+          "heading": "Kết quả cuối cùng",
+          "level": 2,
+          "line": 433
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-21-lesson-crud-feature.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1028,
+      "nonEmptyLines": 828,
+      "sections": [
+        {
+          "heading": "Lesson CRUD Feature Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "File Map",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Task 1: Proto — Add UpdateNodeContent + UpdateNodeTitle",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "Task 2: svc-roadmap — Implement service methods + tests",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "Task 3: api-gateway — DTOs + gRPC client + PATCH endpoints",
+          "level": 2,
+          "line": 321
+        },
+        {
+          "heading": "Task 4: Admin — Create features/lessons/ feature",
+          "level": 2,
+          "line": 437
+        },
+        {
+          "heading": "Task 5: Admin page — Refactor lesson editor page",
+          "level": 2,
+          "line": 871
+        },
+        {
+          "heading": "Self-Review Checklist",
+          "level": 2,
+          "line": 1012
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1014,
+      "nonEmptyLines": 824,
+      "sections": [
+        {
+          "heading": "Web Feature-First Refactor Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "File Map",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Task 1: Add Vitest to apps/web",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "Task 2: node.service.ts — TDD",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "Task 3: roadmap.service.ts — TDD",
+          "level": 2,
+          "line": 307
+        },
+        {
+          "heading": "Task 4: Move components into features; create LessonLayout",
+          "level": 2,
+          "line": 513
+        },
+        {
+          "heading": "Task 5: Slim pages, delete lib/api.ts and old components",
+          "level": 2,
+          "line": 826
+        },
+        {
+          "heading": "Self-Review",
+          "level": 2,
+          "line": 995
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-22-feature-loop.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 457,
+      "nonEmptyLines": 334,
+      "sections": [
+        {
+          "heading": "Feature Loop Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Task 1: Add loop-state.json to .gitignore",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "Task 2: Create the feature-loop skill file",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "Self-Review",
+          "level": 2,
+          "line": 433
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-22-notion-lesson.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 538,
+      "nonEmptyLines": 412,
+      "sections": [
+        {
+          "heading": "Notion Lesson Completion Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Task 1: MiniGraph `currentNodeId` highlight",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "Task 2: LessonLayout — wire roadmap data to MiniGraph + polish progress card",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "Task 3: Lesson page — parallel roadmap fetch",
+          "level": 3,
+          "line": 263
+        },
+        {
+          "heading": "Task 4: LessonEditor — replace button with debounce autosave",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "Task 5: Full suite verification",
+          "level": 3,
+          "line": 497
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-23-notion-page-shell.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 2730,
+      "nonEmptyLines": 2245,
+      "sections": [
+        {
+          "heading": "Notion Page Shell — Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Task 1: DB migration — add coverImage and icon to Node",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Task 2: Proto — add fields, messages, RPCs; regenerate",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "Task 3: svc-roadmap — implement new service methods and wire controller",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "Task 4: api-gateway — GRPC client, REST endpoints, GraphQL, DTOs",
+          "level": 3,
+          "line": 624
+        },
+        {
+          "heading": "Task 5: Uploadthing setup in admin",
+          "level": 3,
+          "line": 831
+        },
+        {
+          "heading": "Task 6: packages/lesson — shared types, BreadcrumbDisplay, CoverDisplay",
+          "level": 3,
+          "line": 907
+        },
+        {
+          "heading": "Task 7: packages/lesson — LessonPageShell",
+          "level": 3,
+          "line": 1210
+        },
+        {
+          "heading": "Task 8: apps/admin — IconPicker component",
+          "level": 3,
+          "line": 1407
+        },
+        {
+          "heading": "Task 9: apps/admin — CoverImage and CoverUploadModal",
+          "level": 3,
+          "line": 1635
+        },
+        {
+          "heading": "Task 10: apps/admin — useLessonPageShell hook + update service + wire lesson page",
+          "level": 3,
+          "line": 1995
+        },
+        {
+          "heading": "Task 11: apps/web — fetchBreadcrumb service + LessonLayout rewrite + page.tsx update",
+          "level": 3,
+          "line": 2316
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1553,
+      "nonEmptyLines": 1248,
+      "sections": [
+        {
+          "heading": "Notion Sidebar Page Tree — Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Task 1: Proto — Add RoadmapTree Messages and RPC",
+          "level": 3,
+          "line": 26
+        },
+        {
+          "heading": "Task 2: svc-roadmap — Implement getRoadmapTree (TDD)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "Task 3: api-gateway — DTOs, gRPC client, REST endpoint, GraphQL query",
+          "level": 3,
+          "line": 309
+        },
+        {
+          "heading": "Task 4: packages/lesson — Types + PageTreeItem Component",
+          "level": 3,
+          "line": 435
+        },
+        {
+          "heading": "Task 5: packages/lesson — PageTreeSidebar Component",
+          "level": 3,
+          "line": 682
+        },
+        {
+          "heading": "Task 6: packages/lesson — LessonPageLayout + Export Updates",
+          "level": 3,
+          "line": 858
+        },
+        {
+          "heading": "Task 7: apps/web — Tree Service + LessonLayout + Page Update",
+          "level": 3,
+          "line": 1056
+        },
+        {
+          "heading": "Task 8: apps/admin — fetchBreadcrumb, fetchRoadmapTree, usePageTree, Page Update",
+          "level": 3,
+          "line": 1276
+        },
+        {
+          "heading": "Test Run Checklist",
+          "level": 2,
+          "line": 1539
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-24-notion-search-plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1643,
+      "nonEmptyLines": 1286,
+      "sections": [
+        {
+          "heading": "Notion Search (Cmd+K) Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "File Map",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "Task 1: Proto — Add SearchNodes RPC",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "Task 2: svc-roadmap — searchNodes Service + Tests",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "Task 3: api-gateway — SearchResultDto + GraphQL Query + REST + Schema File",
+          "level": 2,
+          "line": 338
+        },
+        {
+          "heading": "Task 4: packages/graphql-client — Codegen Setup",
+          "level": 2,
+          "line": 593
+        },
+        {
+          "heading": "Task 5: Apollo Client Setup — apps/web",
+          "level": 2,
+          "line": 762
+        },
+        {
+          "heading": "Task 6: Apollo Client Setup — apps/admin (with Auth Link)",
+          "level": 2,
+          "line": 842
+        },
+        {
+          "heading": "Task 7: packages/lesson — useSearchModal + useSearch Hooks",
+          "level": 2,
+          "line": 944
+        },
+        {
+          "heading": "Task 8: packages/lesson — SearchModal UI Components",
+          "level": 2,
+          "line": 1145
+        },
+        {
+          "heading": "Task 9: Integration — apps/web SearchModal",
+          "level": 2,
+          "line": 1480
+        },
+        {
+          "heading": "Task 10: Integration — apps/admin SearchModal",
+          "level": 2,
+          "line": 1544
+        },
+        {
+          "heading": "Codegen Workflow Reference",
+          "level": 2,
+          "line": 1628
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-28-core-package-refactor.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 2016,
+      "nonEmptyLines": 1650,
+      "sections": [
+        {
+          "heading": "Core Package Refactor — Implementation Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Global Constraints",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "File Map",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "Created",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Modified",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Deleted",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "Task 1: Scaffold packages/core",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Task 2: Migrate roadmap domain",
+          "level": 2,
+          "line": 195
+        },
+        {
+          "heading": "Task 3: Migrate graph domain (services + hooks)",
+          "level": 2,
+          "line": 478
+        },
+        {
+          "heading": "Task 4: Migrate lesson domain (services + hooks)",
+          "level": 2,
+          "line": 892
+        },
+        {
+          "heading": "Task 5: Migrate packages/graph UI → packages/core/src/graph/ui/",
+          "level": 2,
+          "line": 1303
+        },
+        {
+          "heading": "Task 6: Migrate packages/lesson UI → packages/core/src/lesson/ui/",
+          "level": 2,
+          "line": 1592
+        },
+        {
+          "heading": "Task 7: Full build & test verification",
+          "level": 2,
+          "line": 1939
+        },
+        {
+          "heading": "Self-Review",
+          "level": 2,
+          "line": 1997
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    }
+  ]
+}

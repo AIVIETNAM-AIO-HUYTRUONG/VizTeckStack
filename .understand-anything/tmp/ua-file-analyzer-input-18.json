@@ -1,0 +1,27 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "docs/superpowers/specs/2026-06-18-vizteckstack-design.md", "language": "markdown", "sizeLines": 346, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md", "language": "markdown", "sizeLines": 204, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-21-git-workflow-design.md", "language": "markdown", "sizeLines": 168, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-22-feature-loop-design.md", "language": "markdown", "sizeLines": 165, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-22-notion-lesson-design.md", "language": "markdown", "sizeLines": 137, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-22-turbo-tui-design.md", "language": "markdown", "sizeLines": 86, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md", "language": "markdown", "sizeLines": 581, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md", "language": "markdown", "sizeLines": 444, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md", "language": "markdown", "sizeLines": 426, "fileCategory": "docs"},
+    {"path": "docs/superpowers/specs/2026-06-24-notion-search-design.md", "language": "markdown", "sizeLines": 486, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    "docs/superpowers/specs/2026-06-18-vizteckstack-design.md": [],
+    "docs/superpowers/specs/2026-06-20-admin-ui-refactor-design.md": [],
+    "docs/superpowers/specs/2026-06-21-git-workflow-design.md": [],
+    "docs/superpowers/specs/2026-06-22-feature-loop-design.md": [],
+    "docs/superpowers/specs/2026-06-22-notion-lesson-design.md": [],
+    "docs/superpowers/specs/2026-06-22-turbo-tui-design.md": [],
+    "docs/superpowers/specs/2026-06-22-vizteckstack-ui-redesign-design.md": [],
+    "docs/superpowers/specs/2026-06-23-notion-page-shell-design.md": [],
+    "docs/superpowers/specs/2026-06-23-notion-sidebar-tree-design.md": [],
+    "docs/superpowers/specs/2026-06-24-notion-search-design.md": []
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "batchIndex": 17,
+  "files": [
+    [
+      "docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md",
+      2693,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md",
+      2099,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-21-apply-gitflow.md",
+      449,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-21-lesson-crud-feature.md",
+      1028,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md",
+      1014,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-22-feature-loop.md",
+      457,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-22-notion-lesson.md",
+      538,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-23-notion-page-shell.md",
+      2730,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md",
+      1553,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-24-notion-search-plan.md",
+      1643,
+      "markdown",
+      "docs"
+    ],
+    [
+      "docs/superpowers/plans/2026-06-28-core-package-refactor.md",
+      2016,
+      "markdown",
+      "docs"
+    ]
+  ],
+  "batchImportData": {
+    "docs/superpowers/plans/2026-06-18-vizteckstack-implementation.md": [],
+    "docs/superpowers/plans/2026-06-20-admin-ui-feature-first-refactor.md": [],
+    "docs/superpowers/plans/2026-06-21-apply-gitflow.md": [],
+    "docs/superpowers/plans/2026-06-21-lesson-crud-feature.md": [],
+    "docs/superpowers/plans/2026-06-21-web-feature-first-refactor.md": [],
+    "docs/superpowers/plans/2026-06-22-feature-loop.md": [],
+    "docs/superpowers/plans/2026-06-22-notion-lesson.md": [],
+    "docs/superpowers/plans/2026-06-23-notion-page-shell.md": [],
+    "docs/superpowers/plans/2026-06-23-notion-sidebar-tree.md": [],
+    "docs/superpowers/plans/2026-06-24-notion-search-plan.md": [],
+    "docs/superpowers/plans/2026-06-28-core-package-refactor.md": []
+  },
+  "neighborMap": {}
+}

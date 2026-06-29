@@ -1,0 +1,10 @@
+{
+  "projectRoot": "D:/lh222k/VizTeckStack",
+  "batchFiles": [
+    {"path": "apps/admin/.env.example", "language": "config", "sizeLines": 6, "fileCategory": "config"},
+    {"path": "apps/admin/package.json", "language": "json", "sizeLines": 45, "fileCategory": "config"},
+    {"path": "apps/admin/tsconfig.json", "language": "json", "sizeLines": 31, "fileCategory": "config"},
+    {"path": "apps/admin/vercel.json", "language": "json", "sizeLines": 5, "fileCategory": "config"}
+  ],
+  "batchImportData": {"apps/admin/.env.example": [], "apps/admin/package.json": [], "apps/admin/tsconfig.json": [], "apps/admin/vercel.json": []}
+}
