@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-29T00:00:00.000Z",
+  "title": "Design System: VizTeckStack",
+  "extensions": {
+    "colorMeta": {
+      "blueprint": {
+        "role": "primary",
+        "displayName": "Blueprint Ink",
+        "canonical": "oklch(0.519 0.256 264.8)",
+        "tonalRamp": ["#0d0a2e", "#1a1550", "#28209a", "#3a30d4", "#4F46E5", "#6f6aeb", "#9fa0ef", "#d1d2f8"]
+      },
+      "blueprint-mid": {
+        "role": "primary-hover",
+        "displayName": "Blueprint Mid",
+        "canonical": "oklch(0.546 0.232 265.6)",
+        "tonalRamp": ["#100c32", "#1e1a5a", "#2e27a6", "#4035d8", "#6366F1", "#7e81f4", "#ababf6", "#d6d8fb"]
+      },
+      "blueprint-lt": {
+        "role": "primary-surface",
+        "displayName": "Blueprint Pale",
+        "canonical": "oklch(0.940 0.041 264.4)",
+        "tonalRamp": ["#0f0c38", "#1c1866", "#2e2898", "#4036c6", "#6369dc", "#8e94e7", "#bdc0f0", "#EEF2FF"]
+      },
+      "growth": {
+        "role": "secondary",
+        "displayName": "Growth Active",
+        "canonical": "oklch(0.534 0.229 161.5)",
+        "tonalRamp": ["#041e13", "#053a24", "#045735", "#047045", "#059669", "#22b785", "#6fdbb0", "#c8f0e0"]
+      },
+      "growth-lt": {
+        "role": "secondary-surface",
+        "displayName": "Growth Pale",
+        "canonical": "oklch(0.965 0.037 162.2)",
+        "tonalRamp": ["#051c12", "#063621", "#056032", "#068045", "#0aac60", "#3fcc8d", "#86e4ba", "#ECFDF5"]
+      },
+      "surface-0": {
+        "role": "neutral-bg",
+        "displayName": "Outer Shell",
+        "canonical": "oklch(0.975 0.007 264.0)",
+        "tonalRamp": ["#141820", "#222736", "#333b4d", "#465066", "#5f6a80", "#808898", "#a8aeb8", "#ced2d9", "#F8F9FC"]
+      },
+      "surface-1": {
+        "role": "neutral-surface",
+        "displayName": "Surface",
+        "canonical": "oklch(1.000 0.000 0)",
+        "tonalRamp": ["#17191f", "#272a33", "#393d48", "#4c515f", "#656b78", "#838891", "#a7aaaf", "#d0d2d5", "#FFFFFF"]
+      },
+      "surface-2": {
+        "role": "neutral-inset",
+        "displayName": "Inner Field",
+        "canonical": "oklch(0.958 0.010 263.5)",
+        "tonalRamp": ["#191d28", "#282d3c", "#3a4053", "#4e546c", "#666e85", "#848c9e", "#a8aeb8", "#cbcfd8", "#F1F3F9"]
+      },
+      "edge": {
+        "role": "neutral-border",
+        "displayName": "Edge",
+        "canonical": "oklch(0.911 0.014 262.8)",
+        "tonalRamp": ["#1a1e2a", "#2a2f3e", "#3d4254", "#52586c", "#6a7082", "#8a8f9e", "#adb2be", "#cdd0d8", "#E2E8F0"]
+      },
+      "ink-1": {
+        "role": "neutral-ink-primary",
+        "displayName": "Primary Ink",
+        "canonical": "oklch(0.147 0.028 261.3)",
+        "tonalRamp": ["#0F172A", "#1e293b", "#2d3d54", "#405168", "#596780", "#788096", "#9aa2ae", "#c4cad4", "#eaecef"]
+      },
+      "ink-2": {
+        "role": "neutral-ink-secondary",
+        "displayName": "Secondary Ink",
+        "canonical": "oklch(0.449 0.037 259.7)",
+        "tonalRamp": ["#1c2130", "#2d3547", "#3e4b5e", "#526177", "#667890", "#8290a4", "#a5b0bf", "#c8d0da", "#ebedf1"]
+      },
+      "ink-3": {
+        "role": "neutral-ink-muted",
+        "displayName": "Muted Ink",
+        "canonical": "oklch(0.668 0.027 258.3)",
+        "tonalRamp": ["#202632", "#303948", "#424d5e", "#566275", "#6c798c", "#8993a3", "#a8b1be", "#c9d0da", "#ebeff4"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page-level title in web viewer. Used once per page; the largest text on any screen." },
+      "heading": { "displayName": "Heading", "purpose": "Section and modal headings in admin. Also lesson page title on first render." },
+      "title": { "displayName": "Title", "purpose": "Card titles, sidebar section headers, sub-modal headings." },
+      "body": { "displayName": "Body", "purpose": "UI prose, card descriptions, lesson content. Max 75ch on reading surfaces." },
+      "label": { "displayName": "Label", "purpose": "Button text, nav links, form labels, table headers." },
+      "caption": { "displayName": "Caption", "purpose": "Timestamps, metadata, hint text beneath inputs." },
+      "badge": { "displayName": "Badge", "purpose": "ROADMAP and LESSON node type labels exclusively. No other use." }
+    },
+    "shadows": [
+      {
+        "name": "overlay-backdrop",
+        "value": "background: rgba(0,0,0,0.5)",
+        "purpose": "Full-screen modal overlay. Signals blocking interaction; not a decorative layer."
+      },
+      {
+        "name": "hover-lift",
+        "value": "0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)",
+        "purpose": "Hover state on interactive cards only (onClick present). Feedback that the surface is pressable."
+      },
+      {
+        "name": "dropdown-float",
+        "value": "0 4px 6px -1px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.10)",
+        "purpose": "Floating layers (dropdowns, command palettes) that must escape stacking context. Use position: fixed + this shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Default easing for state transitions (button hover, modal open). Smooth and neutral."
+      },
+      {
+        "name": "ease-out-quart",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Entrances — elements arriving into view. Fast start, smooth deceleration."
+      },
+      {
+        "name": "duration-fast",
+        "value": "150ms",
+        "purpose": "Interactive feedback: button hover, input focus ring. Users in task flow should not wait."
+      },
+      {
+        "name": "duration-normal",
+        "value": "250ms",
+        "purpose": "Modal appear/disappear, panel slide, skeleton fade. Still fast; product UIs don't choreograph."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action trigger. Blueprint Ink fill with white text. Used for one primary action per view.",
+      "html": "<button class=\"ds-btn-primary\">New Roadmap</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: #4F46E5; color: #fff; border: 1px solid #4F46E5; border-radius: 6px; padding: 8px 16px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.4; cursor: pointer; transition: all 150ms cubic-bezier(0.4,0,0.2,1); user-select: none; } .ds-btn-primary:hover { background: #6366F1; border-color: #6366F1; transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid #4F46E5; outline-offset: 2px; } .ds-btn-primary:active { transform: translateY(0); } .ds-btn-primary:disabled { opacity: 0.5; pointer-events: none; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: none; transform: none !important; } }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary/outline action. White background with Blueprint Ink border and text.",
+      "html": "<button class=\"ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: #fff; color: #4F46E5; border: 1px solid #4F46E5; border-radius: 6px; padding: 8px 16px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.4; cursor: pointer; transition: all 150ms cubic-bezier(0.4,0,0.2,1); user-select: none; } .ds-btn-secondary:hover { background: #EEF2FF; } .ds-btn-secondary:focus-visible { outline: 2px solid #4F46E5; outline-offset: 2px; } .ds-btn-secondary:disabled { opacity: 0.5; pointer-events: none; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Low-emphasis action. Transparent background, Secondary Ink text. Used for destructive/logout/secondary nav actions.",
+      "html": "<button class=\"ds-btn-ghost\">Log out</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: transparent; color: #475569; border: 1px solid transparent; border-radius: 6px; padding: 8px 16px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 600; line-height: 1.4; cursor: pointer; transition: all 150ms cubic-bezier(0.4,0,0.2,1); user-select: none; } .ds-btn-ghost:hover { background: #F1F3F9; color: #0F172A; } .ds-btn-ghost:focus-visible { outline: 2px solid #4F46E5; outline-offset: 2px; } .ds-btn-ghost:disabled { opacity: 0.5; pointer-events: none; }"
+    },
+    {
+      "name": "Roadmap Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Content card for a roadmap entry in the web viewer. NodeBadge + title + description.",
+      "html": "<div class=\"ds-card\"><span class=\"ds-badge-roadmap\">ROADMAP</span><div class=\"ds-card-body\"><h3 class=\"ds-card-title\">Frontend Engineering</h3><p class=\"ds-card-desc\">Master modern frontend from HTML foundations to advanced React patterns.</p></div></div>",
+      "css": ".ds-card { background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: box-shadow 150ms ease, transform 150ms ease; } .ds-card:hover { box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06); transform: translateY(-1px); } .ds-badge-roadmap { display: inline-block; background: #EEF2FF; color: #4F46E5; font-family: JetBrains Mono, monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 9999px; padding: 2px 8px; } .ds-card-body { display: flex; flex-direction: column; gap: 4px; } .ds-card-title { font-family: Space Grotesk, system-ui, sans-serif; font-size: 16px; font-weight: 600; color: #0F172A; margin: 0; line-height: 1.4; } .ds-card-desc { font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 400; color: #475569; margin: 0; line-height: 1.5; } @media (prefers-reduced-motion: reduce) { .ds-card { transition: none; transform: none !important; } }"
+    },
+    {
+      "name": "Node Badge — ROADMAP",
+      "kind": "chip",
+      "refersTo": "node-badge-roadmap",
+      "description": "Type classifier for ROADMAP nodes. Blueprint palette. Appears inside cards and on graph canvas nodes.",
+      "html": "<span class=\"ds-badge-roadmap\">ROADMAP</span>",
+      "css": ".ds-badge-roadmap { display: inline-block; background: #EEF2FF; color: #4F46E5; font-family: JetBrains Mono, monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 9999px; padding: 2px 8px; line-height: 1; }"
+    },
+    {
+      "name": "Node Badge — LESSON",
+      "kind": "chip",
+      "refersTo": "node-badge-lesson",
+      "description": "Type classifier for LESSON nodes. Growth palette. Signals learning content.",
+      "html": "<span class=\"ds-badge-lesson\">LESSON</span>",
+      "css": ".ds-badge-lesson { display: inline-block; background: #ECFDF5; color: #059669; font-family: JetBrains Mono, monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 9999px; padding: 2px 8px; line-height: 1; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": null,
+      "description": "Standard form field. Used in modals (roadmap create/edit, login).",
+      "html": "<div class=\"ds-field\"><label class=\"ds-label\" for=\"ds-input-demo\">Roadmap Title</label><input class=\"ds-input\" id=\"ds-input-demo\" type=\"text\" placeholder=\"e.g. Frontend Engineering\"></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; } .ds-label { font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #0F172A; line-height: 1.4; } .ds-input { background: #fff; border: 1px solid #E2E8F0; border-radius: 6px; padding: 10px 12px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 400; color: #0F172A; line-height: 1.4; outline: none; transition: border-color 150ms ease, box-shadow 150ms ease; width: 100%; box-sizing: border-box; } .ds-input::placeholder { color: #94A3B8; } .ds-input:focus { border-color: #4F46E5; box-shadow: 0 0 0 3px rgba(79,70,229,0.10); } .ds-input:disabled { opacity: 0.5; cursor: not-allowed; background: #F1F3F9; }"
+    },
+    {
+      "name": "Admin Navigation Header",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Top navigation bar for the admin CMS. Space Grotesk wordmark, ghost logout button, theme toggle slot.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-nav-brand\">VizTeckStack Admin</span><div class=\"ds-nav-actions\"><button class=\"ds-btn-ghost\">Log out</button></div></header>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 56px; background: #fff; border-bottom: 1px solid #E2E8F0; padding: 0 24px; } .ds-nav-brand { font-family: Space Grotesk, system-ui, sans-serif; font-size: 18px; font-weight: 600; color: #0F172A; letter-spacing: -0.01em; } .ds-nav-actions { display: flex; align-items: center; gap: 12px; } .ds-btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: transparent; color: #475569; border: 1px solid transparent; border-radius: 6px; padding: 8px 16px; font-family: Inter, system-ui, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 150ms ease; } .ds-btn-ghost:hover { background: #F1F3F9; color: #0F172A; }"
+    },
+    {
+      "name": "Skeleton Loader Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Loading state for list views (roadmap table). Flat animated pulse; no spinner.",
+      "html": "<div class=\"ds-skeleton-list\"><div class=\"ds-skeleton-row\"><div class=\"ds-skel ds-skel-wide\"></div><div class=\"ds-skel ds-skel-mid\"></div><div class=\"ds-skel ds-skel-narrow\"></div></div><div class=\"ds-skeleton-row\"><div class=\"ds-skel ds-skel-wide\"></div><div class=\"ds-skel ds-skel-mid\"></div><div class=\"ds-skel ds-skel-narrow\"></div></div></div>",
+      "css": ".ds-skeleton-list { background: #fff; border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden; } .ds-skeleton-row { display: flex; gap: 16px; padding: 12px 16px; border-bottom: 1px solid #E2E8F0; animation: ds-pulse 1.5s ease-in-out infinite; } .ds-skeleton-row:last-child { border-bottom: none; } .ds-skel { background: #F1F3F9; border-radius: 4px; height: 16px; } .ds-skel-wide { width: 192px; } .ds-skel-mid { width: 128px; } .ds-skel-narrow { width: 64px; } @keyframes ds-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } } @media (prefers-reduced-motion: reduce) { .ds-skeleton-row { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Structured Atlas · The Technical Notebook",
+    "overview": "Two surfaces, one system. The roadmap graph interface is The Structured Atlas: users see the full topology of a knowledge domain, navigate node relationships, and always know where they stand. The lesson interface is The Technical Notebook: focused study, deep hierarchy, distraction-free reading — a well-annotated engineering journal that trusts the reader to be a professional.\n\nWhat unites them: precision over decoration. Every pixel earns its place. This design system actively refuses to sell itself; it enables work. Like Linear, it trusts the user's intent. Like Notion, it keeps the canvas out of the way.\n\nThis system explicitly rejects the sales-heavy eLearning aesthetic of Udemy and Coursera. It rejects the generic SaaS dashboard template. It rejects over-gamified learning. Learners here are technical adults in a focused state; the interface should feel accordingly.",
+    "keyCharacteristics": [
+      "Flat-by-default elevation: surfaces express depth through the three-layer neutral stack, not box-shadows",
+      "Semantic accent: Blueprint and Growth appear only at meaning-bearing moments — node type, primary action, active selection",
+      "Cool slate foundation: Outer Shell → Surface → Inner Field — a perceived z-axis without paint",
+      "Typography-led hierarchy: Space Grotesk for structure, Inter for reading, JetBrains Mono for type-labeling only",
+      "Both themes (light/dark) are first-class: the token system is symmetric, not approximated"
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Blueprint and Growth appear only at meaning-bearing moments: node type badge, primary action button, and selection/active state. Using either accent as a decorative color destroys the system's ability to signal.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Warm-Default Rule",
+        "body": "The background palette is cool-neutral. Do not drift toward warm sand, cream, or beige tones. Warmth in this brand is carried by Space Grotesk's letterforms and Blueprint's confidence, not by background hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Font Split Rule",
+        "body": "Space Grotesk belongs to navigation, headings, and product identity. Inter belongs to everything a user reads, types, or clicks. JetBrains Mono belongs to type labels only. Mixing them on the same visual element breaks the voice hierarchy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Ceiling Rule",
+        "body": "No heading exceeds 32px (Display). This is a product UI, not a campaign page. Fluid clamp scaling for headings is prohibited.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "At rest, all surfaces are shadowless. Hover lift applies only to surfaces with an onClick. Dropdown shadow applies only to floating layers. Any other shadow is decoration; remove it.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Blueprint and Growth only at meaning-bearing moments: node type badge, primary action button, active/focus/selected state.",
+      "Do express depth through the three-layer neutral stack (Outer Shell → Surface → Inner Field). Add a border before adding a shadow.",
+      "Do use Space Grotesk for headings and navigation; Inter for all reading and interactive text; JetBrains Mono for node type badges only.",
+      "Do ship every interactive state: hover, focus, active, disabled, loading (skeleton), and error.",
+      "Do cap lesson page body line length at ≤75ch.",
+      "Do write empty states that teach the interface.",
+      "Do include @media (prefers-reduced-motion: reduce) for every animation.",
+      "Do use text-wrap: balance on h1–h3; text-wrap: pretty on body prose.",
+      "Do use position: fixed or <dialog>/Popover API for dropdowns inside overflow: hidden containers."
+    ],
+    "donts": [
+      "Don't use Blueprint or Growth as decorative colors.",
+      "Don't add border-left or border-right wider than 1px as a colored accent stripe.",
+      "Don't use background-clip: text gradient text.",
+      "Don't add box-shadow to surfaces at rest.",
+      "Don't use glassmorphism as a default surface treatment.",
+      "Don't build anything that looks like Udemy or Coursera: no countdown timers, no foregrounded star ratings.",
+      "Don't add XP bars, achievement badge grids, or confetti animations.",
+      "Don't use generic SaaS hero metric tiles.",
+      "Don't use Space Grotesk in buttons, form labels, or body text.",
+      "Don't add the eyebrow pattern (small all-caps tracked labels) above every section heading.",
+      "Don't add numbered section markers (01/02/03) as default scaffolding.",
+      "Don't warm-tint the background palette."
+    ]
+  }
+}
