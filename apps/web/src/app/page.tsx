@@ -26,9 +26,9 @@ export default async function HomePage() {
             No roadmaps available yet.
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {roadmaps.map((r) => (
-              <a key={r.id} href={`/roadmap/${r.slug}`} className="no-underline block">
+              <a key={r.id} href={`/roadmap/${r.slug}`} className="no-underline block group">
                 <Card type="ROADMAP" title={r.title} description={r.description} />
               </a>
             ))}
