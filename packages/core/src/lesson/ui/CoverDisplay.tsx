@@ -23,7 +23,7 @@ export function CoverDisplay({
   const showImage = !!coverImage && !imgError;
 
   return (
-    <div className="relative w-full h-[200px]">
+    <div className="relative w-full h-[160px] sm:h-[200px]">
       {showImage ? (
         <img
           src={coverImage!}

@@ -28,9 +28,9 @@ export function RoadmapGraphView({ detail, slug }: RoadmapGraphViewProps) {
   };
 
   return (
-    <div className="px-6 pb-6">
+    <div className="px-4 sm:px-6 pt-4 pb-6">
       <Breadcrumb items={breadcrumbItems} />
-      <div className="h-[70vh] w-full rounded-lg overflow-hidden" role="region" aria-label="Roadmap graph">
+      <div className="h-[55vh] sm:h-[70vh] w-full rounded-lg overflow-hidden" role="region" aria-label="Roadmap graph">
         <RoadmapGraph
           nodes={detail.nodes}
           edges={detail.edges}

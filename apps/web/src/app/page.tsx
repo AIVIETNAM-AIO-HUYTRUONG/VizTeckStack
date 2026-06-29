@@ -14,15 +14,15 @@ export default async function HomePage() {
   return (
     <div className="px-6 py-10">
       <div className="max-w-[1200px] mx-auto">
-        <h1 className="font-display font-bold text-[32px] text-text-1 mb-2">
+        <h1 className="font-display font-bold text-[32px] text-text-1 mb-2" style={{ textWrap: 'balance' }}>
           Learning Roadmaps
         </h1>
-        <p className="font-body text-base text-text-2 mb-10">
+        <p className="font-body text-base text-text-2 mb-10" style={{ textWrap: 'pretty' }}>
           Browse our structured learning paths and start your journey.
         </p>
 
         {roadmaps.length === 0 ? (
-          <div className="text-text-3 text-sm text-center py-16">
+          <div className="text-text-2 text-sm text-center py-16">
             No roadmaps available yet.
           </div>
         ) : (

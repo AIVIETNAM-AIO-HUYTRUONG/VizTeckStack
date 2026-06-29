@@ -37,7 +37,10 @@ export function LessonPageShell({
   );
 
   const title = titleSlot ?? (
-    <h1 className="font-display font-bold text-[32px] leading-tight text-text-1 mt-8 mb-4">
+    <h1
+      className="font-display font-bold text-[24px] sm:text-[32px] leading-tight text-text-1 mt-8 mb-4"
+      style={{ textWrap: 'balance' } as React.CSSProperties}
+    >
       {node.title}
     </h1>
   );
