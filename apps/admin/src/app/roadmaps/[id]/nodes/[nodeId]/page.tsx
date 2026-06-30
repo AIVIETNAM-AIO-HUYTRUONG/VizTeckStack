@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useAuthGuard } from "@/lib/useAuthGuard";
+import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { useAdminLessonEditor } from "@/features/lessons/content-editor/hooks/useLessonEditor";
 import { useAdminLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
 import { useAdminPageTree } from "@/features/lessons/page-tree/hooks/usePageTree";

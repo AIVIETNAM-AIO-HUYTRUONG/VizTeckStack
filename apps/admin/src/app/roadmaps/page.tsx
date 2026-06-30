@@ -11,7 +11,7 @@ import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { RoadmapModal } from '@/features/roadmaps/components/RoadmapModal';
 import { useAdminRoadmaps } from '@/features/roadmaps/hooks/useRoadmaps';
 import { STATUS_CLASS, STATUS_LABEL } from '@vizteck/core';
-import { useAuthGuard } from '@/lib/useAuthGuard';
+import { useAuthGuard } from '@/hooks/useAuthGuard';
 
 function SkeletonRow() {
   return (
