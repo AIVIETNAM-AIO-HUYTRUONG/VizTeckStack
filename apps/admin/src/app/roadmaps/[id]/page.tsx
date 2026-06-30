@@ -5,16 +5,16 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { RoadmapGraph } from '@vizteck/core';
 import type { NodeType } from '@vizteck/ui';
-import { useAuthGuard } from '@/lib/useAuthGuard';
-import { useUnsavedGuard } from '@/lib/useRouteGuard';
-import { useAdminGraphEditor } from '@/features/graph-editor/hooks/useGraphEditor';
-import type { EditorNode } from '@/features/graph-editor/hooks/useGraphEditor';
-import { useNodeActions } from '@/features/graph-editor/hooks/useNodeActions';
+import { useAuthGuard } from '@/hooks/useAuthGuard';
+import { useUnsavedGuard } from '@/hooks/useRouteGuard';
+import { useAdminGraphEditor } from '@/features/roadmaps/graph-editor/hooks/useGraphEditor';
+import type { EditorNode } from '@/features/roadmaps/graph-editor/hooks/useGraphEditor';
+import { useNodeActions } from '@/features/roadmaps/graph-editor/hooks/useNodeActions';
 import type { SidePanelState } from '@vizteck/core';
-import { useGraphDraft } from '@/features/graph-editor/hooks/useGraphDraft';
-import { GraphToolbar } from '@/features/graph-editor/components/GraphToolbar';
-import { NodeInventory } from '@/features/graph-editor/components/NodeInventory';
-import { NodeSidePanel } from '@/features/graph-editor/components/NodeSidePanel';
+import { useGraphDraft } from '@/features/roadmaps/graph-editor/hooks/useGraphDraft';
+import { GraphToolbar } from '@/features/roadmaps/graph-editor/components/GraphToolbar';
+import { NodeInventory } from '@/features/roadmaps/graph-editor/components/NodeInventory';
+import { NodeSidePanel } from '@/features/roadmaps/graph-editor/components/NodeSidePanel';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 
 interface DeleteConfirm {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import type { SaveStatus } from '../hooks/useLessonEditor';
+import type { SaveStatus } from '../content-editor/hooks/useLessonEditor';
 
 interface LessonTitleEditorProps {
   title: string;
