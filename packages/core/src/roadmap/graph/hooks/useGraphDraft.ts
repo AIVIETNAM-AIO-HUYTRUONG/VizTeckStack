@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, type MutableRefObject } from 'react';
-import type { EditorNode, EditorEdge } from './types';
+import type { EditorNode, EditorEdge } from '../types';
 
 export function useGraphDraft(
   id: string,

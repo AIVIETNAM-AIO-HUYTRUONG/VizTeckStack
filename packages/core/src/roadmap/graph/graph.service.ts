@@ -8,7 +8,7 @@ import {
   type GetRoadmapQuery,
   type UpsertGraphMutationVariables,
 } from '@vizteck/graphql-client';
-import type { ApolloLike } from '../roadmap/types';
+import type { ApolloLike } from '../types';
 import type { NodeItem, EdgeItem } from './types';
 import type { EditorNode, EditorEdge, GraphData, RoadmapEntry } from './types';
 

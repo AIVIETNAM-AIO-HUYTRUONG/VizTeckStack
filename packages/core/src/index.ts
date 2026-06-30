@@ -5,14 +5,14 @@ export * from './roadmap/roadmap.service';
 export { useRoadmaps } from './roadmap/hooks/useRoadmaps';
 
 // graph — domain
-export * from './graph/types';
-export * from './graph/graph.service';
-export { useGraphEditor } from './graph/useGraphEditor';
-export { useGraphDraft } from './graph/useGraphDraft';
+export * from './roadmap/graph/types';
+export * from './roadmap/graph/graph.service';
+export { useGraphEditor } from './roadmap/graph/hooks/useGraphEditor';
+export { useGraphDraft } from './roadmap/graph/hooks/useGraphDraft';
 // graph — UI (moved from packages/graph)
-export { RoadmapGraph } from './graph/ui/RoadmapGraph';
-export type { RoadmapGraphProps } from './graph/ui/RoadmapGraph';
-export { RoadmapNode } from './graph/ui/RoadmapNode';
+export { RoadmapGraph } from './roadmap/graph/components/RoadmapGraph';
+export type { RoadmapGraphProps } from './roadmap/graph/components/RoadmapGraph';
+export { RoadmapNode } from './roadmap/graph/components/RoadmapNode';
 // re-export @xyflow/react types previously exposed by packages/graph
 export type {
   NodeChange,

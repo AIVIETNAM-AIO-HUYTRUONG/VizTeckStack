@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo, type Dispatch, type SetStateAction } from 'react';
-import type { ApolloLike } from '../roadmap/types';
-import { loadGraph, saveGraph, makeSnapshot } from './graph.service';
-import type { EditorNode, EditorEdge, RoadmapEntry } from './types';
-import type { UpdateRoadmapInput } from '../roadmap/types';
+import type { ApolloLike } from '../../types';
+import { loadGraph, saveGraph, makeSnapshot } from '../graph.service';
+import type { EditorNode, EditorEdge, RoadmapEntry } from '../types';
+import type { UpdateRoadmapInput } from '../../types';
 
 export function useGraphEditor(
   client: ApolloLike,
