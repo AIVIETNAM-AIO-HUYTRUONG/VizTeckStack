@@ -5,7 +5,7 @@ import "@blocknote/mantine/style.css";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
-import { parseBlocks } from "./utils";
+import { parseBlocks } from "../../utils/utils";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 

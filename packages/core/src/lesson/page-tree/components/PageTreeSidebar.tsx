@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { PageTreeItem } from './PageTreeItem';
-import type { PageTree, PageTreeNode } from '../types';
+import type { PageTree, PageTreeNode } from '../../types';
 
 export interface PageTreeSidebarProps {
   tree: PageTree;

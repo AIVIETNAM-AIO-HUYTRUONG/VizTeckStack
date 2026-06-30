@@ -1,7 +1,7 @@
 /// <reference types="vitest/globals" />
 import { render, screen, fireEvent } from '@testing-library/react';
 import { PageTreeSidebar } from './PageTreeSidebar';
-import type { PageTree } from '../types';
+import type { PageTree } from '../../types';
 
 const tree: PageTree = {
   rootSlug: 'frontend',

@@ -2,8 +2,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { ApolloLike } from '../roadmap/types';
-import { updateNodeCover, updateNodeIcon } from './lesson.service';
+import type { ApolloLike } from '../../roadmap/types';
+import { updateNodeCover, updateNodeIcon } from '../lesson.service';
 
 export function useLessonPageShell(
   client: ApolloLike,

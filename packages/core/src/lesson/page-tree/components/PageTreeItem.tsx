@@ -1,6 +1,6 @@
 "use client";
 
-import type { PageTreeNode } from "../types";
+import type { PageTreeNode } from "../../types";
 
 export interface PageTreeItemProps {
   node: PageTreeNode;

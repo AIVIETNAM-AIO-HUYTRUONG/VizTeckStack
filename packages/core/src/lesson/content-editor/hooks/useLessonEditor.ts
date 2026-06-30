@@ -2,9 +2,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { ApolloLike } from '../roadmap/types';
-import { fetchLesson, updateLessonContent, updateLessonTitle } from './lesson.service';
-import type { LessonNode, SaveStatus, UseLessonEditorResult } from './types';
+import type { ApolloLike } from '../../../roadmap/types';
+import { fetchLesson, updateLessonContent, updateLessonTitle } from '../../lesson.service';
+import type { LessonNode, SaveStatus, UseLessonEditorResult } from '../../types';
 
 export function useLessonEditor(
   client: ApolloLike,

@@ -5,7 +5,7 @@ import { CoverDisplay } from "./CoverDisplay";
 import type { LessonShellNode } from "../types";
 
 const LessonViewer = React.lazy(() =>
-  import("./LessonViewer").then((m) => ({ default: m.LessonViewer }))
+  import("../content-editor/components/LessonViewer").then((m) => ({ default: m.LessonViewer }))
 );
 
 export interface LessonPageShellProps {

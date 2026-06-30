@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { PageTreeSidebar } from './PageTreeSidebar';
+import { PageTreeSidebar } from '../page-tree/components/PageTreeSidebar';
 import type { PageTree, PageTreeNode } from '../types';
 
 export interface LessonPageLayoutProps {

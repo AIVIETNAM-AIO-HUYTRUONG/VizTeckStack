@@ -2,9 +2,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { ApolloLike } from '../roadmap/types';
-import type { PageTree } from './types';
-import { fetchRoadmapTree } from './lesson.service';
+import type { ApolloLike } from '../../../roadmap/types';
+import type { PageTree } from '../../types';
+import { fetchRoadmapTree } from '../../lesson.service';
 
 export function usePageTree(client: ApolloLike, nodeId: string): PageTree | null {
   const [tree, setTree] = useState<PageTree | null>(null);

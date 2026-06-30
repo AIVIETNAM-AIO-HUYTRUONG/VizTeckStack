@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useSearch } from './useSearch';
+import { useSearch } from '../hooks/useSearch';
 import { SearchResultItem } from './SearchResultItem';
 import { SearchPreview } from './SearchPreview';
 import type { SearchQuery } from '@vizteck/graphql-client';
