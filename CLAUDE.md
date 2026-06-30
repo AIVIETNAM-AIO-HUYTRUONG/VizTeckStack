@@ -101,7 +101,7 @@ Browser
 
 | Package | Name | Purpose |
 |---------|------|---------|
-| `packages/core` | `@vizteck/core` | **Single source of truth for all feature logic.** Feature-first layout: `roadmap/`, `graph/`, `lesson/` — each with `types.ts`, `*.service.ts`, hooks, and a `ui/` subfolder for display components. Apps import from here. |
+| `packages/core` | `@vizteck/core` | **Single source of truth for all feature logic.** Feature-first layout: `roadmap/` (sub_feature: `graph/`) and `lesson/` (sub_features: `content-editor/`, `page-tree/`, `search/`) — each feature has `types.ts`, `*.service.ts`, `hooks/`, `components/`, `utils/`; sub_features follow the same pattern nested inside. Apps import from here. |
 | `packages/db` | `@vizteck/db` | Exports `db` (PrismaClient singleton) and all Prisma types. |
 | `packages/ui` | `@vizteck/ui` | Shared React components (Button, Card, NodeBadge). |
 | `packages/graph` | `@vizteck/graph` | **Shim only** — re-exports `RoadmapGraph`, `RoadmapNode`, and all graph types from `@vizteck/core`. Do not add source files here. |
@@ -114,25 +114,33 @@ Browser
 `apps/admin/src/features/` contains only admin-specific wrappers and UI. All business logic (services, hooks) lives in `@vizteck/core`; admin hooks are thin wrappers that inject `adminApolloClient`.
 
 ```
-src/features/
-  roadmaps/
-    hooks/useRoadmaps.ts          — useAdminRoadmaps() injects adminApolloClient → @vizteck/core useRoadmaps
-    components/RoadmapModal.tsx   — create / edit modal
-  graph-editor/
-    hooks/useGraphEditor.ts       — useAdminGraphEditor(id, slug) → @vizteck/core useGraphEditor
-    hooks/useNodeActions.ts       — canvas interaction handlers (drop, connect, delete) — stays in admin (Next.js router)
-    hooks/useGraphDraft.ts        — re-export from @vizteck/core
-    components/GraphToolbar.tsx
-    components/NodeInventory.tsx
-    components/NodeSidePanel.tsx
-  lessons/
-    hooks/useLessonEditor.ts      — useAdminLessonEditor(nodeId) → @vizteck/core useLessonEditor
-    hooks/useLessonPageShell.ts   — useAdminLessonPageShell(nodeId, cover, icon) → @vizteck/core
-    hooks/usePageTree.ts          — useAdminPageTree(nodeId) → @vizteck/core usePageTree
-    components/LessonTitleEditor.tsx — inline title with blur-to-save (admin-only)
-    components/CoverImage.tsx     — editable cover area (hover controls: upload, paste URL, remove)
-    components/CoverUploadModal.tsx — uploadthing file upload modal
-    components/IconPicker.tsx     — emoji picker for node icon
+src/
+  hooks/                                — shared admin hooks (auth, route guards)
+    useAuthGuard.ts
+    useRouteGuard.ts
+  features/
+    roadmaps/
+      hooks/useRoadmaps.ts              — useAdminRoadmaps() → @vizteck/core useRoadmaps
+      components/RoadmapModal.tsx
+      graph-editor/                     ← sub_feature
+        hooks/useGraphEditor.ts         — useAdminGraphEditor(id, slug) → @vizteck/core useGraphEditor
+        hooks/useNodeActions.ts         — canvas interaction handlers — stays in admin (Next.js router)
+        hooks/useGraphDraft.ts          — re-export from @vizteck/core
+        components/GraphToolbar.tsx
+        components/NodeInventory.tsx
+        components/NodeSidePanel.tsx
+    lessons/
+      hooks/useLessonPageShell.ts       — useAdminLessonPageShell(nodeId, cover, icon) → @vizteck/core
+      components/LessonTitleEditor.tsx  — inline title with blur-to-save (admin-only)
+      components/CoverImage.tsx         — editable cover area
+      components/CoverUploadModal.tsx   — uploadthing file upload modal
+      components/IconPicker.tsx         — emoji picker for node icon
+      content-editor/                   ← sub_feature
+        hooks/useLessonEditor.ts        — useAdminLessonEditor(nodeId) → @vizteck/core useLessonEditor
+      page-tree/                        ← sub_feature
+        hooks/usePageTree.ts            — useAdminPageTree(nodeId) → @vizteck/core usePageTree
+      search/                           ← sub_feature
+        SearchModalWrapper.tsx          — wires SearchModal to admin Apollo client
 ```
 
 Feature display components (`LessonEditor`, `LessonViewer`, `LessonPageShell`, `RoadmapGraph`, etc.) are imported from `@vizteck/core`, not defined in `apps/admin`.
