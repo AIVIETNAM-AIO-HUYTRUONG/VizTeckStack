@@ -2,6 +2,19 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Scoped rules
+
+Subdirectory `CLAUDE.md` files auto-load scoped rules when working inside those directories.
+Shared rule files live in `rules/` — do not duplicate content from there into this file.
+
+| Scope | File |
+|-------|------|
+| React/Tailwind/Apollo | `rules/frontend.md` |
+| NestJS/REST/GraphQL | `rules/api.md` |
+| Prisma/PostgreSQL | `rules/database.md` |
+| Test frameworks | `rules/testing.md` |
+| Package boundaries | `rules/packages.md` |
+
 ## Commands
 
 ```bash

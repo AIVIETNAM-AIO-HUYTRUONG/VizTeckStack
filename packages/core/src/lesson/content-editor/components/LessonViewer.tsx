@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 import { parseBlocks } from '../../utils/utils';
+import { lessonSchema } from '../blocks/TocBlock';
 
 export interface LessonViewerProps {
   contentJson: string;
@@ -18,7 +19,7 @@ export interface LessonViewerProps {
 function LessonViewerInner({ contentJson }: LessonViewerProps) {
   const blocks = parseBlocks(contentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
+  const editor = useCreateBlockNote({ schema: lessonSchema, ...(blocks ? { initialContent: blocks as any } : {}) });
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   useEffect(() => {
