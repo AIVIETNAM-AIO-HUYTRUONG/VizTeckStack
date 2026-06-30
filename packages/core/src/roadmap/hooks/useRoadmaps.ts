@@ -7,9 +7,9 @@ import {
   updateRoadmap,
   deleteRoadmap,
   cycleStatus,
-} from './roadmap.service';
-import { STATUS_CYCLE } from './constants';
-import type { ApolloLike, Roadmap, CreateRoadmapInput, UpdateRoadmapInput, ModalState } from './types';
+} from '../roadmap.service';
+import { STATUS_CYCLE } from '../utils/constants';
+import type { ApolloLike, Roadmap, CreateRoadmapInput, UpdateRoadmapInput, ModalState } from '../types';
 
 export function useRoadmaps(client: ApolloLike) {
   const [roadmaps, setRoadmaps] = useState<Roadmap[]>([]);

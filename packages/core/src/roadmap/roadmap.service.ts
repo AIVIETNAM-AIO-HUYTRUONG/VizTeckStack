@@ -5,7 +5,7 @@ import {
   DeleteRoadmapDocument,
   type ListRoadmapsQuery,
 } from '@vizteck/graphql-client';
-import { STATUS_CYCLE } from './constants';
+import { STATUS_CYCLE } from './utils/constants';
 import type { ApolloLike, Roadmap, CreateRoadmapInput, UpdateRoadmapInput } from './types';
 
 export async function getRoadmaps(client: ApolloLike): Promise<Roadmap[]> {
