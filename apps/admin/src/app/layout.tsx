@@ -3,7 +3,7 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { AdminApolloProvider } from '@/components/ApolloProvider';
-import { SearchModalWrapper } from '@/features/search/SearchModalWrapper';
+import { SearchModalWrapper } from '@/features/lessons/search/SearchModalWrapper';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
