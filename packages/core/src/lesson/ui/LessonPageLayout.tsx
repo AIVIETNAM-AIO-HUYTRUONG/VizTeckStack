@@ -72,7 +72,8 @@ export function LessonPageLayout({
       {/* Content */}
       <div className="flex-1 min-w-0 relative">
         {/* Toggle button
-            Mobile: fixed just below header (z-50, above sidebar z-40)
+            Mobile: fixed just below lesson header (z-50, above sidebar z-40)
+            top-[70px] = h-14 lesson header (56px) + 14px gap
             Desktop: absolute inside content column  */}
         <button
           type="button"

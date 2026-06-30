@@ -30,11 +30,11 @@ export function Card({ type, title, description, miniGraph, onClick, 'aria-label
       aria-label={ariaLabel}
       className={[
         'bg-bg-1 border border-border rounded-lg p-5 flex flex-col gap-3',
-        'transition-all duration-150 motion-reduce:transition-none',
+        'transition-all duration-200 motion-reduce:transition-none',
         interactive
-          ? 'cursor-pointer hover:-translate-y-0.5 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1'
+          ? 'cursor-pointer hover:-translate-y-1.5 hover:shadow-[0_8px_24px_rgba(79,70,229,0.10)] focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1'
           : 'cursor-default',
-        'group-hover:-translate-y-0.5 group-hover:shadow-sm',
+        'group-hover:-translate-y-1.5 group-hover:shadow-[0_8px_24px_rgba(79,70,229,0.10)]',
       ].join(' ')}
     >
       <NodeBadge type={type} />

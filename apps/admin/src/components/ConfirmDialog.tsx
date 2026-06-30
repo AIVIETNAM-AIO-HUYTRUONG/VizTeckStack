@@ -59,7 +59,7 @@ export function ConfirmDialog({
         aria-labelledby={headingId}
         className="relative w-full max-w-[400px] bg-bg-1 border border-border rounded-md shadow-lg p-6 mx-4"
       >
-        <h2 id={headingId} className="text-[20px] font-semibold text-text-1 mb-3">
+        <h2 id={headingId} className="font-display text-[20px] font-semibold text-text-1 mb-3">
           {heading}
         </h2>
         <p className="text-sm text-text-2 mb-6">{body}</p>

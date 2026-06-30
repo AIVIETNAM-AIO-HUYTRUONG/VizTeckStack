@@ -104,7 +104,7 @@ export function NodeInventory({
             className={`flex-1 text-[10px] font-semibold uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-inset transition-colors
               ${filter === f
                 ? 'text-indigo border-b-2 border-indigo bg-indigo/5'
-                : 'text-text-3 hover:text-text-2 border-b-2 border-transparent'
+                : 'text-text-2 hover:text-text-1 border-b-2 border-transparent'
               }`}
           >
             {f}
@@ -117,7 +117,7 @@ export function NodeInventory({
 
         {/* Empty state */}
         {filteredNodes.length === 0 && (!showAvailable || availableRoadmaps.length === 0) && (
-          <div className="flex flex-col items-center justify-center h-32 text-text-3 text-xs text-center px-4 gap-1">
+          <div className="flex flex-col items-center justify-center h-32 text-text-2 text-xs text-center px-4 gap-1">
             <span>No nodes yet.</span>
             <span style={{ fontSize: 10 }}>Right-click canvas or use Add Node.</span>
           </div>
@@ -186,7 +186,7 @@ export function NodeInventory({
         {showAvailable && availableRoadmaps.length > 0 && (
           <>
             <div
-              className="flex items-center px-3 border-b border-border bg-bg-2 text-text-3 font-semibold uppercase"
+              className="flex items-center px-3 border-b border-border bg-bg-2 text-text-2 font-semibold uppercase"
               style={{ height: 20, fontSize: 9, letterSpacing: '0.06em' }}
             >
               Available roadmaps

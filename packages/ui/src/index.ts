@@ -26,6 +26,16 @@ export {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog';
+export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from './ui/table';
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+} from './ui/dropdown-menu';
 
 // Utility
 export { cn } from './lib/utils';

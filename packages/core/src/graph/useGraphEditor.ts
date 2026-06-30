@@ -89,6 +89,7 @@ export function useGraphEditor(
     allRoadmaps,
     setEditorNodes: setEditorNodes as Dispatch<SetStateAction<EditorNode[]>>,
     setEditorEdges: setEditorEdges as Dispatch<SetStateAction<EditorEdge[]>>,
+    savedSnapshotRef,
     handleSave,
     handleChangeStatus,
   };

@@ -40,6 +40,7 @@ export default function GraphEditorPage({
     roadmapTitle, roadmapStatus,
     editorNodes, editorEdges, allRoadmaps,
     setEditorNodes, setEditorEdges,
+    savedSnapshotRef,
     handleSave, handleChangeStatus,
   } = useAdminGraphEditor(id, slug);
 
@@ -56,7 +57,7 @@ export default function GraphEditorPage({
     handleDropNode, handleNodeClick, handleBack,
   } = useNodeActions({ id, slug, setEditorNodes, setEditorEdges, setPanel, confirmNavigation, setPendingNavUrl });
 
-  useGraphDraft(id, editorNodes, editorEdges, dirty, loading);
+  useGraphDraft(id, editorNodes, editorEdges, dirty, loading, savedSnapshotRef);
 
   function handleAddNode() {
     setPanel({ open: true, mode: 'create', flowPosition: undefined });
@@ -149,7 +150,7 @@ export default function GraphEditorPage({
       />
 
       {saveError && (
-        <div className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2 flex-shrink-0">
+        <div role="alert" className="bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-2 flex-shrink-0">
           {saveError}
         </div>
       )}

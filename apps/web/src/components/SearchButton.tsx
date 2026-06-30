@@ -10,7 +10,7 @@ export function SearchButton() {
       type="button"
       aria-label="Search"
       onClick={() => setOpen(true)}
-      className="sm:hidden flex items-center justify-center w-11 h-11 text-text-2 hover:text-text-1 transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo motion-reduce:transition-none"
+      className="flex items-center justify-center w-11 h-11 text-text-2 hover:text-text-1 transition-colors rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo motion-reduce:transition-none"
     >
       <svg
         width="18"

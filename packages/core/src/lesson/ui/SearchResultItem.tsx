@@ -16,8 +16,7 @@ export function SearchResultItem({ item, isSelected, onMouseEnter, onClick }: Se
   return (
     <button
       type="button"
-      role="option"
-      aria-selected={isSelected}
+      aria-current={isSelected ? 'true' : undefined}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       className={`w-full text-left px-3 py-2 flex items-center gap-2 rounded-md text-sm transition-colors ${

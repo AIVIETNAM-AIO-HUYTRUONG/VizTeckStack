@@ -58,6 +58,9 @@ export function SearchModal({ open, onClose, getLessonHref, getRoadmapHref }: Se
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Search"
         className="w-full max-w-2xl bg-bg-0 rounded-xl shadow-2xl border border-border overflow-hidden flex flex-col"
         style={{ maxHeight: '80vh' }}
         onClick={(e) => e.stopPropagation()}
@@ -83,9 +86,10 @@ export function SearchModal({ open, onClose, getLessonHref, getRoadmapHref }: Se
             ref={inputRef}
             type="text"
             placeholder="Search…"
+            aria-label="Search lessons and roadmaps"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="flex-1 bg-transparent text-text-1 placeholder:text-text-3 text-sm outline-none min-w-0"
+            className="flex-1 bg-transparent text-text-1 placeholder:text-text-2 text-sm outline-none min-w-0"
           />
           <button
             type="button"

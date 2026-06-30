@@ -119,7 +119,7 @@ export function RoadmapModal({ mode, initial, onSubmit, onClose }: RoadmapModalP
         aria-labelledby={headingId}
         className="relative w-full max-w-[480px] bg-bg-1 border border-border rounded-md shadow-lg p-6 mx-4 max-h-[90dvh] overflow-y-auto"
       >
-        <h2 id={headingId} className="text-[20px] font-semibold text-text-1 mb-5">
+        <h2 id={headingId} className="font-display text-[20px] font-semibold text-text-1 mb-5">
           {heading}
         </h2>
 
@@ -167,7 +167,7 @@ export function RoadmapModal({ mode, initial, onSubmit, onClose }: RoadmapModalP
             {slugError ? (
               <p id="slug-error" className="mt-1 text-[12px] text-red-500" role="alert">{slugError}</p>
             ) : isCreate && (
-              <p id="slug-hint" className="mt-1 text-[12px] text-text-3">
+              <p id="slug-hint" className="mt-1 text-[12px] text-text-2">
                 Auto-generated from title. You can edit before saving.
               </p>
             )}
@@ -175,7 +175,7 @@ export function RoadmapModal({ mode, initial, onSubmit, onClose }: RoadmapModalP
 
           <div>
             <label htmlFor="roadmap-description" className="block text-sm font-semibold text-text-1 mb-1">
-              Description <span className="text-text-3 font-normal">(optional)</span>
+              Description <span className="text-text-2 font-normal">(optional)</span>
             </label>
             <textarea
               id="roadmap-description"

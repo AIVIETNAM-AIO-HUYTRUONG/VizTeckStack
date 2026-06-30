@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { LessonPageShell } from "./LessonPageShell";
-import type { LessonShellNode, BreadcrumbItem } from "../types";
+import type { LessonShellNode } from "../types";
 
 const node: LessonShellNode = {
   id: "n1",
@@ -11,17 +11,13 @@ const node: LessonShellNode = {
   type: "LESSON",
 };
 
-const breadcrumb: BreadcrumbItem[] = [
-  { title: "Frontend", slug: "frontend", nodeId: null },
-];
-
 it("view mode renders title", () => {
-  render(<LessonPageShell mode="view" node={node} breadcrumb={breadcrumb} />);
+  render(<LessonPageShell mode="view" node={node} />);
   expect(screen.getByRole("heading", { name: "Box Model" })).toBeDefined();
 });
 
 it("view mode renders icon via CoverDisplay", () => {
-  render(<LessonPageShell mode="view" node={node} breadcrumb={breadcrumb} />);
+  render(<LessonPageShell mode="view" node={node} />);
   expect(screen.getByText("⚡")).toBeDefined();
 });
 
@@ -30,7 +26,6 @@ it("edit mode renders coverSlot when provided", () => {
     <LessonPageShell
       mode="edit"
       node={node}
-      breadcrumb={breadcrumb}
       coverSlot={<div data-testid="custom-cover">custom</div>}
     />
   );
@@ -42,7 +37,6 @@ it("edit mode renders titleSlot when provided", () => {
     <LessonPageShell
       mode="edit"
       node={node}
-      breadcrumb={breadcrumb}
       titleSlot={<h1 data-testid="custom-title">custom title</h1>}
     />
   );
@@ -50,6 +44,6 @@ it("edit mode renders titleSlot when provided", () => {
 });
 
 it("edit mode uses default title when titleSlot not provided", () => {
-  render(<LessonPageShell mode="edit" node={node} breadcrumb={breadcrumb} />);
+  render(<LessonPageShell mode="edit" node={node} />);
   expect(screen.getByRole("heading", { name: "Box Model" })).toBeDefined();
 });

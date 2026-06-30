@@ -12,7 +12,6 @@ it("renders without cover — shows gradient", () => {
     <CoverImage
       cover={null}
       icon={null}
-      breadcrumb={[]}
       onCoverChange={() => {}}
       onIconChange={() => {}}
     />
@@ -26,7 +25,6 @@ it("shows cover controls on hover", async () => {
     <CoverImage
       cover={null}
       icon={null}
-      breadcrumb={[]}
       onCoverChange={() => {}}
       onIconChange={() => {}}
     />
@@ -43,7 +41,6 @@ it("calls onCoverChange(null) when Remove is clicked", () => {
     <CoverImage
       cover="https://example.com/img.jpg"
       icon={null}
-      breadcrumb={[]}
       onCoverChange={onCoverChange}
       onIconChange={() => {}}
     />

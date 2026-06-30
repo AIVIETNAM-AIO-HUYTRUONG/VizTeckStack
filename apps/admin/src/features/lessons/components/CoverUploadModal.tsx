@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 
 export interface CoverUploadModalProps {
@@ -13,6 +13,12 @@ export function CoverUploadModal({ onUploaded, onClose }: CoverUploadModalProps)
   const [urlInput, setUrlInput] = useState("");
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [onClose]);
 
   const { startUpload } = useUploadThing("coverUploader", {
     onClientUploadComplete: (res) => {
@@ -45,14 +51,20 @@ export function CoverUploadModal({ onUploaded, onClose }: CoverUploadModalProps)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-bg-1 border border-border rounded-xl w-[400px] shadow-2xl overflow-hidden">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cover-upload-modal-title"
+        className="bg-bg-1 border border-border rounded-xl w-[400px] shadow-2xl overflow-hidden"
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-          <h2 className="font-display font-bold text-sm text-text-1">Set cover image</h2>
+          <h2 id="cover-upload-modal-title" className="font-display font-bold text-sm text-text-1">Set cover image</h2>
           <button
             type="button"
+            aria-label="Close"
             onClick={onClose}
-            className="text-text-3 hover:text-text-1 transition-colors text-lg leading-none"
+            className="text-text-2 hover:text-text-1 transition-colors text-lg leading-none"
           >
             ×
           </button>
@@ -68,7 +80,7 @@ export function CoverUploadModal({ onUploaded, onClose }: CoverUploadModalProps)
               className={`flex-1 py-3 text-sm font-medium transition-colors ${
                 tab === t
                   ? "text-indigo border-b-2 border-indigo"
-                  : "text-text-3 hover:text-text-2"
+                  : "text-text-2 hover:text-text-1"
               }`}
             >
               {t === "upload" ? "Upload file" : "Paste URL"}
@@ -85,7 +97,7 @@ export function CoverUploadModal({ onUploaded, onClose }: CoverUploadModalProps)
                 <span className="text-sm text-text-2 font-medium">
                   {uploading ? "Uploading…" : "Click to upload"}
                 </span>
-                <span className="text-xs text-text-3 mt-1">PNG, JPG, WebP — max 4MB</span>
+                <span className="text-xs text-text-2 mt-1">PNG, JPG, WebP — max 4MB</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -107,7 +119,7 @@ export function CoverUploadModal({ onUploaded, onClose }: CoverUploadModalProps)
                 value={urlInput}
                 onChange={(e) => setUrlInput(e.target.value)}
                 placeholder="https://example.com/image.jpg"
-                className="w-full bg-bg-0 border border-border rounded-lg px-3 py-2.5 text-sm text-text-1 placeholder:text-text-3 focus:outline-none focus:border-indigo"
+                className="w-full bg-bg-0 border border-border rounded-lg px-3 py-2.5 text-sm text-text-1 placeholder:text-text-2 focus:outline-none focus:border-indigo"
                 onKeyDown={(e) => e.key === "Enter" && handleUrlConfirm()}
               />
               <button

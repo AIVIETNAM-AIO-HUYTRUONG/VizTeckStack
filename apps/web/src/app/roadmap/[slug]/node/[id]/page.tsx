@@ -1,5 +1,5 @@
 import { LessonLayout } from '@/features/lesson/components/LessonLayout';
-import { fetchNode, fetchBreadcrumb, fetchRoadmapTree } from '@/lib/gql';
+import { fetchNode, fetchRoadmapTree } from '@/lib/gql';
 
 export const revalidate = 0;
 export const dynamicParams = true;
@@ -15,29 +15,24 @@ export default async function LessonPage({
 }) {
   const { slug, id } = await params;
 
-  const [nodeResult, breadcrumbResult, treeResult] = await Promise.allSettled([
+  const [nodeResult, treeResult] = await Promise.allSettled([
     fetchNode(id),
-    fetchBreadcrumb(id),
     fetchRoadmapTree(slug),
   ]);
 
   if (nodeResult.status === 'rejected') {
     return (
-      <div className="text-text-3 text-sm text-center py-16">
+      <div className="text-text-2 text-sm text-center py-16">
         Lesson not found.
       </div>
     );
   }
 
-  const breadcrumb =
-    breadcrumbResult.status === 'fulfilled' ? breadcrumbResult.value : [];
-  const tree =
-    treeResult.status === 'fulfilled' ? treeResult.value : null;
+  const tree = treeResult.status === 'fulfilled' ? treeResult.value : null;
 
   return (
     <LessonLayout
       node={nodeResult.value}
-      breadcrumb={breadcrumb}
       tree={tree}
     />
   );
