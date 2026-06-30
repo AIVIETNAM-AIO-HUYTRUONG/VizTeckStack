@@ -49,7 +49,7 @@ export function PageTreeSidebar({ tree, currentNodeId, getLessonHref, getRoadmap
   return (
     <div className="h-full overflow-y-auto py-3 px-2">
       <div className="px-2 pb-2 mb-1 border-b border-border">
-        <span className="text-xs font-semibold text-text-3 uppercase tracking-wider">
+        <span className="text-xs font-semibold text-text-2 uppercase tracking-wider">
           {tree.rootTitle}
         </span>
       </div>

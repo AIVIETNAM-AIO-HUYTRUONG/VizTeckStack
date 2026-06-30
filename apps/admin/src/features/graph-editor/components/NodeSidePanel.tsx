@@ -42,6 +42,7 @@ export function NodeSidePanel({ mode, initial, allRoadmaps, onSubmit, onClose }:
     });
   }
 
+  const headingId = 'node-side-panel-heading';
   const headingText = mode === 'create' ? 'Create Node' : 'Edit Node';
   const submitLabel = mode === 'create' ? 'Create Node' : 'Save Changes';
 
@@ -49,15 +50,18 @@ export function NodeSidePanel({ mode, initial, allRoadmaps, onSubmit, onClose }:
     <>
       <div className="absolute inset-0 z-10" onClick={onClose} aria-hidden="true" />
       <div
-        className="absolute top-0 right-0 bottom-0 z-20 bg-bg-1 border-l border-border flex flex-col"
-        style={{ width: 320, transform: 'translateX(0)', transition: 'transform 200ms ease-out' }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={headingId}
+        className="absolute top-0 right-0 bottom-0 z-20 bg-bg-1 border-l border-border flex flex-col transition-transform duration-200 ease-out motion-reduce:transition-none"
+        style={{ width: 320, transform: 'translateX(0)' }}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-border flex-shrink-0">
-          <span className="text-sm font-semibold text-text-1">{headingText}</span>
+          <span id={headingId} className="text-sm font-semibold text-text-1">{headingText}</span>
           <button
             onClick={onClose}
             aria-label="Close panel"
-            className="text-text-3 hover:text-text-1 text-lg leading-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1 rounded"
+            className="text-text-2 hover:text-text-1 text-lg leading-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-offset-1 rounded"
           >
             ×
           </button>
@@ -75,7 +79,9 @@ export function NodeSidePanel({ mode, initial, allRoadmaps, onSubmit, onClose }:
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
+                autoFocus={mode === 'create'}
                 placeholder="Node title"
+                maxLength={200}
                 className="w-full px-3 py-2 text-sm text-text-1 bg-bg-2 border border-border rounded-sm focus:outline-none focus:ring-2 focus:ring-indigo"
               />
             </div>
@@ -116,7 +122,7 @@ export function NodeSidePanel({ mode, initial, allRoadmaps, onSubmit, onClose }:
                     </option>
                   ))}
                 </select>
-                <p className="text-[11px] text-text-3">
+                <p className="text-[11px] text-text-2">
                   Clicking this node on the canvas will navigate to the selected roadmap.
                 </p>
               </div>

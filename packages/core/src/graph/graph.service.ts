@@ -70,10 +70,17 @@ export async function loadGraph(
     const draftJson = sessionStorage.getItem(`graph-draft-${roadmapId}`);
     if (draftJson) {
       try {
-        const draft = JSON.parse(draftJson) as { nodes: EditorNode[]; edges: EditorEdge[] };
-        if (makeSnapshot(draft.nodes, draft.edges) !== savedSnapshot) {
+        const draft = JSON.parse(draftJson) as { nodes: EditorNode[]; edges: EditorEdge[]; baseSnapshot?: string };
+        // Only restore draft if DB hasn't changed since the draft was created.
+        // A missing baseSnapshot means the draft is from an older format — treat as stale.
+        if (
+          draft.baseSnapshot === savedSnapshot &&
+          makeSnapshot(draft.nodes, draft.edges) !== savedSnapshot
+        ) {
           restoredNodes = draft.nodes;
           restoredEdges = draft.edges;
+        } else {
+          sessionStorage.removeItem(`graph-draft-${roadmapId}`);
         }
       } catch {
         sessionStorage.removeItem(`graph-draft-${roadmapId}`);

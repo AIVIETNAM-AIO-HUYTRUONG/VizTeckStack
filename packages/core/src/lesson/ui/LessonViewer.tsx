@@ -31,7 +31,7 @@ function LessonViewerInner({ contentJson }: LessonViewerProps) {
   }, []);
 
   if (!blocks) {
-    return <div className="text-text-3 text-sm py-6">No content available.</div>;
+    return <div className="text-text-2 text-sm py-6">No content available.</div>;
   }
 
   return <BlockNoteView editor={editor} editable={false} theme={theme} />;

@@ -34,6 +34,7 @@ it('reads initial collapsed state from localStorage', () => {
       <div>Content</div>
     </LessonPageLayout>
   );
+  // Default is collapsed (true); sm:w-0 class is present at initial render
   const sidebar = document.querySelector('[data-testid="lesson-sidebar"]');
   expect(sidebar?.className).toContain('w-0');
 });
@@ -44,11 +45,12 @@ it('persists collapse toggle to localStorage', () => {
       <div>Content</div>
     </LessonPageLayout>
   );
+  // Default is collapsed (true); first click opens sidebar, second click closes
   const toggleBtn = screen.getByRole('button', { name: /toggle sidebar/i });
   fireEvent.click(toggleBtn);
-  expect(localStorage.getItem('lesson-sidebar-collapsed')).toBe('true');
-  fireEvent.click(toggleBtn);
   expect(localStorage.getItem('lesson-sidebar-collapsed')).toBe('false');
+  fireEvent.click(toggleBtn);
+  expect(localStorage.getItem('lesson-sidebar-collapsed')).toBe('true');
 });
 
 it('renders without sidebar when tree is undefined', () => {

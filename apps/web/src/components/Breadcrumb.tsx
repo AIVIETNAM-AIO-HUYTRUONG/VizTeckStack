@@ -15,19 +15,19 @@ interface BreadcrumbProps {
 const dotClass: Record<BreadcrumbState, string> = {
   visited: 'bg-bg-1 border-2 border-indigo text-indigo',
   active:  'bg-indigo border-2 border-indigo text-white',
-  none:    'bg-text-3 border-2 border-text-3 text-white',
+  none:    'bg-text-2 border-2 border-text-2 text-white',
 };
 
 const labelClass: Record<BreadcrumbState, string> = {
   visited: 'text-indigo',
   active:  'text-indigo',
-  none:    'text-text-3',
+  none:    'text-text-2',
 };
 
 const connectorClass: Record<BreadcrumbState, string> = {
   visited: 'bg-indigo',
   active:  'bg-border',
-  none:    'bg-text-2',
+  none:    'bg-border',
 };
 
 export function Breadcrumb({ items }: BreadcrumbProps) {

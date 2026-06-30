@@ -7,29 +7,28 @@ it("renders img when coverImage provided", () => {
     <CoverDisplay
       coverImage="https://example.com/img.jpg"
       icon="⚡"
-      breadcrumb={[]}
-    />
+    />,
   );
-  expect(screen.getByRole("img").getAttribute("src")).toBe(
-    "https://example.com/img.jpg"
+  expect(screen.getByAltText("").getAttribute("src")).toBe(
+    "https://example.com/img.jpg",
   );
 });
 
 it("renders gradient fallback when no coverImage", () => {
   const { container } = render(
-    <CoverDisplay coverImage={null} icon={null} breadcrumb={[]} />
+    <CoverDisplay coverImage={null} icon={null} />,
   );
   const gradient = container.querySelector(".bg-gradient-to-br");
   expect(gradient).not.toBeNull();
 });
 
 it("renders default icon when icon is null", () => {
-  render(<CoverDisplay coverImage={null} icon={null} breadcrumb={[]} />);
+  render(<CoverDisplay coverImage={null} icon={null} />);
   expect(screen.getByText("📄")).toBeDefined();
 });
 
 it("renders provided icon", () => {
-  render(<CoverDisplay coverImage={null} icon="🚀" breadcrumb={[]} />);
+  render(<CoverDisplay coverImage={null} icon="🚀" />);
   expect(screen.getByText("🚀")).toBeDefined();
 });
 
@@ -40,9 +39,8 @@ it("calls onIconClick when icon is clicked", async () => {
     <CoverDisplay
       coverImage={null}
       icon="⚡"
-      breadcrumb={[]}
       onIconClick={onIconClick}
-    />
+    />,
   );
   await user.click(screen.getByText("⚡"));
   expect(onIconClick).toHaveBeenCalledOnce();

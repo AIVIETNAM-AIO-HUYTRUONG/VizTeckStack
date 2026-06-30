@@ -62,6 +62,7 @@ export function NodeInventory({
         <button
           onClick={() => setOpen(true)}
           title="Open Inventory"
+          aria-label="Open node inventory"
           className="w-7 h-7 flex items-center justify-center text-text-3 hover:text-text-1 hover:bg-bg-2 rounded cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo"
           style={{ fontSize: 16 }}
         >
@@ -86,6 +87,7 @@ export function NodeInventory({
         <button
           onClick={() => setOpen(false)}
           title="Collapse"
+          aria-label="Collapse node inventory"
           className="text-text-3 hover:text-text-1 cursor-pointer focus:outline-none focus:ring-1 focus:ring-indigo rounded leading-none"
           style={{ fontSize: 18 }}
         >
@@ -94,15 +96,15 @@ export function NodeInventory({
       </div>
 
       {/* Filter tabs */}
-      <div className="flex-shrink-0 flex border-b border-border" style={{ height: 30 }}>
+      <div className="flex-shrink-0 flex border-b border-border" style={{ height: 32 }}>
         {(['ALL', 'ROADMAP', 'LESSON'] as FilterType[]).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`flex-1 text-[10px] font-semibold uppercase tracking-wider cursor-pointer focus:outline-none transition-colors
+            className={`flex-1 text-[10px] font-semibold uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo focus:ring-inset transition-colors
               ${filter === f
                 ? 'text-indigo border-b-2 border-indigo bg-indigo/5'
-                : 'text-text-3 hover:text-text-2 border-b-2 border-transparent'
+                : 'text-text-2 hover:text-text-1 border-b-2 border-transparent'
               }`}
           >
             {f}
@@ -115,7 +117,7 @@ export function NodeInventory({
 
         {/* Empty state */}
         {filteredNodes.length === 0 && (!showAvailable || availableRoadmaps.length === 0) && (
-          <div className="flex flex-col items-center justify-center h-32 text-text-3 text-xs text-center px-4 gap-1">
+          <div className="flex flex-col items-center justify-center h-32 text-text-2 text-xs text-center px-4 gap-1">
             <span>No nodes yet.</span>
             <span style={{ fontSize: 10 }}>Right-click canvas or use Add Node.</span>
           </div>
@@ -135,9 +137,14 @@ export function NodeInventory({
                 onDragStart={(e) => handleNodeDrag(e, node.id)}
                 role="button"
                 tabIndex={0}
-                aria-label="Drag to place on canvas"
-                onKeyDown={() => {}}
-                className="flex-shrink-0 text-text-3 cursor-grab select-none w-5 flex items-center justify-center"
+                aria-label={`${node.title} — drag to place on canvas, or press Enter to edit`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onEditNode(node.id);
+                  }
+                }}
+                className="flex-shrink-0 text-text-3 cursor-grab select-none w-5 flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-indigo rounded"
               >
                 ⠿
               </div>
@@ -161,13 +168,13 @@ export function NodeInventory({
 
               <button
                 onClick={() => onEditNode(node.id)}
-                className="flex-shrink-0 text-[10px] font-semibold text-text-3 hover:text-indigo px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+                className="flex-shrink-0 text-[10px] font-semibold text-text-3 hover:text-indigo px-1 py-0.5 rounded cursor-pointer focus:outline-none focus:ring-1 focus:ring-indigo opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity motion-reduce:transition-none"
               >
                 Edit
               </button>
               <button
                 onClick={() => onDeleteNode(node.id)}
-                className="flex-shrink-0 text-[10px] font-semibold text-red-400 hover:text-red-600 px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+                className="flex-shrink-0 text-[10px] font-semibold text-red-400 hover:text-red-600 px-1 py-0.5 rounded cursor-pointer focus:outline-none focus:ring-1 focus:ring-red-400 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity motion-reduce:transition-none"
               >
                 Del
               </button>
@@ -179,7 +186,7 @@ export function NodeInventory({
         {showAvailable && availableRoadmaps.length > 0 && (
           <>
             <div
-              className="flex items-center px-3 border-b border-border bg-bg-2 text-text-3 font-semibold uppercase"
+              className="flex items-center px-3 border-b border-border bg-bg-2 text-text-2 font-semibold uppercase"
               style={{ height: 20, fontSize: 9, letterSpacing: '0.06em' }}
             >
               Available roadmaps
@@ -195,9 +202,14 @@ export function NodeInventory({
                   onDragStart={(e) => handleRoadmapDrag(e, roadmap)}
                   role="button"
                   tabIndex={0}
-                  aria-label="Drag to place on canvas"
-                  onKeyDown={() => {}}
-                  className="flex-shrink-0 text-text-3 cursor-grab select-none w-5 flex items-center justify-center"
+                  aria-label={`${roadmap.title} — drag to canvas, or press Enter to add as node`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      onAddRoadmapLink(roadmap);
+                    }
+                  }}
+                  className="flex-shrink-0 text-text-3 cursor-grab select-none w-5 flex items-center justify-center focus:outline-none focus:ring-1 focus:ring-indigo rounded"
                 >
                   ⠿
                 </div>
@@ -208,17 +220,15 @@ export function NodeInventory({
                   {roadmap.title}
                 </span>
 
-                {/* "Add" = adds as unplaced node (then Edit/Del appear like any node) */}
                 <button
                   onClick={() => onAddRoadmapLink(roadmap)}
-                  className="flex-shrink-0 text-[10px] font-semibold text-text-3 hover:text-indigo px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="flex-shrink-0 text-[10px] font-semibold text-text-3 hover:text-indigo px-1 py-0.5 rounded cursor-pointer focus:outline-none focus:ring-1 focus:ring-indigo opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity motion-reduce:transition-none"
                 >
                   Add
                 </button>
-                {/* Dismiss from palette (doesn't delete the roadmap) */}
                 <button
                   onClick={() => dismiss(roadmap.id)}
-                  className="flex-shrink-0 text-[10px] text-text-3 hover:text-red-500 px-1 py-0.5 rounded cursor-pointer focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="flex-shrink-0 text-[10px] text-text-3 hover:text-red-500 px-1 py-0.5 rounded cursor-pointer focus:outline-none focus:ring-1 focus:ring-red-400 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity motion-reduce:transition-none"
                 >
                   ✕
                 </button>

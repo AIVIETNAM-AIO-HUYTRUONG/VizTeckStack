@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "reason": "Inter is intentional — confirmed in DESIGN.md as the body/label typeface for both surfaces",
+        "createdAt": "2026-06-29T10:35:23.094Z"
+      }
+    ]
+  }
+}

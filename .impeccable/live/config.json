@@ -1,0 +1,10 @@
+{
+  "files": [
+    "apps/admin/src/app/layout.tsx",
+    "apps/web/src/app/layout.tsx"
+  ],
+  "insertBefore": "</body>",
+  "commentSyntax": "jsx",
+  "cspChecked": true,
+  "_note": "Monorepo: run with --target apps/admin or --target apps/web to scope live mode to one surface"
+}

@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { CoverDisplay } from "@vizteck/lesson";
-import type { BreadcrumbItem } from "@vizteck/lesson";
 import { IconPicker } from "./IconPicker";
 import { CoverUploadModal } from "./CoverUploadModal";
 
 export interface CoverImageProps {
   cover: string | null;
   icon: string | null;
-  breadcrumb: BreadcrumbItem[];
   onCoverChange: (url: string | null) => void;
   onIconChange: (value: string | null) => void;
 }
@@ -17,7 +15,6 @@ export interface CoverImageProps {
 export function CoverImage({
   cover,
   icon,
-  breadcrumb,
   onCoverChange,
   onIconChange,
 }: CoverImageProps) {
@@ -37,7 +34,6 @@ export function CoverImage({
       <CoverDisplay
         coverImage={cover}
         icon={icon}
-        breadcrumb={breadcrumb}
         onIconClick={() => setPickerOpen((o) => !o)}
       />
 
@@ -88,7 +84,7 @@ export function CoverImage({
             value={urlValue}
             onChange={(e) => setUrlValue(e.target.value)}
             placeholder="https://example.com/img.jpg"
-            className="bg-bg-0 border border-border rounded px-2.5 py-1 text-xs text-text-1 placeholder:text-text-3 focus:outline-none focus:border-indigo w-64"
+            className="bg-bg-0 border border-border rounded px-2.5 py-1 text-xs text-text-1 placeholder:text-text-2 focus:outline-none focus:border-indigo w-64"
             onKeyDown={(e) => {
               if (e.key === "Enter" && urlValue.trim()) {
                 onCoverChange(urlValue.trim());

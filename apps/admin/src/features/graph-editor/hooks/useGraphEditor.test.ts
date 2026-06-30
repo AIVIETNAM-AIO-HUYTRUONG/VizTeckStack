@@ -31,6 +31,7 @@ const mockReturn = {
   allRoadmaps: [],
   setEditorNodes: vi.fn(),
   setEditorEdges: vi.fn(),
+  savedSnapshotRef: { current: '' },
   handleSave: vi.fn(),
   handleChangeStatus: vi.fn(),
 };

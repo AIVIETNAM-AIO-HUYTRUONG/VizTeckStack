@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "../../apps/admin/tailwind.config.ts",
+    "css": "../../apps/admin/src/app/globals.css",
+    "baseColor": "slate",
+    "cssVariables": false
+  },
+  "aliases": {
+    "components": "@vizteck/ui",
+    "utils": "@vizteck/ui/lib/utils",
+    "ui": "@vizteck/ui/ui",
+    "lib": "@vizteck/ui/lib",
+    "hooks": "@vizteck/ui/hooks"
+  },
+  "iconLibrary": "lucide"
+}
