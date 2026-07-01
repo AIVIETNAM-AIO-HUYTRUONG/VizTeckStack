@@ -1,5 +1,6 @@
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { SearchButton } from '@/components/SearchButton';
+import { AdminSwitch } from '@/components/AdminSwitch';
 import { SearchModalWrapper } from '@/features/search/SearchModalWrapper';
 import { SearchProvider } from '@/features/search/SearchContext';
 
@@ -12,6 +13,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           VizTeck<span className="text-indigo">Stack</span>
         </a>
         <div className="flex items-center gap-2">
+          <AdminSwitch />
           <SearchButton />
           <ThemeToggle />
         </div>

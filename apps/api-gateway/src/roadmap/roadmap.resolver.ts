@@ -1,6 +1,9 @@
 import { Resolver, Query, Mutation, Args, ID, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { AdminGuard } from '../auth/admin.guard';
+import { ClerkAuthGuard } from '../auth/clerk-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
+import { UserRole } from '../auth/types';
 import { ListRoadmapsUseCase } from '../application/use-cases/roadmap/list-roadmaps.use-case';
 import { GetRoadmapUseCase } from '../application/use-cases/roadmap/get-roadmap.use-case';
 import { CreateRoadmapUseCase } from '../application/use-cases/roadmap/create-roadmap.use-case';
@@ -57,13 +60,15 @@ export class RoadmapResolver {
     };
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard, RolesGuard)
+  @Roles(UserRole.EDITOR, UserRole.SUPER_ADMIN)
   @Mutation(() => RoadmapDto)
   createRoadmap(@Args('input') input: CreateRoadmapInput): Promise<RoadmapDto> {
     return this.createRoadmapUseCase.execute(input) as Promise<RoadmapDto>;
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard, RolesGuard)
+  @Roles(UserRole.EDITOR, UserRole.SUPER_ADMIN)
   @Mutation(() => RoadmapDto)
   updateRoadmap(
     @Args('id', { type: () => ID }) id: string,
@@ -72,14 +77,16 @@ export class RoadmapResolver {
     return this.updateRoadmapUseCase.execute(id, input) as Promise<RoadmapDto>;
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard, RolesGuard)
+  @Roles(UserRole.SUPER_ADMIN)
   @Mutation(() => Boolean)
   async deleteRoadmap(@Args('id', { type: () => ID }) id: string): Promise<boolean> {
     await this.deleteRoadmapUseCase.execute(id);
     return true;
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard, RolesGuard)
+  @Roles(UserRole.EDITOR, UserRole.SUPER_ADMIN)
   @Mutation(() => RoadmapDetailDto)
   async upsertGraph(
     @Args('roadmapId', { type: () => ID }) roadmapId: string,

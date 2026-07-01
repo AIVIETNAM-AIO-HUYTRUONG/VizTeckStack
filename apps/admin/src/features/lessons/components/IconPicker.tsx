@@ -1,18 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { LESSON_ICONS, renderLessonIcon } from "@vizteck/ui";
 
 const EMOJI_LIST = [
   "🚀", "📘", "🎯", "💡", "🔥", "⭐", "🌐", "🛠️", "📦", "🧩",
   "✨", "⚡", "💻", "🔑", "🎨", "📊", "🔧", "🌟", "🏆", "🎓",
   "📝", "🔍", "💎", "🧠",
-];
-
-const LUCIDE_ICONS = [
-  "Zap", "Rocket", "BookOpen", "Target", "Lightbulb", "Flame",
-  "Star", "Globe", "Wrench", "Package", "Puzzle", "Sparkles",
-  "Code", "Database", "Server", "Terminal", "Layout", "Layers",
-  "Box", "ArrowRight", "Check", "Link", "Lock", "FileText",
 ];
 
 type Tab = "emoji" | "text" | "icons";
@@ -30,7 +24,7 @@ export function IconPicker({ icon, onIconChange, isOpen, onToggle }: IconPickerP
 
   const handleSelect = (value: string | null) => {
     onIconChange(value);
-    onToggle(); // close after selection
+    onToggle();
   };
 
   return (
@@ -43,7 +37,7 @@ export function IconPicker({ icon, onIconChange, isOpen, onToggle }: IconPickerP
         onClick={onToggle}
         onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onToggle()}
       >
-        {icon || "📄"}
+        {renderLessonIcon(icon)}
       </div>
 
       {/* Picker dropdown */}
@@ -106,16 +100,17 @@ export function IconPicker({ icon, onIconChange, isOpen, onToggle }: IconPickerP
 
             {activeTab === "icons" && (
               <div className="grid grid-cols-4 gap-1">
-                {LUCIDE_ICONS.map((name) => (
+                {LESSON_ICONS.map(({ name, Comp }) => (
                   <button
                     key={name}
                     type="button"
+                    title={name}
                     onClick={() => handleSelect(name)}
-                    className={`py-1.5 text-[10px] text-text-3 hover:text-text-1 hover:bg-bg-2 rounded transition-colors truncate ${
-                      icon === name ? "bg-bg-2 text-indigo" : ""
+                    className={`py-2 flex items-center justify-center rounded transition-colors hover:bg-bg-2 ${
+                      icon === name ? "bg-bg-2 text-indigo" : "text-text-2"
                     }`}
                   >
-                    {name}
+                    <Comp size={18} />
                   </button>
                 ))}
               </div>

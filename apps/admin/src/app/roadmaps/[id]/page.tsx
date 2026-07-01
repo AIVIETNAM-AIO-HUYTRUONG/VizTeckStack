@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import { RoadmapGraph } from '@vizteck/core';
 import type { NodeType } from '@vizteck/ui';
-import { useAuthGuard } from '@/hooks/useAuthGuard';
 import { useUnsavedGuard } from '@/hooks/useRouteGuard';
 import { useAdminGraphEditor } from '@/features/roadmaps/graph-editor/hooks/useGraphEditor';
 import type { EditorNode } from '@/features/roadmaps/graph-editor/hooks/useGraphEditor';
@@ -28,8 +27,6 @@ export default function GraphEditorPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  useAuthGuard();
-
   const { id } = use(params);
   const searchParams = useSearchParams();
   const slug = searchParams.get('slug');

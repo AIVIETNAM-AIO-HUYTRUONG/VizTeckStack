@@ -61,3 +61,21 @@ enum RoadmapStatus {
   PUBLIC
   PRIVATE
 }
+
+model AuditLog {
+  id        String      @id @default(cuid())
+  actorId   String
+  targetId  String
+  action    AuditAction
+  metadata  Json?
+  createdAt DateTime    @default(now())
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE_ROLE
+  DISABLE
+  ENABLE
+  DELETE
+  RESET_INVITE
+}

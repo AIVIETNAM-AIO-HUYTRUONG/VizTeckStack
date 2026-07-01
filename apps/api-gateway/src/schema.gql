@@ -79,6 +79,29 @@ type SearchResultDto {
   breadcrumb: [String!]!
 }
 
+type AuthUserType {
+  id: ID!
+  email: String!
+  name: String!
+  role: UserRole!
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  EDITOR
+  VIEWER
+}
+
+type UserType {
+  id: ID!
+  email: String!
+  name: String!
+  role: UserRole!
+  status: String!
+  createdAt: String!
+  lastSignInAt: String
+}
+
 type Query {
   roadmaps: [RoadmapDto!]!
   roadmap(slug: String!): RoadmapDetailDto
@@ -86,6 +109,8 @@ type Query {
   search(q: String!, titleOnly: Boolean = false, roadmapId: ID): [SearchResultDto!]!
   node(id: ID!): NodeDto
   nodeBreadcrumb(id: ID!): [BreadcrumbItemDto!]!
+  me: AuthUserType!
+  users: [UserType!]!
 }
 
 type Mutation {
@@ -97,6 +122,10 @@ type Mutation {
   updateNodeTitle(id: ID!, title: String!): NodeDto!
   updateNodeCover(id: ID!, coverImage: String): NodeDto!
   updateNodeIcon(id: ID!, icon: String): NodeDto!
+  createUser(input: CreateUserInput!): UserType!
+  updateUser(id: ID!, input: UpdateUserInput!): UserType!
+  deleteUser(id: ID!): Boolean!
+  resendInvite(id: ID!): Boolean!
 }
 
 input CreateRoadmapInput {
@@ -127,4 +156,14 @@ input EdgeInput {
   sourceId: String!
   targetId: String!
   label: String
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  role: UserRole!
+}
+
+input UpdateUserInput {
+  role: UserRole!
 }

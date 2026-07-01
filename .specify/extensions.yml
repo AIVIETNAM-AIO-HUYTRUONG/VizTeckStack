@@ -1,0 +1,58 @@
+schema_version: "1.0"
+
+# VizTeckStack extension hooks for speckit workflow.
+#
+# Hook lifecycle:
+#   before_specify / after_specify
+#   before_plan    / after_plan
+#   before_tasks   / after_tasks
+#   before_analyze / after_analyze
+#   before_implement / after_implement
+#   before_checklist / after_checklist
+#
+# Each hook entry:
+#   extension:   Human-readable name shown in output
+#   command:     Skill to invoke (dots → hyphens for slash command, e.g. vizteck.pr-prep → /vizteck-pr-prep)
+#   description: Shown when hook is optional
+#   prompt:      Extra context sent to the skill (optional)
+#   optional:    true = show prompt, user must run manually | false = auto-execute
+#   enabled:     false to temporarily disable without deleting
+#   condition:   Leave empty — condition evaluation is handled by HookExecutor, not by speckit-* skills
+
+hooks:
+  # ─── AFTER IMPLEMENT ────────────────────────────────────────────────────────
+  # Runs after /speckit-implement completes all tasks.
+  # Goal: catch regressions before marking the feature done.
+
+  after_implement:
+    - extension: "VizTeck PR Prep"
+      command: "vizteck.pr-prep"
+      description: "Chạy lint, build, test, và kiểm tra package boundary violations trước khi tạo commit"
+      optional: false
+      enabled: true
+      condition: ""
+
+  # ─── AFTER PLAN ─────────────────────────────────────────────────────────────
+  # Runs after /speckit-plan generates all design artifacts.
+  # Goal: remind to verify constitution gates before tasking.
+
+  after_plan:
+    - extension: "Constitution Review Reminder"
+      command: "speckit-constitution"
+      description: "Xác nhận tất cả Constitution gates PASS trước khi tạo tasks"
+      prompt: "Scan plan.md và verify tất cả 5 Constitution gates (Core-First, Package Boundary, Targeted Mutations, GitFlow, Simplicity) đều PASS. Nếu có violation, dừng và báo cáo."
+      optional: true
+      enabled: true
+      condition: ""
+
+  # ─── AFTER CHECKLIST ────────────────────────────────────────────────────────
+  # Runs after /speckit-checklist generates quality checklist.
+  # Goal: encourage running convergence to catch gaps.
+
+  after_checklist:
+    - extension: "Convergence Check"
+      command: "speckit-converge"
+      description: "Scan codebase để tìm những gì trong spec/tasks nhưng chưa được implement"
+      optional: true
+      enabled: true
+      condition: ""

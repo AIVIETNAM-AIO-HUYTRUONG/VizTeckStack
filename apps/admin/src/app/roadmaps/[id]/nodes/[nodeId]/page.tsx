@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useAuthGuard } from "@/hooks/useAuthGuard";
+import { useAuth } from "@/features/auth/hooks/useAdminAuth";
 import { useAdminLessonEditor } from "@/features/lessons/content-editor/hooks/useLessonEditor";
 import { useAdminLessonPageShell } from "@/features/lessons/hooks/useLessonPageShell";
 import { useAdminPageTree } from "@/features/lessons/page-tree/hooks/usePageTree";
@@ -44,7 +44,8 @@ export default function LessonEditorPage({
 }: {
   params: Promise<{ id: string; nodeId: string }>;
 }) {
-  useAuthGuard();
+  const { user } = useAuth();
+  const isViewer = user?.role === 'VIEWER';
   const { id, nodeId } = use(params);
   const router = useRouter();
   const slug = useSearchParams().get('slug');
@@ -130,7 +131,7 @@ export default function LessonEditorPage({
             }
           >
             <LessonPageShell
-              mode="edit"
+              mode={isViewer ? "view" : "edit"}
               node={{
                 id: nodeId,
                 title: lesson.title,
@@ -139,27 +140,27 @@ export default function LessonEditorPage({
                 content: lesson.content ?? null,
                 type: (lesson.type === "ROADMAP" ? "ROADMAP" : "LESSON") as "LESSON" | "ROADMAP",
               }}
-              coverSlot={
+              coverSlot={isViewer ? undefined : (
                 <CoverImage
                   cover={cover}
                   icon={icon}
                   onCoverChange={setCover}
                   onIconChange={setIcon}
                 />
-              }
-              titleSlot={
+              )}
+              titleSlot={isViewer ? undefined : (
                 <LessonTitleEditor
                   title={lesson.title}
                   saveStatus={titleSaveStatus}
                   onSave={handleSaveTitle}
                 />
-              }
-              contentSlot={
+              )}
+              contentSlot={isViewer ? undefined : (
                 <LessonEditor
                   initialContentJson={lesson.content ?? ""}
                   onSave={handleSaveContent}
                 />
-              }
+              )}
             />
           </LessonPageLayout>
         )}

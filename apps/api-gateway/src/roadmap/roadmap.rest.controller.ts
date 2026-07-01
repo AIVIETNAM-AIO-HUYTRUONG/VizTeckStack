@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards, Query } from '@nestjs/common';
+﻿import { Controller, Get, Post, Put, Delete, Patch, Param, Body, UseGuards, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiParam } from '@nestjs/swagger';
-import { AdminGuard } from '../auth/admin.guard';
+import { ClerkAuthGuard } from '../auth/clerk-auth.guard';
 import { ListRoadmapsUseCase } from '../application/use-cases/roadmap/list-roadmaps.use-case';
 import { GetRoadmapUseCase } from '../application/use-cases/roadmap/get-roadmap.use-case';
 import { CreateRoadmapUseCase } from '../application/use-cases/roadmap/create-roadmap.use-case';
@@ -81,19 +81,19 @@ export class RoadmapRestController {
     return { ...detail.node, content: detail.node.content ? JSON.stringify(detail.node.content) : undefined };
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Get('admin/validate')
-  @ApiOperation({ summary: 'Validate admin token — returns 200 if valid, 401 if not' })
+  @ApiOperation({ summary: 'Validate admin token â€” returns 200 if valid, 401 if not' })
   @ApiBearerAuth()
   validateToken() { return { ok: true }; }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Post('roadmaps')
   @ApiOperation({ summary: 'Create roadmap' })
   @ApiBearerAuth()
   createRoadmap(@Body() body: CreateRoadmapInput) { return this.createRoadmapUseCase.execute(body); }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Put('roadmaps/:id')
   @ApiOperation({ summary: 'Update roadmap metadata' })
   @ApiBearerAuth()
@@ -102,14 +102,14 @@ export class RoadmapRestController {
     return this.updateRoadmapUseCase.execute(id, body);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Delete('roadmaps/:id')
   @ApiOperation({ summary: 'Delete roadmap' })
   @ApiBearerAuth()
   @ApiParam({ name: 'id', type: String })
   deleteRoadmap(@Param('id') id: string) { return this.deleteRoadmapUseCase.execute(id); }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Post('roadmaps/:id/graph')
   @ApiOperation({ summary: 'Upsert full graph (nodes + edges) for a roadmap' })
   @ApiBearerAuth()
@@ -119,16 +119,16 @@ export class RoadmapRestController {
     return this.upsertGraphUseCase.execute(id, nodeInputs, body.edges);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Patch('nodes/:id/content')
-  @ApiOperation({ summary: 'Update lesson content (targeted — no graph upsert)' })
+  @ApiOperation({ summary: 'Update lesson content (targeted â€” no graph upsert)' })
   @ApiBearerAuth()
   @ApiParam({ name: 'id', type: String })
   updateNodeContent(@Param('id') id: string, @Body() body: UpdateNodeContentInput) {
     return this.updateNodeContentUseCase.execute(id, body.content);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Patch('nodes/:id/title')
   @ApiOperation({ summary: 'Update node title' })
   @ApiBearerAuth()
@@ -137,7 +137,7 @@ export class RoadmapRestController {
     return this.updateNodeTitleUseCase.execute(id, body.title);
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Patch('nodes/:id/cover')
   @ApiOperation({ summary: 'Update node cover image' })
   @ApiBearerAuth()
@@ -146,7 +146,7 @@ export class RoadmapRestController {
     return this.updateNodeCoverUseCase.execute(id, body.coverImage ?? '');
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Patch('nodes/:id/icon')
   @ApiOperation({ summary: 'Update node icon' })
   @ApiBearerAuth()
@@ -155,10 +155,10 @@ export class RoadmapRestController {
     return this.updateNodeIconUseCase.execute(id, body.icon ?? '');
   }
 
-  @UseGuards(AdminGuard)
+  @UseGuards(ClerkAuthGuard)
   @Get('search')
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Search nodes and roadmaps (full-text) — Swagger docs only, use GraphQL in FE' })
+  @ApiOperation({ summary: 'Search nodes and roadmaps (full-text) â€” Swagger docs only, use GraphQL in FE' })
   async searchNodes(
     @Query('q') q: string,
     @Query('titleOnly') titleOnly?: string,
