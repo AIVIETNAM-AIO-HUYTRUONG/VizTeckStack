@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
+import { ClerkProvider } from '@clerk/nextjs';
 import { AdminApolloProvider } from '@/components/ApolloProvider';
 import { SearchModalWrapper } from '@/features/lessons/search/SearchModalWrapper';
 
@@ -43,10 +44,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} bg-bg-0 text-text-1`}>
-        <AdminApolloProvider>
-          <SearchModalWrapper />
-          {children}
-        </AdminApolloProvider>
+        <ClerkProvider>
+          <AdminApolloProvider>
+            <SearchModalWrapper />
+            {children}
+          </AdminApolloProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

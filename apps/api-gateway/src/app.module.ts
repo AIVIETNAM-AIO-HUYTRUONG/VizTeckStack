@@ -5,6 +5,8 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled';
 import { join } from 'path';
 import { RoadmapModule } from './roadmap/roadmap.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 import { HealthController } from './health.controller';
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -23,6 +25,8 @@ const isDev = process.env.NODE_ENV !== 'production';
       ],
     }),
     RoadmapModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [HealthController],
 })

@@ -1,3 +1,11 @@
+// auth
+export * from './auth/types';
+
+// user-management
+export * from './user-management/types';
+export * from './user-management/user.service';
+export { useUsers } from './user-management/hooks/useUsers';
+
 // roadmap
 export * from './roadmap/types';
 export * from './roadmap/utils/constants';
