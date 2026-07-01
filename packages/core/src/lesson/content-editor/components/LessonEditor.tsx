@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import { parseBlocks } from "../../utils/utils";
+import { lessonSchema } from "../blocks/TocBlock";
 
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 
@@ -17,7 +18,7 @@ export interface LessonEditorProps {
 export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) {
   const blocks = parseBlocks(initialContentJson);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const editor = useCreateBlockNote(blocks ? { initialContent: blocks as any } : {});
+  const editor = useCreateBlockNote({ schema: lessonSchema, ...(blocks ? { initialContent: blocks as any } : {}) });
 
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [saveStatus, setSaveStatus] = useState<SaveStatus>("idle");
@@ -94,7 +95,7 @@ export function LessonEditor({ initialContentJson, onSave }: LessonEditorProps) 
         className="bg-bg-1 border border-border rounded-md px-6 py-4"
         style={{ minHeight: 400 }}
       >
-        <BlockNoteView editor={editor} editable={true} theme={theme} onChange={handleChange} />
+        <BlockNoteView editor={editor} editable={true} theme={theme} onChange={handleChange} sideMenu={true} />
       </div>
     </div>
   );

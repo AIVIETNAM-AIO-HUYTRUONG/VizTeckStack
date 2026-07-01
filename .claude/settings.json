@@ -1,15 +1,18 @@
 {
-  "enabledPlugins": {
-    "ponytail@ponytail": true,
-    "railway@claude-plugins-official": true
-  },
   "permissions": {
     "allow": [
       "Bash(pnpm --filter @vizteck/e2e test:e2e*)",
       "Bash(pnpm --filter @vizteck/e2e test:ui*)",
       "Bash(pnpm --filter @vizteck/e2e test:headed*)",
       "Bash(npx playwright *)",
-      "Bash(pnpm exec playwright *)"
+      "Bash(pnpm exec playwright *)",
+      "Bash(bash \"C:/Users/lh222/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"docs/superpowers/plans/2026-06-30-folder-architecture-refactor.md\" 3)",
+      "Bash(bash \"C:/Users/lh222/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/review-package\" \"398b96a\" \"HEAD\")",
+      "Bash(bash \"C:/Users/lh222/.claude/plugins/cache/claude-plugins-official/superpowers/6.0.3/skills/subagent-driven-development/scripts/task-brief\" \"docs/superpowers/plans/2026-06-30-folder-architecture-refactor.md\" 4)"
     ]
+  },
+  "enabledPlugins": {
+    "ponytail@ponytail": true,
+    "railway@claude-plugins-official": true
   }
 }

@@ -34,6 +34,8 @@ export { useLessonPageShell } from './lesson/hooks/useLessonPageShell';
 export { usePageTree } from './lesson/page-tree/hooks/usePageTree';
 // lesson — UI (moved from packages/lesson)
 export { LessonEditor } from './lesson/content-editor/components/LessonEditor';
+export { TocBlock, lessonSchema } from './lesson/content-editor/blocks/TocBlock';
+export type { LessonSchema } from './lesson/content-editor/blocks/TocBlock';
 export type { LessonEditorProps } from './lesson/content-editor/components/LessonEditor';
 export { LessonViewer } from './lesson/content-editor/components/LessonViewer';
 export type { LessonViewerProps } from './lesson/content-editor/components/LessonViewer';
