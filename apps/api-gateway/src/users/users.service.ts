@@ -46,11 +46,20 @@ export class UsersService {
   }
 
   async create(email: string, name: string, role: UserRole, actorId: string): Promise<UserDto> {
-    const invitation = await this.clerk.invitations.createInvitation({
-      emailAddress: email,
-      publicMetadata: { role, name },
-      redirectUrl: `${process.env.ADMIN_URL ?? 'http://localhost:3002'}/roadmaps`,
-    } as any);
+    let invitation: any;
+    try {
+      invitation = await this.clerk.invitations.createInvitation({
+        emailAddress: email,
+        publicMetadata: { role, name },
+        redirectUrl: `${process.env.ADMIN_URL ?? 'http://localhost:3002'}/roadmaps`,
+      } as any);
+    } catch (err: any) {
+      const msg: string = err?.errors?.[0]?.message ?? err?.message ?? '';
+      if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('exist')) {
+        throw new BadRequestException('Email đã được sử dụng');
+      }
+      throw err;
+    }
 
     await db.auditLog.create({
       data: { actorId, targetId: invitation.id, action: 'CREATE' },

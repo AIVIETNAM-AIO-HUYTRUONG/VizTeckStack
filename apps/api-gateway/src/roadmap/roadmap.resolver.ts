@@ -78,7 +78,7 @@ export class RoadmapResolver {
   }
 
   @UseGuards(ClerkAuthGuard, RolesGuard)
-  @Roles(UserRole.EDITOR, UserRole.SUPER_ADMIN)
+  @Roles(UserRole.SUPER_ADMIN)
   @Mutation(() => Boolean)
   async deleteRoadmap(@Args('id', { type: () => ID }) id: string): Promise<boolean> {
     await this.deleteRoadmapUseCase.execute(id);

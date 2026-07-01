@@ -37,5 +37,9 @@ export {
   DropdownMenuPortal,
 } from './ui/dropdown-menu';
 
+// Icons
+export { LESSON_ICONS, renderLessonIcon } from './icons';
+export type { LucideProps } from './icons';
+
 // Utility
 export { cn } from './lib/utils';

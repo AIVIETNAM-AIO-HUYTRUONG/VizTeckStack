@@ -96,7 +96,7 @@ Không implement trong branch này. Xem `specs/002-lesson-pages/spec.md` phần 
   - Scenario 3: Icon và cover verify (không cần code change — chỉ xác nhận)
   - Scenario 4: Toggle block với drag (edge case)
   - Scenario 5: TOC empty state (edge case)
-- [ ] T010 Tạo commit `feat: add block drag-drop and TOC custom block to lesson editor`
+- [x] T010 Tạo commit `feat: add block drag-drop and TOC custom block to lesson editor`
 
 ---
 

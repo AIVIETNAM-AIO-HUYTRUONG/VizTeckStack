@@ -1,8 +1,3 @@
-export function getToken(): string {
-  if (typeof window === 'undefined') return '';
-  return localStorage.getItem('admin_token') ?? '';
-}
-
 export function slugify(title: string): string {
   return title
     .toLowerCase()

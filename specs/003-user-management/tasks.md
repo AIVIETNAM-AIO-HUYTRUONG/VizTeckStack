@@ -139,10 +139,19 @@
 
 - [X] T035 Export new types từ `packages/core/src/index.ts`: `AuthUser`, `UserRole`, `ClerkUser`
 - [X] T036 Add "Users" vào sidebar navigation (update wherever nav items are defined in `apps/admin/src/`)
-- [ ] T037 [P] Run `pnpm lint` từ root — fix all linting errors
+- [X] T037 [P] Run `pnpm lint` từ root — fix all linting errors
 - [X] T038 [P] Run `pnpm build` từ root — fix all TypeScript/build errors ✓ (9/9 tasks successful)
 - [ ] T039 Run all 5 scenarios in `specs/003-user-management/quickstart.md` manually
-- [ ] T040 Commit: `feat: add multi-user auth and role-based access control via Clerk`
+- [X] T040 Commit: `feat: add multi-user auth and role-based access control via Clerk`
+
+---
+
+## Phase 7: Convergence
+
+- [X] T041 Fix `deleteRoadmap` in `apps/api-gateway/src/roadmap/roadmap.resolver.ts` — change `@Roles(EDITOR, SUPER_ADMIN)` → `@Roles(SUPER_ADMIN)` only per FR-012 (contradicts)
+- [X] T042 Add SUPER_ADMIN role check to `apps/admin/src/app/admin/users/page.tsx` — redirect non-SUPER_ADMIN users away (e.g. to `/roadmaps`) so US3/AC3 is enforced client-side (partial)
+- [X] T043 Wrap `createInvitation` in try/catch in `apps/api-gateway/src/users/users.service.ts` — rethrow Clerk duplicate-email error as `BadRequestException('Email đã được sử dụng')` per US2/AC5 (partial)
+- [X] T044 [P] Delete dead file `apps/admin/src/hooks/useAuthGuard.ts` — no callers remain after Clerk migration (unrequested)
 
 ---
 

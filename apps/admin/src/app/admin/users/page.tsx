@@ -1,11 +1,13 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@vizteck/ui';
 import { AdminLayout } from '@/components/AdminLayout';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { UserList } from '@/features/user-management/components/UserList';
 import { UserFormModal } from '@/features/user-management/components/UserFormModal';
 import { useAdminUsers } from '@/features/user-management/hooks/useAdminUsers';
+import { useAuth } from '@/features/auth/hooks/useAdminAuth';
 import type { ClerkUser } from '@vizteck/core';
 
 type Modal =
@@ -15,7 +17,14 @@ type Modal =
   | { type: 'delete'; user: ClerkUser };
 
 export default function UsersPage() {
+  const router = useRouter();
+  const { user, isLoading: authLoading } = useAuth();
   const { users, isLoading, createUser, updateUser, deleteUser, resendInvite } = useAdminUsers();
+
+  if (!authLoading && user && user.role !== 'SUPER_ADMIN') {
+    router.replace('/roadmaps');
+    return null;
+  }
   const [modal, setModal] = useState<Modal>({ type: 'none' });
 
   return (

@@ -11,7 +11,6 @@ import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { RoadmapModal } from '@/features/roadmaps/components/RoadmapModal';
 import { useAdminRoadmaps } from '@/features/roadmaps/hooks/useRoadmaps';
 import { STATUS_CLASS, STATUS_LABEL } from '@vizteck/core';
-import { useAuthGuard } from '@/hooks/useAuthGuard';
 
 function SkeletonRow() {
   return (
@@ -35,8 +34,6 @@ function DotsIcon() {
 }
 
 export default function RoadmapsPage() {
-  useAuthGuard();
-
   const {
     roadmaps,
     loading,

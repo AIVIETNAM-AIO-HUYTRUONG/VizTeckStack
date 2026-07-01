@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { renderLessonIcon } from "@vizteck/ui";
 
 export interface CoverDisplayProps {
   coverImage: string | null;
@@ -34,7 +35,7 @@ export function CoverDisplay({
         onClick={onIconClick}
         {...(onIconClick ? { role: "button", tabIndex: 0 } : {})}
       >
-        {icon || "📄"}
+        {renderLessonIcon(icon, 24, "text-text-2")}
       </div>
     </div>
   );
